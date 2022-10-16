@@ -1,0 +1,83 @@
+$color1: #B1B2FF;
+$color2: #AAC4FF;
+$color3: #D2DAFF;
+$color4: #EEF1FF;
+
+$color5: #dad7cd;
+$color6: #a3b18a;
+$color7: #588157;
+$color8: #3a5a40;
+$color9: #344e41;
+$color66: #5b6d5a36;
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.navbar {
+    background-color: $color6;
+  }
+
+#nav-brand{
+    color: $color5;
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Jost", sans-serif;
+}
+
+#nav-link{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: $color9;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 0 10px 30px;
+
+    &:hover{
+        color:$color5;
+    }
+
+    &:focus{
+        color:$color5;
+    }
+
+    &:active{
+        color:$color5;
+    }
+}
+
+#nav-btn {
+    padding: 8px 30px;
+    display: inline-block;
+    margin: 8px;
+    border-radius: 50px;
+    color: $color9;
+    font-size: 14px;
+    border: 2px solid $color5;
+    font-weight: 650;
+
+    &:hover{
+        color:$color8;
+        background-color:$color5;
+        border-color: $color8;
+
+    }
+
+    &:focus{
+        color:$color8;
+        background-color:$color5;
+        border-color: $color8;
+    }
+
+    &:active{
+        color:$color8;
+        background-color:$color5;
+        border-color: $color8;
+    }
+}
+
+
+
