@@ -1,10 +1,71 @@
-$color5: #dad7cd;
-$color6: #a3b18a;
-$color7: #588157;
-$color8: #3a5a40;
-$color9: #344e41;
-$color10: #b1c096;
+$navbar: white;
+$nav-link: #30567c;
+$nav-link-hover:#B1B2FF;
+$button-hover: #AAC4FF;
+$accent-color: #607EAA;
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 #legend{
-    background-color: $color6 !important;
+    background-color: rgba(84, 86, 199, 0.801);
+    padding-top: 150px;
+    height: 600px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+
+#home-image{
+    width: 100%;
+    height: 90%;
+    display: inline-block;
+}
+
+#home-slogan{
+    color: white;
+    font-size: 42px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+}
+
+#home-text{
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    padding-top: 30px;
+}
+
+#get-started-home{
+    padding: 15px 90px;
+    display: inline-block;
+    margin-top: 10px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 650;
+    border: 2px solid #224274;
+    color:#224274;
+    background-color:#b1d3ff;
+
+    &:hover{
+        border: 2px solid #224174ce;
+        color:#224274;
+        background-color:#ceddff;
+    }
+
+    &:focus{
+        border: 2px solid #224174ce;
+        color:#224274;
+        background-color:#c3ddff;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    }
+
+    &:active{
+        border: 2px solid #224174ce;
+        color:#224274;
+        background-color:#c3ddff;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    }
 }

@@ -14,9 +14,9 @@ const NavbarTop = () => {
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="me-auto">
-      <Nav.Link href="#home" id="nav-link">Home</Nav.Link>
-      <Nav.Link href="#link" id="nav-link">Category</Nav.Link>
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown" id="nav-link">
+      <Nav.Link href="#home" id="nav-link">Sākums</Nav.Link> {/* Home */}
+      <Nav.Link href="#link" id="nav-link">Kategorijas</Nav.Link> {/* Categories */}
+          <NavDropdown title="Dropdown" className="basic-nav-dropdow" id="nav-link">
           <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
@@ -25,13 +25,10 @@ const NavbarTop = () => {
       </NavDropdown>
     </Nav> 
       <Nav className="ms-auto">
-        <Button variant="outline-secondary" id="nav-btn" href="#log-in">Log in</Button>
-        <Button variant="outline-secondary" id="nav-btn" href="#sign-up">Sign up</Button>
+        <Button variant="outline-secondary" id="get-started" href="#sign-up">Reģistrēties</Button> {/* Get started */}
+        <Button variant="outline-secondary" id="nav-btn" href="#log-in">Pieslēgties</Button> {/* Log in */}
       </Nav>
      
-    
-
-
   </Navbar.Collapse>
   <Navbar.Toggle />
 

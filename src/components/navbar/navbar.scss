@@ -1,14 +1,8 @@
-$color1: #B1B2FF;
-$color2: #AAC4FF;
-$color3: #D2DAFF;
-$color4: #EEF1FF;
-
-$color5: #dad7cd;
-$color6: #a3b18a;
-$color7: #588157;
-$color8: #3a5a40;
-$color9: #344e41;
-$color66: #5b6d5a36;
+$navbar: white;
+$nav-link: #30567c;
+$nav-link-hover:#B1B2FF;
+$button-hover: #AAC4FF;
+$accent-color: #b1d3ff;
 
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,11 +10,12 @@ body{
 
 
 .navbar {
-    background-color: $color6;
+    background-color: $navbar;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
   }
 
 #nav-brand{
-    color: $color5;
+    color: $nav-link-hover;
     font-size: 30px;
     line-height: 1;
     font-weight: 700;
@@ -30,22 +25,21 @@ body{
 }
 
 #nav-link{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: $color9;
+    color: $nav-link;
     font-size: 15px;
     font-weight: 500;
     padding: 10px 0 10px 30px;
 
     &:hover{
-        color:$color5;
+        color:$nav-link-hover;
     }
 
     &:focus{
-        color:$color5;
+        color:$nav-link-hover;
     }
 
     &:active{
-        color:$color5;
+        color:$nav-link-hover;
     }
 }
 
@@ -54,30 +48,58 @@ body{
     display: inline-block;
     margin: 8px;
     border-radius: 50px;
-    color: $color9;
+    color: $nav-link;
     font-size: 14px;
-    border: 2px solid $color5;
+    border: 2px solid $button-hover;
     font-weight: 650;
 
     &:hover{
-        color:$color8;
-        background-color:$color5;
-        border-color: $color8;
-
+        color:$nav-link-hover;
+        background-color:$navbar;
+        border-color: $nav-link-hover;
     }
 
     &:focus{
-        color:$color8;
-        background-color:$color5;
-        border-color: $color8;
+        color:$nav-link-hover;
+        background-color:$navbar;
+        border-color: $nav-link-hover;
     }
 
     &:active{
-        color:$color8;
-        background-color:$color5;
-        border-color: $color8;
+        color:$nav-link-hover;
+        background-color:$navbar;
+        border-color: $nav-link-hover;
     }
 }
 
+#get-started{
+    padding: 8px 30px;
+    display: inline-block;
+    margin: 8px;
+    border-radius: 50px;
+    font-size: 14px;
+    border: 2px solid $nav-link-hover;
+    font-weight: 650;
+    color: $nav-link;
+    background-color:$accent-color;
+
+    &:hover{
+        color: $nav-link;
+        background-color:#ceddff;
+        border-color: $nav-link-hover;
+    }
+
+    &:focus{
+    color: $nav-link-hover;
+    background-color:#607eaaea;
+    border-color: $button-hover;
+    }
+
+    &:active{
+    color: $nav-link-hover;
+    background-color:#607eaaea;
+    border-color: $button-hover;
+    }
+}
 
 
