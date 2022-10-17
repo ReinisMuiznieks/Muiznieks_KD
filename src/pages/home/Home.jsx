@@ -1,5 +1,6 @@
 import React from "react";
 import NavbarTop from "../../components/navbar/navbar.jsx";
+import Footer from "../../components/footer/footer.jsx";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -26,14 +27,38 @@ const Home = () => {
 
             </Col>
           </Row>
-          <Row>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-          </Row>
     </Container>
-</div> 
-    
+</div>
+
+<div>
+    <Container className="p-3 text-center">
+      <h1>Tēmas</h1>
+        <Row id="kateg">
+          <Col>
+          <p>1. Pamata frāzes</p>
+          <p>2. Nedēļas dienas</p>
+          <p>3. Norādes</p>
+          <p>4. Norādījuu izpratne</p>
+          <p>5. Dienas</p>
+          </Col>
+          <Col>
+          <p>6. Nedēļas</p>
+          <p>7. Mēneši</p>
+          <p>8. Komunikācija</p>
+          <p>9. Iepazīšanās</p>
+          <p>10. Transports</p>
+          </Col>
+          <Col>
+          <p>6. Nedēļas</p>
+          <p>7. Mēneši</p>
+          <p>8. Komunikācija</p>
+          <p>9. Iepazīšanās</p>
+          <p>10. Transports</p>
+          </Col>
+        </Row>
+    </Container>
+</div>
+<Footer />
 </>
         )
 }

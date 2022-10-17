@@ -32,7 +32,7 @@ body{
 }
 
 #home-text{
-    color: white;
+    color: rgb(224, 224, 224);
     font-size: 24px;
     font-weight: 600;
     padding-top: 30px;
@@ -58,14 +58,17 @@ body{
     &:focus{
         border: 2px solid #224174ce;
         color:#224274;
-        background-color:#c3ddff;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+        background-color:#ceddff;;
     }
 
     &:active{
         border: 2px solid #224174ce;
         color:#224274;
-        background-color:#c3ddff;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+        background-color:#ceddff;
     }
+}
+
+
+#kateg{
+    text-align: left;
 }

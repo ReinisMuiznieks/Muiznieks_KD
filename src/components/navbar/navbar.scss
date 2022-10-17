@@ -78,10 +78,10 @@ body{
     margin: 8px;
     border-radius: 50px;
     font-size: 14px;
-    border: 2px solid $nav-link-hover;
+    border: 2px solid $button-hover;
     font-weight: 650;
     color: $nav-link;
-    background-color:$accent-color;
+    background-color:$nav-link-hover;
 
     &:hover{
         color: $nav-link;
@@ -90,14 +90,14 @@ body{
     }
 
     &:focus{
-    color: $nav-link-hover;
-    background-color:#607eaaea;
+        color: $nav-link;
+    background-color:#ceddff;
     border-color: $button-hover;
     }
 
     &:active{
-    color: $nav-link-hover;
-    background-color:#607eaaea;
+    color: $nav-link;
+    background-color:#ceddff;
     border-color: $button-hover;
     }
 }
