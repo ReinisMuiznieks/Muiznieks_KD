@@ -30,6 +30,30 @@ body{
     width: 100%;
     margin-top: 5px;
     background-color: #7678D2;
+
+    border-radius: 10px;
+    font-weight: 400;
+    border: 1px solid #ffffff;
+    color:white;
+    background-color:#7678d2;
+
+    &:hover{
+        border: 1px solid #98c7f7;
+        color:white;
+        background-color:#8788d3;
+    }
+
+    &:focus{
+        border: 1px solid #98c7f7;
+        color:white;
+        background-color:#8788d3;
+    }
+
+    &:active{
+        border: 1px solid #98c7f7;
+        color:white;
+        background-color:#8788d3;
+    }
 }
 
 #login-image{

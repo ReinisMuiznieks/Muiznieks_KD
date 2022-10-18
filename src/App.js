@@ -8,6 +8,7 @@ import {
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import PageNotFound from "./pages/pagenotfound/PageNotFound";
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/log-in" element={<Login/>}/>
                 <Route path="/sign-up" element={<Register/>}/>
-                {/* <Route path="/*" element={<PageNotFound/>}/> */}
+                <Route path="/*" element={<PageNotFound/>}/>
             </Routes>
         </BrowserRouter>
   );
