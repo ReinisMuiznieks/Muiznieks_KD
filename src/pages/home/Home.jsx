@@ -19,7 +19,7 @@ const Home = () => {
                 <p id="home-text">Apgūsti latviešu valodu sev vispiemērotākajā laikā no jebkuras vietas. Paplašiniet savu vārdu krājumu un novērtējiet savas zināšanas testu veidā un sekojoiet līdzi savam progresam.
                 
                 </p>
-                <Button variant="outline-secondary" id="get-started-home" href="#sign-up">Reģistrēties</Button>
+                <Button variant="outline-secondary" id="get-started-home" href="/sign-up">Reģistrēties</Button>
 
             </Col>
             <Col id="test">
@@ -30,7 +30,7 @@ const Home = () => {
     </Container>
 </div>
 
-<div>
+{/* <div>
     <Container className="p-3 text-center">
       <h1>Tēmas</h1>
         <Row id="kateg">
@@ -57,7 +57,7 @@ const Home = () => {
           </Col>
         </Row>
     </Container>
-</div>
+</div> */}
 <Footer />
 </>
         )

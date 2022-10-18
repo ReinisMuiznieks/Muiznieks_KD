@@ -6,12 +6,13 @@ $accent-color: #607EAA;
 
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    //min-height: calc(100vh - 73px - 53px);
 }
 
 #legend{
     background-color: rgba(84, 86, 199, 0.801);
     padding-top: 150px;
-    height: 600px;
+    min-height: calc(100vh - 73px - 53px); // makes so the site is in full screen
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
@@ -71,4 +72,5 @@ body{
 
 #kateg{
     text-align: left;
+    margin-bottom: 100px;
 }

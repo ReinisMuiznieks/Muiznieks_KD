@@ -1,0 +1,55 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: calc(100vh - 73px - 53px); // makes so the site is in full screen
+}
+
+#register-form{
+    padding: 12%;
+}
+
+#register-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 120px;
+    padding-bottom: 100px;
+}
+
+.full-form{
+    box-shadow: rgb(0 0 0 / 12%) 1px 1px 10px;
+    border-radius: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 80%;
+    height: 100%;
+}
+
+
+
+#submit-form{
+    width: 100%;
+    margin-top: 5px;
+    background-color: #7678D2;
+}
+
+#register-image{
+    width: 100%;
+    height: 100%;
+}
+
+#form-title{
+    padding-bottom: 10px;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+#login-href{
+    text-decoration: none;
+}
+
+.form-label{
+    font-size: 16px;
+    font-weight: 500;
+}
