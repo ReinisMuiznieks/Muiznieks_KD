@@ -18,7 +18,7 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/log-in" element={<Login/>}/>
                 <Route path="/sign-up" element={<Register/>}/>
-                <Route path="/*" element={<PageNotFound/>}/>
+                <Route path="/*" element={<PageNotFound/>}/> 
             </Routes>
         </BrowserRouter>
   );
