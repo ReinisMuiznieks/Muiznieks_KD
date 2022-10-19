@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <div id="footer">
           <div className="p-3 text-center">
-            © Copyright Verbum. All Rights Reserved
+            © Autortiesības Verbum
           </div>
         </div>
     )

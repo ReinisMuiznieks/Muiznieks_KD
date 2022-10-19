@@ -1,6 +1,6 @@
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: calc(100vh - 73px - 53px); // makes so the site is in full screen
+    //min-height: calc(100vh - 73px - 53px); // makes so the site is in full screen
 }
 
 #register-form{
@@ -11,8 +11,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 120px;
-    padding-bottom: 100px;
+    padding-top: 10%;
+    padding-bottom: 8%;
+    max-height: 80vh;
 }
 
 .full-form{

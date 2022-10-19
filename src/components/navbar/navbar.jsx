@@ -15,8 +15,8 @@ const NavbarTop = () => {
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="me-auto">
       <Nav.Link href="/" id="nav-link">Sākums</Nav.Link> {/* Home */}
-      <Nav.Link href="/link" id="nav-link">Kategorijas</Nav.Link> {/* Categories */}
-          <NavDropdown title="Dropdown" className="basic-nav-dropdow" id="nav-link">
+      <Nav.Link href="/learn" id="nav-link">Mācies</Nav.Link> {/* Learn */}
+      <NavDropdown title="Dropdown" className="basic-nav-dropdow" id="nav-link">
           <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>
           <NavDropdown.Item href="/action/3.2">Another action</NavDropdown.Item>
           <NavDropdown.Item href="/action/3.3">Something</NavDropdown.Item>
