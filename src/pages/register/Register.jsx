@@ -7,6 +7,7 @@ import Footer from "../../components/footer/footer.jsx";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import image from '../../images/register_image.svg'
 
 const Register = () => {
     return (
@@ -15,7 +16,7 @@ const Register = () => {
 <Container id="register-container">
     <Row className="full-form">
         <Col>
-        <img src="https://svgur.com/i/nVE.svg" alt="sign-up" id="register-image"></img>
+        <img src={image} alt="sign-up" id="register-image"></img>
         
         </Col>
 

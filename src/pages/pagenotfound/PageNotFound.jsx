@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 // import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
 import './pagenotfound.scss'
+import image from '../../images/404.svg'
 
 
 const PageNotFound = () => {
@@ -14,7 +15,7 @@ const PageNotFound = () => {
 <NavbarTop />
     <Container>
         <Stack id="notfound-stack">
-            <img src="https://svgur.com/i/nTL.svg" alt="404" id="notfound-image"></img>
+            <img src={image} alt="404" id="notfound-image"></img>
             <h3 id="notfound-title" className="text-center">Lapa Nav Atrasta</h3>
             <Button variant="outline-secondary" id="notfound-button" href="/">Atpakaļ uz sākumlapu</Button>
         </Stack>

@@ -7,6 +7,7 @@ import Footer from "../../components/footer/footer.jsx";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import image from '../../images/login_image.svg'
 
 const Login = () => {
     return (
@@ -15,7 +16,7 @@ const Login = () => {
 <Container id="login-container">
     <Row className="full-form">
         <Col>
-        <img src="https://svgur.com/i/nUN.svg" alt="log-in" id="login-image"></img>
+        <img src={image} alt="log-in" id="login-image"></img>
         
         </Col>
 

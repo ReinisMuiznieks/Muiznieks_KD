@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import './home.scss'
+import image from '../../images/home_image.svg'
 
 const Home = () => {
     return (
@@ -23,7 +24,7 @@ const Home = () => {
 
             </Col>
             <Col id="test">
-                <img src="https://svgur.com/i/nSG.svg" alt="learning" id="home-image"></img>
+                <img src={image} alt="learning" id="home-image"></img>
 
             </Col>
           </Row>
