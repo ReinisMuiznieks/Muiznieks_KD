@@ -10,10 +10,11 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import PageNotFound from "./pages/pagenotfound/PageNotFound";
 import Learn from "./pages/learn/Learn";
-
+import {ToastContainer} from 'react-toastify'
 
 function App() {
     return (
+        <>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home/>}/>
@@ -23,6 +24,8 @@ function App() {
                 <Route path="/learn" element={<Learn/>}/> 
             </Routes>
         </BrowserRouter>
+        <ToastContainer />
+        </>
   );
 }
 
