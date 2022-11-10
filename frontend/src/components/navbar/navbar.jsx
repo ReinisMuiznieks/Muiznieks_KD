@@ -6,7 +6,21 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import './navbar.scss'
 
-const NavbarTop = () => {
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout, reset } from '../../features/auth/authSlice'
+
+function NavbarTop() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
+
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
+
   return (    
 <Navbar>
 <Container>
@@ -25,8 +39,12 @@ const NavbarTop = () => {
       </NavDropdown>
     </Nav> 
       <Nav className="ms-auto">
-        <Button variant="outline-secondary" id="get-started" href="/sign-up">Reģistrēties</Button> {/* Get started */}
-        <Button variant="outline-secondary" id="nav-btn" href="/log-in">Pieslēgties</Button> {/* Log in */}
+      {user ? (
+
+        <Button variant="outline-secondary" id="nav-btn" href="/log-in" onClick={onLogout}>Atslēgties</Button>
+      ) : (
+        <><Button variant="outline-secondary" id="get-started" href="/sign-up">Reģistrēties</Button><Button variant="outline-secondary" id="nav-btn" href="/log-in">Pieslēgties</Button></>   
+        )}
       </Nav>
      
   </Navbar.Collapse>

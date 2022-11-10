@@ -7,8 +7,11 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import './home.scss'
 import image from '../../images/home_image.svg'
+import { useSelector } from 'react-redux'
 
-const Home = () => {
+function Home() {
+  const { user } = useSelector((state) => state.auth)
+
     return (
 <>
 <NavbarTop />
@@ -20,8 +23,12 @@ const Home = () => {
                 <p id="home-text">Apgūsti latviešu valodu sev vispiemērotākajā laikā no jebkuras vietas. Paplašiniet savu vārdu krājumu un novērtējiet savas zināšanas testu veidā un sekojoiet līdzi savam progresam.
                 
                 </p>
-                <Button variant="outline-secondary" id="get-started-home" href="/sign-up">Reģistrēties</Button>
-
+                {user ? (
+                  <></>
+                ) : (
+                  <Button variant="outline-secondary" id="get-started-home" href="/sign-up">Reģistrēties</Button>
+                )}
+                
             </Col>
             <Col id="test">
                 <img src={image} alt="learning" id="home-image"></img>

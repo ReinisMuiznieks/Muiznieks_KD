@@ -8,24 +8,56 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import image from '../../images/login_image.svg'
+
 import {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { login, reset } from '../../features/auth/authSlice'
 
-function Login(){
+function Login() {
     const [formData, setFormData] = useState({
-        email: '',
-        password: '',
+      email: '',
+      password: '',
     })
-
+  
     const { email, password } = formData
+  
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+  
+    const { user, isError, isSuccess, message } = useSelector(
+      (state) => state.auth
+    )
+  
+    useEffect(() => {
+      if (isError) {
+        toast.error(message)
+      }
+  
+      if (isSuccess || user) {
+        navigate('/')
+      }
+  
+      dispatch(reset())
+    }, [user, isError, isSuccess, message, navigate, dispatch])
+  
     const onChange = (e) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-        }) )
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }))
     }
-
+  
     const onSubmit = (e) => {
-        e.preventDefault()
+      e.preventDefault()
+  
+      const userData = {
+        email,
+        password,
+      }
+  
+      dispatch(login(userData))
     }
 
     return (
