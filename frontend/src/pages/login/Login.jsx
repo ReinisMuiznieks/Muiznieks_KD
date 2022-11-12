@@ -9,7 +9,57 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import image from '../../images/login_image.svg'
 
-const Login = () => {
+import {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { login, reset } from '../../features/auth/authSlice'
+
+function Login() {
+    const [formData, setFormData] = useState({
+      email: '',
+      password: '',
+    })
+  
+    const { email, password } = formData
+  
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+  
+    const { user, isError, isSuccess, message } = useSelector(
+      (state) => state.auth
+    )
+  
+    useEffect(() => {
+      if (isError) {
+        toast.error(message)
+      }
+  
+      if (isSuccess || user) {
+        navigate('/')
+      }
+  
+      dispatch(reset())
+    }, [user, isError, isSuccess, message, navigate, dispatch])
+  
+    const onChange = (e) => {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }))
+    }
+  
+    const onSubmit = (e) => {
+      e.preventDefault()
+  
+      const userData = {
+        email,
+        password,
+      }
+  
+      dispatch(login(userData))
+    }
+
     return (
 <><NavbarTop/>
 
@@ -21,32 +71,51 @@ const Login = () => {
         </Col>
 
         <Col>
-            <Form id="login-form">
-                <h3 id="form-title" className="text-center">Pieslēgšanās</h3>
-                <div className="text-center">Vēl neesiet reģistrēti?{" "}
-                    <a className="link-primary" id="login-href" href="/sign-up">Reģistrēties</a>
+            <Form id="login-form" onSubmit={onSubmit}>
+                <h3 id="form-title" className="text-center">Login</h3>  {/* Pieslēgšanās */}
+                <div className="text-center">Not registered?{" "} {/* Vēl neesiet reģistrēti */}
+                    <a className="link-primary" id="login-href" href="/sign-up">Register</a> {/* Reģistrēties */}
                 </div>
 
-                <Form.Group className="mb-3 pt-3" controlId="formEmail">
-                <Form.Label>Epasts</Form.Label>
-                <Form.Control type="email" placeholder="Ievadiet e-pastu" />
+                <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label> {/* E-pasts */}
+                <div className='form-group'>
+                <input
+                    type='email'
+                    className='form-control'
+                    id='email'
+                    name='email'
+                    value={email}
+                    placeholder='Enter email' /* Ievadiet e-pastu */
+                    onChange={onChange}
+                />
+                </div>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formPassword">
-                <Form.Label>Parole</Form.Label>
-                <Form.Control type="password" placeholder="Ievadiet paroli" />
+                <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label> {/* Parole */}
+                <div className='form-group'>
+                <input
+                    type='password'
+                    className='form-control'
+                    id='password'
+                    name='password'
+                    value={password}
+                    placeholder='Enter password' /* Ievadiet paroli */
+                    onChange={onChange}
+                />
+                </div>
                 </Form.Group>
 
-                <Button variant="primary" type="submit" id="submit-form">Pieslēgties</Button>
-                <p className="text-center mt-2">Aizmirsāt <a href="/forgot-password">paroli?</a></p>
+                <Button variant="primary" type="submit" id="submit-form">Login</Button> {/* Pieslēgties */}
+                <p className="text-center mt-2">Forgot <a href="/forgot-password">password?</a></p> {/* Aizmirsāt paroli? */}
             </Form>
         </Col>
     </Row>
 </Container>
 
 <Footer/></>
-
-    )
+)
 }
 
 export default Login;

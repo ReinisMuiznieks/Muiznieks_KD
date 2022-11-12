@@ -6,7 +6,21 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import './navbar.scss'
 
-const NavbarTop = () => {
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout, reset } from '../../features/auth/authSlice'
+
+function NavbarTop() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
+
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
+
   return (    
 <Navbar>
 <Container>
@@ -14,8 +28,8 @@ const NavbarTop = () => {
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="me-auto">
-      <Nav.Link href="/" id="nav-link">Sākums</Nav.Link> {/* Home */}
-      <Nav.Link href="/learn" id="nav-link">Mācies</Nav.Link> {/* Learn */}
+      <Nav.Link href="/" id="nav-link">Home</Nav.Link> {/* Sākums */}
+      <Nav.Link href="/learn" id="nav-link">Learn</Nav.Link> {/* Mācies */}
       <NavDropdown title="Dropdown" className="basic-nav-dropdow" id="nav-link">
           <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>
           <NavDropdown.Item href="/action/3.2">Another action</NavDropdown.Item>
@@ -25,8 +39,12 @@ const NavbarTop = () => {
       </NavDropdown>
     </Nav> 
       <Nav className="ms-auto">
-        <Button variant="outline-secondary" id="get-started" href="/sign-up">Reģistrēties</Button> {/* Get started */}
-        <Button variant="outline-secondary" id="nav-btn" href="/log-in">Pieslēgties</Button> {/* Log in */}
+      {user ? (
+
+        <Button variant="outline-secondary" id="nav-btn" href="/log-in" onClick={onLogout}>Logout</Button>
+      ) : (
+        <><Button variant="outline-secondary" id="get-started" href="/sign-up">Register</Button><Button variant="outline-secondary" id="nav-btn" href="/log-in">Login</Button></>   
+        )}
       </Nav>
      
   </Navbar.Collapse>

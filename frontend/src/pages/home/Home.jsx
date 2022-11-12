@@ -7,8 +7,11 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import './home.scss'
 import image from '../../images/home_image.svg'
+import { useSelector } from 'react-redux'
 
-const Home = () => {
+function Home() {
+  const { user } = useSelector((state) => state.auth)
+
     return (
 <>
 <NavbarTop />
@@ -16,12 +19,14 @@ const Home = () => {
     <Container>
           <Row>
             <Col>
-                <h1 id="home-slogan">Latviešu valodas apguve internēta</h1>
-                <p id="home-text">Apgūsti latviešu valodu sev vispiemērotākajā laikā no jebkuras vietas. Paplašiniet savu vārdu krājumu un novērtējiet savas zināšanas testu veidā un sekojoiet līdzi savam progresam.
+                <h1 id="home-slogan">Latvian language learning online</h1> {/* Latviešu valodas apguve internēta */}
+                <p id="home-text">Learn Latvian at the best time for you from anywhere. Expand your vocabulary and measure your knowledge by doing tests & keep track of your progress.</p> {/* Apgūsti latviešu valodu sev vispiemērotākajā laikā no jebkuras vietas. Paplašiniet savu vārdu krājumu un novērtējiet savas zināšanas testu veidā un sekojoiet līdzi savam progresam. */}
+                {user ? (
+                  <></>
+                ) : (
+                  <Button variant="outline-secondary" id="get-started-home" href="/sign-up">Get started</Button>
+                )}
                 
-                </p>
-                <Button variant="outline-secondary" id="get-started-home" href="/sign-up">Reģistrēties</Button>
-
             </Col>
             <Col id="test">
                 <img src={image} alt="learning" id="home-image"></img>
