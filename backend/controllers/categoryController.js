@@ -1,32 +1,30 @@
 const asyncHandler = require('express-async-handler')
-const Type = require('../models/typeModel')
+const Category = require('../models/categoryModel')
 const e = require('express')
 
-
-// Get types
+// Get category
 const getCategory = asyncHandler(async (req, res) => {
-    const types = await Type.find()
+    const categories = await Category.find()
   
-    res.status(200).json(types)
+    res.status(200).json(categories)
   })
-
 
 const addCategory = asyncHandler(async(req,res) => {
     const { name } = req.body
 
-    // Create type
-    const type = await Type.create({
+    // Create category
+    const category = await Category.create({
         name
     })
 
-    if(type) {
+    if(category) {
         res.status(201).json({
-            _id: type.id,
-            name: type.name
+            _id: category.id,
+            name: category.name
         })
     } else {
         res.status(400)
-        throw new Error('Invalid type data')
+        throw new Error('Invalid category data')
     }
 })
 
