@@ -35,7 +35,7 @@ function Login() {
         toast.error(message)
       }
   
-      if (isSuccess || user) {
+      if (isSuccess || user) { // doesnt allow to access /log-in anymore when logged in
         navigate('/')
       }
   

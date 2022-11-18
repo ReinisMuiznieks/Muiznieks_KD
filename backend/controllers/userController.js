@@ -6,7 +6,7 @@ const e = require('express')
 
 // Register user
 const registerUser = asyncHandler(async(req,res) => {
-    const { name, email, password } = req.body
+    const { name, email, password, role } = req.body
 
     if(!name || !email || !password){
         res.status(400)
@@ -28,7 +28,8 @@ const registerUser = asyncHandler(async(req,res) => {
     const user = await User.create({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        role,
     })
 
     if(user) {
@@ -36,7 +37,8 @@ const registerUser = asyncHandler(async(req,res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id)
+            role: user.role,
+            token: generateToken(user._id),
         })
     } else {
         res.status(400)
@@ -58,7 +60,8 @@ const loginUser = asyncHandler(async(req,res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id)
+            role: user.role,
+            token: generateToken(user._id),
         })
     } else {
         res.status(400)
@@ -77,6 +80,7 @@ const getMe = asyncHandler(async(req,res) => {
         id: _id,
         name,
         email,
+        role,
     })
 })
 

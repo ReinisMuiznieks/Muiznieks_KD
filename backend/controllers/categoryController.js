@@ -28,7 +28,53 @@ const addCategory = asyncHandler(async(req,res) => {
     }
 })
 
+
+// Update category
+const updateCategory = asyncHandler(async (req, res) => {
+    const category = await Category.findById(req.params.id)
+  
+    if (!category) {
+      res.status(400)
+      throw new Error('Category not found')
+    }
+  
+    // Check for user
+    if (!req.user) {
+      res.status(401)
+      throw new Error('User not found')
+    }
+
+    const updateCategory = await Category.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    })
+  
+    res.status(200).json(updateCategory)
+  })
+  
+// Delete category
+  const deleteCategory = asyncHandler(async (req, res) => {
+    const category = await Category.findById(req.params.id)
+  
+    if (!category) {
+      res.status(400)
+      throw new Error('Category not found')
+    }
+  
+    // Check for user
+    if (!req.user) {
+      res.status(401)
+      throw new Error('User not found')
+    }
+  
+    await category.remove()
+  
+    res.status(200).json({ id: req.params.id })
+  })
+
+
 module.exports ={
     addCategory,
-    getCategory
+    getCategory,
+    updateCategory,
+    deleteCategory,
 }
