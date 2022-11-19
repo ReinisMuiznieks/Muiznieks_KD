@@ -1,17 +1,10 @@
 import React, { useEffect } from "react";
-import NavbarTop from "../../components/navbar/navbar.jsx";
-import Footer from "../../components/footer/footer.jsx";
-import Container from 'react-bootstrap/Container';
-
-import { UseEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import CategoryForm from "../../components/categories/categoryForm.jsx";
 import {getCategories,reset} from '../../features/categories/categorySlice'
-import CategoryItem from "../../components/categories/categoryItem.jsx";
+import CategoryItem from "./categoryItem.jsx";
 
-
-function AdminDashboard() {
+function DisplayCategories() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     
@@ -41,14 +34,6 @@ function AdminDashboard() {
 
 return (
     <>
-    <NavbarTop/>
-    
-    <section className="heading">
-        <h1>Welcome { user && user.name }</h1>
-    </section>
-    
-    <CategoryForm/>
-
     <section className="content">
         {categories.length > 0 ? (
             <div className="categories">
@@ -58,10 +43,9 @@ return (
             </div>
         ) : (<h3>No categories</h3>)}
     </section>
-    <Footer/>
     </>
 
 )
 }
 
-export default AdminDashboard;
+export default DisplayCategories;

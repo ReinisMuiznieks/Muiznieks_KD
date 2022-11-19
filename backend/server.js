@@ -7,6 +7,7 @@ const port = process.env.PORT || 5000
 const typeRoutes = require('./routes/typeRotues')
 const categoryRoutes = require('./routes/categoryRoutes')
 const cardRoutes = require('./routes/cardRoutes')
+const testRoutes = require('./routes/testRoutes')
 
 connectDB()
 
@@ -20,6 +21,7 @@ app.use('/api/users', require('./routes/userRoutes'))
 app.use('/api/types',typeRoutes)
 app.use('/api/categories',categoryRoutes,require('./routes/categoryRoutes'))
 app.use('/api/cards',cardRoutes, require('./routes/cardRoutes'))
+app.use('/api/tests',testRoutes,require('./routes/testRoutes'))
 
 
 app.use(errorHandler)

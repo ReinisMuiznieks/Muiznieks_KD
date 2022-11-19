@@ -9,10 +9,12 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import PageNotFound from "./pages/pagenotfound/PageNotFound";
-import Learn from "./pages/learn/Learn";
+import Category from "./pages/category/Category";
 import {ToastContainer} from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
-import AdminDashboard from "./pages/admin/adminDashboard";
+import Learn from './pages/learn/Learn';
+
+import Admin from "./pages/admin/admin";
 
 function App() {
 
@@ -24,8 +26,9 @@ function App() {
                 <Route path="/log-in" element={<Login/>}/>
                 <Route path="/sign-up" element={<Register/>}/>
                 <Route path="/*" element={<PageNotFound/>}/> 
-                <Route path="/learn" element={<Learn/>}/>
-                <Route path="/admin" element={<AdminDashboard/>}/>
+                <Route path="/learn" element={<Category/>}/>
+                <Route path="/learn/test" element={<Learn/>}/>
+                <Route path="/admins" element={<Admin/>}/>
             </Routes>
         </BrowserRouter>
         <ToastContainer />

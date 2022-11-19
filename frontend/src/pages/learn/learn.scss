@@ -1,44 +1,14 @@
-$nav-link-hover:#B1B2FF;
-$button-hover: #AAC4FF;
-$accent-color: #607EAA;
-
-#learn-legend{
-    // background-color: rgba(84, 86, 199, 0.801);
-    padding-top: 50px;
-    min-height: calc(100vh - 73px - 53px); // makes so the site is in full screen
+#card-image{
+    width:100%;
+    max-width:600px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#learn-stack{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
-
-#stack-card{
-    width: 50%;
-    height: 50%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 2px solid #607EAA;
-    background-color: #b1b2ff2c;
-    
-
-}
-
-#stack-chapter{
-    color: #181818;
-    font-size: 18px;
-    font-weight: 700;
-    padding-bottom: 0;
-    
-}
-
-#stack-title{
-    padding-top: 0;
-    font-size: 16px;
-    font-weight: 500;
-    color: #2b2b2b;
-    
-
+#card-text{
+    text-align: center;
+    font-size: 4vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
 }

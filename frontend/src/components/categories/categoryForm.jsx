@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createCategory } from '../../features/categories/categorySlice'
+import { toast } from 'react-toastify'
 
 function CategoryForm() {
     const [name, setName] = useState('')
@@ -10,8 +11,12 @@ function CategoryForm() {
     const onSubmit = (e) => {
       e.preventDefault()
   
-      dispatch(createCategory({ name }))
-      setName('')
+      if (name.trim().length !== 0) {
+        dispatch(createCategory({ name }))
+        setName('')
+      } else {
+        toast.error('Input value is empty!')
+      }
     }
   
     return (
