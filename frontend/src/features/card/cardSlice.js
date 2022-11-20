@@ -9,7 +9,7 @@ const initialState = {
     message: ''
 }
 
-// Create new category
+// Create new card
 
 export const createCard = createAsyncThunk('/cards/create', async (cardData, thunkAPI) => {
     try {
@@ -26,7 +26,7 @@ export const createCard = createAsyncThunk('/cards/create', async (cardData, thu
     }
 })
 
-// Get user category
+// Get user card
 export const getCards = createAsyncThunk('cards/getAll', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -42,7 +42,7 @@ export const getCards = createAsyncThunk('cards/getAll', async (_, thunkAPI) => 
     }
 })
 
-// Delete category
+// Delete card
 
 export const deleteCard = createAsyncThunk('/cards/delete', async (id, thunkAPI) => {
     try {

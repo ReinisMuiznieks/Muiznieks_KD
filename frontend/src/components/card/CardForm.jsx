@@ -1,90 +1,85 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createCard } from '../../features/card/cardSlice'
 import { toast } from 'react-toastify'
+import { PickerOverlay } from "filestack-react";
 
 function CardForm() {
-
-    const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        image:'',
-      })
-
-    const { title, description, image } = formData
+    const [isPicker, setIsPicker] = useState(false);
+    const [image, setImage] = useState("");
+    const [title, setTitle] = useState("");
 
     const dispatch = useDispatch()
 
-    const onChange = (e) => {
-        setFormData((prevState) => ({
-          ...prevState,
-          [e.target.name]: e.target.value,
-        }))
-      }
-
-    const onSubmit = (e) => {
+      const onSubmit = (e) => {
         e.preventDefault()
     
-        const formData = {
-          title,
-          description,
-          image
-        }
-
-        if(title.length !== 0 && description.length !== 0 && image){
-          dispatch(createCard(formData))
+        if (title.trim().length !== 0 && image) {
+          dispatch(createCard({ title, image: image.filesUploaded[0].url }))
+          setTitle('')
+          setImage('')
         } else {
-          alert("error")
+          toast.error('Input value is empty!')
         }
       }
 
-    return (
-        <>
-      <section className='form'>
-        <form onSubmit={onSubmit}>
-          <div className='form-group'>
-            <label htmlFor='text'>Card</label>
+      return (
+        <div>
+          <form
+            onSubmit={onSubmit}
+          >
+            {image ? (
+              <img
+                src={image && image.filesUploaded[0].url}
+                alt="imageUploded"
+                className="w-full h-56 object-cover"
+                name='image'
+              />
+            ) : (
+              <button
+                onClick={() => (isPicker ? setIsPicker(false) : setIsPicker(true))}
+                type="button"
+              >
+                Choose Image
+              </button>
+            )}
+    
+            {/* input title */}
             <input
-              type='text'
+              type="text"
               name='title'
-              id='text'
-              value={title}
-              onChange={onChange}
+              required
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Image Title"
             />
-          </div>
-          <div className='form-group'>
-            <label htmlFor='text'>Description</label>
-            <input
-              type='text'
-              name='description'
-              id='text'
-              value={description}
-              onChange={onChange}
-            />
-          </div>
-          <div className='form-group'>
-            <label htmlFor='text'>Image</label>
-            <input
-              type='file'
-              name='image'
-              id='text'
-              value={image}
-              onChange={onChange}
-            />
-          </div>
-
-          
-          <div className='form-group'>
-            <button className='btn btn-block' type='submit'>
-              Add Card
+            {/* submit button */}
+            <button
+              type="submit"
+            >
+              {"SUBMIT!"}
             </button>
-          </div>
-        </form>
-      </section>
-
-
-        </>
-    )
+            {/* Filestack */}
+            <div className="mt-4 relative">
+              {isPicker && (
+                <PickerOverlay
+                  apikey={process.env.REACT_APP_FILESTACK_API_KEY}
+                  onSuccess={(res) => {
+                    setImage(res);
+                    setIsPicker(false);
+                  }}
+                  onError={(res) => alert(res)}
+                  pickerOptions={{
+                    maxFiles: 1,
+                    accept: ["image/*"],
+                    errorsTimeout: 2000,
+                    maxSize: 1 * 1000 * 1000,
+                  }}
+                />
+              )}
+            </div>
+          </form>
+        </div>
+      );
   }
   
   export default CardForm

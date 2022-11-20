@@ -1,17 +1,40 @@
 import { useDispatch } from 'react-redux'
 import { deleteCard } from '../../features/card/cardSlice'
+import React from "react";
+import '../../pages/learn/learn.scss';
+import Container from 'react-bootstrap/Container';
+import Stack from 'react-bootstrap/Stack';
+import Card from 'react-bootstrap/Card';
 
 function CardItem({card}) {
     const dispatch = useDispatch()
 
-  return (
-    <div className="card">
-        <h2>{card.title}</h2>
-        <h3>{card.description}</h3>
-        <img src={card.image} alt={card.title} />
+    return (
+<>
+  <div id="learn-legend">
+    <Container>
+        
+        <h1 className="text-center pb-4">Category name</h1>
+          {/* <Flashcard></Flashcard> */}
+        <Stack id="learn-stack">
+
+        <Card>
+        <Card.Img variant="top" id="card-image" className="pt-4" src={card.image} alt={card.title} />
+
+        <Card.Body>
+            <Card.Text id="card-text">
+            {card.title}
+            </Card.Text>
+        </Card.Body>
         <button onClick={() => dispatch(deleteCard(card._id))}className="close">Delete</button>
-    </div>
-  )
+        </Card>
+        
+        </Stack>
+    </Container>
+</div>
+
+</>
+    )
 }
 
-export default CardItem
+export default CardItem;

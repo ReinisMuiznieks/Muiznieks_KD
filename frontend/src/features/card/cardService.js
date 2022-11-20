@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API_URL = '/api/cards/'
 
-// Create new category
+// Create new card
 const createCard = async (cardData, token) => {
   const config = {
     headers: {
@@ -15,7 +15,7 @@ const createCard = async (cardData, token) => {
   return response.data
 }
 
-  // Get user category
+  // Get user card
   const getCards = async (token) => {
     const config = {
       headers: {
@@ -28,7 +28,7 @@ const createCard = async (cardData, token) => {
     return response.data
   }
 
-  // Delete category
+  // Delete card
   const deleteCard = async (cardId,token) => {
     const config = {
       headers: {

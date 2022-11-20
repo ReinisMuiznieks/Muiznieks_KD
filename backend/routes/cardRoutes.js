@@ -10,7 +10,7 @@ const { isAdmin, protect } = require('../middleware/authMiddleware')
 
 router.post('/', protect, isAdmin, addCard)
 router.get('/', protect, getCard)
-router.get('/:id', getCard)
+router.get('/:id', protect, getCard)
 router.put('/:id', protect, isAdmin, updateCard)
 router.delete('/:id', protect, isAdmin, deleteCard)
 

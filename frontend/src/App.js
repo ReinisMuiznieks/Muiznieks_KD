@@ -16,12 +16,14 @@ import Learn from './pages/learn/Learn';
 
 import Admin from "./pages/admin/admin";
 
+
 function App() {
 
     return (
         <>
         <BrowserRouter>
             <Routes>
+                
                 <Route path="/" element={<Home/>}/>
                 <Route path="/log-in" element={<Login/>}/>
                 <Route path="/sign-up" element={<Register/>}/>
