@@ -8,6 +8,7 @@ const typeRoutes = require('./routes/typeRotues')
 const categoryRoutes = require('./routes/categoryRoutes')
 const cardRoutes = require('./routes/cardRoutes')
 const testRoutes = require('./routes/testRoutes')
+const path = require('path')
 
 connectDB()
 
@@ -22,6 +23,16 @@ app.use('/api/types',typeRoutes)
 app.use('/api/categories',categoryRoutes,require('./routes/categoryRoutes'))
 app.use('/api/cards',cardRoutes, require('./routes/cardRoutes'))
 app.use('/api/tests',testRoutes,require('./routes/testRoutes'))
+
+// Frontend
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/build')))
+    app.get('*',(req,res) => res.sendFile(path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
+    )
+  )
+} else {
+    app.get('/', (req,res) => res.send('Set to production'))
+}
 
 
 app.use(errorHandler)
