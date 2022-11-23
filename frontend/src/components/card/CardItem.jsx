@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
 
-function CardItem({card}) {
+function CardItem({card, category}) {
     const dispatch = useDispatch()
 
     return (
@@ -14,7 +14,7 @@ function CardItem({card}) {
   <div id="learn-legend">
     <Container>
         
-        <h1 className="text-center pb-4">Category name</h1>
+        {/* <h1 className="text-center pb-4">{category}</h1>  category vjg tikai prieks admin lapas */}
           {/* <Flashcard></Flashcard> */}
         <Stack id="learn-stack">
 
@@ -26,7 +26,7 @@ function CardItem({card}) {
             {card.title}
             </Card.Text>
         </Card.Body>
-        <button onClick={() => dispatch(deleteCard(card._id))}className="close">Delete</button>
+        {/* <button onClick={() => dispatch(deleteCard(card._id))}className="close">Delete</button> */}
         </Card>
         
         </Stack>

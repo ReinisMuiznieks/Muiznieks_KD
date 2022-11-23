@@ -1,23 +1,52 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { createCard } from '../../features/card/cardSlice'
 import { toast } from 'react-toastify'
 import { PickerOverlay } from "filestack-react";
+import { useNavigate } from 'react-router-dom'
+import {getCategories,reset} from '../../features/categories/categorySlice'
 
 function CardForm() {
     const [isPicker, setIsPicker] = useState(false);
     const [image, setImage] = useState("");
     const [title, setTitle] = useState("");
-
+    const [category, setCategory] = useState('');
+    const { user } = useSelector((state) => state.auth)
+    const { categories, isLoading, isError, message } = useSelector((state) => state.categories)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+
+        if(isError) {
+            console.log(message)
+        }
+
+        if(!user){
+            navigate('/sign-up')
+        }
+
+        if(user.role !== 'admin'){
+            navigate('/')
+        }
+
+        dispatch(getCategories())
+
+        return () => { // clears when component unmounts
+            dispatch(reset())
+        }
+    }, [user, navigate, isError, message, dispatch])
+
 
       const onSubmit = (e) => {
         e.preventDefault()
     
         if (title.trim().length !== 0 && image) {
-          dispatch(createCard({ title, image: image.filesUploaded[0].url }))
+          dispatch(createCard({ title, image: image.filesUploaded[0].url, category }))
           setTitle('')
           setImage('')
+          setCategory('')
+          toast.success(`Card ${title} has been created!`)
         } else {
           toast.error('Input value is empty!')
         }
@@ -52,6 +81,17 @@ function CardForm() {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Image Title"
             />
+
+            <div className="form-outline mb-1">
+                <select  onChange={(e)=>setCategory(e.target.value)} id="category" name="cars" className="form-control select select-initialized"  value={category}>
+                    <option value="" >Choose Category</option>
+                    {
+                        categories && categories.map(category =>(
+                            <option key={category._id}  value={category._id} category={category} >{category.name}</option>
+                        ))
+                    }
+                </select>
+            </div>
             {/* submit button */}
             <button
               type="submit"

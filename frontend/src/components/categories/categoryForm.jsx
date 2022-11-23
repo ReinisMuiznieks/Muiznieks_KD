@@ -13,6 +13,7 @@ function CategoryForm() {
   
       if (name.trim().length !== 0) {
         dispatch(createCategory({ name }))
+        toast.success(`Successfully created catagory ${name}`)
         setName('')
       } else {
         toast.error('Input value is empty!')

@@ -19,7 +19,6 @@ function Admin() {
 <br/>
 
 <CategoryForm/>
-<DisplayCategories/>
 </>
     )
 }

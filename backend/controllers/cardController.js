@@ -2,21 +2,86 @@ const asyncHandler = require('express-async-handler')
 const Card = require('../models/cardModel')
 const e = require('express')
 
-// Get category
+// Get cards
 const getCard = asyncHandler(async (req, res) => {
   const cards = await Card.find()
 
   res.status(200).json(cards)
 })
 
-const addCard = asyncHandler(async(req,res) => {
-  const { title, description, image } = req.body
+// Get card by id
+const getCardbyId = asyncHandler(async (req, res) => {
+  const card = await Card.findById(req.params.id)
 
-  // Create card
+  res.status(200).json(card)
+})
+
+//GET card by title
+// const testCat =( async (req, res) => {
+//   const qNew = req.query.new;
+//   const qCategory = req.query.title;
+//   try {
+//     let cards;
+
+//     if (qNew) {
+//       cards = await Card.find().sort({ createdAt: -1 }).limit(1);
+//     } else if (qCategory) {
+//       cards = await Card.find({
+//         title: {
+//           $in: [qCategory],
+//         },
+//       });
+//     } else {
+//       cards = await Card.find();
+//     }
+
+//     res.status(200).json(cards);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
+// Gets cards by category id
+const getCardsbyCategory = asyncHandler(async (req, res) => {
+  const qNew = req.query.new;
+  const qCategory = req.query.category;
+
+  try {
+    let cards
+
+    if (qNew) {
+      cards = await Card.find().populate("category").sort({ createdAt: -1 }).limit(1);
+      
+    } else if (qCategory) {
+      cards = await Card.find({
+        category:
+        { 
+          $in: 
+          [qCategory]
+        }}).populate("category")
+    } else {
+      cards = await Card.find().populate("category");
+    }
+    
+    res.status(200).json(cards);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+
+// Create card
+const addCard = asyncHandler(async(req,res) => {
+  const { title, description, image, category } = req.body
+
+  
   const card = await Card.create({
       title,
       description,
       image,
+      category
   })
 
   if(card) {
@@ -25,6 +90,7 @@ const addCard = asyncHandler(async(req,res) => {
           title: card.title,
           description: card.description,
           image: card.image,
+          category: card.category
       })
   } else {
       res.status(400)
@@ -32,8 +98,7 @@ const addCard = asyncHandler(async(req,res) => {
   }
 })
 
-
-// Update category
+// Update card
 const updateCard = asyncHandler(async (req, res) => {
   const card = await Card.findById(req.params.id)
 
@@ -75,10 +140,11 @@ const deleteCard = asyncHandler(async (req, res) => {
   res.status(200).json({ id: req.params.id })
 })
 
-
 module.exports ={
   addCard,
   getCard,
   updateCard,
   deleteCard,
+  getCardbyId,
+  getCardsbyCategory
 }

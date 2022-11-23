@@ -19,18 +19,8 @@ const Category = () => {
             <Card id="stack-card">
                 <Card.Body id="stack-chapter">1. Nodaļa</Card.Body>
                 <Card.Body id="stack-title">Iepazīšanās</Card.Body>
+                <a href="/" class="btn btn stretched-link">Go somewhere</a>
             </Card>
-
-            <Card id="stack-card">
-                <Card.Body id="stack-chapter">1. Nodaļa</Card.Body>
-                <Card.Body id="stack-title">Iepazīšanās</Card.Body>
-            </Card>
-
-            <Card id="stack-card">
-                <Card.Body id="stack-chapter">1. Nodaļa</Card.Body>
-                <Card.Body id="stack-title">Iepazīšanās</Card.Body>
-            </Card>
-            
         </Stack>
     </Container>
 </div>

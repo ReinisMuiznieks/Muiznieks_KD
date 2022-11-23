@@ -13,9 +13,9 @@ import Category from "./pages/category/Category";
 import {ToastContainer} from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import Learn from './pages/learn/Learn';
+import Preview from './pages/learn/Preview';
 
 import Admin from "./pages/admin/admin";
-
 
 function App() {
 
@@ -23,14 +23,14 @@ function App() {
         <>
         <BrowserRouter>
             <Routes>
-                
                 <Route path="/" element={<Home/>}/>
                 <Route path="/log-in" element={<Login/>}/>
                 <Route path="/sign-up" element={<Register/>}/>
                 <Route path="/*" element={<PageNotFound/>}/> 
-                <Route path="/learn" element={<Category/>}/>
+                <Route path="/learn" element={<Learn/>}/>
                 <Route path="/learn/test" element={<Learn/>}/>
                 <Route path="/admins" element={<Admin/>}/>
+                <Route path="/category/:id" element={<Preview/>}/>
             </Routes>
         </BrowserRouter>
         <ToastContainer />

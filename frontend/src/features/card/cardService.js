@@ -15,7 +15,7 @@ const createCard = async (cardData, token) => {
   return response.data
 }
 
-  // Get user card
+  // Get cards
   const getCards = async (token) => {
     const config = {
       headers: {
@@ -41,10 +41,12 @@ const createCard = async (cardData, token) => {
     return response.data
   }
 
+
+
 const cardService = {
     createCard,
     getCards,
-    deleteCard,
+    deleteCard
 }
 
 export default cardService

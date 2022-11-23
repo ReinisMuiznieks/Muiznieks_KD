@@ -36,7 +36,7 @@ return (
         {cards.length > 0 ? (
             <div className="cards">
                 {cards.map((card) => (
-                    <CardItem key={card._id} card={card}/>
+                    <CardItem key={card._id} card={card} category={card.category.name}/>
                 ))}
             </div>
         ) : (<h3>No cards</h3>)}
