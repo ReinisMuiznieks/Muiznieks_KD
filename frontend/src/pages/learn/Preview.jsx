@@ -22,8 +22,8 @@ const Learn = () => {
           try {
             const res = await axios.get(
               cat
-                ? `https://verbum-api.onrender.com/api/cards?category=${cat}`
-                : "https://verbum-api.onrender.com/api/cards"
+                ? `https://verbum-server-kd.onrender.com/api/cards?category=${cat}`
+                : "https://verbum-server-kd.onrender.com/api/cards"
             );
             setCards(res.data);
           } catch (err) {}
