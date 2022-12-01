@@ -9,11 +9,17 @@ const categoryRoutes = require('./routes/categoryRoutes')
 const cardRoutes = require('./routes/cardRoutes')
 const testRoutes = require('./routes/testRoutes')
 const path = require('path')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+
+
 
 connectDB()
 
 const app = express()
 
+app.use(cors())
+app.use(bodyParser.json())
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -25,14 +31,14 @@ app.use('/api/cards',cardRoutes, require('./routes/cardRoutes'))
 app.use('/api/tests',testRoutes,require('./routes/testRoutes'))
 
 // Frontend
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/build')))
-    app.get('*',(req,res) => res.sendFile(path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
-    )
-  )
-} else {
-    app.get('/', (req,res) => res.send('Set to production'))
-}
+// if(process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, '../frontend/build')))
+//     app.get('*',(req,res) => res.sendFile(path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
+//     )
+//   )
+// } else {
+//     app.get('/', (req,res) => res.send('Set to production'))
+// }
 
 
 app.use(errorHandler)
