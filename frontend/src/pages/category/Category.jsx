@@ -3,7 +3,6 @@ import './category.scss';
 import NavbarTop from "../../components/navbar/navbar.jsx";
 import Footer from "../../components/footer/footer.jsx";
 import Container from 'react-bootstrap/Container';
-// import Flashcard from "../../components/flashcard/flashcard";
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
 

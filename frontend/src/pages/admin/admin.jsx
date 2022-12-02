@@ -1,16 +1,19 @@
-import DisplayCards from "../../components/card/displayCards";
-import CategoryForm from "../../components/categories/categoryForm";
-import DisplayCategories from "../../components/categories/displayCategories";
+import DisplayCards from "../../components/card/DisplayCards";
+import CategoryForm from "../../components/category/CategoryForm";
+import DisplayCategories from "../../components/category/DisplayCategories";
 import NavbarTop from "../../components/navbar/navbar";
 import CardForm from "../../components/card/CardForm";
-
 function Admin() {
 
     return(
 <>
+
 <NavbarTop/>
+
+
 <CardForm/>
-<DisplayCards/>
+
+{/* <DisplayCards/> */}
 
 <br/>
 <br/>
@@ -18,7 +21,7 @@ function Admin() {
 <br/>
 <br/>
 
-<CategoryForm/>
+{/* <CategoryForm/> */}
 </>
     )
 }

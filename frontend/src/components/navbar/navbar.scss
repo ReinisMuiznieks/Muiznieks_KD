@@ -11,7 +11,10 @@ body{
 
 .navbar {
     background-color: $navbar;
+    // background: rgb(61,63,111);
+    // background: linear-gradient(180deg, rgba(61,63,111,0.7203256302521008) 0%, rgba(118,120,210,1) 100%);
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    max-height: 100px;
   }
 
 #nav-brand{
@@ -45,7 +48,6 @@ body{
 
 #nav-btn {
     padding: 8px 30px;
-    display: inline-block;
     margin: 8px;
     border-radius: 50px;
     color: $nav-link;
@@ -74,7 +76,6 @@ body{
 
 #get-started{
     padding: 8px 30px;
-    display: inline-block;
     margin: 8px;
     border-radius: 50px;
     font-size: 14px;

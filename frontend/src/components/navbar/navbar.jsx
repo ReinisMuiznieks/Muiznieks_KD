@@ -29,7 +29,13 @@ function NavbarTop() {
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="me-auto">
       <Nav.Link href="/" id="nav-link">Home</Nav.Link> {/* Sākums */}
-      <Nav.Link href="/learn" id="nav-link">Learn</Nav.Link> {/* Mācies */}
+      {user ? (
+        <>
+        <Nav.Link href="/learn" id="nav-link">Learn</Nav.Link> {/* Mācies */}
+        </>
+      ) : (
+        <></>   
+        )}
       <NavDropdown title="Dropdown" className="basic-nav-dropdow" id="nav-link">
           <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>
           <NavDropdown.Item href="/action/3.2">Another action</NavDropdown.Item>
@@ -40,8 +46,10 @@ function NavbarTop() {
     </Nav> 
       <Nav className="ms-auto">
       {user ? (
-
+        <>
+        {/* <Nav.Item id="user">Logged in as {user.name}!</Nav.Item> */}
         <Button variant="outline-secondary" id="nav-btn" href="/log-in" onClick={onLogout}>Logout</Button>
+        </>
       ) : (
         <><Button variant="outline-secondary" id="get-started" href="/sign-up">Register</Button><Button variant="outline-secondary" id="nav-btn" href="/log-in">Login</Button></>   
         )}

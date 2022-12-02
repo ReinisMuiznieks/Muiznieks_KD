@@ -16,8 +16,8 @@ const PageNotFound = () => {
     <Container>
         <Stack id="notfound-stack">
             <img src={image} alt="404" id="notfound-image"></img>
-            <h3 id="notfound-title" className="text-center">Lapa Nav Atrasta</h3>
-            <Button variant="outline-secondary" id="notfound-button" href="/">Atpakaļ uz sākumlapu</Button>
+            <h3 id="notfound-title" className="text-center">Page Not Found!</h3>
+            <Button variant="outline-secondary" id="notfound-button" href="/">Home</Button>
         </Stack>
     </Container>
     

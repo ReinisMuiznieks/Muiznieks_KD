@@ -2,10 +2,7 @@ import React from "react";
 import './learn.scss';
 import NavbarTop from "../../components/navbar/navbar.jsx";
 import Footer from "../../components/footer/footer.jsx";
-
-// import Flashcard from "../../components/flashcard/flashcard";
-
-import DisplayCategories from "../../components/categories/displayCategories";
+import DisplayCategories from "../../components/category/DisplayCategories";
 
 const Learn = () => {
     return (

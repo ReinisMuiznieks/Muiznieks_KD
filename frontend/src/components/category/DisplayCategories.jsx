@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import {getCategories,reset} from '../../features/categories/categorySlice'
-import CategoryItem from "./categoryItem.jsx";
-import Preview from "../../pages/learn/Preview.jsx"
+import {getCategories,reset} from '../../features/category/categorySlice'
+import CategoryItem from "./CategoryItem.jsx";
+import Spinner from "../spinner/spinner";
 
 function DisplayCategories() {
     const navigate = useNavigate()
@@ -22,9 +22,6 @@ function DisplayCategories() {
             navigate('/sign-up')
         }
 
-        if(user.role !== 'admin'){
-            navigate('/')
-        }
 
         dispatch(getCategories())
 
@@ -32,6 +29,10 @@ function DisplayCategories() {
             dispatch(reset())
         }
     }, [user, navigate, isError, message, dispatch])
+
+    if(isLoading) {
+        return <Spinner/>
+    }
 
 return (
     <>
@@ -42,7 +43,7 @@ return (
                     <CategoryItem key={category._id} category={category}/>
                 ))}
             </div>
-        ) : (<h3>No categories</h3>)}
+        ) : (<h1>No categories</h1>)}
     </section>
     </>
 

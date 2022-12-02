@@ -1,16 +1,13 @@
 import { useDispatch } from 'react-redux'
-import { deleteCategory } from '../../features/categories/categorySlice'
+import { deleteCategory } from '../../features/category/categorySlice'
 import React from "react";
 import '../../pages/category/category.scss';
-import NavbarTop from "../../components/navbar/navbar.jsx";
-import Footer from "../../components/footer/footer.jsx";
 import Container from 'react-bootstrap/Container';
-// import Flashcard from "../../components/flashcard/flashcard";
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 
-function CategoryItem({category}) {
+function CategoryItem({category, length}) {
     // const dispatch = useDispatch()
 
   return (

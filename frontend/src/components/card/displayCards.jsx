@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {getCards, reset} from '../../features/card/cardSlice'
+import Spinner from "../spinner/spinner";
 
 import CardItem from "./CardItem.jsx";
 
@@ -22,13 +23,16 @@ function DisplayCards() {
             navigate('/sign-up')
         }
 
-        if(user.role !== 'admin'){
-            navigate('/')
-        }
-
         dispatch(getCards())
 
+        return () => { // clears when component unmounts
+            dispatch(reset())
+        }
     }, [user, navigate, isError, message, dispatch])
+
+    if(isLoading) {
+        return <Spinner/>
+    }
 
 return (
     <>
@@ -43,6 +47,7 @@ return (
     </section>
     </>
 )
+
 }
 
 export default DisplayCards;

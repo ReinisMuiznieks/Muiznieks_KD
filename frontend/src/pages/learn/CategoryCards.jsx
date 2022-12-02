@@ -2,20 +2,16 @@ import React, { useEffect, useState } from "react";
 import './learn.scss';
 import NavbarTop from "../../components/navbar/navbar.jsx";
 import Footer from "../../components/footer/footer.jsx";
-import { useSelector, useDispatch } from 'react-redux'
-import {getCategories} from '../../features/categories/categorySlice'
-import {getCards} from '../../features/card/cardSlice'
-// import Flashcard from "../../components/flashcard/flashcard";
 import axios from 'axios'
 import { useLocation } from "react-router";
-import DisplayCategories from "../../components/categories/displayCategories";
-import categoryService from "../../features/categories/categoryService";
 import CardItem from "../../components/card/CardItem";
+import Spinner from "../../components/spinner/spinner";
 
-const Learn = () => {
+const CategoryCards = () => {
     const location = useLocation();
     const [cards, setCards] = useState([]);
     const cat = location.pathname.split("/")[2];
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const getCards = async () => {
@@ -25,11 +21,16 @@ const Learn = () => {
                 ? `https://verbum-server-kd.onrender.com/api/cards?category=${cat}`
                 : "https://verbum-server-kd.onrender.com/api/cards"
             );
+            setIsLoading(false);
             setCards(res.data);
           } catch (err) {}
         };
         getCards();
       }, [cat]);
+
+      if(isLoading) {
+        return <Spinner/>
+    }
 
     return (
 <>
@@ -50,4 +51,4 @@ const Learn = () => {
     )
 }
 
-export default Learn;
+export default CategoryCards;
