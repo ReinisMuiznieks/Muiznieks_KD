@@ -69,12 +69,8 @@ function CardForm() {
 
       const [isShown, setIsShown] = useState(false);
 
-      const handleClick = event => {
-        // 👇️ toggle shown state
+      const handleClick = () => {
         setIsShown(current => !current);
-    
-        // 👇️ or simply set it to true
-        // setIsShown(true);
       };
 
       if(isLoading) {
@@ -133,24 +129,24 @@ function CardForm() {
 
           <Col>
           
-            <Form.Select onChange={(e)=>setCategory(e.target.value)} id="category" name="cars" className="form-control select select-initialized"  value={category}>
-              <option >Choose Category</option>
-              {
-                  categories && categories.map(category =>(
-                      <option key={category._id}  value={category._id} category={category} >{category.name}</option>
-                  ))
-                  
-              }
-            </Form.Select>
-          </Col>
-          <div className="d-grid gap-2 d-md-flex justify-content-md-end pt-2">
-              <Button className="btn btn-secondary" type="button" onClick={handleClick}>Add category</Button>
+            <div class="input-group mb-3">
+              <Form.Select onChange={(e)=>setCategory(e.target.value)} id="category" name="cars" className="form-control select select-initialized"  value={category}>
+                <option >Choose Category</option>
+                {
+                    categories && categories.map(category =>(
+                        <option key={category._id}  value={category._id} category={category} >{category.name}</option>
+                    ))
+                    
+                }
+              </Form.Select>
+              <Button className="btn btn-secondary" type="button" onClick={handleClick} id="button-addon2">Add category</Button>
                     {isShown && (
 
                         <CategoryForm/>
 
                     )}
-          </div>
+            </div>
+          </Col>
 
           </Row>
 
