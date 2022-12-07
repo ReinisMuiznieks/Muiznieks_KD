@@ -18,7 +18,8 @@ import CategoryForm from '../category/CategoryForm';
 function CardForm() {
     const [isPicker, setIsPicker] = useState(false);
     const [image, setImage] = useState("");
-    const [title, setTitle] = useState("");
+    const [lv_word, setLvword] = useState("");
+    const [eng_word, setEngword] = useState("");
     const [category, setCategory] = useState('');
     const { user } = useSelector((state) => state.auth)
     const { categories, isLoading, isError, message } = useSelector((state) => state.categories)
@@ -50,19 +51,21 @@ function CardForm() {
       const onSubmit = (e) => {
         e.preventDefault()
     
-        if (title.trim().length !== 0 && image) {
-          dispatch(createCard({ title, image: image.filesUploaded[0].url, category }))
-          setTitle('')
+        if (lv_word.trim().length !== 0 && eng_word.trim().length !== 0 && image) {
+          dispatch(createCard({ lv_word, eng_word, image: image.filesUploaded[0].url, category }))
+          setLvword('')
+          setEngword('')
           setImage('')
           setCategory('')
-          toast.success(`Card ${title} has been created!`)
+          toast.success(`Card ${lv_word} has been created!`)
         } else {
           toast.error('Please fill out all of the fields!')
         }
       }
 
       const onReset = () => {
-        setTitle('')
+        setLvword('')
+        setEngword('')
         setImage('')
         setCategory('')
       }
@@ -83,22 +86,26 @@ function CardForm() {
           <Row>
           <Col>
             <Form.Group className="mb-3">
-              <Form.Label>Title</Form.Label>
+              <Form.Label>LV</Form.Label>
               <Form.Control 
               type='text'
-              name='title'
+              name='lv_word'
               required
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
+              onChange={(e) => setLvword(e.target.value)}
+              placeholder="LV"
               />
             </Form.Group>
           </Col>
 
           <Col>
             <Form.Group className='pb-4'>
-              <Form.Label>Description</Form.Label>
-              <Form.Control disabled 
-              type='text' 
+              <Form.Label>ENG</Form.Label>
+              <Form.Control 
+              type='text'
+              name='eng_word'
+              required
+              onChange={(e) => setEngword(e.target.value)}
+              placeholder="LV"
               />
             </Form.Group>
           </Col>
