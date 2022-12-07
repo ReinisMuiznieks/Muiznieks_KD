@@ -14,7 +14,7 @@ import {ToastContainer} from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import Learn from './pages/learn/Learn';
 import CategoryCards from "./pages/learn/CategoryCards";
-import Admin from "./pages/admin/Admin";
+import Admin from "./pages/admin/admin";
 
 function App() {
 
