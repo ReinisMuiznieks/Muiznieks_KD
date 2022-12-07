@@ -16,30 +16,6 @@ const getCardbyId = asyncHandler(async (req, res) => {
   res.status(200).json(card)
 })
 
-//GET card by title
-// const testCat =( async (req, res) => {
-//   const qNew = req.query.new;
-//   const qCategory = req.query.title;
-//   try {
-//     let cards;
-
-//     if (qNew) {
-//       cards = await Card.find().sort({ createdAt: -1 }).limit(1);
-//     } else if (qCategory) {
-//       cards = await Card.find({
-//         title: {
-//           $in: [qCategory],
-//         },
-//       });
-//     } else {
-//       cards = await Card.find();
-//     }
-
-//     res.status(200).json(cards);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 // Gets cards by category id
 const getCardsbyCategory = asyncHandler(async (req, res) => {
@@ -70,15 +46,14 @@ const getCardsbyCategory = asyncHandler(async (req, res) => {
 });
 
 
-
-
 // Create card
 const addCard = asyncHandler(async(req,res) => {
-  const { title, description, image, category } = req.body
+  const { lv_word, eng_word, description, image, category } = req.body
 
   
   const card = await Card.create({
-      title,
+      lv_word,
+      eng_word,
       description,
       image,
       category
@@ -87,7 +62,8 @@ const addCard = asyncHandler(async(req,res) => {
   if(card) {
       res.status(201).json({
           _id: card.id,
-          title: card.title,
+          lv_word: card.lv_word,
+          eng_word: card.eng_word,
           description: card.description,
           image: card.image,
           category: card.category

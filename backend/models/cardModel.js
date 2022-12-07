@@ -2,7 +2,11 @@ const mongoose = require('mongoose')
 const {ObjectId} = mongoose.Schema;
 
 const cardSchema = mongoose.Schema({
-    title: {
+      lv_word: {
+        type: String,
+        required: true,
+      },
+      eng_word: {
         type: String,
         required: true,
       },
