@@ -12,33 +12,51 @@ $accent-color: #607EAA;
     display: flex;
     justify-content: center;
     align-items: center;
-    
-}
-
-#stack-card{
-    width: 50%;
-    height: 50%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 2px solid #607EAA;
-    background-color: #b1b2ff2c;
-    
-
 }
 
 #stack-chapter{
     color: #181818;
-    font-size: 18px;
+    font-size: 2.4vh;
     font-weight: 700;
-    padding-bottom: 0;
-    
+}
+
+#learn-link{
+    text-decoration:none;
 }
 
 #stack-title{
-    padding-top: 0;
-    font-size: 16px;
+    padding-top: -2px;
+    font-size: 13px;
     font-weight: 500;
-    color: #2b2b2b;
+    color: #474747;
     
+}
 
+#stack-card {
+    background-color: white;
+    width: 50%;
+    height: 10vh;
+    margin: 10px;
+    padding: 15px 30px;
+    text-align: left;
+    text-transform: uppercase;
+    transition: 0.5s;
+    color: white;
+    display: block;
+    box-shadow: 0 0px 2px 0 rgba(45, 54, 65, 0.75);
+
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+    &:hover {
+    color: #fff;
+    text-decoration: none;
+    transform: scale(0.99);
+    }
+
+    &:active {
+    transform: scale(0.95);
+    }
 }

@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../../features/auth/authSlice'
+import Spinner from "../../components/spinner/Spinner";
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
   
-    const { user, isError, isSuccess, message } = useSelector(
+    const { user, isError, isSuccess, isLoading, message } = useSelector(
       (state) => state.auth
     )
   
@@ -34,6 +35,10 @@ function Login() {
       if (isError) {
         toast.error(message)
       }
+
+      if(isLoading) {
+        return <Spinner/>
+    }
   
       if (isSuccess || user) { // doesnt allow to access /log-in anymore when logged in
         navigate('/')

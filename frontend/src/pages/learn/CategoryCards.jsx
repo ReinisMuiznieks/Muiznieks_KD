@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useLocation } from "react-router";
 import CardItem from "../../components/card/CardItem";
 import Spinner from "../../components/spinner/Spinner";
+import NoCards from "../../components/card/NoCards";
 
 const CategoryCards = () => {
     const location = useLocation();
@@ -43,7 +44,7 @@ const CategoryCards = () => {
                     <CardItem key={card._id} card={card} category={card.category.name}/>
                 ))}
             </div>
-        ) : (<h3>No cards</h3>)}
+        ) : (<NoCards/>)}
     </section>
 <Footer/>
 

@@ -8,7 +8,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 
 function CategoryItem({category, length}) {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
   return (
     // <div className="category">
@@ -19,14 +19,17 @@ function CategoryItem({category, length}) {
 <>
   <div id="learn-legend">
     <Container>
-        <Stack id="learn-stack">
-            <Card id="stack-card">
-                <Card.Body id="stack-chapter">{category.name}</Card.Body>
+      <Link to={`/category/${category._id}`}  id='learn-link'>
+        <Stack id="learn-stack" >
+            <button id="stack-card">
+              
+                <Card.Body id="stack-chapter" > {category.name} </Card.Body>
                 {/* <Card.Body id="stack-title">Iepazīšanās</Card.Body> */}
-                {/* <button onClick={() => dispatch(deleteCategory(category._id))}className="close">Delete</button> */}
-                <Link to={`/category/${category._id}`}><div>Preview</div></Link>
-            </Card> 
+              
+              {/* <button onClick={() => dispatch(deleteCategory(category._id))}className="close">Delete</button> */}
+            </button>
         </Stack>
+      </Link>
     </Container>
 </div>
 </>

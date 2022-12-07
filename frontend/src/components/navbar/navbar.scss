@@ -32,9 +32,13 @@ body{
     font-size: 15px;
     font-weight: 500;
     padding: 10px 0 10px 30px;
+    text-transform: uppercase;
+    transition: 0.4s;
 
     &:hover{
         color:$nav-link-hover;
+        background-position: right center;
+        transform: scale(0.95);
     }
 
     &:focus{
@@ -47,59 +51,33 @@ body{
 }
 
 #nav-btn {
-    padding: 8px 30px;
+    padding: 9px 30px;
     margin: 8px;
     border-radius: 50px;
     color: $nav-link;
-    font-size: 14px;
+    font-size: 12px;
     border: 2px solid $button-hover;
     font-weight: 650;
+    transition: 0.4s;
 
     &:hover{
         color:$nav-link-hover;
         background-color:$navbar;
         border-color: $nav-link-hover;
+        transform: scale(0.97);
     }
 
     &:focus{
         color:$nav-link-hover;
         background-color:$navbar;
         border-color: $nav-link-hover;
+        transform: scale(0.95);
     }
 
     &:active{
         color:$nav-link-hover;
         background-color:$navbar;
         border-color: $nav-link-hover;
-    }
-}
-
-#get-started{
-    padding: 8px 30px;
-    margin: 8px;
-    border-radius: 50px;
-    font-size: 14px;
-    border: 2px solid $button-hover;
-    font-weight: 650;
-    color: $nav-link;
-    background-color:$nav-link-hover;
-
-    &:hover{
-        color: $nav-link;
-        background-color:#ceddff;
-        border-color: $nav-link-hover;
-    }
-
-    &:focus{
-        color: $nav-link;
-    background-color:#ceddff;
-    border-color: $button-hover;
-    }
-
-    &:active{
-    color: $nav-link;
-    background-color:#ceddff;
-    border-color: $button-hover;
     }
 }
 

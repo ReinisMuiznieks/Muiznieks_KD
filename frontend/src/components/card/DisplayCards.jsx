@@ -36,7 +36,7 @@ function DisplayCards() {
 
 return (
     <>
-    <section className="content">
+    <Section className="content">
         {cards.length > 0 ? (
             <div className="cards">
                 {cards.map((card) => (
@@ -44,7 +44,7 @@ return (
                 ))}
             </div>
         ) : (<h3>No cards</h3>)}
-    </section>
+    </Section>
     </>
 )
 

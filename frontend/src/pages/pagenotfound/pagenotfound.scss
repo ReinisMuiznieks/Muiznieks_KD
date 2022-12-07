@@ -5,15 +5,15 @@
 }
 
 #notfound-image{
-    width: 45vh;
-    height: 45vh;
+    width: 30vh;
+    height: 30vh;
     padding-top: 5%;
 }
 
 #notfound-title{
     color: #182c41;
     //font-size: 60px;
-    font-size: 7vh;
+    font-size: 5vh;
     line-height: 1;
     font-weight: 800;
     letter-spacing: 1px;
@@ -22,19 +22,20 @@
 
 #notfound-button{
     padding: 1vh 10vh;
-    display: inline-block;
     margin-top: 20px;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: 650;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 700;
     border: 2px solid #224274;
     color:#152535;
     background-color:#B1B2FF;
+    transition: 0.5s;
 
     &:hover{
         border: 2px solid #224174ce;
         color:#30567c;
         background-color:#AAC4FF;
+        transform: scale(0.97);
     }
 
     &:focus{
