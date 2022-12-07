@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { PickerOverlay } from "filestack-react";
 import { useNavigate } from 'react-router-dom'
 import {getCategories,reset} from '../../features/category/categorySlice'
-import Spinner from '../spinner/spinner';
+import Spinner from '../spinner/Spinner';
 import './card.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';

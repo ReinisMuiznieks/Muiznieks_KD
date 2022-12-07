@@ -1,7 +1,7 @@
 import React from "react";
 import './category.scss';
-import NavbarTop from "../../components/navbar/navbar.jsx";
-import Footer from "../../components/footer/footer.jsx";
+import NavbarTop from "../../components/navbar/Navbar.jsx";
+import Footer from "../../components/footer/Footer.jsx";
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import './learn.scss';
-import NavbarTop from "../../components/navbar/navbar.jsx";
-import Footer from "../../components/footer/footer.jsx";
+import NavbarTop from "../../components/navbar/Navbar.jsx";
+import Footer from "../../components/footer/Footer.jsx";
 import axios from 'axios'
 import { useLocation } from "react-router";
 import CardItem from "../../components/card/CardItem";
-import Spinner from "../../components/spinner/spinner";
+import Spinner from "../../components/spinner/Spinner";
 
 const CategoryCards = () => {
     const location = useLocation();

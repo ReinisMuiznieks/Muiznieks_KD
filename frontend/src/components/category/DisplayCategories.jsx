@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {getCategories,reset} from '../../features/category/categorySlice'
 import CategoryItem from "./CategoryItem.jsx";
-import Spinner from "../spinner/spinner";
+import Spinner from "../spinner/Spinner";
 
 function DisplayCategories() {
     const navigate = useNavigate()
