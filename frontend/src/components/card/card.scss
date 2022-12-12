@@ -1,0 +1,56 @@
+
+#complete-card{
+    width: 30vh;
+    margin: 5px;
+    font-weight: 500;
+    color:rgb(100, 100, 100);
+    padding: 10px;
+}
+
+#complete-title{
+    color: #182c41;
+    font-size: 4vh;
+    font-weight: 700;
+    padding-top: 2%;
+    margin-bottom: 20px;
+}
+
+#item{
+    text-align-last: right;
+    color: rgb(81, 81, 81);
+    font-weight: 650;
+}
+
+#card-items{
+    font-weight: 400;
+}
+
+#complete-button{
+    margin-top: 30px;
+    padding: 1vh 7vh;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid #bca3ff;
+    color:white;
+    background-color:#B1B2FF;
+    transition: 0.5s;
+
+    &:hover{
+        background-color:#AAC4FF;
+        transform: scale(0.97);
+    }
+
+    &:focus{
+        background-color:#AAC4FF;
+    }
+
+    &:active{
+        background-color:#AAC4FF;
+    }
+}
+
+#completed-image{
+    width: 25px;
+    height: 25px;
+}

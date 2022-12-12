@@ -1,16 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {getCategories,reset} from '../../features/category/categorySlice'
 import CategoryItem from "./CategoryItem.jsx";
 import Spinner from "../spinner/Spinner";
+import Form from 'react-bootstrap/Form';
+import "./category.scss"
+import Container from 'react-bootstrap/Container';
 
 function DisplayCategories() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    
     const { user } = useSelector((state) => state.auth)
     const { categories, isLoading, isError, message } = useSelector((state) => state.categories)
+
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
 
@@ -21,7 +25,6 @@ function DisplayCategories() {
         if(!user){
             navigate('/sign-up')
         }
-
 
         dispatch(getCategories())
 
@@ -36,10 +39,23 @@ function DisplayCategories() {
 
 return (
     <>
+    <div id="category-legend">
+    <Form>
+    <Form.Control id="searchbar"
+    
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search"
+    />
+    
+    </Form>
+    </div>
+
     <section className="content">
         {categories.length > 0 ? (
             <div className="categories">
-                {categories.map((category) => (
+                {categories.filter((item) => {
+                    return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search)
+                }).map((category) => (
                     <CategoryItem key={category._id} category={category}/>
                 ))}
             </div>

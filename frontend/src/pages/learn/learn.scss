@@ -24,11 +24,12 @@
 }
 
 #continue-button{
+    border-radius: 15px;
     margin-top: 50px;
     font-size: 16px;
     font-weight: 500;
     color: white;
-    padding: 15px 50px;
+    padding: 12px 60px;
     text-align: center;
     transition: 0.5s;
     display: block;
@@ -41,7 +42,6 @@
     touch-action: manipulation;
 
     &:hover {
-    color: rgb(133, 107, 160);
     transform: #7160aa;
     background-color: #b1b2ffbf;
     }

@@ -20,7 +20,7 @@ function CategoryItem({category, length}) {
   <div id="learn-legend">
     <Container>
       <Link to={`/category/${category._id}`}  id='learn-link'>
-        <Stack id="learn-stack" >
+        <Stack id="learn-stack">
             <button id="stack-card">
               
                 <Card.Body id="stack-chapter" > {category.name} </Card.Body>
