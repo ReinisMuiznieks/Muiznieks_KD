@@ -26,6 +26,24 @@ export const createCategory = createAsyncThunk('/categories/create', async (cate
     }
 })
 
+
+// Update category
+
+export const updateCategory = createAsyncThunk('/categories/update', async (updatedCategoryData,id, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await categoryService.updateCategory(updatedCategoryData, id, token)
+    } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 // Get user category
 
 export const getCategories = createAsyncThunk('categories/getAll', async (_, thunkAPI) => {
@@ -103,6 +121,19 @@ export const categorySlice = createSlice({
                 state.categories = state.categories.filter((category) => category._id !== action.payload.id) // removes from UI without needing to refresh
             })
             .addCase(deleteCategory.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(updateCategory.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(updateCategory.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.categories.push(action.payload)
+            })
+            .addCase(updateCategory.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

@@ -15,6 +15,19 @@ const createCategory = async (categoryData, token) => {
     return response.data
   }
 
+// Update category
+const updateCategory = async (updatedCategoryData, cateogryId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.put(API_URL + cateogryId, updatedCategoryData, config)
+
+  return response.data
+}
+
   // Get user category
   const getCategories = async (token) => {
     const config = {
@@ -45,6 +58,7 @@ const categoryService = {
     createCategory,
     getCategories,
     deleteCategory,
+    updateCategory
 }
 
 export default categoryService

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -13,12 +13,28 @@ function NavbarTop() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())
     navigate('/')
   }
+
+  useEffect(() => {
+    checkRole();
+  })
+
+  const checkRole = () => {
+      if(user && user.role === 'admin'){
+      setIsAdmin(true)
+    }
+    else{
+      setIsAdmin(false)
+    }
+  }
+
+
 
   return (    
 <Navbar>
@@ -36,6 +52,16 @@ function NavbarTop() {
         <>
         </>   
         )}
+
+      {isAdmin ? (
+        <>
+        <Nav.Link href="/admin" id="nav-link">Dashboard</Nav.Link> {/* Mācies */}
+        </>
+      ) : (
+        <>
+        </>   
+        )}
+        
     </Nav>
 
       <Nav className="ms-auto">
