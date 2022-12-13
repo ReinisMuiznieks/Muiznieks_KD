@@ -7,13 +7,14 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './card.scss'
-import confetti from "https://cdn.skypack.dev/canvas-confetti";
+import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.6.0-t438JJTXIbBReqvLtDua/mode=imports/optimized/canvas-confetti.js";
 
 function CardCompleted({words, category}) {
     confetti();
 
     return (
 <>
+
   <div id="learn-legend">
     <Container>
         <Stack id="notfound-stack">
