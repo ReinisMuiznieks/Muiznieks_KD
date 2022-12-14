@@ -81,6 +81,7 @@ function CardForm() {
     }
 
       return (
+        
         <Container className='card-legend pt-5'>
         <Form onSubmit={onSubmit}>
           <Row>
@@ -136,7 +137,7 @@ function CardForm() {
 
           <Col>
           
-            <div class="input-group mb-3">
+            <div className="input-group mb-3">
               <Form.Select onChange={(e)=>setCategory(e.target.value)} id="category" name="cars" className="form-control select select-initialized"  value={category}>
                 <option >Choose Category</option>
                 {

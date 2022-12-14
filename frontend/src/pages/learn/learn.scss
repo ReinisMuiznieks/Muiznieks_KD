@@ -1,3 +1,24 @@
+#learn-legend{
+    padding-top: 5%;
+    max-height: 100vh;
+}
+.img-attrib {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0 .5em .5em 0;
+    padding: .25em;
+    margin-top: 0.3em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.283);
+    text-decoration: none;
+    
+    &:hover{
+        color: white;
+        text-decoration: underline;
+    }
+  }
+
 #card-image{
     object-fit:scale-down;
     width: 900px;

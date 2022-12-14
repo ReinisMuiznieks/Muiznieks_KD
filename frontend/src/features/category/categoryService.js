@@ -16,14 +16,14 @@ const createCategory = async (categoryData, token) => {
   }
 
 // Update category
-const updateCategory = async (updatedCategoryData, cateogryId, token) => {
+const updateCategory = async (updatedCategoryData, categoryId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }
 
-  const response = await axios.put(API_URL + cateogryId, updatedCategoryData, config)
+  const response = await axios.put(API_URL + categoryId, updatedCategoryData, config)
 
   return response.data
 }
@@ -42,14 +42,14 @@ const updateCategory = async (updatedCategoryData, cateogryId, token) => {
   }
 
   // Delete category
-  const deleteCategory = async (cateogryId,token) => {
+  const deleteCategory = async (categoryId,token) => {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     } 
   
-    const response = await axios.delete(API_URL + cateogryId, config)
+    const response = await axios.delete(API_URL + categoryId, config)
   
     return response.data
   }

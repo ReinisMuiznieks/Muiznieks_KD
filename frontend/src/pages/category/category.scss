@@ -16,21 +16,13 @@ $accent-color: #607EAA;
 }
 
 #stack-chapter{
-    color: #181818;
+    color: #232323;
     font-size: 2.4vh;
-    font-weight: 700;
+    font-weight: 750;
 }
 
 #learn-link{
     text-decoration:none;
-}
-
-#stack-title{
-    padding-top: -2px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #474747;
-    
 }
 
 #stack-card {
@@ -40,11 +32,10 @@ $accent-color: #607EAA;
     margin: 10px;
     padding: 15px 30px;
     text-align: left;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     transition: 0.5s;
-    color: white;
     display: block;
-    box-shadow: 0 0px 2px 0 rgba(45, 54, 65, 0.75);
+    border-color: #7678d2;
 
     cursor: pointer;
     user-select: none;
@@ -52,7 +43,6 @@ $accent-color: #607EAA;
     touch-action: manipulation;
 
     &:hover {
-    color: #fff;
     text-decoration: none;
     transform: scale(0.99);
     }
@@ -63,6 +53,7 @@ $accent-color: #607EAA;
 }
 
 #delete-button{
+    width: 150px;
     border-radius: 15px;
     font-size: 13px;
     font-weight: 500;
@@ -88,6 +79,7 @@ $accent-color: #607EAA;
 }
 
 #update-button{
+    width: 150px;
     border-radius: 15px;
     font-size: 13px;
     font-weight: 500;

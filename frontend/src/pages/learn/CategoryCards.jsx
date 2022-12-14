@@ -15,14 +15,23 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import icon from '../../images/question_mark.svg'
 import Popover from 'react-bootstrap/Popover';
 import CardCompleted from "../../components/card/CardCompleted";
+import { useDispatch } from 'react-redux'
+import { deleteCard } from '../../features/card/cardSlice'
+import Modal from 'react-bootstrap/Modal';
 
 const CategoryCards = () => {
+    const dispatch = useDispatch()
     const location = useLocation();
     const [cards, setCards] = useState([]);
     const cat = location.pathname.split("/")[2];
     const [isLoading, setIsLoading] = useState(true);
     const [currentCard, setCurrentCard] = useState(0);
     const [showResults, setShowResults] = useState(false);
+
+    const [showDelete, setShowDelete] = useState(false);
+    const handleCloseDelete = () => setShowDelete(false);
+    const handleShowDelete = () => setShowDelete(true);
+
 
     useEffect(() => {
         const getCards = async () => {
@@ -62,6 +71,11 @@ const CategoryCards = () => {
         return <Spinner/>
     }
 
+    const onDelete = () => {
+      dispatch(deleteCard(cards[currentCard]._id))
+      window.location.reload();
+    }
+
     return (
 <>
 <NavbarTop />
@@ -72,15 +86,33 @@ const CategoryCards = () => {
   ) : (
     <>
       {cards.length > 0 ? (
+        
             <div id="learn-legend">
+
+              <Modal show={showDelete} onHide={handleCloseDelete}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Delete category</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to delete <b>{cards[currentCard].lv_word}</b> category?</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="outline-secondary" onClick={handleCloseDelete}>
+                    Cancel
+                  </Button>
+                  <Button variant="outline-danger" onClick={onDelete}>
+                    Delete
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+
             <Container>
                 
-                {/* <h1 className="text-center pb-4">{category}</h1>  category vjg tikai prieks admin lapas */}
                 <Stack id="learn-stack">
         
                 <Card>
                     <Card.Img variant="top" id="card-image" className="pt-4" src={cards[currentCard].image} alt={cards[currentCard].lv_word} />
-        
+                    <a href="/credits" className="img-attrib">Credits</a>
+
+
                     <Card.Body>
                         <Card.Text id="card-text">
                         {cards[currentCard].lv_word}
@@ -112,10 +144,10 @@ const CategoryCards = () => {
                         </OverlayTrigger>
                         </Card.Text>
                     </Card.Body>
-                {/* <button onClick={() => dispatch(deleteCard(card._id))}className="close">Delete</button> */}
                 </Card>
                 <div className="buttons">
                     <Button id="continue-button" onClick={displayCard}>Continue</Button>
+                    <button onClick={handleShowDelete} className="close mt-2" id="delete-button">Delete <b>{cards[currentCard].lv_word}</b></button>
                 </div>
                 </Stack>
             </Container>

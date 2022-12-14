@@ -7,17 +7,15 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './card.scss'
-// import confetti from "https://cdn.skypack.dev/pin/canvas-confetti@v1.6.0-t438JJTXIbBReqvLtDua/mode=imports/optimized/canvas-confetti.js";
 
 function CardCompleted({words, category}) {
-    // confetti();
 
     return (
 <>
-
   <div id="learn-legend">
     <Container>
         <Stack id="notfound-stack">
+            
             <img src={image} alt="404" id="notfound-image"></img>
             <h3 id="complete-title" className="text-center">Lesson complete!</h3>
             <Card id="complete-card">
@@ -38,7 +36,7 @@ function CardCompleted({words, category}) {
             </Container>
                 {/* <Card.Body >Dictionary + {words}</Card.Body> */}
             </Card>
-
+            
             <Button variant="outline-secondary" id="complete-button" href="/learn">Continue</Button>
         </Stack>
     </Container>

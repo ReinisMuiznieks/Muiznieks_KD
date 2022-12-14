@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Learn from './pages/learn/Learn';
 import CategoryCards from "./pages/learn/CategoryCards";
 import Admin from "./pages/admin/Admin";
+import Credits from "./pages/credits/Credits";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/learn/test" element={<Learn/>}/>
                 <Route path="/admin" element={<Admin/>}/>
                 <Route path="/category/:id" element={<CategoryCards/>}/>
+                <Route path="/credits" element={<Credits/>}/>
             </Routes>
         </BrowserRouter>
         <ToastContainer />

@@ -26,6 +26,7 @@ function CardItem({card, category}) {
         <Card>
             <Card.Img variant="top" id="card-image" className="pt-4" src={card.image} alt={card.lvword} />
 
+
             <Card.Body>
                 <Card.Text id="card-text">
                 {card.lv_word}
@@ -50,7 +51,6 @@ function CardItem({card, category}) {
                         <Image id="image"
                             ref={ref}
                             roundedCircle
-
                             src={icon}
                         />
                         </Button>
