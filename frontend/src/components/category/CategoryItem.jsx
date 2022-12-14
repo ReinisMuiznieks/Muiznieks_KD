@@ -35,8 +35,6 @@ function CategoryItem({category}) {
 
     })
 
-
-
     const checkRole = () => {
       if(user && user.role === 'admin'){
       setIsAdmin(true)

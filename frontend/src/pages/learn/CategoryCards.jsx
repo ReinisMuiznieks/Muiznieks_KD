@@ -9,6 +9,7 @@ import NoCards from "../../components/card/NoCards";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
+import { useSelector } from 'react-redux'
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -31,7 +32,22 @@ const CategoryCards = () => {
     const [showDelete, setShowDelete] = useState(false);
     const handleCloseDelete = () => setShowDelete(false);
     const handleShowDelete = () => setShowDelete(true);
+    const { user } = useSelector((state) => state.auth)
+    const [isAdmin, setIsAdmin] = useState(false);
 
+    useEffect(() => {
+      checkRole();
+
+    })
+
+    const checkRole = () => {
+      if(user && user.role === 'admin'){
+      setIsAdmin(true)
+    }
+    else{
+      setIsAdmin(false)
+    }
+  }
 
     useEffect(() => {
         const getCards = async () => {
@@ -88,7 +104,8 @@ const CategoryCards = () => {
       {cards.length > 0 ? (
         
             <div id="learn-legend">
-
+  {isAdmin ? (
+  <>
               <Modal show={showDelete} onHide={handleCloseDelete}>
                 <Modal.Header closeButton>
                   <Modal.Title>Delete category</Modal.Title>
@@ -103,7 +120,12 @@ const CategoryCards = () => {
                   </Button>
                 </Modal.Footer>
               </Modal>
-
+              </>
+    ) : (
+      <>
+      </>
+    )}
+ 
             <Container>
                 
                 <Stack id="learn-stack">
@@ -147,7 +169,14 @@ const CategoryCards = () => {
                 </Card>
                 <div className="buttons">
                     <Button id="continue-button" onClick={displayCard}>Continue</Button>
-                    <button onClick={handleShowDelete} className="close mt-2" id="delete-button">Delete <b>{cards[currentCard].lv_word}</b></button>
+                    {isAdmin ? (
+                      <>
+                        <button onClick={handleShowDelete} className="close mt-2" id="delete-button">Delete <b>{cards[currentCard].lv_word}</b></button>
+                      </>
+                    ) : (
+                      <>
+                      </>
+                    )}
                 </div>
                 </Stack>
             </Container>
@@ -156,9 +185,11 @@ const CategoryCards = () => {
     </>
   )} 
     </section>
+    
 <Footer/>
 </>
     )
+
 }
 
 export default CategoryCards;
