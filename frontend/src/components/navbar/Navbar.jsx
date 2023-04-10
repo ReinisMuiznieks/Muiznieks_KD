@@ -8,6 +8,7 @@ import './navbar.scss'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../features/auth/authSlice'
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavbarTop() {
   const navigate = useNavigate()
@@ -55,7 +56,14 @@ function NavbarTop() {
 
       {isAdmin ? (
         <>
-        <Nav.Link href="/admin" id="nav-link">Dashboard</Nav.Link> {/* Mācies */}
+        <Nav.Link href="/admin" id="nav-link">Dashboard</Nav.Link>
+
+        <NavDropdown title="Admin" id="nav-link">
+              <NavDropdown.Item href="/admin/card">Add Card</NavDropdown.Item>
+              <NavDropdown.Item href="/admin/test">Add Test</NavDropdown.Item>
+              {/* <NavDropdown.Divider /> */}
+              {/* <NavDropdown.Item href="#action/3.4">Test</NavDropdown.Item> */}
+        </NavDropdown>
         </>
       ) : (
         <>

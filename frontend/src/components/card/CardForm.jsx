@@ -14,6 +14,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import CategoryForm from '../category/CategoryForm';
+import Navbar from '../../components/navbar/Navbar'
 
 function CardForm() {
     const [isPicker, setIsPicker] = useState(false);
@@ -81,7 +82,8 @@ function CardForm() {
     }
 
       return (
-        
+        <>
+        <Navbar/>
         <Container className='card-legend pt-5'>
         <Form onSubmit={onSubmit}>
           <Row>
@@ -184,6 +186,7 @@ function CardForm() {
 
       </Form>
       </Container>
+      </>
       );
   }
   

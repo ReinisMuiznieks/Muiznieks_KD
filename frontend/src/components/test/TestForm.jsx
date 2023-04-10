@@ -15,6 +15,7 @@ import Stack from 'react-bootstrap/Stack';
 import CategoryForm from '../category/CategoryForm';
 import axios from 'axios'
 import {getTypes} from '../../features/type/typeSlice'
+import Navbar from '../../components/navbar/Navbar'
 
 function TestForm() {
     const [category, setCategory] = useState('');
@@ -93,6 +94,8 @@ function TestForm() {
     }
 
       return (
+        <>
+        <Navbar/>
         <Container className='card-legend pt-5'>
         <Form onSubmit={onSubmit}>
           <Row>
@@ -165,6 +168,7 @@ function TestForm() {
 
       </Form>
       </Container>
+      </>
       );
   }
   
