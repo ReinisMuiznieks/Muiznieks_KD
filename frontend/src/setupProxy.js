@@ -5,6 +5,7 @@ module.exports = function(app) {
     '/api',
     createProxyMiddleware({
       target: 'https://verbum-server-kd.onrender.com',
+      // target: 'https://localhost:5000',
       changeOrigin: true,
     })
   );

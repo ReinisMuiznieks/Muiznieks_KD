@@ -3,6 +3,8 @@
 // import DisplayCategories from "../../components/category/DisplayCategories";
 import NavbarTop from "../../components/navbar/Navbar";
 import CardForm from "../../components/card/CardForm";
+import TestForm from "../../components/test/TestForm";
+import TestForm2 from "../../components/test/TestForm2";
 function Admin() {
 
     return(
@@ -12,16 +14,9 @@ function Admin() {
 
 
 <CardForm/>
+<TestForm/>
+{/* <TestForm2/> */}
 
-{/* <DisplayCards/> */}
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-{/* <CategoryForm/> */}
 </>
     )
 }

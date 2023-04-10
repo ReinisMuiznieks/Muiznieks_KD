@@ -8,6 +8,8 @@ const typeRoutes = require('./routes/typeRotues')
 const categoryRoutes = require('./routes/categoryRoutes')
 const cardRoutes = require('./routes/cardRoutes')
 const testRoutes = require('./routes/testRoutes')
+const questionRoutes = require('./routes/questionRoutes')
+const answerRoutes = require('./routes/answerRoutes')
 const path = require('path')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -29,6 +31,8 @@ app.use('/api/types',typeRoutes)
 app.use('/api/categories',categoryRoutes,require('./routes/categoryRoutes'))
 app.use('/api/cards',cardRoutes, require('./routes/cardRoutes'))
 app.use('/api/tests',testRoutes,require('./routes/testRoutes'))
+app.use('/api/questions',questionRoutes,require('./routes/questionRoutes'))
+app.use('/api/answers',answerRoutes,require('./routes/answerRoutes'))
 
 // Frontend
 // if(process.env.NODE_ENV === 'production') {

@@ -1,21 +1,20 @@
 const mongoose = require("mongoose");
+const {ObjectId} = mongoose.Schema;
 
 const testSchema = new mongoose.Schema({
-  userId: {
-    type: String,
-    required: true,
-  },
   testname: {
     type: String,
     required: true,
   },
   category: {
-    type: String,
-    required: true,
-  },
+    type: ObjectId,
+    ref: "Category",
+    required : [true, 'Must belong to a category'],
+},
   type: {
-    type: String,
-    required: true,
+    type: ObjectId,
+    ref: "Type",
+    required : [true, 'Must belong to a type'],
   },
 },
   {
