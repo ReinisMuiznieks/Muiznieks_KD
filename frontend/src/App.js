@@ -18,6 +18,7 @@ import Admin from "./pages/admin/Admin";
 import Credits from "./pages/credits/Credits";
 import TestForm from "./components/test/TestForm";
 import CardForm from "./components/card/CardForm";
+import QuestionForm from "./components/question/QuestionForm";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/admin" element={<Admin/>}/>
                 <Route path="/admin/test" element={<TestForm/>}/>
                 <Route path="/admin/card" element={<CardForm/>}/>
+                <Route path="/admin/question" element={<QuestionForm/>}/>
                 <Route path="/category/:id" element={<CategoryCards/>}/>
                 <Route path="/credits" element={<Credits/>}/>
             </Routes>
