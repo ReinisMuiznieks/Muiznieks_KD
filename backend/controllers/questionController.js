@@ -22,6 +22,7 @@ const getQuestion = asyncHandler(async (req,res) =>{
     }
 });
 
+
 const addQuestion = asyncHandler(async (req,res) =>{
     const question = new Question({
         testname: req.body.testname,

@@ -16,14 +16,16 @@ import axios from 'axios'
 import Navbar from '../../components/navbar/Navbar'
 import TestForm from '../test/TestForm'
 import {getTests} from '../../features/test/testSlice'
+import QuestionItem from './QuestionItem'
 
-function QuestionForm() {
+function TestingForm() {
     const { user } = useSelector((state) => state.auth)
     const [questionTitle, setQuestionTitle] = useState("");
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [test, setTest] = useState("");
     const { tests, isLoading, isError, message } = useSelector((state) => state.tests)
+    const [questions, setQuestions] = useState([]);
 
     useEffect(() => {
         if(!user){
@@ -52,13 +54,27 @@ function QuestionForm() {
                 'Authorization': `Bearer ${user.token}`
             },
           })
+
           setTest('')
           setQuestionTitle('')
-          toast.success(`Question ${test} has been created!`)
+          toast.success(`Test ${test} has been created!`)
         } else {
           toast.error('Please fill out all of the fields!')
         }
       }
+
+      useEffect(() => {
+        const headers = { 'Authorization': `Bearer ${user.token}` };
+        const getQuestions = async () => {
+          try {
+            const res = await axios.get(
+                'http://localhost:5000/api/questions', { headers }
+            );
+            setQuestions(res.data);
+          } catch (err) {}
+        };
+        getQuestions();
+      }, [test]);
 
       const onReset = () => {
         setTest('')
@@ -79,30 +95,6 @@ function QuestionForm() {
         <>
         <Navbar/>
         <Container className='card-legend pt-5'>
-        <Form onSubmit={onSubmit}>
-          <Row>
-          <Col>
-            <Form.Group className="mb-3">
-              <Form.Label>Question</Form.Label>
-              <Form.Control 
-              type='text'
-              name='questionTitle'
-              required
-              onChange={(e) => setQuestionTitle(e.target.value)}
-              placeholder="Question"
-              />
-            </Form.Group>
-          </Col>
-
-          </Row>
-
-          <Row>
-          <Col>
-
-          </Col>
-
-          <Col>
-          
             <div className="input-group mb-3">
               <Form.Select onChange={(e)=>setTest(e.target.value)} id="test" name="cars" className="form-control select select-initialized"  value={test}>
                 <option >Choose Test</option>
@@ -121,21 +113,29 @@ function QuestionForm() {
 
                     )}
             </div>
-          </Col>
 
-          </Row>
-          
+            <>
+        {/* <Section className="content"> */}
+            {/* {cards.length > 0 ? ( */}
+                {/* <div className="cards">
+                    {questions.map((question) => (
+                        // <QuestionItem key={question._id} question={question} test={question.test}/>
+                        <h1 key={question._id}>{question}</h1>
+                    ))}
+                </div> */}
 
-          <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
-                <Button variant="outline-success" type="submit">Submit</Button>
-                <div className="vr" />
-                <Button variant="outline-danger" onClick={onReset}>Reset</Button>
-          </Stack>
+                <div className="col">
+                <h1>Mi Casa</h1>
+                <p>This is my house y&apos;all!</p>
+                {questions.map(question => <h1 key={question._id}>{question.question}</h1>)}
+                </div>
+            {/* ) : (<h3>No cards</h3>)} */}
+        {/* </Section> */}
+        </>
 
-      </Form>
       </Container>
       </>
       );
   }
   
-  export default QuestionForm
+  export default TestingForm

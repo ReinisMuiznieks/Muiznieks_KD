@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {getCards, reset} from '../../features/card/cardSlice'
-import Spinner from "../spinner/spinner";
+import Spinner from "../spinner/Spinner";
 
 import CardItem from "./CardItem.jsx";
 
