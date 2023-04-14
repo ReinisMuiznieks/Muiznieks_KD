@@ -44,7 +44,7 @@ function QuestionForm() {
         if (questionTitle.trim().length !== 0) {
           // axios post create new test
           const questionData = {
-            testname: test,
+            test: test,
             question: questionTitle
           };
         axios.post("http://localhost:5000/api/questions",questionData, {

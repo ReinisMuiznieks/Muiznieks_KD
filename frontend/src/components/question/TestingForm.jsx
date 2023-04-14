@@ -46,7 +46,7 @@ function TestingForm() {
         if (questionTitle.trim().length !== 0) {
           // axios post create new test
           const questionData = {
-            testname: test,
+            testid: test,
             question: questionTitle
           };
         axios.post("http://localhost:5000/api/questions",questionData, {
@@ -68,7 +68,7 @@ function TestingForm() {
         const getQuestions = async () => {
           try {
             const res = await axios.get(
-                'http://localhost:5000/api/questions', { headers }
+                `http://localhost:5000/api/questions/test=${test}`, { headers }
             );
             setQuestions(res.data);
           } catch (err) {}
@@ -125,8 +125,7 @@ function TestingForm() {
                 </div> */}
 
                 <div className="col">
-                <h1>Mi Casa</h1>
-                <p>This is my house y&apos;all!</p>
+                <h1>{test} questions</h1>
                 {questions.map(question => <h1 key={question._id}>{question.question}</h1>)}
                 </div>
             {/* ) : (<h3>No cards</h3>)} */}

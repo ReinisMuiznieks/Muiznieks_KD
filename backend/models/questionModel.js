@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const {ObjectId} = mongoose.Schema;
 
 const questionSchema = new mongoose.Schema({
-    testname: {
+    test: {
         type: ObjectId,
         ref: "Test",
         required : [true, 'Must belong to a test'],
