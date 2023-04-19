@@ -58,9 +58,39 @@ const deleteAnswer = asyncHandler(async (req,res) =>{
         })
 })
 
+// Gets answers by question id
+const getAnswersByQuestionId = asyncHandler(async (req, res) => {
+    const qNew = req.query.new;
+    const qQuestion = req.query.question;
+  
+    try {
+      let answers
+  
+      if (qNew) {
+        answers = await Answer.find().populate("question").sort({ createdAt: -1 }).limit(1);
+        
+      } else if (qQuestion) {
+        answers = await Answer.find({
+            question:
+          { 
+            $in: 
+            [qQuestion]
+          }}).populate("question")
+      } else {
+        answers = await Answer.find().populate("question");
+      }
+      
+      res.status(200).json(answers);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+
 module.exports = {
     getAnswer,
     getAnswers,
     addAnswer,
     deleteAnswer,
+    getAnswersByQuestionId
 }

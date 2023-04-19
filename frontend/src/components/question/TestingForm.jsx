@@ -17,6 +17,7 @@ import Navbar from '../../components/navbar/Navbar'
 import TestForm from '../test/TestForm'
 import {getTests} from '../../features/test/testSlice'
 import QuestionItem from './QuestionItem'
+import mongoose from 'mongoose';
 
 function TestingForm() {
     const { user } = useSelector((state) => state.auth)
@@ -24,8 +25,10 @@ function TestingForm() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [test, setTest] = useState("");
+    const [question, setQuestion] = useState("");
     const { tests, isLoading, isError, message } = useSelector((state) => state.tests)
     const [questions, setQuestions] = useState([]);
+    const [answers, setAnswers] = useState([]);
 
     useEffect(() => {
         if(!user){
@@ -68,13 +71,45 @@ function TestingForm() {
         const getQuestions = async () => {
           try {
             const res = await axios.get(
-                `http://localhost:5000/api/questions/test=${test}`, { headers }
+                `http://localhost:5000/api/questions?test=${test}`, { headers }
             );
             setQuestions(res.data);
           } catch (err) {}
         };
-        getQuestions();
-      }, [test]);
+
+
+        const getAnswers = async () => {
+          try {
+            const res = await axios.get(
+                `http://localhost:5000/api/answers?question=${question}`, { headers }
+            );
+            setAnswers(res.data);
+            console.log(res.data);
+            console.log(answers[0].createdAt);
+          } catch (err) {}
+        };
+
+        var validTest = mongoose.Types.ObjectId.isValid(test);
+        if(validTest)
+        {
+          //process your code here
+          getQuestions();
+        } else {
+          //the id is not a valid ObjectId
+        }
+
+        var validQuestion = mongoose.Types.ObjectId.isValid(question);
+        if(validQuestion)
+        {
+          //process your code here
+          getAnswers();
+
+        } else {
+          //the id is not a valid ObjectId
+        }
+
+        //getQuestions();
+      }, [test, question]);
 
       const onReset = () => {
         setTest('')
@@ -114,6 +149,25 @@ function TestingForm() {
                     )}
             </div>
 
+            <div className="input-group mb-3">
+              <Form.Select onChange={(e)=>setQuestion(e.target.value)} id="question" name="cars" className="form-control select select-initialized"  value={question}>
+                <option >Choose Question</option>
+                {
+                    questions && questions.map(question =>(
+                        <option key={question._id}  value={question._id} question={question} >{question.question} {}</option>
+                    ))
+                    
+                }
+              </Form.Select>
+              <Button className="btn btn-secondary" type="button" onClick={handleClick} id="button-addon2">Add Question</Button>
+                    {isShown && (
+
+                       <>
+                       </>
+
+                    )}
+            </div>
+
             <>
         {/* <Section className="content"> */}
             {/* {cards.length > 0 ? ( */}
@@ -125,8 +179,8 @@ function TestingForm() {
                 </div> */}
 
                 <div className="col">
-                <h1>{test} questions</h1>
-                {questions.map(question => <h1 key={question._id}>{question.question}</h1>)}
+                <h1>{question} answers</h1>
+                {answers.map(answer => <h1 key={answer._id}>{answer.answer}</h1>)}
                 </div>
             {/* ) : (<h3>No cards</h3>)} */}
         {/* </Section> */}
