@@ -17,6 +17,8 @@ import Navbar from '../../components/navbar/Navbar'
 import TestForm from '../test/TestForm'
 import {getTests} from '../../features/test/testSlice'
 import QuestionItem from './QuestionItem'
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
 import mongoose from 'mongoose';
 
 function TestingForm() {
@@ -29,6 +31,23 @@ function TestingForm() {
     const { tests, isLoading, isError, message } = useSelector((state) => state.tests)
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
+    const [answer, setAnswer] = useState([]);
+    const [answerId, setAnswerId] = useState([]);
+    const [radioValue, setRadioValue] = useState('1');
+    const [correct, setCorrect] = useState(false);
+
+    const radios = [
+      { name: 'False', value: '1' },
+      { name: 'True', value: '2' },
+    ];
+
+    useEffect(() => {
+      if(radioValue==2)
+      {
+        setCorrect(true)
+      }
+      else{setCorrect(false)}
+    })
 
     useEffect(() => {
         if(!user){
@@ -42,30 +61,6 @@ function TestingForm() {
         dispatch(getTests())
     }, [user, navigate, isError, message, dispatch])
 
-
-      const onSubmit = (e) => {
-        e.preventDefault()
-    
-        if (questionTitle.trim().length !== 0) {
-          // axios post create new test
-          const questionData = {
-            testid: test,
-            question: questionTitle
-          };
-        axios.post("http://localhost:5000/api/questions",questionData, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            },
-          })
-
-          setTest('')
-          setQuestionTitle('')
-          toast.success(`Test ${test} has been created!`)
-        } else {
-          toast.error('Please fill out all of the fields!')
-        }
-      }
-
       useEffect(() => {
         const headers = { 'Authorization': `Bearer ${user.token}` };
         const getQuestions = async () => {
@@ -77,45 +72,47 @@ function TestingForm() {
           } catch (err) {}
         };
 
+        // const getAnswers = async () => {
+        //   try {
+        //     const res = await axios.get(
+        //         `http://localhost:5000/api/answers?question=${question}`, { headers }
+        //     );
+        //     setAnswers(res.data);
+        //   } catch (err) {}
+        // };
 
-        const getAnswers = async () => {
-          try {
-            const res = await axios.get(
-                `http://localhost:5000/api/answers?question=${question}`, { headers }
-            );
-            setAnswers(res.data);
-            console.log(res.data);
-            console.log(answers[0].createdAt);
-          } catch (err) {}
-        };
-
+        // const getAnswerById = async () => {
+        //   try {
+        //     const res = await axios.get(
+        //         `http://localhost:5000/api/answers/${answerId}`, { headers }
+        //     );
+        //     setAnswer(res.data);
+        //   } catch (err) {}
+        // };
         var validTest = mongoose.Types.ObjectId.isValid(test);
         if(validTest)
         {
-          //process your code here
           getQuestions();
-        } else {
-          //the id is not a valid ObjectId
         }
 
-        var validQuestion = mongoose.Types.ObjectId.isValid(question);
-        if(validQuestion)
-        {
-          //process your code here
-          getAnswers();
+        // var validQuestion = mongoose.Types.ObjectId.isValid(question);
+        // if(validQuestion)
+        // {
+        //   getAnswers();
+        // }
 
-        } else {
-          //the id is not a valid ObjectId
-        }
+        // var validAnswer = mongoose.Types.ObjectId.isValid(answer);
+        // if(validAnswer)
+        // {
+        //   getAnswerById();
+        //   console.log(getAnswerById);
+        // }
+        // else{
+        // }
 
         //getQuestions();
-      }, [test, question]);
-
-      const onReset = () => {
-        setTest('')
-        setQuestionTitle('')
-      }
-
+      }, [test, question, answerId]);
+      
       const [isShown, setIsShown] = useState(false);
 
       const handleClick = () => {
@@ -124,6 +121,36 @@ function TestingForm() {
 
       if(isLoading) {
         return <Spinner/>
+    }
+
+    const onSubmit = (e) => {
+      e.preventDefault()
+
+      if (answer.trim().length !== 0 && test && question) {
+        // axios post create new test
+        const answerData = {
+          question: question,
+          answer: answer,
+          isCorrect: correct
+        };
+      axios.post("http://localhost:5000/api/answers",answerData, {
+          headers: {
+              'Authorization': `Bearer ${user.token}`
+          },
+        })
+
+        setTest('')
+        setQuestion('')
+        toast.success(`Test ${answer} has been created!`)
+      } else {
+        toast.error('Please fill out all of the fields!')
+      }
+    }
+
+    const onReset = () => {
+      setAnswer('')
+      setTest('')
+      setQuestion('')
     }
 
       return (
@@ -168,22 +195,44 @@ function TestingForm() {
                     )}
             </div>
 
-            <>
-        {/* <Section className="content"> */}
-            {/* {cards.length > 0 ? ( */}
-                {/* <div className="cards">
-                    {questions.map((question) => (
-                        // <QuestionItem key={question._id} question={question} test={question.test}/>
-                        <h1 key={question._id}>{question}</h1>
-                    ))}
-                </div> */}
 
-                <div className="col">
-                <h1>{question} answers</h1>
-                {answers.map(answer => <h1 key={answer._id}>{answer.answer}</h1>)}
-                </div>
-            {/* ) : (<h3>No cards</h3>)} */}
-        {/* </Section> */}
+          <Row>
+            <Col>
+              <Form.Group className="mb-3">
+                <Form.Label>Answer</Form.Label>
+                <Form.Control 
+                type='text'
+                name='answer'
+                required
+                onChange={(e) => setAnswer(e.target.value)}
+                placeholder="Answer"
+                />
+              </Form.Group>
+            </Col>
+
+            <ButtonGroup>
+        {radios.map((radio, idx) => (
+          <ToggleButton
+            key={idx}
+            id={`radio-${idx}`}
+            type="radio"
+            variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+            name="radio"
+            value={radio.value}
+            checked={radioValue === radio.value}
+            onChange={(e) => setRadioValue(e.currentTarget.value)}
+          >
+            {radio.name}
+          </ToggleButton>
+        ))}
+      </ButtonGroup>
+          </Row>
+            <>
+            <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
+                <Button variant="outline-success" type="submit" onClick={onSubmit}>Submit</Button>
+                <div className="vr" />
+                <Button variant="outline-danger" onClick={onReset}>Reset</Button>
+          </Stack>
         </>
 
       </Container>

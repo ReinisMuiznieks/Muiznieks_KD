@@ -20,6 +20,8 @@ import TestForm from "./components/test/TestForm";
 import CardForm from "./components/card/CardForm";
 import QuestionForm from "./components/question/QuestionForm";
 import TestingForm from "./components/question/TestingForm";
+import Test from "./pages/test/Test";
+import TestQuestions from "./pages/test/TestQuestions";
 
 function App() {
 
@@ -32,6 +34,7 @@ function App() {
                 <Route path="/sign-up" element={<Register/>}/>
                 <Route path="/*" element={<PageNotFound/>}/> 
                 <Route path="/learn" element={<Learn/>}/>
+                <Route path="/test" element={<Test/>}/>
                 <Route path="/learn/test" element={<Learn/>}/>
                 <Route path="/admin" element={<Admin/>}/>
                 <Route path="/admin/test" element={<TestForm/>}/>
@@ -39,6 +42,7 @@ function App() {
                 <Route path="/admin/question" element={<QuestionForm/>}/>
                 <Route path="/admin/testing" element={<TestingForm/>}/>
                 <Route path="/category/:id" element={<CategoryCards/>}/>
+                <Route path="/test/:id" element={<TestQuestions/>}/>
                 <Route path="/credits" element={<Credits/>}/>
             </Routes>
         </BrowserRouter>

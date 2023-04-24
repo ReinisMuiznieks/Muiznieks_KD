@@ -16,15 +16,16 @@ import axios from 'axios'
 import Navbar from '../../components/navbar/Navbar'
 import TestForm from '../test/TestForm'
 import {getTests} from '../../features/test/testSlice'
-import AnswerForm from '../answer/AnswerForm'
+import { getQuestions } from '../../features/question/questionSlice'
 
-function QuestionForm() {
+function AnswerForm() {
     const { user } = useSelector((state) => state.auth)
     const [questionTitle, setQuestionTitle] = useState("");
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [test, setTest] = useState("");
-    const { tests, isLoading, isError, message } = useSelector((state) => state.tests)
+    const { questions, isLoading, isError, message } = useSelector((state) => state.questions);
+    const { tests } = useSelector((state) => state.tests);
 
     useEffect(() => {
         if(!user){
@@ -35,8 +36,8 @@ function QuestionForm() {
             navigate('/')
         }
 
-        dispatch(getTests())
-    }, [user, navigate, isError, message, dispatch])
+        dispatch(getQuestions())
+    })
 
 
       const onSubmit = (e) => {
@@ -78,7 +79,6 @@ function QuestionForm() {
 
       return (
         <>
-        <Navbar/>
         <Container className='card-legend pt-5'>
         <Form onSubmit={onSubmit}>
           <Row>
@@ -135,10 +135,10 @@ function QuestionForm() {
 
       </Form>
       </Container>
-      
+      <h1>testr</h1>
+
       </>
-      
       );
   }
   
-  export default QuestionForm
+  export default AnswerForm

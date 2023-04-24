@@ -2,19 +2,17 @@
 // import CategoryForm from "../../components/category/CategoryForm";
 // import DisplayCategories from "../../components/category/DisplayCategories";
 import NavbarTop from "../../components/navbar/Navbar";
-import CardForm from "../../components/card/CardForm";
-import TestForm from "../../components/test/TestForm";
+import AnswerForm from "../../components/answer/AnswerForm";
 
 function Admin() {
 
     return(
 <>
 
-{/* <NavbarTop/> */}
+<NavbarTop/>
 
 
-<CardForm/>
-<TestForm/>
+<AnswerForm/>
 {/* <TestForm2/> */}
 
 </>
