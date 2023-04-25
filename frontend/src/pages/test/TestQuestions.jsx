@@ -59,7 +59,7 @@ const TestQuestions = () => {
             setQuestions(res.data);
           } catch (err) {}
         };
-        getQuestions();
+        // getQuestions();
       }, [cat]);
 
       const displayQuestion = async () => {
@@ -91,7 +91,7 @@ const TestQuestions = () => {
             } catch (err) {}
           };
 
-          getAnswers();
+          // getAnswers();
         });
 
         useEffect(() => {
