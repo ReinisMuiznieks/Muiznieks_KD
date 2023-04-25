@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createCard } from '../../features/card/cardSlice'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import {getCategories,reset} from '../../features/category/categorySlice'

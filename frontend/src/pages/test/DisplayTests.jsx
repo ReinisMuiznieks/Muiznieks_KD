@@ -5,7 +5,6 @@ import {getTests,reset} from '../../features/test/testSlice'
 import Spinner from "../../components/spinner/Spinner";
 import Form from 'react-bootstrap/Form';
 import "./test.scss"
-import Container from 'react-bootstrap/Container';
 import TestItem from "./TestItem";
 
 function DisplayTests() {

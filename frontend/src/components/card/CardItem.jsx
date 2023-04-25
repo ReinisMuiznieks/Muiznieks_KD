@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux'
-import { deleteCard } from '../../features/card/cardSlice'
 import React from "react";
 import '../../pages/learn/learn.scss';
 import Container from 'react-bootstrap/Container';

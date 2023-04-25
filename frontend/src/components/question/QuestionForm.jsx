@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createCard } from '../../features/card/cardSlice'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import {getCategories,reset} from '../../features/category/categorySlice'
 import Spinner from '../spinner/Spinner';
 import '../card/card.scss'
 import Button from 'react-bootstrap/Button';
@@ -14,10 +12,8 @@ import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import axios from 'axios'
 import Navbar from '../../components/navbar/Navbar'
-import TestForm from '../test/TestForm'
 import {getTests} from '../../features/test/testSlice'
 import { getCards } from '../../features/card/cardSlice'
-import AnswerForm from '../answer/AnswerForm'
 
 function QuestionForm() {
     const { user } = useSelector((state) => state.auth)

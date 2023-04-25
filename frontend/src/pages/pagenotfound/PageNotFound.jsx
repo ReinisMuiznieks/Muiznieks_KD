@@ -3,7 +3,6 @@ import NavbarTop from "../../components/navbar/Navbar.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-// import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
 import './pagenotfound.scss'
 import image from '../../images/404.svg'

@@ -15,7 +15,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './test.scss';
 import TestCompleted from "../../components/test/TestCompleted";
-import { getCards } from "../../features/card/cardSlice";
 
 const TestQuestions = () => {
     const dispatch = useDispatch()

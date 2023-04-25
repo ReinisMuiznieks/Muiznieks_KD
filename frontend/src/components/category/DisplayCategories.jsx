@@ -6,7 +6,6 @@ import CategoryItem from "./CategoryItem.jsx";
 import Spinner from "../spinner/Spinner";
 import Form from 'react-bootstrap/Form';
 import "./category.scss"
-import Container from 'react-bootstrap/Container';
 
 function DisplayCategories() {
     const navigate = useNavigate()

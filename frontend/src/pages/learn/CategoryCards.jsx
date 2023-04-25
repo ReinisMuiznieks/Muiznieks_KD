@@ -3,7 +3,7 @@ import './learn.scss';
 import NavbarTop from "../../components/navbar/Navbar.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import axios from 'axios'
-import { Navigate, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import Spinner from "../../components/spinner/Spinner";
 import NoCards from "../../components/card/NoCards";
 import Button from 'react-bootstrap/Button';
