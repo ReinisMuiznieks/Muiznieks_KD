@@ -7,6 +7,11 @@ const questionSchema = new mongoose.Schema({
         ref: "Test",
         required : [true, 'Must belong to a test'],
     },
+    card: {
+      type: ObjectId,
+      ref: "Card",
+      required : [false],
+    },
     question: {
         type: String,
         required: true,

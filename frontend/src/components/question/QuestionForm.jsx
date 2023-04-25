@@ -16,6 +16,7 @@ import axios from 'axios'
 import Navbar from '../../components/navbar/Navbar'
 import TestForm from '../test/TestForm'
 import {getTests} from '../../features/test/testSlice'
+import { getCards } from '../../features/card/cardSlice'
 import AnswerForm from '../answer/AnswerForm'
 
 function QuestionForm() {
@@ -24,7 +25,10 @@ function QuestionForm() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [test, setTest] = useState("");
-    const { tests, isLoading, isError, message } = useSelector((state) => state.tests)
+    const { tests, isLoading, isError, message } = useSelector((state) => state.tests);
+
+    const [card, setCard] = useState("");
+    const { cards } = useSelector((state) => state.cards);
 
     useEffect(() => {
         if(!user){
@@ -34,8 +38,8 @@ function QuestionForm() {
         if(user.role !== 'admin'){
             navigate('/')
         }
-
         dispatch(getTests())
+        dispatch(getCards())
     }, [user, navigate, isError, message, dispatch])
 
 
@@ -46,7 +50,8 @@ function QuestionForm() {
           // axios post create new test
           const questionData = {
             test: test,
-            question: questionTitle
+            question: questionTitle,
+            card: card,
           };
         axios.post("http://localhost:5000/api/questions",questionData, {
             headers: {
@@ -122,7 +127,28 @@ function QuestionForm() {
 
                     )}
             </div>
+
+            <div className="input-group mb-3">
+              <Form.Select onChange={(e)=>setCard(e.target.value)} id="card" name="cars" className="form-control select select-initialized"  value={card}>
+                <option >Choose Card</option>
+                {
+                    cards && cards.map(card =>(
+                        <option key={card._id}  value={card._id} card={card} >{card.lv_word}</option>
+                    ))
+                    
+                }
+              </Form.Select>
+              <Button className="btn btn-secondary" type="button" onClick={handleClick} id="button-addon2">Add Test</Button>
+                    {isShown && (
+
+                       <>
+                       </>
+
+                    )}
+            </div>
           </Col>
+
+          
 
           </Row>
           

@@ -3,24 +3,19 @@ import '../learn/learn.scss';
 import NavbarTop from "../../components/navbar/Navbar.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import axios from 'axios'
-import { Navigate, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import Spinner from "../../components/spinner/Spinner";
-import NoCards from "../../components/card/NoCards";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import { useSelector } from 'react-redux'
 import Card from 'react-bootstrap/Card';
-import Image from 'react-bootstrap/Image';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import icon from '../../images/question_mark.svg'
-import Popover from 'react-bootstrap/Popover';
-import CardCompleted from "../../components/card/CardCompleted";
 import { useDispatch } from 'react-redux'
-import { deleteCard } from '../../features/card/cardSlice'
-import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import './test.scss';
+import TestCompleted from "../../components/test/TestCompleted";
+import { getCards } from "../../features/card/cardSlice";
 
 const TestQuestions = () => {
     const dispatch = useDispatch()
@@ -37,7 +32,8 @@ const TestQuestions = () => {
     const handleShowDelete = () => setShowDelete(true);
     const { user } = useSelector((state) => state.auth)
     const [isAdmin, setIsAdmin] = useState(false);
-    const [answer, setAnswer] = useState([]);
+    const [cards, setCards] = useState([]);
+
     const headers = { 'Authorization': `Bearer ${user.token}` };
     useEffect(() => {
       checkRole();
@@ -67,7 +63,6 @@ const TestQuestions = () => {
         getQuestions();
       }, [cat]);
 
-
       const displayQuestion = async () => {
         try {
           const res = await axios.get(
@@ -88,7 +83,9 @@ const TestQuestions = () => {
         const getAnswers = async () => {
             try {
               const res = await axios.get(
-                  `http://localhost:5000/api/answers?question=${questions[currentCard]._id}`, { headers }
+                questions
+                  ? `http://localhost:5000/api/answers?question=${questions[currentCard]._id}`
+                  : "http://localhost:5000/api/answers?question", { headers }
               );
               setIsLoading(false);
               setAnswers(res.data);
@@ -96,39 +93,43 @@ const TestQuestions = () => {
           };
 
           getAnswers();
-
-        //   const getAnswerById = async () => {
-        //     try {
-        //       const res = await axios.get(
-        //           `http://localhost:5000/api/answers/${answer._id}`, { headers }
-        //       );
-        //       setAnswer(res.data);
-        //     } catch (err) {}
-        //   };
-        //   getAnswerById();
         });
 
-      const displayAnswers = async () => {
-        const headers = { 'Authorization': `Bearer ${user.token}` };
-        try {
-          const res = await axios.get(
-            cat
-              ? `http://localhost:5000/api/questions?test=$${questions[currentCard]._id}`
-              : "http://localhost:5000/api/questions", { headers }
-          );
+        useEffect(() => {
+          const getCard = async () => {
+              try {
+                const res = await axios.get(
+                  questions
+                    ? `http://localhost:5000/api/cards/${questions[currentCard].card}`
+                    : "http://localhost:5000/api/cards", { headers }
+                );
+                setIsLoading(false);
+                setCards(res.data);
+              } catch (err) {}
+            };
+            getCard();
+          });
 
-        if (currentCard + 1 < (res.data).length) {
-          setCurrentCard(currentCard + 1);
-        } else {
-          setShowResults(true);
-        }  
-        } catch (err) {}
-      };
+      // const displayAnswers = async () => {
+      //   const headers = { 'Authorization': `Bearer ${user.token}` };
+      //   try {
+      //     const res = await axios.get(
+      //       cat
+      //         ? `http://localhost:5000/api/questions?test=$${questions[currentCard]._id}`
+      //         : "http://localhost:5000/api/questions", { headers }
+      //     );
+
+      //   if (currentCard + 1 < (res.data).length) {
+      //     setCurrentCard(currentCard + 1);
+      //   } else {
+      //     setShowResults(true);
+      //   }  
+      //   } catch (err) {}
+      // };
 
       if(isLoading) {
         return <Spinner/>
     }
-
 
     return (
 <>
@@ -136,8 +137,8 @@ const TestQuestions = () => {
 
 <section className="content">
   { showResults ? (
-    //<CardCompleted key={tests.length} words={tests.length} category={cards[currentCard].category.name}/>
     <>
+      <TestCompleted key={questions.length} words={questions.length} question={questions[currentCard].test.testname}/>
     </>
   ) : (
     <>
@@ -157,24 +158,26 @@ const TestQuestions = () => {
                 <Stack id="learn-stack">
         
                 <Card>
-                    <Card.Body>
+                <Card.Body>
                         <Card.Text id="card-text">
                         {questions[currentCard].question}
                         </Card.Text>
                     </Card.Body>
+
+                <Card.Img variant="top" id="card-image" className="pt-4" src={cards.image} alt={questions[currentCard].card} />
                 </Card>
 
 
-    <>
-    <Container>
-        <div className="col">
+
+    <Container id="answer_container">
+        <Row>
                 {answers.map(answer => 
-                <Button variant="outline-primary" key={answer._id}>{answer.answer}</Button>)}
-        </div>
+                <Col><Button id="answer_button" onClick={displayQuestion} key={answer._id}>{answer.answer}</Button></Col>)}
+        </Row>
     </Container>
-    </>
+
                 <div className="buttons">
-                    <Button id="continue-button" onClick={displayQuestion}>Continue</Button>
+                    {/* <Button id="continue-button" onClick={displayQuestion}>Continue</Button> */}
                     {/* {isAdmin ? (
                       <>
                         <button onClick={handleShowDelete} className="close mt-2" id="delete-button">Delete <b>{cards[currentCard].lv_word}</b></button>
@@ -183,11 +186,12 @@ const TestQuestions = () => {
                       <>
                       </>
                     )} */}
+                    {/* <Button id="answer_button" onClick={displayQuestion}>Continue</Button> */}
                 </div>
                 </Stack>
             </Container>
         </div>
-        ) : (<NoCards/>)}
+        ) : (<h1>test</h1>)}
     </>
   )} 
     </section>

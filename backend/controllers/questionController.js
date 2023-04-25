@@ -43,12 +43,13 @@ const getQuestion = asyncHandler(async (req,res) =>{
 
 // Create question
 const addQuestion = asyncHandler(async(req,res) => {
-  const { test, question } = req.body
+  const { test, question, card } = req.body
 
   
   const createQuestion = await Question.create({
       test,
-      question
+      question,
+      card,
   })
 
   if(createQuestion) {
@@ -56,6 +57,7 @@ const addQuestion = asyncHandler(async(req,res) => {
           _id: createQuestion.id,
           question: createQuestion.question,
           test: createQuestion.test,
+          card: createQuestion.card,
       })
   } else {
       res.status(400)

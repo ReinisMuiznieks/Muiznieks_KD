@@ -1,0 +1,26 @@
+#answer_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    padding-top: 100px;
+}
+
+#answer_button{
+    background-color: white;
+    color: rgb(49, 49, 49);
+    border-color: rgb(194, 194, 194);
+    border-radius: 7px;
+    font-size: 20px;
+    height: 50px;
+    width: 200px;
+
+    &:hover{
+        transform: scale(0.97);
+        border-color:rgb(113, 112, 112);
+    }
+
+    &:focus{
+        transform: scale(0.95);
+    }
+}
