@@ -148,11 +148,24 @@ const getQuestionsByCard = asyncHandler(async (req, res) => {
   }
 });
 
+const updateQuestion = asyncHandler(async (req, res) => {
+  Question.updateOne({ _id: req.params.id }, {
+      $push: {
+          options: req.body.options,
+      }
+  }).then(data => {
+      res.json(data)
+  }).catch(e => {
+      res.json({ message: e })
+  })
+})
+
 module.exports = {
     getQuestion,
     getQuestions,
     addQuestion,
     deleteQuestion,
     getQuestionsByTest,
-    getQuestionsByCard
+    getQuestionsByCard,
+    updateQuestion
 }

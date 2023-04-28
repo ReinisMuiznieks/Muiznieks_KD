@@ -44,7 +44,7 @@ function App() {
                 <Route path="/admin/question" element={<QuestionForm/>}/>
                 <Route path="/admin/testing" element={<TestingForm/>}/>
                 <Route path="/category/:id" element={<CategoryCards/>}/>
-                <Route path="/test/:id" element={<TestQuestions/>}/>
+                {/* <Route path="/test/:id" element={<TestQuestions/>}/> */}
                 <Route path="/credits" element={<Credits/>}/>
                 <Route path="/quiz/:id" element={<QuizController/>} />
             </Routes>

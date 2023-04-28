@@ -14,8 +14,7 @@ import axios from 'axios'
 import Navbar from '../../components/navbar/Navbar'
 import {getTests} from '../../features/test/testSlice'
 import { getCards } from '../../features/card/cardSlice'
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
+import { v4 as uuidv4 } from 'uuid';
 
 const radios = [
   { name: 'False', value: '1' },
@@ -23,15 +22,9 @@ const radios = [
 ];
 
 function QuestionForm() {
-  const [answer, setAnswer] = useState([]);
-  const [answerId, setAnswerId] = useState([]);
-  const [radioValue, setRadioValue] = useState('1');
-  const [correct, setCorrect] = useState(false);
-  const [question, setQuestion] = useState("");
-  const [questions, setQuestions] = useState([]);
 
-
-
+  const [options, setOptions] = useState([]);
+  const [correctOption, setCorrectOption] = useState();
     const { user } = useSelector((state) => state.auth)
     const [questionTitle, setQuestionTitle] = useState("");
     const dispatch = useDispatch()
@@ -41,6 +34,29 @@ function QuestionForm() {
 
     const [card, setCard] = useState("");
     const { cards } = useSelector((state) => state.cards);
+    const [dumy, setDumy] = useState(0);
+    const [inputFields, setInputFields] = useState([{ id: uuidv4(), option: '' }]);
+
+    const handleAddFields = () => {
+        setInputFields([...inputFields, { id: uuidv4(), option: '' }])
+    }
+
+  const handleRemoveFields = id => {
+    const values = [...inputFields];
+    values.splice(values.findIndex(value => value.id === id), 1);
+    setInputFields(values);
+}
+
+const handleChangeInput = async (id, event) => {
+  const newInputFields = await Promise.all(inputFields.map(i => {
+      if (id === i.id) {
+          i[event.target.name] = event.target.value
+      }
+      return i;
+  }))
+  setInputFields(newInputFields);
+}
+
 
     useEffect(() => {
         if(!user){
@@ -56,40 +72,77 @@ function QuestionForm() {
 
 
     
-      const onSubmit = (e) => {
+      const addQuestion = async (e) => {
         e.preventDefault()
     
         if (questionTitle.trim().length !== 0) {
           // axios post create new test
+          // const questionData = {
+          //   test: test,
+          //   question: questionTitle,
+          //   card: card,
+          //   options: {
+          //     option: answer,
+          //     isCorrect: correct
+          //   }
+          // };
+          //     axios.post("http://localhost:5000/api/questions",questionData, {
+          //   headers: {
+          //       'Authorization': `Bearer ${user.token}`
+          //   },
+          // })
+          // setTest('')
+          // setQuestionTitle('')
+          // toast.success(`Question ${test} has been created!`)
+          const inputOption = await Promise.all(inputFields.map((inputF) => inputF.option))
+          /* const index = inputOption.indexOf(correctOption)
+          if (index > -1) {
+              inputOption.splice(index, 1);
+          } */
+          console.log(inputOption);
+          setOptions(inputOption);
+
           const questionData = {
             test: test,
             question: questionTitle,
             card: card,
-            options: {
-              option: answer,
-              isCorrect: correct
-            }
-          };
-
-          // const option = {
-          //   options: {
-          //       option: answer,
-          //       isCorrect: correct
-          //   }
-          // };
-          
-        axios.post("http://localhost:5000/api/questions",questionData, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            },
-          })
-          setTest('')
-          setQuestionTitle('')
-          toast.success(`Question ${test} has been created!`)
+        };
+        console.log(questionData)
+        axios.post("http://localhost:5000/api/questions", questionData, 
+        {headers: {'Authorization': `Bearer ${user.token}`}},).then((response) => {
+            console.log(response.status);
+            const data = response.data._id;
+            handleOptions({ data, inputOption });
+        });
         } else {
           toast.error('Please fill out all of the fields!')
         }
       }
+
+      const handleOptions = ({ data, inputOption }) => {
+        var questionOptions;
+        var control;
+        for (let i = 0; i < inputOption.length; i++) {
+            var questionOptions = inputOption[i];
+            if (questionOptions == correctOption) {
+                control = true
+            } else {
+                control = false
+            }
+            const option = {
+                options: {
+                    option: questionOptions,
+                    isCorrect: control
+                }
+            }
+            console.log(option);
+            axios.put("http://localhost:5000/api/questions/" + data, option ,{headers: {'Authorization': `Bearer ${user.token}`}},).then((response) => {
+                console.log(response.status);
+                console.log(response);
+            });
+        }
+        setDumy(dumy + 1)
+    }
 
       const onReset = () => {
         setTest('')
@@ -110,7 +163,7 @@ function QuestionForm() {
         <>
         <Navbar/>
         <Container className='card-legend pt-5'>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={addQuestion}>
           <Row>
           <Col>
             <Form.Group className="mb-3">
@@ -178,18 +231,12 @@ function QuestionForm() {
           </Row>
           
 
-          <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
-                <Button variant="outline-success" type="submit">Submit</Button>
-                <div className="vr" />
-                <Button variant="outline-danger" onClick={onReset}>Reset</Button>
-          </Stack>
-
       </Form>
       </Container>
       
       <Container className='card-legend pt-5'>
           <Row>
-            <Col>
+            {/* <Col>
               <Form.Group className="mb-3">
                 <Form.Label>Answer</Form.Label>
                 <Form.Control 
@@ -200,9 +247,9 @@ function QuestionForm() {
                 placeholder="Answer"
                 />
               </Form.Group>
-            </Col>
+            </Col> */}
 
-            <ButtonGroup>
+            {/* <ButtonGroup>
         {radios.map((radio, idx) => (
           <ToggleButton
             key={idx}
@@ -217,20 +264,35 @@ function QuestionForm() {
             {radio.name}
           </ToggleButton>
         ))}
-      </ButtonGroup>
+      </ButtonGroup> */}
           </Row>
-            <>
             <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
-                <Button variant="outline-success" type="submit" onClick={onSubmit}>Submit</Button>
+                <Button variant="outline-success" type="submit" onClick={addQuestion}>Submit</Button>
                 <div className="vr" />
                 <Button variant="outline-danger" onClick={onReset}>Reset</Button>
-          </Stack>
-        </>
-
+            </Stack>
       </Container>
+
+      {inputFields.map(inputField => (
+      <div key={inputField.id}>
+          <textarea
+              name="option"
+              label="First Name"
+              variant="filled"
+              value={inputField.option}
+              onChange={event => handleChangeInput(inputField.id, event)}
+              style={{ maxWidth: "650px", maxHeight: "200px", width: "650px" }}
+          />
+          <Button style={{ verticalAlign: "top", color: "#EEEEEE" }} disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>-</Button>
+          <Button style={{ verticalAlign: "top", color: "#EEEEEE" }} onClick={handleAddFields}>+</Button>
+          <input style={{ verticalAlign: "top", color: "#EEEEEE" }} type="radio" name='control' value={inputField.option} onClick={(e) => setCorrectOption(e.target.value)} />
+      </div>
+  ))}
       </>
+
+      
       
       );
   }
   
-  export default QuestionForm
+  export default QuestionForm;

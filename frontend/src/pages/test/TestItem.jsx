@@ -22,7 +22,7 @@ function TestItem({test}) {
           <div id="card-legend">
             <Container>
                 <Stack id="learn-stack">
-                <Link to={`/test/${test._id}`}  id='learn-link'>
+                <Link to={`/quiz/${test._id}`}  id='learn-link'>
                     <button id="stack-card">             
                         <Card.Body id="stack-chapter" > {test.testname} </Card.Body>        
                     </button>
