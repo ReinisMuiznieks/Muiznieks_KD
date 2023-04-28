@@ -33,6 +33,9 @@ const TestQuestions = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [cards, setCards] = useState([]);
 
+    const [score, setScore] = useState(0);
+    const [answer, setAnswer] = useState(0);
+
     const headers = { 'Authorization': `Bearer ${user.token}` };
     useEffect(() => {
       checkRole();
@@ -59,15 +62,13 @@ const TestQuestions = () => {
             setQuestions(res.data);
           } catch (err) {}
         };
-        // getQuestions();
+        getQuestions();
       }, [cat]);
 
       const displayQuestion = async () => {
         try {
           const res = await axios.get(
-            cat
-              ? `http://localhost:5000/api/questions?test=${cat}`
-              : "http://localhost:5000/api/questions", { headers }
+               `http://localhost:5000/api/questions?test=${cat}`, { headers }
           );
 
         if (currentCard + 1 < (res.data).length) {
@@ -91,7 +92,7 @@ const TestQuestions = () => {
             } catch (err) {}
           };
 
-          // getAnswers();
+          getAnswers();
         });
 
         useEffect(() => {
@@ -130,6 +131,36 @@ const TestQuestions = () => {
         return <Spinner/>
     }
 
+    const getAnswer = async () => {
+      try {
+        const res = await axios.get(
+          questions
+            ? `http://localhost:5000/api/answers?question=${questions[currentCard]._id}`
+            : "http://localhost:5000/api/answers?question", { headers }
+        );
+        setIsLoading(false);
+        setAnswers(res.data);
+      } catch (err) {}
+    };
+
+    const displayCard = async () => {
+      try {
+        const res = await axios.get(
+          cat
+            ? `http://localhost:5000/api/questions?test=${cat}`
+            : "http://localhost:5000/api/questions", { headers}
+        );
+
+      if (currentCard + 1 < (res.data).length) {
+        setCurrentCard(currentCard + 1);
+      } else {
+        setShowResults(true);
+      }
+      
+      } catch (err) {}
+
+    };
+
     return (
 <>
 <NavbarTop />
@@ -151,7 +182,7 @@ const TestQuestions = () => {
       <>
       </>
     )}
- 
+    {/* <Button id="continue-button" onClick={displayCard}>Continue</Button> */}
             <Container>
                 
                 <Stack id="learn-stack">
@@ -171,7 +202,7 @@ const TestQuestions = () => {
     <Container id="answer_container">
         <Row>
                 {answers.map(answer => 
-                <Col><Button id="answer_button" onClick={displayQuestion} key={answer._id}>{answer.answer}</Button></Col>)}
+                <Col><Button id="answer_button" onClick={displayCard} key={answer._id}>{answer.answer}</Button></Col>)}
         </Row>
     </Container>
 

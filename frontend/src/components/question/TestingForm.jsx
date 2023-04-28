@@ -59,6 +59,7 @@ function TestingForm() {
 
       useEffect(() => {
         const headers = { 'Authorization': `Bearer ${user.token}` };
+        
         const getQuestions = async () => {
           try {
             const res = await axios.get(
@@ -126,17 +127,21 @@ function TestingForm() {
         // axios post create new test
         const answerData = {
           question: question,
-          answer: answer,
-          isCorrect: correct
         };
-      axios.post("http://localhost:5000/api/answers",answerData, {
+        const option = {
+          options: {
+              option: answer,
+              isCorrect: correct
+          }
+      }
+      axios.post("http://localhost:5000/api/answers",answerData,option, {
           headers: {
               'Authorization': `Bearer ${user.token}`
           },
         })
 
-        setTest('')
-        setQuestion('')
+        // setTest('')
+        // setQuestion('')
         toast.success(`Test ${answer} has been created!`)
       } else {
         toast.error('Please fill out all of the fields!')
@@ -232,6 +237,8 @@ function TestingForm() {
         </>
 
       </Container>
+
+      
       </>
       );
   }

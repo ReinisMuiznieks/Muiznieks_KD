@@ -8,14 +8,22 @@ const questionSchema = new mongoose.Schema({
         required : [true, 'Must belong to a test'],
     },
     card: {
-      type: ObjectId,
-      ref: "Card",
-      required : [false],
+      type: String,
+      required : true,
     },
     question: {
         type: String,
         required: true,
       },
+    options: [{
+      option: {
+          type: String,
+      },
+      isCorrect: {
+          type: Boolean,
+          default: false
+      }
+  }],
 },
   {
     timestamps: true,

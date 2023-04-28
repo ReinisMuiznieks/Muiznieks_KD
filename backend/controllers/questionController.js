@@ -43,13 +43,15 @@ const getQuestion = asyncHandler(async (req,res) =>{
 
 // Create question
 const addQuestion = asyncHandler(async(req,res) => {
-  const { test, question, card } = req.body
+  const { test, question, card, options, correctOption } = req.body
 
   
   const createQuestion = await Question.create({
       test,
       question,
       card,
+      options,
+      correctOption
   })
 
   if(createQuestion) {
@@ -58,12 +60,15 @@ const addQuestion = asyncHandler(async(req,res) => {
           question: createQuestion.question,
           test: createQuestion.test,
           card: createQuestion.card,
+          options: createQuestion.options,
+          correctOption: createQuestion.correctOption
       })
   } else {
       res.status(400)
       throw new Error('Invalid question data')
   }
 })
+
 // router.patch('/:id', (req, resp) => {
 //     Test.updateOne({ _id: req.params.id }, {
 //         $set: {
@@ -115,6 +120,33 @@ const getQuestionsByTest = asyncHandler(async (req, res) => {
     }
   });
 
+  // Gets questions by card id
+const getQuestionsByCard = asyncHandler(async (req, res) => {
+  const qNew = req.query.new;
+  const qCard = req.query.card;
+
+  try {
+    let questions
+
+    if (qNew) {
+      questions = await Question.find().populate("card").sort({ createdAt: -1 }).limit(1);
+      
+    } else if (qCard) {
+      questions = await Question.find({
+          card:
+        { 
+          $in: 
+          [qCard]
+        }}).populate("card")
+    } else {
+      questions = await Question.find().populate("card");
+    }
+    
+    res.status(200).json(questions);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = {
     getQuestion,
@@ -122,4 +154,5 @@ module.exports = {
     addQuestion,
     deleteQuestion,
     getQuestionsByTest,
+    getQuestionsByCard
 }

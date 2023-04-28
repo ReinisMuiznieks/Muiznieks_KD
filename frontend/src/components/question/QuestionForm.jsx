@@ -14,8 +14,24 @@ import axios from 'axios'
 import Navbar from '../../components/navbar/Navbar'
 import {getTests} from '../../features/test/testSlice'
 import { getCards } from '../../features/card/cardSlice'
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+
+const radios = [
+  { name: 'False', value: '1' },
+  { name: 'True', value: '2' },
+];
 
 function QuestionForm() {
+  const [answer, setAnswer] = useState([]);
+  const [answerId, setAnswerId] = useState([]);
+  const [radioValue, setRadioValue] = useState('1');
+  const [correct, setCorrect] = useState(false);
+  const [question, setQuestion] = useState("");
+  const [questions, setQuestions] = useState([]);
+
+
+
     const { user } = useSelector((state) => state.auth)
     const [questionTitle, setQuestionTitle] = useState("");
     const dispatch = useDispatch()
@@ -39,6 +55,7 @@ function QuestionForm() {
     }, [user, navigate, isError, message, dispatch])
 
 
+    
       const onSubmit = (e) => {
         e.preventDefault()
     
@@ -48,7 +65,19 @@ function QuestionForm() {
             test: test,
             question: questionTitle,
             card: card,
+            options: {
+              option: answer,
+              isCorrect: correct
+            }
           };
+
+          // const option = {
+          //   options: {
+          //       option: answer,
+          //       isCorrect: correct
+          //   }
+          // };
+          
         axios.post("http://localhost:5000/api/questions",questionData, {
             headers: {
                 'Authorization': `Bearer ${user.token}`
@@ -125,11 +154,11 @@ function QuestionForm() {
             </div>
 
             <div className="input-group mb-3">
-              <Form.Select onChange={(e)=>setCard(e.target.value)} id="card" name="cars" className="form-control select select-initialized"  value={card}>
+              <Form.Select onChange={(e)=>setCard(e.target.value)} id="card" name="cars" className="form-control select select-initialized"  value={card.image}>
                 <option >Choose Card</option>
                 {
                     cards && cards.map(card =>(
-                        <option key={card._id}  value={card._id} card={card} >{card.lv_word}</option>
+                        <option key={card._id}  value={card.image} card={card.image} >{card.lv_word}</option>
                     ))
                     
                 }
@@ -158,6 +187,47 @@ function QuestionForm() {
       </Form>
       </Container>
       
+      <Container className='card-legend pt-5'>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3">
+                <Form.Label>Answer</Form.Label>
+                <Form.Control 
+                type='text'
+                name='answer'
+                required
+                onChange={(e) => setAnswer(e.target.value)}
+                placeholder="Answer"
+                />
+              </Form.Group>
+            </Col>
+
+            <ButtonGroup>
+        {radios.map((radio, idx) => (
+          <ToggleButton
+            key={idx}
+            id={`radio-${idx}`}
+            type="radio"
+            variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+            name="radio"
+            value={radio.value}
+            checked={radioValue === radio.value}
+            onChange={(e) => setRadioValue(e.currentTarget.value)}
+          >
+            {radio.name}
+          </ToggleButton>
+        ))}
+      </ButtonGroup>
+          </Row>
+            <>
+            <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
+                <Button variant="outline-success" type="submit" onClick={onSubmit}>Submit</Button>
+                <div className="vr" />
+                <Button variant="outline-danger" onClick={onReset}>Reset</Button>
+          </Stack>
+        </>
+
+      </Container>
       </>
       
       );
