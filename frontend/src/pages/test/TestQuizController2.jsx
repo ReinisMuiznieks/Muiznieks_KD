@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Quiz from "./TestQuiz2";
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector } from "react-redux";
+import NoQuestions from "../../components/card/NoQuestions";
 
 const QuizController = (CUId) => {
     const { user } = useSelector((state) => state.auth)
@@ -91,13 +92,24 @@ const QuizController = (CUId) => {
     return (
         <div>
             {/* <CountDownTimer hoursMinSecs={hoursMinSecs}/> */}
-            <Quiz
+            
+            {/* <Quiz
                 questions={questions}
                 score={score}
                 setScore={setScore}
                 setQuestions={setQuestions}
                 exam_id={id}
+            /> */}
+
+        {questions.length > 0 ? (
+            <Quiz
+            questions={questions}
+            score={score}
+            setScore={setScore}
+            setQuestions={setQuestions}
+            exam_id={id}
             />
+        ) : (<NoQuestions/>)}
         </div>
     );
 }

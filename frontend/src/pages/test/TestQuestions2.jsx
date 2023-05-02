@@ -1,40 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import '../learn/learn.scss';
 import NavbarTop from "../../components/navbar/Navbar.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import axios from 'axios'
-import { useLocation } from "react-router";
 import Spinner from "../../components/spinner/Spinner";
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import { useSelector } from 'react-redux'
 import Card from 'react-bootstrap/Card';
-import { useDispatch } from 'react-redux'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './test.scss';
-import TestCompleted from "../../components/test/TestCompleted";
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
-
+import { toast } from 'react-toastify'
 
 const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-const SingleQuestion = styled.div`
-  width: 95%;
-  min-height: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  border: 5px solid grey;
-  padding: 20px;
-  margin-top: 10px;
 `
 const Options = styled.div`
   width: 100%;
@@ -44,28 +30,6 @@ const Options = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 10px;
-`
-const SingleOption = styled.button`
-  width: 46%;
-  height: 50px;
-  padding: 15px 20px;
-  margin: 10px;
-  box-shadow: 0 0 2px black;
-`
-const Control = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-`
-const Select = styled.div`
-  background-color: rgb(7, 207, 0);
-  color: white;
-  box-shadow: 0 0 1px black;
-`
-const Wrong = styled.div`
-  background-color: rgb(233, 0, 0);
-  color: white;
-  box-shadow: 0 0 1px black;
 `
 
 const TestQuestions2 = ({
@@ -106,12 +70,12 @@ const TestQuestions2 = ({
       const handleNext = () => {
         if (currQues >= (questions.length - 1)) {
           submitTest();
-        navigate(`/result/${id.id}`);
-        console.log("no more questions");
+          navigate(`/result/${id.id}`);
         } else if (selected) {
           setCurrQues(currQues + 1);
           setSelected();
-        } else setError("Please select an option first");
+        } else 
+          toast.error("Please select an option");
       };
 
       const submitTest = () => {
@@ -154,36 +118,76 @@ const TestQuestions2 = ({
     return (
 <>
 <NavbarTop />
-<Container>
-      <h1>Question {currQues + 1} :</h1>
-      <SingleQuestion>
-        <h2>{questions[currQues].question}</h2>
-        <img src={questions[currQues].card} alt="test"></img>
+{questions.length > 0 ? (
+  <Container>
+    <Stack id="question-stack">
+
+      <Card id="question-card">
+        <Card.Body>
+          <Card.Text id="card-text">
+          {questions[currQues].question}
+          </Card.Text>
+        </Card.Body>
+          <Card.Img variant="top" id="card-image" className="pt-4" src={questions[currQues].card} alt="card"/>
+      </Card>
+
+      <Container id="answer_container">
+        <Row>
+        <Col>
         <Options>
           {error && {error}}
           {options &&
             options.map((option) => (
-              <button className={`singleOption  ${selected && handleSelect(option.option)}`}
+              <Button 
+                id="answer_button" 
+                className={`singleOption  ${selected && handleSelect(option.option)}`}
                 key={option._id} 
                 // creator
                 onClick={() => { handleCheck(option.option) }}
                 disabled={selected}>
                 {option.option}
-              </button>
+              </Button>
             ))}
         </Options>
-        <Control>
-          <button
-            variant="contained"
-            color="primary"
-            size="large"
-            style={{ width: 185 }}
-            onClick={handleNext}>
-            {currQues >= (questions.length - 1) ? (<span >Submit</span>) : (<span>Next Question</span>)}
-          </button>
-        </Control>
-      </SingleQuestion>
-    </Container >
+        </Col>
+        </Row>
+        <Row>
+          <Col>
+              <Button
+                id="next_question_button"
+                variant="contained"
+                color="primary"
+                size="large"
+                style={{ width: 185 }}
+                onClick={handleNext}>
+                {currQues >= (questions.length - 1) ? (<span >Submit</span>) : (<span>Next Question</span>)}
+              </Button>
+          </Col>
+        </Row>
+      </Container>
+
+      <div className="buttons">
+      {/* <Button id="continue-button" onClick={displayQuestion}>Continue</Button> */}
+      {/* {isAdmin ? (
+      <>
+      <button onClick={handleShowDelete} className="close mt-2" id="delete-button">Delete <b>{cards[currentCard].lv_word}</b></button>
+      </>
+      ) : (
+      <>
+      </>
+      )} */}
+      {/* <Button id="answer_button" onClick={displayQuestion}>Continue</Button> */}
+      </div>
+    </Stack>
+  </Container>
+
+  ) : (<h3>No questions</h3>)}
+
+
+
+
+
+
 
 <Footer/>
 </>

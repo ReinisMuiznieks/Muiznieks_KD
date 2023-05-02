@@ -11,6 +11,7 @@ import axios from 'axios'
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom'
 import { useSelector } from "react-redux";
+import NavbarTop from "../navbar/Navbar";
 
 const TestCompleted = () => {
     const [score, setScore] = useState(0);
@@ -56,6 +57,8 @@ const TestCompleted = () => {
 
     return (
 <>
+<NavbarTop/>
+
   <div id="learn-legend">
     <Container>
         <Stack id="notfound-stack">

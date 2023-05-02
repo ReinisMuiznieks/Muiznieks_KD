@@ -25,6 +25,62 @@
     }
 }
 
-.completed {
-    color: red !important;
+#next_question_button{
+    margin-top: 30px;
+    background-color: white;
+    color: rgb(49, 49, 49);
+    border-color: rgb(177,178,255);
+    border-width: 2px;
+    border-radius: 7px;
+    font-size: 20px;
+    height: 50px;
+    width: 200px;
+
+    &:hover{
+        transform: scale(0.97);
+        border-color:rgb(193, 194, 255);
+    }
+
+    &:focus{
+        transform: scale(0.95);
+    }
+
+}
+
+#question-stack{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+
+#question-card{
+    padding-bottom: 30px;
+}
+
+#stack-card-completed {
+    background-color: rgb(255, 255, 255);
+    width: 500px;
+    height: 10vh;
+    margin: 10px;
+    padding: 15px 30px;
+    text-align: left;
+    // text-transform: uppercase;
+    transition: 0.5s;
+    display: block;
+    border-color: #00c03a;
+
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+    &:hover {
+    text-decoration: none;
+    transform: scale(0.99);
+    }
+
+    &:active {
+    transform: scale(0.95);
+    }
 }

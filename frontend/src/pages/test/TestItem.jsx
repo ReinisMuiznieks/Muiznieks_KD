@@ -21,6 +21,7 @@ function TestItem({test}) {
   const { user } = useSelector((state) => state.auth)
   const [iscompleted, setisCompleted] = useState(false);
   const dispatch = useDispatch()
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
 
@@ -41,6 +42,7 @@ function TestItem({test}) {
               setisCompleted(true);
           }
       }
+
     } catch (err) {
         console.log(err);
     }
@@ -53,9 +55,9 @@ function TestItem({test}) {
                 <div id="card-legend">
                   <Container>
                       <Stack id="learn-stack">
-                      <Link to={`/quiz/${test._id}`}  id='learn-link'>
-                          <button id="stack-card">             
-                              <Card.Body id="stack-chapter-completed"> {test.testname} </Card.Body>        
+                      <Link to={`/test/${test._id}`}  id='learn-link'>
+                          <button id="stack-card-completed">             
+                              <Card.Body id="stack-chapter"> {test.testname}</Card.Body>        
                           </button>
                       </Link>
                       </Stack>
@@ -67,7 +69,7 @@ function TestItem({test}) {
                 <div id="card-legend">
                   <Container>
                       <Stack id="learn-stack">
-                      <Link to={`/quiz/${test._id}`}  id='learn-link'>
+                      <Link to={`/test/${test._id}`}  id='learn-link'>
                           <button id="stack-card">             
                               <Card.Body id="stack-chapter" > {test.testname}</Card.Body>        
                           </button>
