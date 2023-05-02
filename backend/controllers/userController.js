@@ -91,8 +91,29 @@ const generateToken = (id) => {
     })
 }
 
+const getUsers = asyncHandler(async(req,res) => {
+    User.find().then(data => {
+        res.json(data)
+    }).catch(e => {
+        res.json({ message: e })
+    })
+})
+
+//spesific user
+const getUser = asyncHandler(async(req,res) => {
+    try {
+        User.find({ _id: req.params.id }).then(data => {
+            res.json(data)
+        })
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+
 module.exports ={
     registerUser,
     loginUser,
     getMe,
+    getUser,
+    getUsers
 }

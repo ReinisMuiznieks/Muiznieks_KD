@@ -24,6 +24,7 @@ import TestQuestions from "./pages/test/TestQuestions";
 import QuizController from "./pages/test/TestQuizController2";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import TestCompleted from "./components/test/TestCompleted";
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
                 {/* <Route path="/test/:id" element={<TestQuestions/>}/> */}
                 <Route path="/credits" element={<Credits/>}/>
                 <Route path="/quiz/:id" element={<QuizController/>} />
+                <Route path="/result/:id" element={<TestCompleted/>} />
             </Routes>
         </BrowserRouter>
         <ToastContainer />

@@ -13,7 +13,7 @@ const answerRoutes = require('./routes/answerRoutes')
 const path = require('path')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-
+const userTestRoutes = require('./routes/userTestRoutes')
 
 
 connectDB()
@@ -33,6 +33,8 @@ app.use('/api/cards',cardRoutes, require('./routes/cardRoutes'))
 app.use('/api/tests',testRoutes,require('./routes/testRoutes'))
 app.use('/api/questions',questionRoutes,require('./routes/questionRoutes'))
 app.use('/api/answers',answerRoutes,require('./routes/answerRoutes'))
+app.use('/api/usertests',userTestRoutes,require('./routes/userTestRoutes'))
+
 
 // Frontend
 // if(process.env.NODE_ENV === 'production') {

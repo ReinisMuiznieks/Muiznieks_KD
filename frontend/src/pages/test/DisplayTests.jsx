@@ -6,16 +6,20 @@ import Spinner from "../../components/spinner/Spinner";
 import Form from 'react-bootstrap/Form';
 import "./test.scss"
 import TestItem from "./TestItem";
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 function DisplayTests() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.auth)
     const { tests, isLoading, isError, message } = useSelector((state) => state.tests)
-
+    const params = useParams();
+    const id = params;
     const [search, setSearch] = useState('');
 
     useEffect(() => {
+
 
         if(isError) {
             console.log(message)
@@ -26,15 +30,19 @@ function DisplayTests() {
         }
 
         dispatch(getTests())
+        
 
         return () => { // clears when component unmounts
             dispatch(reset())
         }
+        
     }, [user, navigate, isError, message, dispatch])
 
     if(isLoading) {
         return <Spinner/>
     }
+
+
 
 return (
     <>

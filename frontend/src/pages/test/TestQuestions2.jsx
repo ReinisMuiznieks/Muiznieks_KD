@@ -18,6 +18,7 @@ import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 
+
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -82,8 +83,8 @@ const TestQuestions2 = ({
     const [selected, setSelected] = useState();
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
-      
+    const { user } = useSelector((state) => state.auth)
+    const headers = { 'Authorization': `Bearer ${user.token}` };
       
         const navigate = useNavigate()
       
@@ -104,7 +105,8 @@ const TestQuestions2 = ({
     
       const handleNext = () => {
         if (currQues >= (questions.length - 1)) {
-        //   navigate(`/result/${id.id}`);
+          submitTest();
+        navigate(`/result/${id.id}`);
         console.log("no more questions");
         } else if (selected) {
           setCurrQues(currQues + 1);
@@ -112,10 +114,39 @@ const TestQuestions2 = ({
         } else setError("Please select an option first");
       };
 
-      const handleSubmit = (e) => {
-        console.log("submitted")
+      const submitTest = () => {
+        console.log(exam_id)
+
+          const testData = {
+            user: user._id,
+            test: id.id,
+            score: score,
+            completed: true,
+        };
+        axios.post("http://localhost:5000/api/usertests/", testData, { headers }).then((response) => {
+            console.log(response.status);
+            console.log(response.data);
+        });
       }
 
+      // const handleReview = (i) => {
+      //     const userOptions = {
+      //       examReview: {
+      //         qAnswers: i,
+      //         qCorrect: correct,
+      //         qTitle: questions[currQues].question,
+      //       }
+      //     };
+      //     console.log(userOptions)
+      //     axios.put("http://localhost:5000/api/usertests/" + "64511056583a17d834ae3031", userOptions, {
+      //       headers: {
+      //           'Authorization': `Bearer ${user.token}`
+      //       },
+      //     },).then((response) => {
+      //       console.log(response.status);
+      //       console.log(response.data);
+      //     });
+      // }
     if(isLoading) {
         return <Spinner/>
     }
@@ -133,7 +164,8 @@ const TestQuestions2 = ({
           {options &&
             options.map((option) => (
               <button className={`singleOption  ${selected && handleSelect(option.option)}`}
-                key={option._id} creator
+                key={option._id} 
+                // creator
                 onClick={() => { handleCheck(option.option) }}
                 disabled={selected}>
                 {option.option}
@@ -147,7 +179,7 @@ const TestQuestions2 = ({
             size="large"
             style={{ width: 185 }}
             onClick={handleNext}>
-            {currQues >= (questions.length - 1) ? (<span onClick={handleSubmit} >Submit</span>) : (<span>Next Question</span>)}
+            {currQues >= (questions.length - 1) ? (<span >Submit</span>) : (<span>Next Question</span>)}
           </button>
         </Control>
       </SingleQuestion>

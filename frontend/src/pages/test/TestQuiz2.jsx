@@ -37,7 +37,7 @@ const Quiz = ({ questions, score, setScore, setQuestions, exam_id}) => {
                 <>
                     <div className="quizInfo">
                         <span>
-                            Score : {score}
+                            {/* Score : {score} */}
                         </span>
                     </div>
                     <TestQuestions2
