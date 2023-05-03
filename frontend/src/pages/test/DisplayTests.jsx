@@ -17,8 +17,7 @@ function DisplayTests() {
     const params = useParams();
     const id = params;
     const [search, setSearch] = useState('');
-    const [questions, setQuestions] = useState(0);
-    
+
     useEffect(() => {
 
 

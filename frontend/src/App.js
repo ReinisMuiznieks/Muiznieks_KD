@@ -13,7 +13,7 @@ import {ToastContainer} from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import Learn from './pages/learn/Learn';
 import CategoryCards from "./pages/learn/CategoryCards";
-import Admin from "./pages/admin/Admin";
+import AdminPage from "./pages/admin/Admin";
 import Credits from "./pages/credits/Credits";
 import TestForm from "./components/test/TestForm";
 import CardForm from "./components/card/CardForm";
@@ -35,7 +35,7 @@ function App() {
                 <Route path="/learn" element={<Learn/>}/>
                 <Route path="/test" element={<Test/>}/>
                 <Route path="/learn/test" element={<Learn/>}/>
-                <Route path="/admin" element={<Admin/>}/>
+                <Route path="/admin" element={<AdminPage/>}/>
                 <Route path="/admin/test" element={<TestForm/>}/>
                 <Route path="/admin/card" element={<CardForm/>}/>
                 <Route path="/admin/question" element={<QuestionForm/>}/>

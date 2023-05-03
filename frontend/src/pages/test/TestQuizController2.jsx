@@ -4,6 +4,7 @@ import Quiz from "./TestQuiz2";
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import NoQuestions from "../../components/card/NoQuestions";
+import Spinner from "../../components/spinner/Spinner";
 
 const QuizController = (CUId) => {
     const { user } = useSelector((state) => state.auth)
@@ -86,21 +87,11 @@ const QuizController = (CUId) => {
     if (isLoading) {
         return (
             <>
-                <h1>loading</h1>
+                <Spinner/>
             </>)
     }
     return (
         <div>
-            {/* <CountDownTimer hoursMinSecs={hoursMinSecs}/> */}
-            
-            {/* <Quiz
-                questions={questions}
-                score={score}
-                setScore={setScore}
-                setQuestions={setQuestions}
-                exam_id={id}
-            /> */}
-
         {questions.length > 0 ? (
             <Quiz
             questions={questions}

@@ -41,7 +41,7 @@ function TestItem({test}) {
         },
       },);
       
-      const myDataDate = await Promise.all(data.map((d) => d.createdAt))
+      const myDataDate = await Promise.all(data.map((d) => d.updatedAt))
       const myDataScore = await Promise.all(data.map((d) => d.score))
 
       const myData = await Promise.all(data.map((d) => d.test))

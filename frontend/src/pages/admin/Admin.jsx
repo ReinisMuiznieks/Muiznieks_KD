@@ -1,22 +1,19 @@
-// import DisplayCards from "../../components/card/DisplayCards";
-// import CategoryForm from "../../components/category/CategoryForm";
-// import DisplayCategories from "../../components/category/DisplayCategories";
-import NavbarTop from "../../components/navbar/Navbar";
-import AnswerForm from "../../components/answer/AnswerForm";
-
-function Admin() {
-
-    return(
-<>
-
-<NavbarTop/>
+import * as React from 'react';
+import NavbarTop from '../../components/navbar/Navbar';
+import TestsTable from './Tests'; 
+import UsersTable from './Users';
 
 
-<AnswerForm/>
-{/* <TestForm2/> */}
+function AdminPage() {
 
-</>
-    )
+
+  return (
+    <>
+    <NavbarTop/>
+    <TestsTable/>   
+    <UsersTable/>
+    </>
+  );
 }
 
-export default Admin;
+export default AdminPage;
