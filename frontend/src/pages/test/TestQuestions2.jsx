@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../learn/learn.scss';
 import NavbarTop from "../../components/navbar/Navbar.jsx";
 import Footer from "../../components/footer/Footer.jsx";
@@ -49,7 +49,8 @@ const TestQuestions2 = ({
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useSelector((state) => state.auth)
     const headers = { 'Authorization': `Bearer ${user.token}` };
-      
+    const [questioncount, setQuestioncount] = useState(0);
+
         const navigate = useNavigate()
       
         const params = useParams();
@@ -78,13 +79,26 @@ const TestQuestions2 = ({
           toast.error("Please select an option");
       };
 
+      const getQuestions = async () => {
+        const { data } = await axios.get(`http://localhost:5000/api/questions?test=${id.id}`, {
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            },
+          },);
+        setQuestioncount(data.length);
+      }
+
+      useEffect(() => {
+        getQuestions();
+      }, [setQuestioncount])
+
       const submitTest = () => {
         console.log(exam_id)
 
           const testData = {
             user: user._id,
             test: id.id,
-            score: score,
+            score: Math.round(score/questioncount*100),
             completed: true,
         };
         axios.post("http://localhost:5000/api/usertests/", testData, { headers }).then((response) => {
@@ -93,24 +107,6 @@ const TestQuestions2 = ({
         });
       }
 
-      // const handleReview = (i) => {
-      //     const userOptions = {
-      //       examReview: {
-      //         qAnswers: i,
-      //         qCorrect: correct,
-      //         qTitle: questions[currQues].question,
-      //       }
-      //     };
-      //     console.log(userOptions)
-      //     axios.put("http://localhost:5000/api/usertests/" + "64511056583a17d834ae3031", userOptions, {
-      //       headers: {
-      //           'Authorization': `Bearer ${user.token}`
-      //       },
-      //     },).then((response) => {
-      //       console.log(response.status);
-      //       console.log(response.data);
-      //     });
-      // }
     if(isLoading) {
         return <Spinner/>
     }

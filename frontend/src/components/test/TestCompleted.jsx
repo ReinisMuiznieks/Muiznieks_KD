@@ -24,7 +24,6 @@ const TestCompleted = () => {
     useEffect(() => {
         getExamNames();
         getTest();
-        getQuestions();
       }, [setScore])
     
       const getExamNames = async () => {
@@ -45,16 +44,6 @@ const TestCompleted = () => {
         setTest(data[0].testname)
       }
 
-      const getQuestions = async () => {
-        const { data } = await axios.get(`http://localhost:5000/api/questions?test=${id.id}`, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            },
-          },);
-        setQuestions(data.length)
-      }
-      
-
     return (
 <>
 <NavbarTop/>
@@ -69,7 +58,7 @@ const TestCompleted = () => {
             <Container>
                 <Row id="card-items">
                     <Col>Score</Col>
-                    <Col id="item">{score}/{questions}</Col>
+                    <Col id="item">{score}%</Col>
                 </Row>
             </Container>
                 {/* <Card.Body >Dictionary + {words}</Card.Body> */}

@@ -63,7 +63,6 @@ function NavbarTop() {
               <NavDropdown.Item href="/admin/card">Add Cards</NavDropdown.Item>
               <NavDropdown.Item href="/admin/test">Add Tests</NavDropdown.Item>
               <NavDropdown.Item href="/admin/question">Add Questions</NavDropdown.Item>
-              <NavDropdown.Item href="/admin/testing">Add Answers</NavDropdown.Item>
               {/* <NavDropdown.Divider /> */}
               {/* <NavDropdown.Item href="#action/3.4">Test</NavDropdown.Item> */}
         </NavDropdown>

@@ -15,11 +15,7 @@ import Navbar from '../../components/navbar/Navbar'
 import {getTests} from '../../features/test/testSlice'
 import { getCards } from '../../features/card/cardSlice'
 import { v4 as uuidv4 } from 'uuid';
-
-const radios = [
-  { name: 'False', value: '1' },
-  { name: 'True', value: '2' },
-];
+import './question.scss'
 
 function QuestionForm() {
 
@@ -75,30 +71,13 @@ const handleChangeInput = async (id, event) => {
       const addQuestion = async (e) => {
         e.preventDefault()
     
-        if (questionTitle.trim().length !== 0) {
-          // axios post create new test
-          // const questionData = {
-          //   test: test,
-          //   question: questionTitle,
-          //   card: card,
-          //   options: {
-          //     option: answer,
-          //     isCorrect: correct
-          //   }
-          // };
-          //     axios.post("http://localhost:5000/api/questions",questionData, {
-          //   headers: {
-          //       'Authorization': `Bearer ${user.token}`
-          //   },
-          // })
-          // setTest('')
-          // setQuestionTitle('')
+        if (questionTitle.trim().length !== 0 && test && card) {
           // toast.success(`Question ${test} has been created!`)
           const inputOption = await Promise.all(inputFields.map((inputF) => inputF.option))
-          /* const index = inputOption.indexOf(correctOption)
-          if (index > -1) {
-              inputOption.splice(index, 1);
-          } */
+          // const index = inputOption.indexOf(correctOption)
+          // if (index > -1) {
+          //     inputOption.splice(index, 1);
+          // } 
           console.log(inputOption);
           setOptions(inputOption);
 
@@ -147,6 +126,7 @@ const handleChangeInput = async (id, event) => {
       const onReset = () => {
         setTest('')
         setQuestionTitle('')
+        setCard('')
       }
 
       const [isShown, setIsShown] = useState(false);
@@ -176,16 +156,7 @@ const handleChangeInput = async (id, event) => {
               placeholder="Question"
               />
             </Form.Group>
-          </Col>
 
-          </Row>
-
-          <Row>
-          <Col>
-
-          </Col>
-
-          <Col>
           
             <div className="input-group mb-3">
               <Form.Select onChange={(e)=>setTest(e.target.value)} id="test" name="cars" className="form-control select select-initialized"  value={test}>
@@ -273,6 +244,7 @@ const handleChangeInput = async (id, event) => {
             </Stack>
       </Container>
 
+{/* <Container>
       {inputFields.map(inputField => (
       <div key={inputField.id}>
           <textarea
@@ -281,14 +253,40 @@ const handleChangeInput = async (id, event) => {
               variant="filled"
               value={inputField.option}
               onChange={event => handleChangeInput(inputField.id, event)}
-              style={{ maxWidth: "650px", maxHeight: "200px", width: "650px" }}
+              style={{ maxWidth: "650px", maxHeight: "50px", width: "650px" }}
           />
           <Button style={{ verticalAlign: "top", color: "#EEEEEE" }} disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>-</Button>
           <Button style={{ verticalAlign: "top", color: "#EEEEEE" }} onClick={handleAddFields}>+</Button>
           <input style={{ verticalAlign: "top", color: "#EEEEEE" }} type="radio" name='control' value={inputField.option} onClick={(e) => setCorrectOption(e.target.value)} />
       </div>
   ))}
-      </>
+  </Container> */}
+
+<Container>
+
+<div>
+  <Form.Group>
+      {inputFields.map(inputField => (
+      <div key={inputField.id} className="input-group mb-3" style={{ width: "650px" }} >
+          <Form.Control
+              name="option"
+              label="option"
+              // variant="filled"
+              value={inputField.option}
+              onChange={event => handleChangeInput(inputField.id, event)}
+              // style={{ maxWidth: "650px", maxHeight: "50px", width: "650px" }}
+          />
+          <Button variant="outline-danger" type="button" id="option-button" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove</Button>
+          <Button variant="outline-success" type="button" id="option-button" disabled={inputFields.length > 3} onClick={handleAddFields}>Add</Button>
+          <input type="radio" name='control' id="option-correct" value={inputField.option} onClick={(e) => setCorrectOption(e.target.value)} />
+      </div> 
+  ))}
+    </Form.Group>
+</div>
+  {/* <Button className="btn btn-secondary" type="button" id="button-addon2">Add Test</Button> */}
+
+</Container>
+  </>
 
       
       

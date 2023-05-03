@@ -18,11 +18,8 @@ import Credits from "./pages/credits/Credits";
 import TestForm from "./components/test/TestForm";
 import CardForm from "./components/card/CardForm";
 import QuestionForm from "./components/question/QuestionForm";
-import TestingForm from "./components/question/TestingForm";
 import Test from "./pages/test/Test";
 import QuizController from "./pages/test/TestQuizController2";
-import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import TestCompleted from "./components/test/TestCompleted";
 
 function App() {
@@ -42,7 +39,6 @@ function App() {
                 <Route path="/admin/test" element={<TestForm/>}/>
                 <Route path="/admin/card" element={<CardForm/>}/>
                 <Route path="/admin/question" element={<QuestionForm/>}/>
-                <Route path="/admin/testing" element={<TestingForm/>}/>
                 <Route path="/category/:id" element={<CategoryCards/>}/>
                 <Route path="/credits" element={<Credits/>}/>
                 <Route path="/test/:id" element={<QuizController/>} />

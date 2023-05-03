@@ -22,10 +22,14 @@ function TestItem({test}) {
   const [iscompleted, setisCompleted] = useState(false);
   const dispatch = useDispatch()
   const [score, setScore] = useState(0);
+  const [completedDate, setCompletedDate] = useState(" ");
+  const [questions, setQuestions] = useState(0);
+  const [scoreColor, setScoreColor] = useState(" ");
 
   useEffect(() => {
 
   getExamNames();
+  // getColor();
   }, [])
 
   const getExamNames = async () => {
@@ -36,10 +40,40 @@ function TestItem({test}) {
             'Authorization': `Bearer ${user.token}`
         },
       },);
+      
+      const myDataDate = await Promise.all(data.map((d) => d.createdAt))
+      const myDataScore = await Promise.all(data.map((d) => d.score))
+
       const myData = await Promise.all(data.map((d) => d.test))
       for (let i = 0; i <= myData.length; i++) {
           if (myData[i] === test._id) {
               setisCompleted(true);
+              // setCompletedDate(myDataDate[i]);
+
+              setCompletedDate(new Date(myDataDate[i]).toLocaleDateString(
+                'en-gb',
+                {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                }
+              ));
+
+              setScore(myDataScore[i]);
+
+              if(myDataScore[i] < 50)
+              {
+                setScoreColor("red");
+              }
+              else if(myDataScore[i] >= 50 && myDataScore[i] < 68)
+              {
+                setScoreColor("yellow");
+              }
+              else if(myDataScore[i] >= 68)
+              {
+                setScoreColor("green");
+              }
+
           }
       }
 
@@ -47,6 +81,24 @@ function TestItem({test}) {
         console.log(err);
     }
   }
+
+  // const getColor = async () => {
+    // if(score < 50)
+    // {
+    //   console.log(score + "bad");
+    //   setScoreColor("red");
+    // }
+    // else if(score > 50 && score < 69)
+    // {
+    //   console.log(score + "okay");
+    //   setScoreColor("yellow");
+    // }
+    // else
+    // {
+    //   console.log(score + "good");
+    //   setScoreColor("green");
+    // }
+  // }
 
     return (
         <>
@@ -56,8 +108,49 @@ function TestItem({test}) {
                   <Container>
                       <Stack id="learn-stack">
                       <Link to={`/test/${test._id}`}  id='learn-link'>
-                          <button id="stack-card-completed">             
-                              <Card.Body id="stack-chapter"> {test.testname}</Card.Body>        
+                          <button id="stack-card-completed">
+                            <Row>  
+                              <Col>        
+                                <Card.Body id="stack-chapter"> {test.testname}</Card.Body>   
+                              </Col>
+                              <Col>
+                              {scoreColor == "red" ? (
+                                <>
+                                <Card.Body id="stack-chapter-datetext">{"Score"}</Card.Body>
+                                <Card.Body id="stack-chapter-score-red">{score}%</Card.Body> 
+                                </>
+                              ) : (
+                                <>
+                                </>
+                              )}
+
+                              {scoreColor == "yellow" ? (
+                                <>
+                                <Card.Body id="stack-chapter-datetext">{"Score"}</Card.Body>
+                                <Card.Body id="stack-chapter-score-yellow">{score}%</Card.Body> 
+                                </>
+                              ) : (
+                                <>
+                                </>
+                              )}
+
+                              {scoreColor == "green" ? (
+                                <>
+                                <Card.Body id="stack-chapter-datetext">{"Score"}</Card.Body>
+                                <Card.Body id="stack-chapter-score-green">{score}%</Card.Body> 
+                                </>
+                              ) : (
+                                <>
+                                </>
+                              )}
+                                {/* <Card.Body id="stack-chapter-datetext">{"Score"}</Card.Body>
+                                <Card.Body id="stack-chapter-score">{score}%</Card.Body>        */}
+                              </Col>
+                              <Col>
+                                <Card.Body id="stack-chapter-datetext">{"Completed on"}</Card.Body>
+                                <Card.Body id="stack-chapter-date">{completedDate}</Card.Body>       
+                              </Col>
+                               </Row>  
                           </button>
                       </Link>
                       </Stack>
