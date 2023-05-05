@@ -105,7 +105,7 @@ const CategoryCards = () => {
         
             <div id="learn-legend">
   {isAdmin ? (
-  <>
+            <>
               <Modal show={showDelete} onHide={handleCloseDelete}>
                 <Modal.Header closeButton>
                   <Modal.Title>Delete category</Modal.Title>

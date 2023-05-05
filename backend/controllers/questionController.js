@@ -69,20 +69,6 @@ const addQuestion = asyncHandler(async(req,res) => {
   }
 })
 
-// router.patch('/:id', (req, resp) => {
-//     Test.updateOne({ _id: req.params.id }, {
-//         $set: {
-//             testname: req.body.testname,
-//             passGrade: req.body.passGrade,
-//             time: req.body.time,
-//         }
-//     }).then(data => {
-//         resp.json(data)
-//     }).catch(e => {
-//         resp.json({ message: e })
-//     })
-// })
-
 const deleteQuestion = asyncHandler(async (req,res) =>{
     Question.deleteOne({ _id: req.params.id })
         .then(data => {

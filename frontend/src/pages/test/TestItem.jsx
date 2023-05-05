@@ -27,9 +27,7 @@ function TestItem({test}) {
   const [scoreColor, setScoreColor] = useState(" ");
 
   useEffect(() => {
-
   getExamNames();
-  // getColor();
   }, [])
 
   const getExamNames = async () => {

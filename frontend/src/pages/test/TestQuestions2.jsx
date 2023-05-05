@@ -15,6 +15,7 @@ import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const Container = styled.div`
   width: 100%;
@@ -110,12 +111,13 @@ const TestQuestions2 = ({
     if(isLoading) {
         return <Spinner/>
     }
-
     return (
 <>
 <NavbarTop />
+<ProgressBar now={[currQues+1]} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/>
 {questions.length > 0 ? (
   <Container>
+    
     <Stack id="question-stack">
 
       <Card id="question-card">

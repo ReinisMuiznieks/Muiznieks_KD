@@ -36,20 +36,6 @@ const addTest = asyncHandler(async (req,res) =>{
     })
 })
 
-// router.patch('/:id', (req, resp) => {
-//     Test.updateOne({ _id: req.params.id }, {
-//         $set: {
-//             testname: req.body.testname,
-//             passGrade: req.body.passGrade,
-//             time: req.body.time,
-//         }
-//     }).then(data => {
-//         resp.json(data)
-//     }).catch(e => {
-//         resp.json({ message: e })
-//     })
-// })
-
 const deleteTest = asyncHandler(async (req,res) =>{
     Test.deleteOne({ _id: req.params.id })
         .then(data => {
@@ -59,9 +45,32 @@ const deleteTest = asyncHandler(async (req,res) =>{
         })
 })
 
+// Update test
+const updateTest = asyncHandler(async (req, res) => {
+    const test = await Test.findById(req.params.id)
+  
+    if (!test) {
+      res.status(400)
+      throw new Error('Test not found')
+    }
+  
+    // Check for user
+    if (!req.user) {
+      res.status(401)
+      throw new Error('User not found')
+    }
+
+    const updateTest = await Test.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    })
+  
+    res.status(200).json(updateTest)
+  })
+
 module.exports = {
     getTests,
     getTest,
     addTest,
     deleteTest,
+    updateTest,
 }

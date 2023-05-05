@@ -11,7 +11,7 @@ function AdminPage() {
     <>
     <NavbarTop/>
     <TestsTable/>   
-    <UsersTable/>
+    {/* <UsersTable/> */}
     </>
   );
 }

@@ -13,10 +13,6 @@ const QuizController = (CUId) => {
     const [score, setScore] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [exam_id, setExam_id] = useState("");
-    const [timerData, setTimerData] = useState(0);
-
-    const [cards, setCards] = useState([]);
-    const navigate = useNavigate()
 
     const params = useParams();
     const id = params;

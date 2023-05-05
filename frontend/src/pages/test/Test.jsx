@@ -49,8 +49,8 @@ const Test = () => {
 <>
 <NavbarTop />
 <Container>
-    {/* <h1>Test</h1>
-    <ProgressBar now={60} label={`${60}%`} /> */}
+    {/* <h1>Test</h1> */}
+    {/* <ProgressBar now={60} label={`${60}%`} /> */}
 </Container>
 
 
