@@ -1,24 +1,21 @@
 import * as React from 'react';
-import NavbarTop from '../../components/navbar/Navbar';
-// import TestsTable from './TestsTable'; 
-// import UsersTable from './UsersTable';
 import Sidebar from './components/AdminSidebar';
+import CategoryForm from './components/forms/CategoryForm'
+import CategoriesTable from './components/tables/CategoriesTable';
 
-
-function AdminPage() {
-
+function CategoriesPanel() {
 
   return (
     <>
     <div style={{ display: 'flex' }}>
       <Sidebar />
       <div style={{ paddingLeft: '10px', width: '100%' }}>
-        {/* <TestsTable />
-        <UsersTable /> */}
+        <CategoryForm/>
+        <CategoriesTable/>
       </div>
     </div>
     </>
   );
 }
 
-export default AdminPage;
+export default CategoriesPanel;

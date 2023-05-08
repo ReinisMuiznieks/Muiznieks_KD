@@ -169,14 +169,14 @@ const CategoryCards = () => {
                 </Card>
                 <div className="buttons">
                     <Button id="continue-button" onClick={displayCard}>Continue</Button>
-                    {isAdmin ? (
+                    {/* {isAdmin ? (
                       <>
                         <button onClick={handleShowDelete} className="close mt-2" id="delete-button">Delete <b>{cards[currentCard].lv_word}</b></button>
                       </>
                     ) : (
                       <>
                       </>
-                    )}
+                    )} */}
                 </div>
                 </Stack>
             </Container>

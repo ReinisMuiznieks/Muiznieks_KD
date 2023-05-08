@@ -1,31 +1,30 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createCard } from '../../features/card/cardSlice'
 import { toast } from 'react-toastify'
-import { PickerOverlay } from "filestack-react";
 import { useNavigate } from 'react-router-dom'
-import {getCategories,reset} from '../../features/category/categorySlice'
-import Spinner from '../spinner/Spinner';
-import './card.scss'
+import {getCategories,reset} from '../../../../features/category/categorySlice'
+import Spinner from '../../../../components/spinner/Spinner';
+import '../../../../components/card/card.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
-import CategoryForm from '../category/CategoryForm';
-import Navbar from '../../components/navbar/Navbar'
+import CategoryForm from '../../../../components/category/CategoryFormModal';
+import axios from 'axios'
+import {getTypes} from '../../../../features/type/typeSlice'
 
-function CardForm() {
-    const [isPicker, setIsPicker] = useState(false);
-    const [image, setImage] = useState("");
-    const [lv_word, setLvword] = useState("");
-    const [eng_word, setEngword] = useState("");
+function TestForm() {
     const [category, setCategory] = useState('');
     const { user } = useSelector((state) => state.auth)
     const { categories, isLoading, isError, message } = useSelector((state) => state.categories)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const [testName, setTestName] = useState("");
+    const [type, setType] = useState('');
+    const { types } = useSelector((state) => state.type)
 
     useEffect(() => {
 
@@ -42,6 +41,7 @@ function CardForm() {
         }
 
         dispatch(getCategories())
+        dispatch(getTypes())
 
         return () => { // clears when component unmounts
             dispatch(reset())
@@ -52,23 +52,32 @@ function CardForm() {
       const onSubmit = (e) => {
         e.preventDefault()
     
-        if (lv_word.trim().length !== 0 && eng_word.trim().length !== 0 && image) {
-          dispatch(createCard({ lv_word, eng_word, image: image.filesUploaded[0].url, category }))
-          setLvword('')
-          setEngword('')
-          setImage('')
+        if (testName.trim().length !== 0 && category && type) {
+          // axios post create new test
+          const testData = {
+            testname: testName,
+            category: category,
+            type: type
+          };
+        axios.post("http://localhost:5000/api/tests",testData, {
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            },
+          })
+
           setCategory('')
-          toast.success(`Card ${lv_word} has been created!`)
+          setType('')
+          setTestName('')
+          toast.success(`Test ${testName} has been created!`)
         } else {
           toast.error('Please fill out all of the fields!')
         }
       }
 
       const onReset = () => {
-        setLvword('')
-        setEngword('')
-        setImage('')
         setCategory('')
+        setType('')
+        setTestName('')
       }
 
       const [isShown, setIsShown] = useState(false);
@@ -83,57 +92,26 @@ function CardForm() {
 
       return (
         <>
-        <Navbar/>
         <Container className='card-legend pt-5'>
         <Form onSubmit={onSubmit}>
           <Row>
           <Col>
             <Form.Group className="mb-3">
-              <Form.Label>LV</Form.Label>
+              <Form.Label>Test name</Form.Label>
               <Form.Control 
               type='text'
-              name='lv_word'
+              name='test_name'
               required
-              onChange={(e) => setLvword(e.target.value)}
-              placeholder="LV"
+              onChange={(e) => setTestName(e.target.value)}
+              placeholder="Test name"
               />
             </Form.Group>
           </Col>
 
-          <Col>
-            <Form.Group className='pb-4'>
-              <Form.Label>ENG</Form.Label>
-              <Form.Control 
-              type='text'
-              name='eng_word'
-              required
-              onChange={(e) => setEngword(e.target.value)}
-              placeholder="LV"
-              />
-            </Form.Group>
-          </Col>
           </Row>
 
           <Row>
           <Col>
-
-          {image ? (
-              <img
-                src={image && image.filesUploaded[0].url}
-                alt="imageUploded"
-                className="pb-3"
-                name='image'
-                id='card-image'
-              />
-            ) : (
-              <Button
-                onClick={() => (isPicker ? setIsPicker(false) : setIsPicker(true))}
-                type="button"
-                variant="secondary"
-              >
-                Choose Image
-              </Button>  
-            )}
 
           </Col>
 
@@ -156,9 +134,27 @@ function CardForm() {
 
                     )}
             </div>
+
+
+
+
+            <div className="input-group mb-3">
+              <Form.Select onChange={(e)=>setType(e.target.value)} id="type" name="cars" className="form-control select select-initialized"  value={type}>
+                <option >Choose Type</option>
+                {
+                    types && types.map(type =>(
+                        <option key={type._id}  value={type._id} type={type} >{type.name}</option>
+                    ))
+                    
+                }
+              </Form.Select>
+            </div>
           </Col>
 
+          
+
           </Row>
+          
 
           <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
                 <Button variant="outline-success" type="submit">Submit</Button>
@@ -166,28 +162,10 @@ function CardForm() {
                 <Button variant="outline-danger" onClick={onReset}>Reset</Button>
           </Stack>
 
-          {/* Filestack */}
-          {isPicker && (
-                <PickerOverlay
-                  apikey={process.env.REACT_APP_FILESTACK_API_KEY}
-                  onSuccess={(res) => {
-                    setImage(res);
-                    setIsPicker(false);
-                  }}
-                  onError={(res) => alert(res)}
-                  pickerOptions={{
-                    maxFiles: 1,
-                    accept: ["image/*"],
-                    errorsTimeout: 2000,
-                    maxSize: 1 * 1000 * 1000,
-                  }}
-                />
-              )}
-
       </Form>
       </Container>
       </>
       );
   }
   
-  export default CardForm
+  export default TestForm

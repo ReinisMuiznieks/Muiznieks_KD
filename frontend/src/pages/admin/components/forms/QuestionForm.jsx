@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import Spinner from '../spinner/Spinner';
-import '../card/card.scss'
+import Spinner from '../../../../components/spinner/Spinner';
+import '../../../../components/card/card.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -11,11 +11,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import axios from 'axios'
-import Navbar from '../../components/navbar/Navbar'
-import {getTests} from '../../features/test/testSlice'
-import { getCards } from '../../features/card/cardSlice'
+import {getTests} from '../../../../features/test/testSlice'
+import { getCards } from '../../../../features/card/cardSlice'
 import { v4 as uuidv4 } from 'uuid';
-import './question.scss'
+import '../../../../components/question/question.scss'
 
 function QuestionForm() {
 
@@ -141,7 +140,6 @@ const handleChangeInput = async (id, event) => {
 
       return (
         <>
-        <Navbar/>
         <Container className='card-legend pt-5'>
         <Form onSubmit={addQuestion}>
           <Row>
