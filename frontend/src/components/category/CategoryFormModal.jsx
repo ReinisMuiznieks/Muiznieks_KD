@@ -10,7 +10,6 @@ function CategoryForm() {
   const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
     const [name, setName] = useState('')
   

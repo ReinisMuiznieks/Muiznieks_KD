@@ -24,6 +24,7 @@ import TestPanel from "./pages/admin/TestsPanel";
 import QuestionsPanel from "./pages/admin/QuestionsPanel";
 import CardsPanel from "./pages/admin/CardsPanel";
 import CategoriesPanel from "./pages/admin/CategoriesPanel";
+import ProfilePage from "./pages/profile/Profile";
 
 function App() {
 
@@ -49,6 +50,8 @@ function App() {
                 <Route path="/admin/questions" element={<QuestionsPanel/>}/>
                 <Route path="/admin/cards" element={<CardsPanel/>}/>
                 <Route path="/admin/categories" element={<CategoriesPanel/>}/>
+
+                <Route path="/profile" element={<ProfilePage/>}/>
             </Routes>
         </BrowserRouter>
         <ToastContainer />

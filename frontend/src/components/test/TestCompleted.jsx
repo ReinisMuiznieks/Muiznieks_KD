@@ -16,16 +16,15 @@ import NavbarTop from "../navbar/Navbar";
 const TestCompleted = () => {
     const [score, setScore] = useState(0);
     const [test, setTest] = useState(" ");
-    const [questions, setQuestions] = useState(0);
     const { user } = useSelector((state) => state.auth)
     const params = useParams();
     const id = params;
-
+    
     useEffect(() => {
         getExamNames();
         getTest();
-      }, [setScore])
-    
+      }, [setScore]);
+      
       const getExamNames = async () => {
         const { data } = await axios.get(`http://localhost:5000/api/usertests/test/${id.id}`, {
             headers: {

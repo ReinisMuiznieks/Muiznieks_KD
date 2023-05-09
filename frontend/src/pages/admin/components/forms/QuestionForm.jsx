@@ -18,19 +18,18 @@ import '../../../../components/question/question.scss'
 
 function QuestionForm() {
 
-  const [options, setOptions] = useState([]);
   const [correctOption, setCorrectOption] = useState();
-    const { user } = useSelector((state) => state.auth)
-    const [questionTitle, setQuestionTitle] = useState("");
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [test, setTest] = useState("");
-    const { tests, isLoading, isError, message } = useSelector((state) => state.tests);
+  const { user } = useSelector((state) => state.auth)
+  const [questionTitle, setQuestionTitle] = useState("");
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [test, setTest] = useState("");
+  const { tests, isLoading, isError, message } = useSelector((state) => state.tests);
 
-    const [card, setCard] = useState("");
-    const { cards } = useSelector((state) => state.cards);
-    const [dumy, setDumy] = useState(0);
-    const [inputFields, setInputFields] = useState([{ id: uuidv4(), option: '' }]);
+  const [card, setCard] = useState("");
+  const { cards } = useSelector((state) => state.cards);
+  const [dumy, setDumy] = useState(0);
+  const [inputFields, setInputFields] = useState([{ id: uuidv4(), option: '' }]);
 
     const handleAddFields = () => {
         setInputFields([...inputFields, { id: uuidv4(), option: '' }])
@@ -67,35 +66,52 @@ const handleChangeInput = async (id, event) => {
 
 
     
-      const addQuestion = async (e) => {
-        e.preventDefault()
-    
-        if (questionTitle.trim().length !== 0 && test && card) {
-          toast.success(`Question ${questionTitle} has been created!`)
-          const inputOption = await Promise.all(inputFields.map((inputF) => inputF.option))
-          // const index = inputOption.indexOf(correctOption)
-          // if (index > -1) {
-          //     inputOption.splice(index, 1);
-          // } 
-          console.log(inputOption);
-          setOptions(inputOption);
+    const addQuestion = async (e) => {
+      e.preventDefault();
 
-          const questionData = {
-            test: test,
-            question: questionTitle,
-            card: card,
+      const hasTwoOptions = inputFields.length >= 2;
+
+      if( typeof correctOption === "undefined")
+      {
+        toast.error('There must be a correct option!')
+      }
+      if(!hasTwoOptions)
+      {
+        toast.error('There must be at least 2 options!')
+      }
+
+      if (questionTitle.trim().length !== 0 && test && card && hasTwoOptions && typeof correctOption !== "undefined") {
+        toast.success(`Question ${questionTitle} has been created!`)
+        const inputOption = await Promise.all(inputFields.map((inputF) => inputF.option))
+        console.log(inputOption);
+    
+        const questionData = {
+          test: test,
+          question: questionTitle,
+          card: card,
         };
         console.log(questionData)
-        axios.post("http://localhost:5000/api/questions", questionData, 
-        {headers: {'Authorization': `Bearer ${user.token}`}},).then((response) => {
+        axios.post("http://localhost:5000/api/questions", questionData,
+          { headers: { 'Authorization': `Bearer ${user.token}` } },).then((response) => {
             console.log(response.status);
             const data = response.data._id;
             handleOptions({ data, inputOption });
-        });
-        } else {
-          toast.error('Please fill out all of the fields!')
-        }
+            onReset();
+          });
+    
+      } else {
+        toast.error('Please fill out all of the fields!')
       }
+    }
+    
+    const onReset = () => {
+      setTest('')
+      setQuestionTitle('')
+      setCard('')
+      setInputFields([{ id: uuidv4(), option: '' }])
+    }
+    
+    
 
       const handleOptions = ({ data, inputOption }) => {
         var questionOptions;
@@ -121,12 +137,6 @@ const handleChangeInput = async (id, event) => {
         }
         setDumy(dumy + 1)
     }
-
-      const onReset = () => {
-        setTest('')
-        setQuestionTitle('')
-        setCard('')
-      }
 
       const [isShown, setIsShown] = useState(false);
 
@@ -204,61 +214,12 @@ const handleChangeInput = async (id, event) => {
       </Container>
       
       <Container className='card-legend pt-5'>
-          <Row>
-            {/* <Col>
-              <Form.Group className="mb-3">
-                <Form.Label>Answer</Form.Label>
-                <Form.Control 
-                type='text'
-                name='answer'
-                required
-                onChange={(e) => setAnswer(e.target.value)}
-                placeholder="Answer"
-                />
-              </Form.Group>
-            </Col> */}
-
-            {/* <ButtonGroup>
-        {radios.map((radio, idx) => (
-          <ToggleButton
-            key={idx}
-            id={`radio-${idx}`}
-            type="radio"
-            variant={idx % 2 ? 'outline-success' : 'outline-danger'}
-            name="radio"
-            value={radio.value}
-            checked={radioValue === radio.value}
-            onChange={(e) => setRadioValue(e.currentTarget.value)}
-          >
-            {radio.name}
-          </ToggleButton>
-        ))}
-      </ButtonGroup> */}
-          </Row>
             <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
                 <Button variant="outline-success" type="submit" onClick={addQuestion}>Submit</Button>
                 <div className="vr" />
                 <Button variant="outline-danger" onClick={onReset}>Reset</Button>
             </Stack>
       </Container>
-
-{/* <Container>
-      {inputFields.map(inputField => (
-      <div key={inputField.id}>
-          <textarea
-              name="option"
-              label="First Name"
-              variant="filled"
-              value={inputField.option}
-              onChange={event => handleChangeInput(inputField.id, event)}
-              style={{ maxWidth: "650px", maxHeight: "50px", width: "650px" }}
-          />
-          <Button style={{ verticalAlign: "top", color: "#EEEEEE" }} disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>-</Button>
-          <Button style={{ verticalAlign: "top", color: "#EEEEEE" }} onClick={handleAddFields}>+</Button>
-          <input style={{ verticalAlign: "top", color: "#EEEEEE" }} type="radio" name='control' value={inputField.option} onClick={(e) => setCorrectOption(e.target.value)} />
-      </div>
-  ))}
-  </Container> */}
 
 <Container>
 
@@ -281,8 +242,6 @@ const handleChangeInput = async (id, event) => {
   ))}
     </Form.Group>
 </div>
-  {/* <Button className="btn btn-secondary" type="button" id="button-addon2">Add Test</Button> */}
-
 </Container>
   </>
 

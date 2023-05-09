@@ -2,8 +2,8 @@ import * as React from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table, Button, Modal, Form } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { Button, Modal, Form } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import {Container } from 'react-bootstrap';
 import { PickerOverlay } from "filestack-react";
 import { toast } from 'react-toastify'

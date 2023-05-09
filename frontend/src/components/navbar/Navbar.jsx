@@ -35,53 +35,53 @@ function NavbarTop() {
     }
   }
 
-
-
   return (    
-<Navbar>
-<Container>
-  <Navbar.Brand href="/" id="nav-brand">Verbum</Navbar.Brand>
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="me-auto">
-      <Nav.Link href="/" id="nav-link">Home</Nav.Link> {/* Sākums */}
-      {user ? (
-        <>
-        <Nav.Link href="/learn" id="nav-link">Learn</Nav.Link> {/* Mācies */}
-        <Nav.Link href="/test" id="nav-link">Test</Nav.Link>
-        </>
-      ) : (
-        <>
-        </>   
-        )}
+    <Navbar expand="md">
+      <Container>
+        <Navbar.Brand href="/" id="nav-brand">Verbum</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/" id="nav-link">Home</Nav.Link> {/* Sākums */}
+            {user ? (
+              <>
+              <Nav.Link href="/learn" id="nav-link">Learn</Nav.Link> {/* Mācies */}
+              <Nav.Link href="/test" id="nav-link">Test</Nav.Link>
+              </>
+            ) : (
+              <>
+              </>   
+            )}
 
-      {isAdmin ? (
-        <>
-        {/* <Nav.Link href="/admin" id="nav-link">Dashboard</Nav.Link> */}
-        <Nav.Link href="/admin" id="nav-link">Admin</Nav.Link>
-        </>
-      ) : (
-        <>
-        </>   
-        )}
-        
-    </Nav>
+            {isAdmin ? (
+              <>
+              {/* <Nav.Link href="/admin" id="nav-link">Dashboard</Nav.Link> */}
+              <Nav.Link href="/admin" id="nav-link">Admin</Nav.Link>
+              </>
+            ) : (
+              <>
+              </>   
+            )}
+            
+          </Nav>
 
-      <Nav className="ms-auto">
-      {user ? (
-        <>
-        {/* <Nav.Item id="user">Logged in as {user.name}!</Nav.Item> */}
-        <Button variant="outline-secondary" id="nav-btn" href="/log-in" onClick={onLogout}>Logout</Button>
-        </>
-      ) : (
-        <><Button variant="outline-secondary" id="nav-btn" href="/sign-up">Register</Button><Button variant="outline-secondary" id="nav-btn" href="/log-in">Login</Button></>   
-        )}
-      </Nav>
+          <Nav className="ms-auto">
+            {user ? (
+              <>
+              <NavDropdown title={user.name} id="nav-dropdown" style={{backgroundColor: "white"}}>
+                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>
+              </NavDropdown>
+              </>
+            ) : (
+              <><Button variant="outline-secondary" id="nav-btn" href="/sign-up">Register</Button><Button variant="outline-secondary" id="nav-btn" href="/log-in">Login</Button></>   
+            )}
+          </Nav>
 
-  </Navbar.Collapse>
-  <Navbar.Toggle />
-</Container>
-</Navbar>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 

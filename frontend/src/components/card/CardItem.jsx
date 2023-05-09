@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux'
 import React from "react";
 import '../../pages/learn/learn.scss';
 import Container from 'react-bootstrap/Container';
@@ -7,19 +6,15 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 import icon from '../../images/question_mark.svg'
 import Popover from 'react-bootstrap/Popover';
 
-function CardItem({card, category}) {
-    const dispatch = useDispatch()
+function CardItem({card}) {
 
     return (
 <>
   <div id="learn-legend">
     <Container>
-        
-        {/* <h1 className="text-center pb-4">{category}</h1>  category vjg tikai prieks admin lapas */}
         <Stack id="learn-stack">
 
         <Card>
@@ -57,7 +52,6 @@ function CardItem({card, category}) {
                 </OverlayTrigger>
                 </Card.Text>
             </Card.Body>
-        {/* <button onClick={() => dispatch(deleteCard(card._id))}className="close">Delete</button> */}
         </Card>
         <div className="buttons">
             <Button id="continue-button">Continue</Button>
