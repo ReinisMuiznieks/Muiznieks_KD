@@ -71,7 +71,7 @@ const handleChangeInput = async (id, event) => {
         e.preventDefault()
     
         if (questionTitle.trim().length !== 0 && test && card) {
-          // toast.success(`Question ${test} has been created!`)
+          toast.success(`Question ${questionTitle} has been created!`)
           const inputOption = await Promise.all(inputFields.map((inputF) => inputF.option))
           // const index = inputOption.indexOf(correctOption)
           // if (index > -1) {

@@ -84,14 +84,14 @@ function CategoryItem({category}) {
         </Link>
         {isAdmin ? (
         <>      
-        <Row>
+        {/* <Row>
           <Col>
             <button onClick={handleShowDelete} className="close" id="delete-button">Delete <b>{category.name}</b></button>
           </Col>
           <Col>
             <button onClick={handleShowUpdate} className="close" id="update-button">Update <b>{category.name}</b></button>
           </Col>
-        </Row>
+        </Row> */}
 
         
 

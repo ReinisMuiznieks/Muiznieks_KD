@@ -5,7 +5,6 @@ import axios from 'axios';
 import { Table, Button, Modal, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {Container} from 'react-bootstrap';
-import Sidebar from '../AdminSidebar';
 
 function TestsTable() {
   const { user } = useSelector((state) => state.auth);

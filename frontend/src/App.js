@@ -15,9 +15,6 @@ import Learn from './pages/learn/Learn';
 import CategoryCards from "./pages/learn/CategoryCards";
 import AdminPage from "./pages/admin/Admin";
 import Credits from "./pages/credits/Credits";
-import TestForm from "./pages/admin/components/forms/TestForm";
-import CardForm from "./pages/admin/components/forms/CardForm";
-import QuestionForm from "./pages/admin/components/forms/QuestionForm";
 import Test from "./pages/test/Test";
 import QuizController from "./pages/test/TestQuizController2";
 import TestCompleted from "./components/test/TestCompleted";
@@ -47,9 +44,6 @@ function App() {
                 <Route path="/result/:id" element={<TestCompleted/>} />
 
                 <Route path="/admin" element={<AdminPage/>}/>
-                <Route path="/admin/test" element={<TestForm/>}/>
-                <Route path="/admin/card" element={<CardForm/>}/>
-                <Route path="/admin/question" element={<QuestionForm/>}/>
                 <Route path="/admin/tests" element={<TestPanel/>}/>
                 <Route path="/admin/users" element={<UsersPanel/>}/>
                 <Route path="/admin/questions" element={<QuestionsPanel/>}/>

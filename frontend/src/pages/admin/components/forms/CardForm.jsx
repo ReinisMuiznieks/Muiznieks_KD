@@ -120,7 +120,7 @@ function CardForm() {
                 src={image && image.filesUploaded[0].url}
                 alt="imageUploded"
                 className="pb-3"
-                name='image'
+                // name='image'
                 id='card-image'
               />
             ) : (
@@ -166,21 +166,21 @@ function CardForm() {
 
           {/* Filestack */}
           {isPicker && (
-                <PickerOverlay
-                  apikey={process.env.REACT_APP_FILESTACK_API_KEY}
-                  onSuccess={(res) => {
-                    setImage(res);
-                    setIsPicker(false);
-                  }}
-                  onError={(res) => alert(res)}
-                  pickerOptions={{
-                    maxFiles: 1,
-                    accept: ["image/*"],
-                    errorsTimeout: 2000,
-                    maxSize: 1 * 1000 * 1000,
-                  }}
-                />
-              )}
+          <PickerOverlay
+            apikey={process.env.REACT_APP_FILESTACK_API_KEY}
+            onSuccess={(res) => {
+              setImage(res);
+              setIsPicker(false);
+            }}
+            onError={(res) => alert(res)}
+            pickerOptions={{
+              maxFiles: 1,
+              accept: ["image/*"],
+              errorsTimeout: 2000,
+              maxSize: 1 * 1000 * 1000,
+            }}
+          />
+          )}
 
       </Form>
       </Container>

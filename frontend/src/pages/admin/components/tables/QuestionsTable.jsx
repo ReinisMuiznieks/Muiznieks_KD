@@ -17,15 +17,26 @@ function QuestionsTable() {
     { field: "_id", headerName: "ID", width: 250 },
     { field: "question", headerName: "Question", width: 250 },
     {
-        field: "options",
-        headerName: "Correct option",
-        width: 250,
-        renderCell: (params) => {
-          const correctOption = params.value.find(option => option.isCorrect);
-          return correctOption ? correctOption.option : '';
-        },
+      field: "options",
+      headerName: "Options",
+      width: 250,
+      renderCell: (params) => {
+        const options = params.value.map((option) => option.option);
+        const correctOption = params.value.find((option) => option.isCorrect)?.option;
+      
+        if (options.length === 0) {
+          return "";
+        } else if (options.length === 1) {
+          return options[0];
+        } else {
+          const displayOptions = options.map((option) =>
+            option === correctOption ? `[${option}]` : option
+          );
+          return `${displayOptions.join(", ")}`;
+        }
       },
-      {
+    },      
+    {
         field: "test",
         headerName: "Test",
         width: 250,
@@ -66,6 +77,7 @@ function QuestionsTable() {
       
   }, []);
 
+
   const handleEdit = (item) => {
     setEditingItem(item);
     setShowModal(true);
@@ -84,31 +96,44 @@ function QuestionsTable() {
       });
   };
 
-  const handleSave = (event) => {
-    event.preventDefault();
-    axios
-      .put(`http://localhost:5000/api/questions/${editingItem._id}`, editingItem, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
-      .then((response) => {
-        setData(
-          data.map((item) =>
-            item._id === editingItem._id ? editingItem : item
-          )
-        );
-        setEditingItem(null);
-        setShowModal(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+const handleSave = (event) => {
+  event.preventDefault();
+  const updatedItem = { ...editingItem };
+  axios
+    .put(`http://localhost:5000/api/questions/${editingItem._id}`, updatedItem, {
+      headers: { Authorization: `Bearer ${user.token}` },
+    })
+    .then((response) => {
+      setData(
+        data.map((item) =>
+          item._id === editingItem._id ? updatedItem : item  
+        )
+      );
+      console.log(updatedItem);
+      console.log(data);
+      setEditingItem({});
+      setShowModal(false);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
 
   const handleCancel = () => {
     setEditingItem({});
     setShowModal(false);
   };
+  const handleOptionChange = (index, value) => {
+    const newOptions = [...editingItem.options];
+    newOptions[index] = { ...newOptions[index], option: value };
+    setEditingItem((prev) => ({ ...prev, options: newOptions }));
+  };
+  
+  
+  
 
+  
   return (
     <Container className='pt-5'>
     <div style={{ height: 400, width: '100%' }}>
@@ -122,33 +147,46 @@ function QuestionsTable() {
         }}
         disableRowSelectionOnClick
       />
-      <Modal show={showModal} onHide={handleCancel}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Item</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSave}>
-          <Modal.Body>
-            <Form.Group controlId="formItemName">
-              <Form.Label>Question:</Form.Label>
-              <Form.Control
-                type="text"
-                value={editingItem?.question || ''}
-                onChange={(event) =>
-                  setEditingItem({ ...editingItem, question: event.target.value })
-                }
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleCancel}>
-              Cancel
-            </Button>
-            <Button variant="primary" type="submit">
-              Save
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
+<Modal show={showModal} onHide={handleCancel}>
+  <Modal.Header closeButton>
+    <Modal.Title>Edit Item</Modal.Title>
+  </Modal.Header>
+  <Form onSubmit={handleSave}>
+    <Modal.Body>
+      <Form.Group controlId="formItemName">
+        <Form.Label>Question:</Form.Label>
+        <Form.Control
+          type="text"
+          value={editingItem?.question || ''}
+          onChange={(event) =>
+            setEditingItem({ ...editingItem, question: event.target.value })
+          }
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Options:</Form.Label>
+        {editingItem?.options?.map((option, index) => (
+          <Form.Control
+            key={option._id}
+            type="text"
+            value={option.option}
+            onChange={(event) => handleOptionChange(index, event.target.value)}
+            className={option.isCorrect ? 'font-weight-bold' : ''}
+          />
+        ))}
+      </Form.Group>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={handleCancel}>
+        Cancel
+      </Button>
+      <Button variant="primary" type="submit">
+        Save
+      </Button>
+    </Modal.Footer>
+  </Form>
+</Modal>
+
     </div>
     </Container>
   );
