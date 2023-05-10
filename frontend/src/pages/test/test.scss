@@ -130,3 +130,27 @@
     vertical-align: bottom;
 }
 
+#next_incorrect_question_button{
+    margin-top: 50px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(49, 49, 49);
+    border-color: rgb(177,178,255);
+    border-width: 2px;
+    border-radius: 7px;
+    font-size: 20px;
+    height: 50px;
+    width: 200px;
+    align-items: flex-end;
+    margin-left: 50px;
+    margin-right: 50px;
+
+    &:hover{
+        transform: scale(0.97);
+        border-color:rgb(193, 194, 255);
+    }
+
+    &:focus{
+        transform: scale(0.95);
+    }
+
+}

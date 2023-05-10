@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import image from '../../images/completed.svg'
@@ -8,76 +8,75 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../card/card.scss'
 import axios from 'axios'
-import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import NavbarTop from "../navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const TestCompleted = () => {
-    const [score, setScore] = useState(0);
+    const [data, setData] = useState([]);
     const [test, setTest] = useState(" ");
     const { user } = useSelector((state) => state.auth)
     const params = useParams();
     const id = params;
-    
-    useEffect(() => {
-        getExamNames();
-        getTest();
-      }, [setScore]);
-      
-      const getExamNames = async () => {
-        const { data } = await axios.get(`http://localhost:5000/api/usertests/test/${id.id}`, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            },
-          },);
-        setScore([data[data.length-1].score])
-      } 
+    const navigate = useNavigate()
 
-      const getTest = async () => {
-        const { data } = await axios.get(`http://localhost:5000/api/tests/${id.id}`, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            },
-          },);
-        setTest(data[0].testname)
-      }
+    useEffect(() => {
+        getTest();
+    }, []);
+
+    const getTest = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/usertests/${id.id}`, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+            setData(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const seeMistakes = () => {
+        navigate(`/incorrect/${id.id}`);
+    };
 
     return (
-<>
-<NavbarTop/>
+        <>
+            <NavbarTop />
 
-  <div id="learn-legend">
-    <Container>
-        <Stack id="notfound-stack">
-            
-            <img src={image} alt="404" id="notfound-image"></img>
-            <h3 id="complete-title" className="text-center">Test completed!</h3>
-            <Card id="complete-card">
-            <Container>
-                <Row id="card-items">
-                    <Col>Score</Col>
-                    <Col id="item">{score}%</Col>
-                </Row>
-            </Container>
-                {/* <Card.Body >Dictionary + {words}</Card.Body> */}
-            </Card>
-            <Card id="complete-card">
-            <Container>
-                <Row id="card-items">
-                    <Col>Test</Col>
-                    <Col id="item">{test}</Col>
-                </Row>
-            </Container>
-                {/* <Card.Body >Dictionary + {words}</Card.Body> */}
-            </Card>
-            
-            <Button variant="outline-secondary" id="complete-button" href="/test">Continue</Button>
-        </Stack>
-    </Container>
-</div>
+            <div id="learn-legend">
+                <Container>
+                    <Stack id="notfound-stack">
 
-</>
+                        <img src={image} alt="404" id="notfound-image"></img>
+                        <h3 id="complete-title" className="text-center">Test completed!</h3>
+                        <Card id="complete-card">
+                            <Container>
+                                <Row id="card-items">
+                                    <Col>Score</Col>
+                                    <Col id="item">{data.length > 0 ? `${data[0].score}%` : ''}</Col>
+                                </Row>
+                            </Container>
+                        </Card>
+                        {/* <Card id="complete-card">
+                            <Container>
+                                <Row id="card-items">
+                                    <Col>Test</Col>
+                                    <Col id="item">{test}</Col>
+                                </Row>
+                            </Container>
+                        </Card> */}
+
+                        <Button variant="outline-secondary" id="complete-button" href="/test">Home</Button>
+
+                        <Button variant="outline-secondary" id="complete-button" onClick={seeMistakes}>Check incorrect answers</Button>
+                    </Stack>
+                </Container>
+            </div>
+
+        </>
     )
 }
 

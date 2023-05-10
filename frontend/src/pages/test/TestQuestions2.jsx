@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import '../../components/card/cards.scss'
 
 const Container = styled.div`
   width: 100%;
@@ -51,62 +52,110 @@ const TestQuestions2 = ({
     const { user } = useSelector((state) => state.auth)
     const headers = { 'Authorization': `Bearer ${user.token}` };
     const [questioncount, setQuestioncount] = useState(0);
+    const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+    const [userTestId, setUserTestId] = useState('');
 
         const navigate = useNavigate()
       
         const params = useParams();
         const id = params;
 
-    const handleSelect = (i) => {
-        if (selected === i && selected === correct) return "select";
-        else if (selected === i && selected !== correct) return "wrong";
-        else if (i === correct) return "select";
-      };
+        const handleSelect = (i) => {
+          if (selected === i && selected === correct) return "select";
+          else if (selected === i && selected !== correct) return "wrong";
+          else if (correct && i === correct) return "select"; // Add a check for 'correct' property
+        };
+        
+      
     
-      const handleCheck = (i) => {
-        setSelected(i);
-        if (i === correct) { setScore(score + 1); }
-        setError(false);
-      };
+        const handleCheck = (i) => {
+          setSelected(i);
+          if (i === correct) {
+            setScore(score + 1);
+          } else {
+            setIncorrectAnswers((prevAnswers) => [
+              ...prevAnswers,
+              {
+                question: questions[currQues],
+                selectedAnswer: i,
+              },
+            ]);
+          }
+          setError(false);
+        };
+        
+      
     
-      const handleNext = () => {
-        if (currQues >= (questions.length - 1)) {
-          submitTest();
-          navigate(`/result/${id.id}`);
-        } else if (selected) {
-          setCurrQues(currQues + 1);
-          setSelected();
-        } else 
-          toast.error("Please select an option");
-      };
+        const handleNext = () => {
+          if (currQues >= questions.length - 1) {
+            submitTest();
+          } else if (selected !== undefined) {
+            setCurrQues(currQues + 1);
+            setSelected(undefined);
+          } else {
+            toast.error("Please select an option");
+          }
+        };
+        
 
       const getQuestions = async () => {
-        const { data } = await axios.get(`http://localhost:5000/api/questions?test=${id.id}`, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            },
-          },);
-        setQuestioncount(data.length);
-      }
+        setIsLoading(true);
+        try {
+          const { data } = await axios.get(
+            `http://localhost:5000/api/questions?test=${id.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
+          setQuestions(data);
+          setQuestioncount(data.length);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
 
       useEffect(() => {
         getQuestions();
       }, [setQuestioncount])
 
       const submitTest = () => {
-        console.log(exam_id)
-
-          const testData = {
-            user: user._id,
-            test: id.id,
-            score: Math.round(score/questioncount*100),
-            completed: true,
+        const incorrectAnsweredQuestions = incorrectAnswers.map((answer) => ({
+          question: answer.question._id,
+          correctAnswer: answer.question.options.find((option) => option.isCorrect)?.option,
+          userAnswer: options.find((option) => option.option === answer.selectedAnswer)?.option,
+        }));
+      
+        const testData = {
+          user: user._id,
+          test: id.id,
+          score: Math.round((score / questioncount) * 100),
+          completed: true,
+          incorrectAnswers: incorrectAnsweredQuestions,
         };
-        axios.post("http://localhost:5000/api/usertests/", testData, { headers }).then((response) => {
+      
+        console.log(testData);
+        axios
+          .post("http://localhost:5000/api/usertests/", testData, { headers })
+          .then((response) => {
             console.log(response.status);
             console.log(response.data);
-        });
-      }
+            setUserTestId(response.data._id);
+            navigate(`/result/${response.data._id}`);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+      };
+      
+      
+      
+
+      
 
     if(isLoading) {
         return <Spinner/>
@@ -114,38 +163,45 @@ const TestQuestions2 = ({
     return (
 <>
 <NavbarTop />
-<ProgressBar now={[currQues+1]} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/>
 {questions.length > 0 ? (
   <Container>
-    
     <Stack id="question-stack">
+    <div className="container">
+        <ProgressBar now={currQues + 1} label={currQues+1 + "/" + questions.length} max={questions.length}/>
+        {/* <ProgressBar now={currQues + 1} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/> */}
+    </div>
 
+    <div id="card-legend">
+      
       <Card id="question-card">
         <Card.Body>
           <Card.Text id="card-text">
           {questions[currQues].question}
           </Card.Text>
         </Card.Body>
-          <Card.Img variant="top" id="card-image" className="pt-4" src={questions[currQues].card} alt="card"/>
+          <Card.Img variant="top" id="card-image" src={questions[currQues].card} alt="card"/>
       </Card>
-
+    </div>
       <Container id="answer_container">
         <Row>
         <Col>
         <Options>
-          {error && {error}}
-          {options &&
-            options.map((option) => (
-              <Button 
-                id="answer_button" 
+          {error && { error }}
+          {questions[currQues] && questions[currQues].options && (
+            questions[currQues].options.map((option) => (
+              <Button
+                id="answer_button"
                 className={`singleOption  ${selected && handleSelect(option.option)}`}
-                key={option._id} 
-                // creator
-                onClick={() => { handleCheck(option.option) }}
-                disabled={selected}>
+                key={option._id}
+                onClick={() => {
+                  handleCheck(option.option);
+                }}
+                disabled={selected}
+              >
                 {option.option}
               </Button>
-            ))}
+            ))
+          )}
         </Options>
         </Col>
         </Row>
@@ -163,19 +219,6 @@ const TestQuestions2 = ({
           </Col>
         </Row>
       </Container>
-
-      <div className="buttons">
-      {/* <Button id="continue-button" onClick={displayQuestion}>Continue</Button> */}
-      {/* {isAdmin ? (
-      <>
-      <button onClick={handleShowDelete} className="close mt-2" id="delete-button">Delete <b>{cards[currentCard].lv_word}</b></button>
-      </>
-      ) : (
-      <>
-      </>
-      )} */}
-      {/* <Button id="answer_button" onClick={displayQuestion}>Continue</Button> */}
-      </div>
     </Stack>
   </Container>
 

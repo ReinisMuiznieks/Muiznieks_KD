@@ -1,7 +1,4 @@
-#learn-legend{
-    padding-top: 5%;
-    max-height: 100vh;
-}
+
 .img-attrib {
     position: absolute;
     top: 0;
@@ -18,15 +15,6 @@
         text-decoration: underline;
     }
   }
-
-#card-image{
-    object-fit:scale-down;
-    width: 900px;
-    height: 400px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 #card-text{
     text-align: center;
@@ -84,4 +72,8 @@
 #eng-word{
     font-size: 20px;
     font-weight: 500;
+}
+
+#learn-card{
+    padding-top: 20px;
 }

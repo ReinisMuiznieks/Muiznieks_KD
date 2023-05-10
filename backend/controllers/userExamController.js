@@ -11,9 +11,9 @@ const getUserExams = asyncHandler(async (req, res) => {
   })
   
   //spesific exam
-  const getUserExam = asyncHandler(async (req, res) => {
+  const getExam = asyncHandler(async (req, res) => {
       try {
-          UserExams.find({ user: req.params.id }).then(data => {
+          UserExams.find({ _id: req.params.id }).then(data => {
             res.json(data)
           })
       } catch (err) {
@@ -41,20 +41,49 @@ const getUserExams = asyncHandler(async (req, res) => {
     }
 });
   
+const addUserExam = asyncHandler(async (req, res) => {
+    const userExams = new UserExams({
+      test: req.body.test,
+      user: req.body.user,
+      score: req.body.score,
+      completed: req.body.completed,
+      incorrectAnswers: req.body.incorrectAnswers,
+    });
   
-  const addUserExam = asyncHandler(async (req, res) => {
-      const userExams = new UserExams({
-          test: req.body.test,
-          user: req.body.user,
-          score: req.body.score,
-          completed: req.body.completed
+    // Validate the UserExam instance
+    const validationError = userExams.validateSync();
+    if (validationError) {
+      console.log(validationError);
+      res.status(400).json({ error: validationError });
+      return;
+    }
+  
+    // Save the UserExam instance
+    userExams.save()
+      .then((data) => {
+        res.json(data);
       })
-      userExams.save().then(data => {
-          res.json(data)
-      }).catch(e => {
-          res.json({ message: e })
-      })
-  })
+      .catch((e) => {
+        res.json({ message: e });
+      });
+  });
+  
+//   const addUserExams= asyncHandler(async (req, res) => {
+//     try {
+//       const { test, user, score, completed, incorrectAnswers } = req.body;
+//       const userExam = new UserExam({
+//         test,
+//         user,
+//         score,
+//         completed,
+//         incorrectAnswers,
+//       });
+//       const savedUserExam = await userExam.save();
+//       res.json(savedUserExam);
+//     } catch (error) {
+//       res.status(500).json({ message: 'Failed to add user exam.' });
+//     }
+//   });
   
   const editUserExam = asyncHandler(async (req, res) => {
       UserExams.updateOne({ _id: req.params.id }, {
@@ -95,7 +124,7 @@ const getUserExams = asyncHandler(async (req, res) => {
   module.exports = router;
 
 module.exports = {
-    getUserExam,
+    getExam,
     getUserExams,
     getUserExamByTestId,
     addUserExam,

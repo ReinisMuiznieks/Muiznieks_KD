@@ -8,16 +8,17 @@ import Image from 'react-bootstrap/Image';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import icon from '../../images/question_mark.svg'
 import Popover from 'react-bootstrap/Popover';
+import '../card/cards.scss'
 
 function CardItem({card}) {
 
     return (
 <>
-  <div id="learn-legend">
+  
     <Container>
-        <Stack id="learn-stack">
-
-        <Card>
+        <Stack>
+        <div id="card-legend">
+        <Card id="learn-card">
             <Card.Img variant="top" id="card-image" className="pt-4" src={card.image} alt={card.lvword} />
 
 
@@ -53,12 +54,13 @@ function CardItem({card}) {
                 </Card.Text>
             </Card.Body>
         </Card>
+        </div>
         <div className="buttons">
             <Button id="continue-button">Continue</Button>
         </div>
         </Stack>
     </Container>
-</div>
+
 
 </>
     )

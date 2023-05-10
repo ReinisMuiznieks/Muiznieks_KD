@@ -25,6 +25,7 @@ import QuestionsPanel from "./pages/admin/QuestionsPanel";
 import CardsPanel from "./pages/admin/CardsPanel";
 import CategoriesPanel from "./pages/admin/CategoriesPanel";
 import ProfilePage from "./pages/profile/Profile";
+import IncorrectAnswersPage from "./pages/test/IncorrectAnswers";
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
                 <Route path="/admin/categories" element={<CategoriesPanel/>}/>
 
                 <Route path="/profile" element={<ProfilePage/>}/>
+                <Route path="/incorrect/:id" element={<IncorrectAnswersPage/>}/>
             </Routes>
         </BrowserRouter>
         <ToastContainer />

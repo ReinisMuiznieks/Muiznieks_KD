@@ -19,6 +19,7 @@ import CardCompleted from "../../components/card/CardCompleted";
 import { useDispatch } from 'react-redux'
 import { deleteCard } from '../../features/card/cardSlice'
 import Modal from 'react-bootstrap/Modal';
+import '../../components/card/cards.scss'
 
 const CategoryCards = () => {
     const dispatch = useDispatch()
@@ -129,7 +130,7 @@ const CategoryCards = () => {
             <Container>
                 
                 <Stack id="learn-stack">
-        
+                  <div id="card-legend">
                 <Card>
                     <Card.Img variant="top" id="card-image" className="pt-4" src={cards[currentCard].image} alt={cards[currentCard].lv_word} />
                     <a href="/credits" className="img-attrib">Credits</a>
@@ -167,6 +168,7 @@ const CategoryCards = () => {
                         </Card.Text>
                     </Card.Body>
                 </Card>
+                </div>
                 <div className="buttons">
                     <Button id="continue-button" onClick={displayCard}>Continue</Button>
                     {/* {isAdmin ? (
