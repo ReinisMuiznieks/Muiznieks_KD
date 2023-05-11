@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import Quiz from "./TestQuiz2";
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector } from "react-redux";
-import NoQuestions from "../../components/card/NoQuestions";
-import Spinner from "../../components/spinner/Spinner";
+import NoQuestions from "../question/NoQuestions";
+import Spinner from "../spinner/Spinner";
 
 const QuizController = (CUId) => {
     const { user } = useSelector((state) => state.auth)

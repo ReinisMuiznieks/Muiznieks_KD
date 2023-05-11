@@ -11,7 +11,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
-import CategoryForm from '../../../../components/category/CategoryFormModal';
+import CategoryForm from './CategoryFormModal';
 import axios from 'axios'
 import {getTypes} from '../../../../features/type/typeSlice'
 

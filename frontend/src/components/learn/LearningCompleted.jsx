@@ -1,3 +1,4 @@
+import '../card/card.scss'
 import React from "react";
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
@@ -6,9 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import './card.scss'
 
-function CardCompleted({words, category}) {
+function LearningCompleted({words, category}) {
 
     return (
 <>
@@ -46,4 +46,4 @@ function CardCompleted({words, category}) {
     )
 }
 
-export default CardCompleted;
+export default LearningCompleted;

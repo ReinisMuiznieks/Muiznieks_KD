@@ -1,7 +1,6 @@
-import './learn.scss';
 import NavbarTop from "../../components/navbar/Navbar.jsx";
 import Footer from "../../components/footer/Footer.jsx";
-import DisplayCategories from "../../components/category/DisplayCategories";
+import DisplayCategories from "../../components/learn/DisplayLearnCategories";
 
 const Learn = () => {
 

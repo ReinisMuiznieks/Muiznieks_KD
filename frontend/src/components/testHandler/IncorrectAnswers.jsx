@@ -1,3 +1,6 @@
+import '../test/test.scss';
+import '../learn/learnCategory.scss';
+import '../card/card.scss';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -8,10 +11,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styled from "styled-components"
-import NavbarTop from '../../components/navbar/Navbar';
-import './test.scss';
-import '../learn/learn.scss';
-import '../../components/card/cards.scss'
+import NavbarTop from '../navbar/Navbar';
 import { useNavigate } from "react-router-dom";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 

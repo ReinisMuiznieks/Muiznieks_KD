@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {getTests,reset} from '../../features/test/testSlice'
-import Spinner from "../../components/spinner/Spinner";
+import Spinner from "../spinner/Spinner";
 import Form from 'react-bootstrap/Form';
 import "./test.scss"
-import TestItem from "./TestItem";
+import TestItem from "../testHandler/TestItem";
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 

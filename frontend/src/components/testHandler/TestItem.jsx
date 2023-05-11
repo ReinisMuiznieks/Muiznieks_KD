@@ -1,7 +1,9 @@
+import '../test/test.scss';
+import '../learn/learnCategory.scss';
+import '../card/card.scss';
 import { useDispatch } from 'react-redux'
 import { deleteCard } from '../../features/card/cardSlice'
 import React, { useEffect } from "react";
-import '../../pages/learn/learn.scss';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -15,7 +17,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import './test.scss';
 
 function TestItem({test}) {
   const { user } = useSelector((state) => state.auth)

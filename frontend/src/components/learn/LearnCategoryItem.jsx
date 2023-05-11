@@ -1,5 +1,5 @@
+import './learnCategory.scss'
 import React, { useEffect, useState } from "react";
-import '../../pages/category/category.scss';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
@@ -9,7 +9,7 @@ import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function CategoryItem({ category }) {
+function LearnCategoryItem({ category }) {
   const { user } = useSelector((state) => state.auth);
   const [isCompleted, setIsCompleted] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -103,4 +103,4 @@ function CategoryItem({ category }) {
   );
 }
 
-export default CategoryItem;
+export default LearnCategoryItem;

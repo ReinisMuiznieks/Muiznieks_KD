@@ -1,22 +1,22 @@
+import '../test/test.scss';
+import '../learn/learnCategory.scss';
+import '../card/card.scss';
 import React, { useEffect, useState } from "react";
-import '../learn/learn.scss';
-import NavbarTop from "../../components/navbar/Navbar.jsx";
-import Footer from "../../components/footer/Footer.jsx";
+import NavbarTop from "../navbar/Navbar.jsx";
+import Footer from "../footer/Footer.jsx";
 import axios from 'axios'
-import Spinner from "../../components/spinner/Spinner";
+import Spinner from "../spinner/Spinner";
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import { useSelector } from 'react-redux'
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import './test.scss';
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import '../../components/card/cards.scss'
 
 const Container = styled.div`
   width: 100%;

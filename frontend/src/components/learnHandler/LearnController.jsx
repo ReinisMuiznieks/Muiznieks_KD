@@ -2,8 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom'
 import { useSelector } from "react-redux";
-import NoCards from "../../components/card/NoCards";
-import Spinner from "../../components/spinner/Spinner";
+import NoCards from "../card/NoCards";
+import Spinner from "../spinner/Spinner";
 import Learn2 from "./Learn2";
 
 const LearnController = () => {

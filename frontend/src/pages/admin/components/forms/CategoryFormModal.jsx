@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { createCategory } from '../../features/category/categorySlice'
+import { createCategory } from '../../../../features/category/categorySlice'
 import { toast } from 'react-toastify'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';

@@ -12,11 +12,10 @@ import PageNotFound from "./pages/pagenotfound/PageNotFound";
 import {ToastContainer} from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import Learn from './pages/learn/Learn';
-import CategoryCards from "./pages/learn/CategoryCards";
 import AdminPage from "./pages/admin/Admin";
 import Credits from "./pages/credits/Credits";
-import Test from "./pages/test/Test";
-import QuizController from "./pages/test/TestQuizController2";
+import TestPage from "./pages/test/Test";
+import QuizController from "./components/testHandler/TestQuizController2";
 import TestCompleted from "./components/test/TestCompleted";
 
 import UsersPanel from "./pages/admin/UsersPanel";
@@ -25,8 +24,8 @@ import QuestionsPanel from "./pages/admin/QuestionsPanel";
 import CardsPanel from "./pages/admin/CardsPanel";
 import CategoriesPanel from "./pages/admin/CategoriesPanel";
 import ProfilePage from "./pages/profile/Profile";
-import IncorrectAnswersPage from "./pages/test/IncorrectAnswers";
-import LearnController from "./pages/learn/LearnController";
+import IncorrectAnswersPage from "./components/testHandler/IncorrectAnswers";
+import LearnController from "./components/learnHandler/LearnController";
 
 function App() {
 
@@ -39,9 +38,8 @@ function App() {
                 <Route path="/sign-up" element={<Register/>}/>
                 <Route path="/*" element={<PageNotFound/>}/> 
                 <Route path="/learn" element={<Learn/>}/>
-                <Route path="/test" element={<Test/>}/>
+                <Route path="/test" element={<TestPage/>}/>
                 <Route path="/learn/test" element={<Learn/>}/>
-                {/* <Route path="/category/:id" element={<CategoryCards/>}/> */}
                 <Route path="/credits" element={<Credits/>}/>
                 <Route path="/test/:id" element={<QuizController/>} />
                 <Route path="/result/:id" element={<TestCompleted/>} />

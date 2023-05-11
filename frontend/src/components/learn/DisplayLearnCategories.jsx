@@ -1,11 +1,11 @@
+import "./learnCategory.scss"
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {getCategories,reset} from '../../features/category/categorySlice'
-import CategoryItem from "./CategoryItem.jsx";
+import LearnCategoryItem from "./LearnCategoryItem";
 import Spinner from "../spinner/Spinner";
 import Form from 'react-bootstrap/Form';
-import "./category.scss"
 
 function DisplayCategories() {
     const navigate = useNavigate()
@@ -55,7 +55,7 @@ return (
                 {categories.filter((item) => {
                     return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search)
                 }).map((category) => (
-                    <CategoryItem key={category._id} category={category}/>
+                    <LearnCategoryItem key={category._id} category={category}/>
                 ))}
             </div>
         ) : (<h1>No categories</h1>)}
