@@ -40,6 +40,7 @@ const LearnCard = ({
     cards,
     category_id,
     setCards,
+    userLearnId,
   }) => {
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -54,17 +55,42 @@ const LearnCard = ({
         const params = useParams();
         const id = params;
 
-        const handleNext = () => {
-          if (currCard >= cards.length - 1) {
-            submitLearn();
-          } else {
-            setCurrCard(currCard + 1);
-          }
-        };
+        const handleNext = async () => {
+            if (currCard >= cards.length - 1) {             
+              submitLearn();
+            } else {
+              try {
+                const updatedProgress = currCard+1;
+                await axios.patch(
+                  `http://localhost:5000/api/userlearn/${userLearnId}`,
+                  { progress: updatedProgress },
+                  { headers }
+                );
+                setCurrCard(currCard + 1);
+              } catch (error) {
+                console.log(error);
+                setError(true);
+              }
+            }
+          };
+          
+          const submitLearn = async () => {
+            try {
+                const updatedProgress = currCard+1;
+                await axios.patch(
+                  `http://localhost:5000/api/userlearn/${userLearnId}`,
+                  { progress: updatedProgress, completed: true },
+                  { headers }
+                );
+              } catch (error) {
+                console.log(error);
+                setError(true);
+              }
+          };
 
         const handlePrevious = () => {
             if (currCard == 0) {
-
+                console.log(currCard);
             } else {
               setCurrCard(currCard - 1);
             }
@@ -93,10 +119,6 @@ const LearnCard = ({
       useEffect(() => {
         getCards();
       }, [setCardCount])
-
-      const submitLearn = () => {
-        console.log("submitted")
-      };
        
 
     if(isLoading) {

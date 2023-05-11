@@ -80,24 +80,6 @@ function TestItem({test}) {
     }
   }
 
-  // const getColor = async () => {
-    // if(score < 50)
-    // {
-    //   console.log(score + "bad");
-    //   setScoreColor("red");
-    // }
-    // else if(score > 50 && score < 69)
-    // {
-    //   console.log(score + "okay");
-    //   setScoreColor("yellow");
-    // }
-    // else
-    // {
-    //   console.log(score + "good");
-    //   setScoreColor("green");
-    // }
-  // }
-
     return (
         <>
         {iscompleted ? (

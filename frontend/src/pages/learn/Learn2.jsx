@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import LearnCard from "./LearnCard";
 
-const Learn2 = ({ cards, setCards, category_id }) => {
+const Learn2 = ({ cards, setCards, category_id, userLearnId }) => {
   const [currCard, setCurrCard] = useState(0);
 
   useEffect(() => {
@@ -28,6 +28,7 @@ const Learn2 = ({ cards, setCards, category_id }) => {
             cards={cards}
             setCards={setCards}
             category_id={category_id}
+            userLearnId={userLearnId}
           />
         </>
       ) : (

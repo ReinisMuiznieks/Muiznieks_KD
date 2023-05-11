@@ -9,11 +9,13 @@ const categoryRoutes = require('./routes/categoryRoutes')
 const cardRoutes = require('./routes/cardRoutes')
 const testRoutes = require('./routes/testRoutes')
 const questionRoutes = require('./routes/questionRoutes')
+const userLaernRoutes = require('./routes/userLearnRoutes')
 const answerRoutes = require('./routes/answerRoutes')
 const path = require('path')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const userTestRoutes = require('./routes/userTestRoutes')
+const userLearnRoutes = require('./routes/userLearnRoutes')
 
 
 connectDB()
@@ -34,6 +36,7 @@ app.use('/api/tests',testRoutes,require('./routes/testRoutes'))
 app.use('/api/questions',questionRoutes,require('./routes/questionRoutes'))
 app.use('/api/answers',answerRoutes,require('./routes/answerRoutes'))
 app.use('/api/usertests',userTestRoutes,require('./routes/userTestRoutes'))
+app.use('/api/userlearn',userLearnRoutes,require('./routes/userLearnRoutes'))
 
 
 // Frontend
