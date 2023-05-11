@@ -26,6 +26,7 @@ import CardsPanel from "./pages/admin/CardsPanel";
 import CategoriesPanel from "./pages/admin/CategoriesPanel";
 import ProfilePage from "./pages/profile/Profile";
 import IncorrectAnswersPage from "./pages/test/IncorrectAnswers";
+import LearnController from "./pages/learn/LearnController";
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
                 <Route path="/learn" element={<Learn/>}/>
                 <Route path="/test" element={<Test/>}/>
                 <Route path="/learn/test" element={<Learn/>}/>
-                <Route path="/category/:id" element={<CategoryCards/>}/>
+                {/* <Route path="/category/:id" element={<CategoryCards/>}/> */}
                 <Route path="/credits" element={<Credits/>}/>
                 <Route path="/test/:id" element={<QuizController/>} />
                 <Route path="/result/:id" element={<TestCompleted/>} />
@@ -54,6 +55,8 @@ function App() {
 
                 <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="/incorrect/:id" element={<IncorrectAnswersPage/>}/>
+
+                <Route path="/learn/:id" element={<LearnController/>} />
             </Routes>
         </BrowserRouter>
         <ToastContainer />

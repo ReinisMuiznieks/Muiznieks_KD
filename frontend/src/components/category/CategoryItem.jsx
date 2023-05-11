@@ -12,7 +12,7 @@ function CategoryItem({category}) {
   <div id="card-legend">
     <Container>
         <Stack id="learn-stack">
-        <Link to={`/category/${category._id}`}  id='learn-link'>
+        <Link to={`/learn/${category._id}`}  id='learn-link'>
             <button id="stack-card">             
                 <Card.Body id="stack-chapter" > {category.name} </Card.Body>        
             </button>
