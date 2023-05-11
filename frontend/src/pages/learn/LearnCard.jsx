@@ -17,6 +17,7 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import '../../components/card/cards.scss'
+import CardCompleted from "../../components/card/CardCompleted";
 
 const Container = styled.div`
   width: 100%;
@@ -47,6 +48,7 @@ const LearnCard = ({
     const { user } = useSelector((state) => state.auth)
     const headers = { 'Authorization': `Bearer ${user.token}` };
     const [cardCount, setCardCount] = useState(0);
+    const [showResults, setShowResults] = useState(false);
     // const [currCard, setCurrCard] = useState(0);
 
     // const [userTestId, setUserTestId] = useState('');
@@ -60,6 +62,7 @@ const LearnCard = ({
           console.log(userLearnId);
             if (currCard >= cards.length - 1) {             
               submitLearn();
+              setShowResults(true);
             } else {
               try {
                 const updatedProgress = currCard+1;
@@ -92,7 +95,7 @@ const LearnCard = ({
 
         const handlePrevious = () => {
             if (currCard == 0) {
-                console.log(currCard);
+              navigate(`/learn/`);
             } else {
               setCurrCard(currCard - 1);
             }
@@ -127,66 +130,69 @@ const LearnCard = ({
         return <Spinner/>
     }
     return (
-<>
-<NavbarTop />
-{cards.length > 0 ? (
-  <Container>
-    <Stack id="question-stack">
-    <div className="container">
-        <ProgressBar now={currCard + 1} label={currCard+1 + "/" + cards.length} max={cards.length}/>
-        {/* <ProgressBar now={currQues + 1} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/> */}
-    </div>
-
-    <div id="card-legend">
-      
-      <Card id="question-card">
-        <Card.Body>
-          <Card.Text id="card-text">
-          {cards[currCard].lv_word}
-          </Card.Text>
-        </Card.Body>
-          <Card.Img variant="top" id="card-image" src={cards[currCard].image} alt="card"/>
-      </Card>
-    </div>
-      <Container id="answer_container">
-        <Row>
-          <Col>
-            <Button
-                id="next_incorrect_question_button"
-                variant="contained"
-                color="primary"
-                size="large"
-                style={{ width: 185 }}
-                onClick={handlePrevious}>
-                {currCard == 0 ? (<span >Back</span>) : (<span>Previous</span>)}
-            </Button>
-
-            <Button
-                id="next_incorrect_question_button"
-                variant="contained"
-                color="primary"
-                size="large"
-                style={{ width: 185 }}
-                onClick={handleNext}>
-                {currCard >= (cards.length-1) ? (<span >Done</span>) : (<span>Next Card</span>)}
-            </Button>
-          </Col>
-        </Row>
-      </Container>
-    </Stack>
-  </Container>
-
-  ) : (<h3>No questions</h3>)}
-
-
-
-
-
-
-
-<Footer/>
-</>
-    )
+      <>
+        <NavbarTop />
+    
+        {showResults ? (
+          <CardCompleted key={cards.length} words={cards.length} category={cards[currCard].category.name} />
+        ) : (
+          <>
+            {cards.length > 0 ? (
+              <Container>
+                <Stack id="question-stack">
+                  <div className="container">
+                    <ProgressBar now={currCard + 1} label={currCard + 1 + "/" + cards.length} max={cards.length} />
+                    {/* <ProgressBar now={currQues + 1} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/> */}
+                  </div>
+    
+                  <div id="card-legend">
+                    <Card id="question-card">
+                      <Card.Body>
+                        <Card.Text id="card-text">
+                          {cards[currCard].lv_word}
+                        </Card.Text>
+                      </Card.Body>
+                      <Card.Img variant="top" id="card-image" src={cards[currCard].image} alt="card" />
+                    </Card>
+                  </div>
+    
+                  <Container id="answer_container">
+                    <Row>
+                      <Col>
+                        <Button
+                          id="next_incorrect_question_button"
+                          variant="contained"
+                          color="primary"
+                          size="large"
+                          style={{ width: 185 }}
+                          onClick={handlePrevious}
+                        >
+                          {currCard === 0 ? (<span>Back</span>) : (<span>Previous</span>)}
+                        </Button>
+    
+                        <Button
+                          id="next_incorrect_question_button"
+                          variant="contained"
+                          color="primary"
+                          size="large"
+                          style={{ width: 185 }}
+                          onClick={handleNext}
+                        >
+                          {currCard >= (cards.length - 1) ? (<span>Done</span>) : (<span>Next Card</span>)}
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Container>
+                </Stack>
+              </Container>
+            ) : (<h3>No questions</h3>)}
+          </>
+        )}
+    
+        <Footer />
+      </>
+    );
+    
 
 }
 

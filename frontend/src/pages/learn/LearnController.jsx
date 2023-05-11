@@ -39,10 +39,13 @@ const LearnController = () => {
             const response = await axios.get(`http://localhost:5000/api/userlearn?user=${user._id}&category=${id.id}`, { headers });
             if (response.data.length > 0) {
                 const userLearnData = response.data[0];
-                setUserLearnId(userLearnData._id);
-                setCurrCard(userLearnData.progress);
-                console.log("exists   "  + userLearnData.progress);
-                
+                if(userLearnData.completed == false){
+                    setUserLearnId(userLearnData._id);
+                    setCurrCard(userLearnData.progress);
+                } else if (userLearnData.completed == true){
+                    setUserLearnId(userLearnData._id);
+                    setCurrCard(userLearnData.progress-1);
+                }
             } else {
                 await createUserLearn();
             }

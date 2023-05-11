@@ -5,7 +5,6 @@ const Learn2 = ({ cards, setCards, category_id, userLearnId, currCard, setCurrCa
 
   useEffect(() => {
     startFunction();
-    console.log("curr" + currCard);
   }, [currCard, cards]);
 
   const startFunction = () => {
