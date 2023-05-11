@@ -99,9 +99,7 @@ const IncorrectAnswersPage = () => {
 
   const handlePrevious = () => {
     if (currQues < data.length) {
-      // submitTest();
-    //   setCurrQues(currQues + 1);
-      console.log("done");
+      navigate(`/test/`);
     } else {
       setCurrQues(currQues - 1);
     }
