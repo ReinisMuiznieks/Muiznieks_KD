@@ -15,18 +15,43 @@ const LearnController = () => {
 
     const params = useParams();
     const id = params;
+    const [currCard, setCurrCard] = useState(0);
 
     useEffect(() => {
         getCards();
-    }, [])
+      }, []);
+    
+      useEffect(() => {
+        if (!isLoading) {
+          checkUserLearn();
+        }
+      }, [isLoading]);
 
     const getCards = async () => {
         const { data } = await axios.get(`http://localhost:5000/api/cards?category=${id.id}`, { headers });
         setCards(data);
         setIsLoading(false);
+        // checkUserLearn();
     }
 
-    const securityData = async () => {
+    const checkUserLearn = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/userlearn?user=${user._id}&category=${id.id}`, { headers });
+            if (response.data.length > 0) {
+                const userLearnData = response.data[0];
+                setUserLearnId(userLearnData._id);
+                setCurrCard(userLearnData.progress);
+                console.log("exists   "  + userLearnData.progress);
+                
+            } else {
+                await createUserLearn();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const createUserLearn = async () => {
         const dummyData = {
             user: user._id,
             category: id.id,
@@ -39,11 +64,11 @@ const LearnController = () => {
         setUserLearnId(response.data._id);
     }
 
-    useEffect(() => {
-        if (!isLoading) {
-            securityData();
-        }
-    }, [isLoading]);
+    // useEffect(() => {
+    //     if (!isLoading) {
+    //         securityData();
+    //     }
+    // }, [isLoading]);
 
     if (isLoading) {
         return (
@@ -51,6 +76,7 @@ const LearnController = () => {
                 <Spinner/>
             </>)
     }
+
     return (
         <div>
         {cards.length > 0 ? (
@@ -59,6 +85,8 @@ const LearnController = () => {
             setCards={setCards}
             category_id={id}
             userLearnId={userLearnId}
+            currCard={currCard}
+            setCurrCard={setCurrCard}
             />
         ) : (<NoCards/>)}
         </div>

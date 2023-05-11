@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import LearnCard from "./LearnCard";
 
-const Learn2 = ({ cards, setCards, category_id, userLearnId }) => {
-  const [currCard, setCurrCard] = useState(0);
+const Learn2 = ({ cards, setCards, category_id, userLearnId, currCard, setCurrCard }) => {
 
   useEffect(() => {
     startFunction();
+    console.log("curr" + currCard);
   }, [currCard, cards]);
 
   const startFunction = () => {

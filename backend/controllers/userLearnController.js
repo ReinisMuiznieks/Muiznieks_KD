@@ -104,6 +104,27 @@ const addUserLearn = asyncHandler(async (req, res) => {
           })
   })
   
+  const getUserLearnByUserAndCategoryId = async (req, res) => {
+    const { user, category } = req.query;
+    try {
+      const userLearn = await UserLearn.find({ user: user, category: category });
+      res.json(userLearn);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to retrieve user learn records' });
+    }
+  };
+
+  const deleteAllUserLearn = async (req, res) => {
+    try {
+      await UserLearn.deleteMany();
+      res.json({ message: 'Userlearn records deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to delete userlearn records' });
+    }
+  };
+
   module.exports = router;
 
 module.exports = {
@@ -115,4 +136,6 @@ module.exports = {
     patchUserLearn,
     editUserLearn,
     getUserLearnByUserId,
+    getUserLearnByUserAndCategoryId,
+    deleteAllUserLearn
 }

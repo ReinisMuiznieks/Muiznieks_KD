@@ -47,6 +47,7 @@ const LearnCard = ({
     const { user } = useSelector((state) => state.auth)
     const headers = { 'Authorization': `Bearer ${user.token}` };
     const [cardCount, setCardCount] = useState(0);
+    // const [currCard, setCurrCard] = useState(0);
 
     // const [userTestId, setUserTestId] = useState('');
 
@@ -56,6 +57,7 @@ const LearnCard = ({
         const id = params;
 
         const handleNext = async () => {
+          console.log(userLearnId);
             if (currCard >= cards.length - 1) {             
               submitLearn();
             } else {
