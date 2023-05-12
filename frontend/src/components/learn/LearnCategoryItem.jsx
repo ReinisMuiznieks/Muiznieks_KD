@@ -1,4 +1,4 @@
-import './learnCategory.scss';
+// import './learnCategory.scss';
 import './learnCategoryUpdated.scss';
 import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
@@ -10,6 +10,8 @@ import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import noCards from '../../images/no_cards.svg'
+import diamond from '../../images/gem_purple.png'
 
 function LearnCategoryItem({ category }) {
   const { user } = useSelector((state) => state.auth);
@@ -56,6 +58,8 @@ function LearnCategoryItem({ category }) {
       if (response.data.length > 0) {
         const firstCardImage = response.data[0].image;
         setCardImage(firstCardImage);
+      } else {
+        setCardImage(noCards);
       }
     } catch (err) {
       console.log(err);
@@ -70,15 +74,16 @@ function LearnCategoryItem({ category }) {
             <Container>
               <Stack id="learn-stack">
                 <Link to={`/learn/${category._id}`} id='learn-link'>
-                  <div id="stack-card-completed">
+                  <div id="stack-card">
                     <div id="image-container">
-                      <img src={cardImage} alt="Image" className="stack-image" />
+                      <img src={cardImage} alt="Image" className="stack-image" id='started' />
                     </div>
+                    <div className="divider-left"></div>
                     <Card.Body id="stack-chapter">{category.name}</Card.Body>
                     <div className="footer-container">
-                      {/* <img src={"https://cdn.filestackcontent.com/iBgkvoGXTFSjQjGz0KR6"} alt="Icon" className="footer-icon" /> */}
                       <Card.Body id="stack-footer">
-                        <span className="progress">{progress}</span> / {cardCount}
+                      <img src={diamond} alt="Icon" className="footer-icon" />
+                        {progress} / {cardCount}
                       </Card.Body>
                     </div>
                   </div>
@@ -97,10 +102,13 @@ function LearnCategoryItem({ category }) {
                     <div id="image-container">
                       <img src={cardImage} alt="Image" className="stack-image" />
                     </div>
+                    <div className="divider-left"></div>
                     <Card.Body id="stack-chapter">{category.name}</Card.Body>
                     <div className="footer-container">
-                      {/* <img src={"https://cdn.filestackcontent.com/iBgkvoGXTFSjQjGz0KR6"} alt="Icon" className="footer-icon" /> */}
-                      <Card.Body id="stack-footer">{"--"} / {cardCount}</Card.Body>
+                      <Card.Body id="stack-footer">
+                      <img src={diamond} alt="Icon" className="footer-icon" />
+                        {"-"} / {cardCount}
+                      </Card.Body>
                     </div>
                   </div>
                 </Link>

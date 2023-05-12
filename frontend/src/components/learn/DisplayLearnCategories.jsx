@@ -39,6 +39,7 @@ function DisplayCategories() {
 
 return (
     <>
+    <div id="learn-container">
     <div id="category-legend">
     <Form>
     <Form.Control id="searchbar"
@@ -61,6 +62,7 @@ return (
             </div>
         ) : (<h1>No categories</h1>)}
     </section>
+    </div>
     </>
 
 )
