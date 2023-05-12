@@ -1,4 +1,5 @@
-import './learnCategory.scss'
+import './learnCategory.scss';
+import './learnCategoryUpdated.scss';
 import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
@@ -8,12 +9,14 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 function LearnCategoryItem({ category }) {
   const { user } = useSelector((state) => state.auth);
   const [isCompleted, setIsCompleted] = useState(false);
   const [progress, setProgress] = useState(0);
   const [cardCount, setCardCount] = useState(0);
+  const [cardImage, setCardImage] = useState('');
 
   useEffect(() => {
     getUserProgress();
@@ -49,6 +52,11 @@ function LearnCategoryItem({ category }) {
         }
       );
       setCardCount(response.data.length);
+      
+      if (response.data.length > 0) {
+        const firstCardImage = response.data[0].image;
+        setCardImage(firstCardImage);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -62,23 +70,18 @@ function LearnCategoryItem({ category }) {
             <Container>
               <Stack id="learn-stack">
                 <Link to={`/learn/${category._id}`} id='learn-link'>
-                  <button id="stack-card-completed">
-                    <Row>
-                      <Col>
-                        <Card.Body id="stack-chapter">{category.name}</Card.Body>
-                      </Col>
-                      <Col>
-                        <>
-                          <Card.Body id="stack-chapter-datetext">{"Progress"}</Card.Body>
-                          <Card.Body id="stack-chapter-score-green">{progress}/{cardCount}</Card.Body>
-                        </>
-                      </Col>
-                      <Col>
-                        {/* <Card.Body id="stack-chapter-datetext">{"Card Count"}</Card.Body> */}
-                        {/* <Card.Body id="stack-chapter-date">{cardCount}</Card.Body> */}
-                      </Col>
-                    </Row>
-                  </button>
+                  <div id="stack-card-completed">
+                    <div id="image-container">
+                      <img src={cardImage} alt="Image" className="stack-image" />
+                    </div>
+                    <Card.Body id="stack-chapter">{category.name}</Card.Body>
+                    <div className="footer-container">
+                      {/* <img src={"https://cdn.filestackcontent.com/iBgkvoGXTFSjQjGz0KR6"} alt="Icon" className="footer-icon" /> */}
+                      <Card.Body id="stack-footer">
+                        <span className="progress">{progress}</span> / {cardCount}
+                      </Card.Body>
+                    </div>
+                  </div>
                 </Link>
               </Stack>
             </Container>
@@ -90,16 +93,27 @@ function LearnCategoryItem({ category }) {
             <Container>
               <Stack id="learn-stack">
                 <Link to={`/learn/${category._id}`} id='learn-link'>
-                  <button id="stack-card">
+                  <div id="stack-card">
+                    <div id="image-container">
+                      <img src={cardImage} alt="Image" className="stack-image" />
+                    </div>
                     <Card.Body id="stack-chapter">{category.name}</Card.Body>
-                  </button>
+                    <div className="footer-container">
+                      {/* <img src={"https://cdn.filestackcontent.com/iBgkvoGXTFSjQjGz0KR6"} alt="Icon" className="footer-icon" /> */}
+                      <Card.Body id="stack-footer">{"--"} / {cardCount}</Card.Body>
+                    </div>
+                  </div>
                 </Link>
               </Stack>
             </Container>
           </div>
         </>
+
+        
       )}
     </>
+
+    
   );
 }
 

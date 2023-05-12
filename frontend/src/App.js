@@ -27,6 +27,8 @@ import ProfilePage from "./pages/profile/Profile";
 import IncorrectAnswersPage from "./components/testHandler/IncorrectAnswers";
 import LearnController from "./components/learnHandler/LearnController";
 
+import TestingPage from "./pages/testingOnly/testingPage";
+
 function App() {
 
     return (
@@ -54,7 +56,9 @@ function App() {
                 <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="/incorrect/:id" element={<IncorrectAnswersPage/>}/>
 
-                <Route path="/learn/:id" element={<LearnController/>} />
+                <Route path="/learn/:id" element={<LearnController/>}/>
+
+                <Route path="/testing" element={<TestingPage/>}/>
             </Routes>
         </BrowserRouter>
         <ToastContainer />
