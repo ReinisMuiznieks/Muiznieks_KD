@@ -3,10 +3,20 @@ const Category = require('../models/categoryModel')
 const e = require('express')
 
 // Get category
-const getCategory = asyncHandler(async (req, res) => {
+const getCategories = asyncHandler(async (req, res) => {
     const categories = await Category.find()
   
     res.status(200).json(categories)
+  })
+
+  const getCategory = asyncHandler(async (req, res) => {
+    try {
+      Category.find({ _id: req.params.id }).then(data => {
+          res.json(data)
+      })
+  } catch (err) {
+      res.json({ message: err });
+  }
   })
 
 const addCategory = asyncHandler(async(req,res) => {
@@ -75,6 +85,7 @@ const updateCategory = asyncHandler(async (req, res) => {
 module.exports ={
     addCategory,
     getCategory,
+    getCategories,
     updateCategory,
     deleteCategory,
 }

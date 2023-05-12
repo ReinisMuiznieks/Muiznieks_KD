@@ -5,7 +5,7 @@ import {getTests,reset} from '../../features/test/testSlice'
 import Spinner from "../spinner/Spinner";
 import Form from 'react-bootstrap/Form';
 import "./test.scss"
-import TestItem from "../testHandler/TestItem";
+import TestItem from "./TestItem";
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
@@ -20,8 +20,16 @@ function DisplayTests() {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [categories, setCategories] = useState([]);
     
+    const [showAllCategories, setShowAllCategories] = useState(false);
+
+    const visibleCategories = showAllCategories ? categories : categories.slice(0, 3);
+  
+    const toggleShowAllCategories = () => {
+      setShowAllCategories(!showAllCategories);
+    };
+
     const handleCategoryChange = (event) => {
-        setSelectedCategory(event.target.value);
+        setSelectedCategory(event);
         setSearch('');
     };
 
@@ -55,24 +63,37 @@ function DisplayTests() {
 
 return (
     <>
-    <div id="category-legend">
+
+<div id="test-container">
+<div id="category-legend">
         <Form>
             <Form.Control id="searchbar"
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search"
             />
-
-            <Form.Control as="select" id="category-select" value={selectedCategory} onChange={handleCategoryChange}>
-                <option value="">All Categories</option>
-                {categories.map((category) => (
-                    <option key={category._id} value={category._id}>
-                        {category.name}
-                    </option>
-                ))}
-            </Form.Control>
         </Form>
     </div>
-
+    <div id="category-legend">
+        <div id="category-select">
+            <button
+            className={`category-button ${selectedCategory === "" ? "active" : ""}`}
+            onClick={() => handleCategoryChange("")}>All Categories</button>
+            {visibleCategories.map((category) => (
+            <button
+                key={category._id}
+                className={`category-button ${selectedCategory === category._id ? "active" : ""}`}
+                onClick={() => handleCategoryChange(category._id)}>
+            {category.name}
+            </button>
+            ))}
+            {categories.length > 3 && (
+            <button className="more-button" onClick={toggleShowAllCategories}>
+                {showAllCategories ? "Less" : "..."}
+            </button>
+            )}
+        </div>
+      </div>
+    
     {tests.length > 0 ? (
     <div className="categories">
         {tests.filter((item) => {
@@ -86,11 +107,13 @@ return (
             <TestItem key={test._id} test={test}/>
         ))}
     </div>
+    
     ) : (
         <>
         </>
         )
     }
+    </div>
     </>
 
 )

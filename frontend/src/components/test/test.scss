@@ -1,0 +1,58 @@
+#test-container{
+}
+
+#category-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .category-button {
+      background-color: white;
+      border-radius: 20px;
+      border: 2px solid rgb(177,178,255);
+      padding: 8px 12px;
+      color: black;
+      cursor: pointer;
+
+      &.active {
+        background-color: rgba(198, 199, 255, 0.308);
+        color: rgb(127, 129, 255);
+      }
+    }
+
+    .more-button {
+      background-color: white;
+      border-radius: 10px;
+      border: 2px solid rgb(177,178,255);
+      padding: 8px 16px;
+      color: black;
+      cursor: pointer;
+    }
+  }
+
+#stack-chapter-date {
+    position: absolute;
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-transform: uppercase;
+    bottom: 12px;
+    left: 135px;
+    font-size: 14px;
+    color: #000000a1;
+    padding: 2px 6px;
+    background-color: white;
+  }
+
+  #stack-chapter-category {
+    position: absolute;
+    border: 1px solid rgba(128, 128, 128, 0.226);
+    border-radius: 10px;
+    padding: 3px 9px;
+    left: 135px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 15px;
+    color: #333;
+  }
+  
