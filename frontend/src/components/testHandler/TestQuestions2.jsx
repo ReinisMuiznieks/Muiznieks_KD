@@ -102,7 +102,7 @@ const TestQuestions2 = ({
         setIsLoading(true);
         try {
           const { data } = await axios.get(
-            `http://localhost:5000/api/questions?test=${id.id}`,
+            `https://verbum-server-kd.onrender.com/api/questions?test=${id.id}`,
             {
               headers: {
                 Authorization: `Bearer ${user.token}`,
@@ -139,7 +139,7 @@ const TestQuestions2 = ({
       
         console.log(testData);
         axios
-          .post("http://localhost:5000/api/usertests/", testData, { headers })
+          .post("https://verbum-server-kd.onrender.com/api/usertests/", testData, { headers })
           .then((response) => {
             console.log(response.status);
             console.log(response.data);

@@ -67,7 +67,7 @@ const LearnCard = ({
               try {
                 const updatedProgress = currCard+1;
                 await axios.patch(
-                  `http://localhost:5000/api/userlearn/${userLearnId}`,
+                  `https://verbum-server-kd.onrender.com/api/userlearn/${userLearnId}`,
                   { progress: updatedProgress },
                   { headers }
                 );
@@ -83,7 +83,7 @@ const LearnCard = ({
             try {
                 const updatedProgress = currCard+1;
                 await axios.patch(
-                  `http://localhost:5000/api/userlearn/${userLearnId}`,
+                  `https://verbum-server-kd.onrender.com/api/userlearn/${userLearnId}`,
                   { progress: updatedProgress, completed: true },
                   { headers }
                 );
@@ -105,7 +105,7 @@ const LearnCard = ({
         setIsLoading(true);
         try {
           const { data } = await axios.get(
-            `http://localhost:5000/api/cards?category=${id.id}`,
+            `https://verbum-server-kd.onrender.com/api/cards?category=${id.id}`,
             {
               headers: {
                 Authorization: `Bearer ${user.token}`,

@@ -45,7 +45,7 @@ function DisplayTests() {
 
         dispatch(getTests())
         
-        axios.get('http://localhost:5000/api/categories',  { headers: { 'Authorization': `Bearer ${user.token}` } })
+        axios.get('https://verbum-server-kd.onrender.com/api/categories',  { headers: { 'Authorization': `Bearer ${user.token}` } })
         .then(response => {
             setCategories(response.data);
             console.log(response.data);

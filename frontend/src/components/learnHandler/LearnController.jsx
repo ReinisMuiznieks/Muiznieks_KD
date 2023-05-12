@@ -28,7 +28,7 @@ const LearnController = () => {
       }, [isLoading]);
 
     const getCards = async () => {
-        const { data } = await axios.get(`http://localhost:5000/api/cards?category=${id.id}`, { headers });
+        const { data } = await axios.get(`https://verbum-server-kd.onrender.com/api/cards?category=${id.id}`, { headers });
         setCards(data);
         setIsLoading(false);
         // checkUserLearn();
@@ -36,7 +36,7 @@ const LearnController = () => {
 
     const checkUserLearn = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/userlearn?user=${user._id}&category=${id.id}`, { headers });
+            const response = await axios.get(`https://verbum-server-kd.onrender.com/api/userlearn?user=${user._id}&category=${id.id}`, { headers });
             if (response.data.length > 0) {
                 const userLearnData = response.data[0];
                 if(userLearnData.completed == false){
@@ -61,7 +61,7 @@ const LearnController = () => {
             progress: 0,
             completed: false,
         };
-        const response = await axios.post("http://localhost:5000/api/userlearn/", dummyData, { headers });
+        const response = await axios.post("https://verbum-server-kd.onrender.com/api/userlearn/", dummyData, { headers });
         console.log(response.status);
         console.log(response.data);
         setUserLearnId(response.data._id);

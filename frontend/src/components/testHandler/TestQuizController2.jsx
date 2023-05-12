@@ -23,7 +23,7 @@ const QuizController = (CUId) => {
     }, [])
 
     const getExams = async () => {
-        const { data } = await axios.get(`http://localhost:5000/api/questions?test=${id.id}`, { headers });
+        const { data } = await axios.get(`https://verbum-server-kd.onrender.com/api/questions?test=${id.id}`, { headers });
         setQuestions(data);
         setIsLoading(false);
     }

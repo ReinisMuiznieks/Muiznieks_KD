@@ -27,7 +27,7 @@ function LearnCategoryItem({ category }) {
   const getUserProgress = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/userlearn/user/${user._id}`,
+        `https://verbum-server-kd.onrender.com/api/userlearn/user/${user._id}`,
         {
           headers: {
             'Authorization': `Bearer ${user.token}`
@@ -46,7 +46,7 @@ function LearnCategoryItem({ category }) {
       }
 
       const response = await axios.get(
-        `http://localhost:5000/api/cards/?category=${category._id}`,
+        `https://verbum-server-kd.onrender.com/api/cards/?category=${category._id}`,
         {
           headers: {
             'Authorization': `Bearer ${user.token}`
@@ -96,24 +96,24 @@ function LearnCategoryItem({ category }) {
         <>
           <div id="card-legend">
             <Container>
-              <Stack id="learn-stack">
-                <Link to={`/learn/${category._id}`} id='learn-link'>
-                  <div id="stack-card">
-                    <div id="image-container">
-                      <img src={cardImage} alt="Image" className="stack-image" />
+                <Stack id="learn-stack">
+                  <Link to={`/learn/${category._id}`} id='learn-link'>
+                    <div id="stack-card">
+                      <div id="image-container">
+                        <img src={cardImage} alt="Image" className="stack-image" />
+                      </div>
+                      <div className="divider-left"></div>
+                      <Card.Body id="stack-chapter">{category.name}</Card.Body>
+                      <div className="footer-container">
+                        <Card.Body id="stack-footer">
+                        <img src={diamond} alt="Icon" className="footer-icon" />
+                          {"-"} / {cardCount}
+                        </Card.Body>
+                      </div>
                     </div>
-                    <div className="divider-left"></div>
-                    <Card.Body id="stack-chapter">{category.name}</Card.Body>
-                    <div className="footer-container">
-                      <Card.Body id="stack-footer">
-                      <img src={diamond} alt="Icon" className="footer-icon" />
-                        {"-"} / {cardCount}
-                      </Card.Body>
-                    </div>
-                  </div>
-                </Link>
-              </Stack>
-            </Container>
+                  </Link>
+                </Stack>
+              </Container>
           </div>
         </>
 

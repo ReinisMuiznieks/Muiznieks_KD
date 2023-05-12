@@ -59,7 +59,7 @@ function TestForm() {
             category: category,
             type: type
           };
-        axios.post("http://localhost:5000/api/tests",testData, {
+        axios.post("https://verbum-server-kd.onrender.com/api/tests",testData, {
             headers: {
                 'Authorization': `Bearer ${user.token}`
             },

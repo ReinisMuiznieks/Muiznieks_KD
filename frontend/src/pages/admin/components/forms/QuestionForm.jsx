@@ -91,7 +91,7 @@ const handleChangeInput = async (id, event) => {
           card: card,
         };
         console.log(questionData)
-        axios.post("http://localhost:5000/api/questions", questionData,
+        axios.post("https://verbum-server-kd.onrender.com/api/questions", questionData,
           { headers: { 'Authorization': `Bearer ${user.token}` } },).then((response) => {
             console.log(response.status);
             const data = response.data._id;
@@ -130,7 +130,7 @@ const handleChangeInput = async (id, event) => {
                 }
             }
             console.log(option);
-            axios.put("http://localhost:5000/api/questions/" + data, option ,{headers: {'Authorization': `Bearer ${user.token}`}},).then((response) => {
+            axios.put("https://verbum-server-kd.onrender.com/api/questions/" + data, option ,{headers: {'Authorization': `Bearer ${user.token}`}},).then((response) => {
                 console.log(response.status);
                 console.log(response);
             });

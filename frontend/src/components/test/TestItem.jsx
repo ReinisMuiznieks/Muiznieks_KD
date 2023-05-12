@@ -39,7 +39,7 @@ function TestItem({test}) {
   const getTestInfo = async () => {
 
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/usertests/user/${user._id}`, {
+      const { data } = await axios.get(`https://verbum-server-kd.onrender.com/api/usertests/user/${user._id}`, {
         headers: {
             'Authorization': `Bearer ${user.token}`
         },
@@ -86,7 +86,7 @@ function TestItem({test}) {
   }
 
   const getCategoryNames = async () => {
-    const response = await axios.get(`http://localhost:5000/api/categories/${test.category}`,
+    const response = await axios.get(`https://verbum-server-kd.onrender.com/api/categories/${test.category}`,
     {
       headers: {
         'Authorization': `Bearer ${user.token}`
