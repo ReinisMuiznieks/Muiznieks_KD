@@ -7,9 +7,6 @@ import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 import noCards from '../../images/no_cards.svg'
 import diamond from '../../images/gem_purple.png'
 

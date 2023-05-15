@@ -19,14 +19,16 @@ function Home() {
     <Container>
           <Row>
             <Col>
-                <h1 id="home-slogan">Latvian language learning online</h1> {/* Latviešu valodas apguve internēta */}
+                <h1 id="home-slogan">Learn <span className="gradient-accent">Latvian</span><br></br> Language Online</h1> {/* Latviešu valodas apguve internēta */}
                 <p id="home-text">Learn Latvian at the best time for you from anywhere. Expand your vocabulary and measure your knowledge by doing tests & keep track of your progress.</p> {/* Apgūsti latviešu valodu sev vispiemērotākajā laikā no jebkuras vietas. Paplašiniet savu vārdu krājumu un novērtējiet savas zināšanas testu veidā un sekojoiet līdzi savam progresam. */}
                 {user ? (
                   <>
                   <Button variant="outline-secondary" id="get-started-home" href="/learn">Get started</Button>
                   </>
                 ) : (
-                  <Button variant="outline-secondary" id="get-started-home" href="/sign-up">Get started</Button>
+                  <>
+                  <Button variant="outline-secondary" id="get-started-home"  className="login-button"href="/sign-up">Get started</Button>
+                  </>
                 )}
                 
             </Col>

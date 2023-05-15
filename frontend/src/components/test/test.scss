@@ -1,4 +1,17 @@
-#test-container{
+$primary: #ffffff;
+$secondary: #7678d2;
+$primaryButton: #95b8fe;
+$secondaryButton: #383946;
+$accent: #a580d5;
+
+#searchbar{
+  width: 30vh;
+  border-radius: 20px;
+  padding-left: 20px;
+  border-color: $secondaryButton;
+  border-block-end-color: $primaryButton;
+  border-block-start-color: $primaryButton;
+  border-width: 2px;
 }
 
 #category-select {
@@ -7,26 +20,36 @@
     gap: 10px;
 
     .category-button {
-      background-color: white;
       border-radius: 20px;
-      border: 2px solid rgb(177,178,255);
+      border: 0;
       padding: 8px 12px;
-      color: black;
+      background-color: #38394677;
+      color: $primary;
+      font-weight: 400;
       cursor: pointer;
+      transition: transform ease 0.2s, box-shadow ease 0.2s;
 
       &.active {
-        background-color: rgba(198, 199, 255, 0.308);
-        color: rgb(127, 129, 255);
+        background-color: $secondaryButton;
+        color: $primaryButton;
+      }
+
+      &:hover{
+        background-color: $secondaryButton;
+        color: $primaryButton;
+        transform: translate(0, -1px);
+        box-shadow: 0 20px 80px -22px $primary;
       }
     }
 
     .more-button {
-      background-color: white;
+      background-color: #38394677;
       border-radius: 10px;
-      border: 2px solid rgb(177,178,255);
+      border: 0;
       padding: 8px 16px;
-      color: black;
+      color: $primary;
       cursor: pointer;
+
     }
   }
 

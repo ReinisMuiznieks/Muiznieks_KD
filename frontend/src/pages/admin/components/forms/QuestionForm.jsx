@@ -215,9 +215,9 @@ const handleChangeInput = async (id, event) => {
       
       <Container className='card-legend pt-5'>
             <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
-                <Button variant="outline-success" type="submit" onClick={addQuestion}>Submit</Button>
+                <Button variant="success" type="submit" onClick={addQuestion}>Submit</Button>
                 <div className="vr" />
-                <Button variant="outline-danger" onClick={onReset}>Reset</Button>
+                <Button variant="danger" onClick={onReset}>Reset</Button>
             </Stack>
       </Container>
 
@@ -235,8 +235,8 @@ const handleChangeInput = async (id, event) => {
               onChange={event => handleChangeInput(inputField.id, event)}
               // style={{ maxWidth: "650px", maxHeight: "50px", width: "650px" }}
           />
-          <Button variant="outline-danger" type="button" id="option-button" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove</Button>
-          <Button variant="outline-success" type="button" id="option-button" disabled={inputFields.length > 3} onClick={handleAddFields}>Add</Button>
+          <Button variant="danger" type="button" id="option-button" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove</Button>
+          <Button variant="success" type="button" id="option-button" disabled={inputFields.length > 3} onClick={handleAddFields}>Add</Button>
           <input type="radio" name='control' id="option-correct" value={inputField.option} onClick={(e) => setCorrectOption(e.target.value)} />
       </div> 
   ))}

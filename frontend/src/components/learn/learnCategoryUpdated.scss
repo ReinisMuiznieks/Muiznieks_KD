@@ -7,6 +7,14 @@
 
 }
 
+$primary: #ffffff;
+$primaryButton: #95b8fe;
+$navbar: #7678d2;
+$nav-link: #ffffff;
+$nav-link-hover:#383946;
+$button-hover: #a580d5;
+
+
 #card-legend {
     display: flex;
     justify-content: center;
@@ -18,9 +26,8 @@
     align-items: flex-start;
     border-radius: 10px;
     padding: 10px;
-    color: white;
     background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.171);
+    border: 0;
     width: 500px;
     height: 120px;
     margin: 10px;
@@ -37,10 +44,6 @@
     &:hover {
     text-decoration: none;
     transform: scale(0.99);
-    }
-
-    &:active {
-    transform: scale(0.95);
     }
   }
 

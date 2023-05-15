@@ -1,19 +1,15 @@
-$navbar: white;
-$nav-link: #30567c;
-$nav-link-hover:#B1B2FF;
-$button-hover: #AAC4FF;
-$accent-color: #607EAA;
+$primary: #ffffff;
+$secondary: #7678d2;
+$primaryButton: #95b8fe;
+$secondaryButton: #383946;
+$accent: #a580d5;
 
 body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    //min-height: calc(100vh - 73px - 53px);
+    background-color: $secondary !important;
 }
 
 #legend{
-    background-color: rgba(84, 86, 199, 0.801);
     padding-top: 150px;
-    min-height: calc(100vh - 73px); // makes so the site is in full screen
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
 
@@ -25,47 +21,41 @@ body{
 
 #home-slogan{
     color: white;
-    font-size: 42px;
+    font-size: 48px;
     line-height: 1;
-    font-weight: 800;
-    letter-spacing: 1px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
 
+.gradient-accent{
+    background: linear-gradient(120deg, $primaryButton, $accent);
+    background-clip: content-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #home-text{
-    color: rgb(224, 224, 224);
-    font-size: 24px;
-    font-weight: 600;
-    padding-top: 30px;
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+    font-weight: 500;
+    margin-top: 70px;
 }
 
 #get-started-home{
-    padding: 15px 90px;
     display: inline-block;
-    margin-top: 10px;
-    border-radius: 50px;
+    margin-top: 50px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: $primary;
+    background-color: $secondaryButton;
     font-size: 18px;
-    font-weight: 650;
-    border: 2px solid #224274;
-    color:#224274;
-    background-color:#b1d3ff;
+    padding: 1em 2em;
+    border: 0;
+    transition: transform ease 0.2s, box-shadow ease 0.2s;
 
     &:hover{
-        border: 2px solid #224174ce;
-        color:#224274;
-        background-color:#ceddff;
-    }
-
-    &:focus{
-        border: 2px solid #224174ce;
-        color:#224274;
-        background-color:#ceddff;;
-    }
-
-    &:active{
-        border: 2px solid #224174ce;
-        color:#224274;
-        background-color:#ceddff;
+        transform: translate(0, -3px);
+        box-shadow: 0 20px 80px -22px $primary;
     }
 }
 

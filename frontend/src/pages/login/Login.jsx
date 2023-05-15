@@ -113,7 +113,7 @@ function Login() {
                 </Form.Group>
 
                 <Button variant="primary" type="submit" id="submit-form">Login</Button> {/* Pieslēgties */}
-                <p className="text-center mt-2">Forgot <a href="/forgot-password">password?</a></p> {/* Aizmirsāt paroli? */}
+                {/* <p className="text-center mt-2">Forgot <a href="/forgot-password">password?</a></p> Aizmirsāt paroli? */}
             </Form>
         </Col>
     </Row>

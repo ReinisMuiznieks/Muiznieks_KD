@@ -15,7 +15,6 @@ import Col from 'react-bootstrap/Col';
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import CardCompleted from "../learn/LearningCompleted";
 
@@ -24,15 +23,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-const Options = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1;
-  align-items: center;
-  justify-content: space-around;
-  margin: 10px;
 `
 
 const LearnCard = ({

@@ -110,7 +110,7 @@ function TestItem({test}) {
                           <CircularProgressbar className="stack-image" value={score} maxValue={100} text={score + '%'}         
                           styles={buildStyles({
                             textColor: "#7678d2",
-                            pathColor: "#b1b2ff",
+                            pathColor: "#95b8fe",
                             trailColor: "white"
                           })}
                         />    

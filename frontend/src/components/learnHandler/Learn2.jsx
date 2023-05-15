@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import LearnCard from "./LearnCard";
 
 const Learn2 = ({ cards, setCards, category_id, userLearnId, currCard, setCurrCard }) => {

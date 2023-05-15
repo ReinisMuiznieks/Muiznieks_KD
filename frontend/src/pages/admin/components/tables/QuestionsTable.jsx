@@ -146,6 +146,7 @@ const handleSave = (event) => {
           Toolbar: GridToolbar,
         }}
         disableRowSelectionOnClick
+        style={{backgroundColor: "white"}}
       />
 <Modal show={showModal} onHide={handleCancel}>
   <Modal.Header closeButton>

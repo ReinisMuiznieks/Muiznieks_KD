@@ -1,51 +1,36 @@
-$navbar: white;
-$nav-link: #30567c;
-$nav-link-hover:#B1B2FF;
-$button-hover: #AAC4FF;
-$accent-color: #b1d3ff;
-
-body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+$primary: #ffffff;
+$primaryButton: #95b8fe;
+$navbar: #7678d2;
+$nav-link: #ffffff;
+$nav-link-hover:#383946;
+$button-hover: #a580d5;
 
 .navbar {
     background-color: $navbar;
-    // background: rgb(61,63,111);
-    // background: linear-gradient(180deg, rgba(61,63,111,0.7203256302521008) 0%, rgba(118,120,210,1) 100%);
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
     max-height: 100px;
+    padding: 20px 0 !important;
   }
 
 #nav-brand{
-    color: $nav-link-hover;
-    font-size: 30px;
+    color: $nav-link;
+    font-size: 35px;
     line-height: 1;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-family: "Jost", sans-serif;
+    // font-family: "Jost", sans-serif;
 }
 
 #nav-link{
     color: $nav-link;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     padding: 10px 0 10px 30px;
     text-transform: uppercase;
-    transition: 0.4s;
+    transition: transform ease 0.5s;
 
     &:hover{
-        color:$nav-link-hover;
-        background-position: right center;
-        transform: scale(0.95);
-    }
-
-    &:focus{
-        color:$nav-link-hover;
-    }
-
-    &:active{
+        transform: translate(0, -3px);
         color:$nav-link-hover;
     }
 }
@@ -53,32 +38,21 @@ body{
 #nav-btn {
     padding: 9px 30px;
     margin: 8px;
-    border-radius: 50px;
-    color: $nav-link;
-    font-size: 12px;
-    border: 2px solid $button-hover;
-    font-weight: 650;
-    transition: 0.4s;
+    border-radius: 6px;
+    color: $nav-link-hover;
+    background-color: $primaryButton;
+    font-size: 14px;
+    border: 0;
+    font-weight: 500;
+    transition: transform ease 0.2s, box-shadow ease 0.2s;
 
     &:hover{
-        color:$nav-link-hover;
-        background-color:$navbar;
-        border-color: $nav-link-hover;
-        transform: scale(0.97);
-    }
-
-    &:focus{
-        color:$nav-link-hover;
-        background-color:$navbar;
-        border-color: $nav-link-hover;
-        transform: scale(0.95);
-    }
-
-    &:active{
-        color:$nav-link-hover;
-        background-color:$navbar;
-        border-color: $nav-link-hover;
+        transform: translate(0, -3px);
+        box-shadow: 0 20px 80px -16px $primary;
     }
 }
 
-
+.profile-dropdown{
+    font-size: 18px;
+    font-weight: 500;
+}

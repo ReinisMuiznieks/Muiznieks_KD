@@ -43,9 +43,9 @@ function CategoryForm() {
         />
       </Form.Group>
       <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
-        <Button variant="outline-success" type="submit">Submit</Button>
+        <Button variant="success" type="submit">Submit</Button>
         <div className="vr" />
-        <Button variant="outline-danger" onClick={onReset}>Reset</Button>
+        <Button variant="danger" onClick={onReset}>Reset</Button>
       </Stack>
     </Form>
   </Container>

@@ -28,7 +28,7 @@ function DisplayCategories() {
 
         dispatch(getCategories())
 
-        return () => { // clears when component unmounts
+        return () => {
             dispatch(reset())
         }
     }, [user, navigate, isError, message, dispatch])

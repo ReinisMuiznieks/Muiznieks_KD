@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 
 const TestCompleted = () => {
     const [data, setData] = useState([]);
-    const [test, setTest] = useState(" ");
     const { user } = useSelector((state) => state.auth)
     const params = useParams();
     const id = params;
