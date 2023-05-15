@@ -39,7 +39,7 @@ function TestsTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/tests", {
+      .get("https://verbum-server-kd.onrender.com/api/tests", {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -57,7 +57,7 @@ function TestsTable() {
 
   const handleDelete = (item) => {
     axios
-      .delete(`http://localhost:5000/api/tests/${item._id}`, {
+      .delete(`https://verbum-server-kd.onrender.com/api/tests/${item._id}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {

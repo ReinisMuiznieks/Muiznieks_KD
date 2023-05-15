@@ -53,7 +53,7 @@ function CardsTable() {
 
 useEffect(() => {
   axios
-    .get("http://localhost:5000/api/categories", {
+    .get("https://verbum-server-kd.onrender.com/api/categories", {
       headers: { Authorization: `Bearer ${user.token}` },
     })
     .then((response) => {
@@ -68,7 +68,7 @@ useEffect(() => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/cards", {
+      .get("https://verbum-server-kd.onrender.com/api/cards", {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -89,7 +89,7 @@ useEffect(() => {
 
   const handleDelete = (item) => {
     axios
-      .delete(`http://localhost:5000/api/cards/${item._id}`, {
+      .delete(`https://verbum-server-kd.onrender.com/api/cards/${item._id}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -105,7 +105,7 @@ useEffect(() => {
     if(editingItem.lv_word.trim().length !== 0 && editingItem.eng_word.trim().length !== 0) {
     axios
       .put(
-        `http://localhost:5000/api/cards/${editingItem._id}`,
+        `https://verbum-server-kd.onrender.com/api/cards/${editingItem._id}`,
         { ...editingItem, category: selectedCategory, image: image},
         {
           headers: { Authorization: `Bearer ${user.token}` },

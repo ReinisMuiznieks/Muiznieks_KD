@@ -39,7 +39,7 @@ function CategoriesTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/categories", {
+      .get("https://verbum-server-kd.onrender.com/api/categories", {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -57,7 +57,7 @@ function CategoriesTable() {
 
   const handleDelete = (item) => {
     axios
-      .delete(`http://localhost:5000/api/categories/${item._id}`, {
+      .delete(`https://verbum-server-kd.onrender.com/api/categories/${item._id}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -71,7 +71,7 @@ function CategoriesTable() {
   const handleSave = (event) => {
     event.preventDefault();
     axios
-      .put(`http://localhost:5000/api/categories/${editingItem._id}`, editingItem, {
+      .put(`https://verbum-server-kd.onrender.com/api/categories/${editingItem._id}`, editingItem, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {

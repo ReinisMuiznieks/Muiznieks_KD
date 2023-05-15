@@ -65,7 +65,7 @@ function QuestionsTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/questions", {
+      .get("https://verbum-server-kd.onrender.com/api/questions", {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -85,7 +85,7 @@ function QuestionsTable() {
 
   const handleDelete = (item) => {
     axios
-      .delete(`http://localhost:5000/api/questions/${item._id}`, {
+      .delete(`https://verbum-server-kd.onrender.com/api/questions/${item._id}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -100,7 +100,7 @@ const handleSave = (event) => {
   event.preventDefault();
   const updatedItem = { ...editingItem };
   axios
-    .put(`http://localhost:5000/api/questions/${editingItem._id}`, updatedItem, {
+    .put(`https://verbum-server-kd.onrender.com/api/questions/${editingItem._id}`, updatedItem, {
       headers: { Authorization: `Bearer ${user.token}` },
     })
     .then((response) => {

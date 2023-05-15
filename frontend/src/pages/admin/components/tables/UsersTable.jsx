@@ -47,7 +47,7 @@ function UsersTable() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/users", {
+      .get("https://verbum-server-kd.onrender.com/api/users", {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -65,7 +65,7 @@ function UsersTable() {
 
   const handleDelete = (item) => {
     axios
-      .delete(`http://localhost:5000/api/users/${item._id}`, {
+      .delete(`https://verbum-server-kd.onrender.com/api/users/${item._id}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
@@ -79,7 +79,7 @@ function UsersTable() {
   const handleSave = (event) => {
     event.preventDefault();
     axios
-      .put(`http://localhost:5000/api/users/${editingItem._id}`, editingItem, {
+      .put(`https://verbum-server-kd.onrender.com/api/users/${editingItem._id}`, editingItem, {
         headers: { Authorization: `Bearer ${user.token}` },
       })
       .then((response) => {
