@@ -9,10 +9,12 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import noCards from '../../images/no_cards.svg'
 import diamond from '../../images/gem_purple.png'
+import spinner from '../../images/spinner.gif'
 
 function LearnCategoryItem({ category }) {
   const { user } = useSelector((state) => state.auth);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [cardCount, setCardCount] = useState(0);
   const [cardImage, setCardImage] = useState('');
@@ -51,13 +53,14 @@ function LearnCategoryItem({ category }) {
         }
       );
       setCardCount(response.data.length);
-      
+
       if (response.data.length > 0) {
         const firstCardImage = response.data[0].image;
         setCardImage(firstCardImage);
       } else {
         setCardImage(noCards);
       }
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -65,60 +68,32 @@ function LearnCategoryItem({ category }) {
 
   return (
     <>
-      {isCompleted ? (
-        <>
-          <div id="card-legend">
-            <Container>
-              <Stack id="learn-stack">
-                <Link to={`/learn/${category._id}`} id='learn-link'>
-                  <div id="stack-card">
-                    <div id="image-container">
-                      <img src={cardImage} alt="Image" className="stack-image" id='started' />
-                    </div>
-                    <div className="divider-left"></div>
-                    <Card.Body id="stack-chapter">{category.name}</Card.Body>
-                    <div className="footer-container">
-                      <Card.Body id="stack-footer">
-                      <img src={diamond} alt="Icon" className="footer-icon" />
-                        {progress} / {cardCount}
-                      </Card.Body>
-                    </div>
-                  </div>
-                </Link>
-              </Stack>
-            </Container>
-          </div>
-        </>
-      ) : (
-        <>
-          <div id="card-legend">
-            <Container>
-                <Stack id="learn-stack">
-                  <Link to={`/learn/${category._id}`} id='learn-link'>
-                    <div id="stack-card">
-                      <div id="image-container">
-                        <img src={cardImage} alt="Image" className="stack-image" />
-                      </div>
-                      <div className="divider-left"></div>
-                      <Card.Body id="stack-chapter">{category.name}</Card.Body>
-                      <div className="footer-container">
-                        <Card.Body id="stack-footer">
-                        <img src={diamond} alt="Icon" className="footer-icon" />
-                          {"-"} / {cardCount}
-                        </Card.Body>
-                      </div>
-                    </div>
-                  </Link>
-                </Stack>
-              </Container>
-          </div>
-        </>
-
-        
-      )}
+      <div id="card-legend">
+        <Container>
+          <Stack id="learn-stack">
+            <Link to={`/learn/${category._id}`} id='learn-link'>
+              <div id="stack-card">
+                <div id="image-container">
+                  {isLoading ? (
+                    <img src={spinner} alt="Image" className="stack-image" />
+                  ) : (
+                    <img src={cardImage} alt="Image" className="stack-image" />
+                  )}
+                </div>
+                <div className="divider-left"></div>
+                <Card.Body id="stack-chapter">{category.name}</Card.Body>
+                <div className="footer-container">
+                  <Card.Body id="stack-footer">
+                    <img src={diamond} alt="Icon" className="footer-icon" />
+                    {isCompleted ? `${progress} / ${cardCount}` : `- / ${cardCount}`}
+                  </Card.Body>
+                </div>
+              </div>
+            </Link>
+          </Stack>
+        </Container>
+      </div>
     </>
-
-    
   );
 }
 
