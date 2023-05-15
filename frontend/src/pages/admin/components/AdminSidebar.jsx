@@ -1,16 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import SettingsIcon from '@material-ui/icons/Settings';
+import { makeStyles } from 'tss-react/mui';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+// import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+// import DashboardIcon from '@material-ui/icons/Dashboard';
+// import SettingsIcon from '@material-ui/icons/';
 import { Link } from 'react-router-dom';
-import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
-
 
 const drawerWidth = 240;
 
@@ -44,30 +42,30 @@ function Sidebar() {
         <div className={classes.toolbar} />
         <List>
           <ListItem button component={Link} to="/">
-            <ListItemIcon><DashboardIcon /></ListItemIcon>
+            {/* <ListItemIcon><DashboardIcon /></ListItemIcon> */}
             <ListItemText primary="Verbum" />
           </ListItem>
         </List>
         <Divider />
         <List>
           <ListItem button component={Link} to="/admin/users">
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
+            {/* <ListItemIcon><SettingsIcon /></ListItemIcon> */}
             <ListItemText primary="Users" />
           </ListItem>
           <ListItem button component={Link} to="/admin/categories">
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
+            {/* <ListItemIcon><SettingsIcon /></ListItemIcon> */}
             <ListItemText primary="Categories" />
           </ListItem>
           <ListItem button component={Link} to="/admin/cards">
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
+            {/* <ListItemIcon><SettingsIcon /></ListItemIcon> */}
             <ListItemText primary="Cards" />
           </ListItem>
           <ListItem button component={Link} to="/admin/tests">
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
+            {/* <ListItemIcon><SettingsIcon /></ListItemIcon> */}
             <ListItemText primary="Tests" />
           </ListItem>
           <ListItem button component={Link} to="/admin/questions">
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
+            {/* <ListItemIcon><SettingsIcon /></ListItemIcon> */}
             <ListItemText primary="Questions" />
           </ListItem>
         </List>
