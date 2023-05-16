@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const Category = require('../models/categoryModel')
 const e = require('express')
+const Test = require('../models/testModel');
 
 // Get category
 const getCategories = asyncHandler(async (req, res) => {
@@ -11,13 +12,18 @@ const getCategories = asyncHandler(async (req, res) => {
 
   const getCategory = asyncHandler(async (req, res) => {
     try {
-      Category.find({ _id: req.params.id }).then(data => {
-          res.json(data)
-      })
-  } catch (err) {
-      res.json({ message: err });
-  }
-  })
+      const test = await Test.findById(req.params.id).populate('categories.category');
+      if (!test) {
+        return res.status(404).json({ message: 'Test not found' });
+      }
+      const categories = test.categories.map((category) => category.category);
+      res.json(categories);
+    } catch (err) {
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
+  
 
 const addCategory = asyncHandler(async(req,res) => {
     const { name } = req.body

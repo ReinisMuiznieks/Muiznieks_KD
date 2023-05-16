@@ -6,11 +6,13 @@ const testSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: {
-    type: ObjectId,
-    ref: "Category",
-    required : [true, 'Must belong to a category'],
-},
+  categories: [{
+    category: {
+      type: ObjectId,
+      ref: "Category",
+      required : [true, 'Must belong to a category'],
+    }
+  }],
   type: {
     type: ObjectId,
     ref: "Type",

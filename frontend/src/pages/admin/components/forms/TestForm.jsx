@@ -14,11 +14,12 @@ import Stack from 'react-bootstrap/Stack';
 import CategoryForm from './CategoryFormModal';
 import axios from 'axios'
 import {getTypes} from '../../../../features/type/typeSlice'
+import Select from 'react-select';
 
 function TestForm() {
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState([]);
     const { user } = useSelector((state) => state.auth)
-    const { categories, isLoading, isError, message } = useSelector((state) => state.categories)
+    // const { categories, isLoading, isError, message } = useSelector((state) => state.categories)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -26,11 +27,11 @@ function TestForm() {
     const [type, setType] = useState('');
     const { types } = useSelector((state) => state.type)
 
-    useEffect(() => {
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [options, setOptions] = useState([]);
 
-        if(isError) {
-            console.log(message)
-        }
+    useEffect(() => {
 
         if(!user){
             navigate('/sign-up')
@@ -40,13 +41,13 @@ function TestForm() {
             navigate('/')
         }
 
-        dispatch(getCategories())
+        // dispatch(getCategories())
         dispatch(getTypes())
 
         return () => { // clears when component unmounts
             dispatch(reset())
         }
-    }, [user, navigate, isError, message, dispatch])
+    }, [user, navigate, dispatch])
 
 
       const onSubmit = (e) => {
@@ -56,10 +57,12 @@ function TestForm() {
           // axios post create new test
           const testData = {
             testname: testName,
-            category: category,
+            categories: selectedCategories.map((categoryId) => ({ category: categoryId })),
             type: type
           };
-        axios.post("https://verbum-server-kd.onrender.com/api/tests",testData, {
+          
+          console.log(testData);
+        axios.post("http://localhost:5000/api/tests",testData,{
             headers: {
                 'Authorization': `Bearer ${user.token}`
             },
@@ -86,9 +89,33 @@ function TestForm() {
         setIsShown(current => !current);
       };
 
-      if(isLoading) {
-        return <Spinner/>
-    }
+    //   if(isLoading) {
+    //     return <Spinner/>
+    // }
+
+  
+    useEffect(() => {
+      fetchCategories();
+    }, []);
+  
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("https://verbum-server-kd.onrender.com/api/categories", {
+          headers: {
+              'Authorization': `Bearer ${user.token}`
+          },});
+
+          const categoriesData = response.data;
+          setCategories(categoriesData);
+        } catch (error) {
+          console.log(error);
+        }
+    }; 
+
+    const handleCategoryChange = (selectedOptions) => {
+      setSelectedCategories(selectedOptions.map((option) => option.value));
+      console.log(selectedCategories)
+    };
 
       return (
         <>
@@ -117,7 +144,7 @@ function TestForm() {
 
           <Col>
           
-            <div className="input-group mb-3">
+            {/* <div className="input-group mb-3">
               <Form.Select onChange={(e)=>setCategory(e.target.value)} id="category" name="cars" className="form-control select select-initialized"  value={category}>
                 <option >Choose Category</option>
                 {
@@ -133,7 +160,19 @@ function TestForm() {
                         <CategoryForm/>
 
                     )}
-            </div>
+            </div> */}
+            <Select
+              // defaultValue={[colourOptions[2], colourOptions[3]]}
+              isMulti
+              name="colors"
+              options={categories.map((category) => ({
+                value: category._id,
+                label: category.name,
+              }))}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              onChange={handleCategoryChange}
+            />
 
 
 

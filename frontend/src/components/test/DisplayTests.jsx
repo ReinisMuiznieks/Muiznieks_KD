@@ -94,21 +94,20 @@ return (
         </div>
       </div>
     
-    {tests.length > 0 ? (
-    <div className="categories">
+      {tests.length > 0 ? (
+        <div className="categories">
         {tests.filter((item) => {
-            if (selectedCategory) {
-                return item.category === selectedCategory &&
-                    (search.toLowerCase() === '' || item.testname.toLowerCase().includes(search));
-            } else {
-                return search.toLowerCase() === '' || item.testname.toLowerCase().includes(search);
-            }
+        if (selectedCategory) {
+            return item.categories.some((category) => category.category === selectedCategory) &&
+            (search.toLowerCase() === '' || item.testname.toLowerCase().includes(search));
+        } else {
+            return search.toLowerCase() === '' || item.testname.toLowerCase().includes(search);
+        }
         }).map((test) => (
-            <TestItem key={test._id} test={test}/>
+        <TestItem key={test._id} test={test} />
         ))}
-    </div>
-    
-    ) : (
+        </div>
+        ) : (
         <>
         </>
         )

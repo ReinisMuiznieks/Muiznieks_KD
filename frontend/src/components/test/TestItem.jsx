@@ -29,7 +29,7 @@ function TestItem({test}) {
   const [completedDate, setCompletedDate] = useState(" ");
   const [questions, setQuestions] = useState(0);
   const [scoreColor, setScoreColor] = useState(" ");
-  const [categoryName, setCategoryName] = useState("");
+  const [categoryNames, setCategoryNames] = useState([]);
 
   useEffect(() => {
     getTestInfo();
@@ -86,14 +86,18 @@ function TestItem({test}) {
   }
 
   const getCategoryNames = async () => {
-    const response = await axios.get(`https://verbum-server-kd.onrender.com/api/categories/${test.category}`,
-    {
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    });
-    setCategoryName(response.data[0].name);
-    
+    try {
+      const response = await axios.get(`http://localhost:5000/api/categories/${test._id}`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      const categories = response.data.map((category) => category.name);
+      setCategoryNames(categories);
+      console.log(categoryNames);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
     return (
@@ -104,7 +108,7 @@ function TestItem({test}) {
               <Container>
                   <Stack id="learn-stack">
                     <Link to={`/test/${test._id}`} id='learn-link'>
-                      <div id="stack-card">
+                      <div id="stack-card" className='test-card'>
                         <div id="image-container">
                           {/* <img src={"cardImage"} alt="Image" className="stack-image" /> */}
                           <CircularProgressbar className="stack-image" value={score} maxValue={100} text={score + '%'}         
@@ -116,14 +120,20 @@ function TestItem({test}) {
                         />    
                         </div>
                         <div className="divider-left"></div>
-                        <Card.Body id="stack-chapter">{test.testname}</Card.Body>
-                         
+                        <Card.Body id="stack-chapter">
+                        <span id="test-title">{test.testname}</span>                      
+                        <div className="category-container">
+                            {categoryNames.length > 0 && categoryNames.map(categoryName => (
+                                <Card.Body key={categoryName} id="stack-chapter-category">{categoryName}</Card.Body>
+                            ))}
+                        </div>
+                      </Card.Body>
                         <div className="footer-container">
                           <Card.Body id="stack-footer">
                           <img src={diamond} alt="Icon" className="footer-icon" />
                             {score} / {"100"}
                           </Card.Body>
-                          <Card.Body id="stack-chapter-category">{categoryName}</Card.Body>
+                          {/* <Card.Body id="stack-chapter-category">{categoryNames[0]}</Card.Body> */}
                           {/* <Card.Body id="stack-chapter-date">{completedDate}</Card.Body> */}
                         </div>
                       </div>
@@ -138,7 +148,7 @@ function TestItem({test}) {
             <Container>
                 <Stack id="learn-stack">
                   <Link to={`/test/${test._id}`} id='learn-link'>
-                    <div id="stack-card">
+                    <div id="stack-card" className='test-card'>
                       <div id="image-container">
                       <CircularProgressbar className="stack-image" value={0} maxValue={100} text={0} 
                       styles={buildStyles({
@@ -147,13 +157,19 @@ function TestItem({test}) {
                       />
                       </div>
                       <div className="divider-left"></div>
-                      <Card.Body id="stack-chapter">{test.testname}</Card.Body>
+                      <Card.Body id="stack-chapter">
+                        <span id="test-title">{test.testname}</span>                      
+                        <div className="category-container">
+                            {categoryNames.length > 0 && categoryNames.map(categoryName => (
+                                <Card.Body key={categoryName} id="stack-chapter-category">{categoryName}</Card.Body>
+                            ))}
+                        </div>
+                      </Card.Body>
                       <div className="footer-container">
                         <Card.Body id="stack-footer">
                         <img src={diamond} alt="Icon" className="footer-icon" />
                           {"-"} / {"100"}
                         </Card.Body>
-                        <Card.Body id="stack-chapter-category">{categoryName}</Card.Body>
                       </div>
                     </div>
                   </Link>
