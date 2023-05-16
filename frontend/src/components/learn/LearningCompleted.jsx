@@ -17,15 +17,14 @@ function LearningCompleted({words, category}) {
         <Stack id="notfound-stack">
             
             <img src={image} alt="404" id="notfound-image"></img>
-            <h3 id="complete-title" className="text-center">Lesson complete!</h3>
+            <h3 id="complete-title" className="text-center">{category} Lesson Complete!</h3>
             <Card id="complete-card">
             <Container>
                 <Row id="card-items">
-                    <Col>Dictionary</Col>
+                    <Col>New words</Col>
                     <Col id="item">+{words}</Col>
                 </Row>
             </Container>
-                {/* <Card.Body >Dictionary + {words}</Card.Body> */}
             </Card>
             <Card id="complete-card">
             <Container>
@@ -34,7 +33,6 @@ function LearningCompleted({words, category}) {
                     <Col id="item">100%</Col>
                 </Row>
             </Container>
-                {/* <Card.Body >Dictionary + {words}</Card.Body> */}
             </Card>
             
             <Button variant="outline-secondary" id="complete-button" href="/learn">Continue</Button>

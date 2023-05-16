@@ -17,6 +17,10 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import CardCompleted from "../learn/LearningCompleted";
+import icon from '../../images/question_mark.svg';
+import Popover from 'react-bootstrap/Popover';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Image from 'react-bootstrap/Image';
 
 const Container = styled.div`
   width: 100%;
@@ -131,7 +135,7 @@ const LearnCard = ({
               <Container>
                 <Stack id="question-stack">
                   <div className="container">
-                    <ProgressBar now={currCard + 1} label={currCard + 1 + "/" + cards.length} max={cards.length} />
+                    <ProgressBar id="progress-bar" now={currCard + 1} label={currCard + 1 + "/" + cards.length} max={cards.length} />
                     {/* <ProgressBar now={currQues + 1} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/> */}
                   </div>
     
@@ -140,6 +144,31 @@ const LearnCard = ({
                       <Card.Body>
                         <Card.Text id="card-text">
                           {cards[currCard].lv_word}
+
+                          <OverlayTrigger
+                            placement="top"
+                            overlay={
+                                <Popover id="popover-contained">
+                                <Popover.Body id="eng-word">
+                                  <strong>{cards[currCard].eng_word}</strong>
+                                </Popover.Body>
+                              </Popover>
+                            }
+                            >
+                            {({ ref, ...triggerHandler }) => (
+                                <Button
+                                {...triggerHandler}
+                                className="d-inline-flex align-items-center"
+                                id="image-button"
+                                >
+                                <Image id="image"
+                                    ref={ref}
+                                    roundedCircle
+                                    src={icon}
+                                />
+                                </Button>
+                            )}
+                          </OverlayTrigger>
                         </Card.Text>
                       </Card.Body>
                       <Card.Img variant="top" id="card-image" src={cards[currCard].image} alt="card" />
@@ -150,25 +179,19 @@ const LearnCard = ({
                     <Row>
                       <Col>
                         <Button
-                          id="next_incorrect_question_button"
+                          id="card_button"
                           variant="contained"
-                          color="primary"
-                          size="large"
-                          style={{ width: 185 }}
                           onClick={handlePrevious}
                         >
                           {currCard === 0 ? (<span>Back</span>) : (<span>Previous</span>)}
                         </Button>
     
                         <Button
-                          id="next_incorrect_question_button"
+                          id="card_button"
                           variant="contained"
-                          color="primary"
-                          size="large"
-                          style={{ width: 185 }}
                           onClick={handleNext}
                         >
-                          {currCard >= (cards.length - 1) ? (<span>Done</span>) : (<span>Next Card</span>)}
+                          {currCard >= (cards.length - 1) ? (<span>Done</span>) : (<span>Next</span>)}
                         </Button>
                       </Col>
                     </Row>

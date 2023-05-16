@@ -59,18 +59,16 @@ const TestCompleted = () => {
                                 </Row>
                             </Container>
                         </Card>
-                        {/* <Card id="complete-card">
-                            <Container>
-                                <Row id="card-items">
-                                    <Col>Test</Col>
-                                    <Col id="item">{test}</Col>
-                                </Row>
-                            </Container>
-                        </Card> */}
-
+                        {data.length > 0 && data[0].score == 100 ? (
+                        <>
                         <Button variant="outline-secondary" id="complete-button" href="/test">Home</Button>
-
-                        <Button variant="outline-secondary" id="complete-button" onClick={seeMistakes}>Check incorrect answers</Button>
+                        </>
+                        ) : (
+                        <>
+                        <Button variant="outline-secondary" id="complete-button"  className="see-mistakes" onClick={seeMistakes}>See mistakes</Button>
+                        <Button variant="outline-secondary" id="complete-button" href="/test">Home</Button>
+                        </>
+                        )}
                     </Stack>
                 </Container>
             </div>

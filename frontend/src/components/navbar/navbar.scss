@@ -8,7 +8,7 @@ $button-hover: #a580d5;
 .navbar {
     background-color: $navbar;
     max-height: 100px;
-    padding: 20px 0 !important;
+    padding-top: 20px !important;
   }
 
 #nav-brand{
@@ -18,16 +18,16 @@ $button-hover: #a580d5;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    // font-family: "Jost", sans-serif;
 }
 
 #nav-link{
     color: $nav-link;
     font-size: 16px;
     font-weight: 500;
-    padding: 10px 0 10px 30px;
+    padding: 0 0 10px 30px;
     text-transform: uppercase;
     transition: transform ease 0.5s;
+    margin-top: 8px;
 
     &:hover{
         transform: translate(0, -3px);

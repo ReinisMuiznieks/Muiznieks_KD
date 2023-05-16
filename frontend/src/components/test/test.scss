@@ -5,7 +5,7 @@ $secondaryButton: #383946;
 $accent: #a580d5;
 
 #searchbar{
-  width: 30vh;
+  width: 350px;
   border-radius: 20px;
   padding-left: 20px;
   border-color: $secondaryButton;
@@ -79,3 +79,84 @@ $accent: #a580d5;
     color: #333;
   }
   
+  #next_question_button{
+    margin-top: 30px;
+    padding: 1.4vh 3vh;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    border: 0;
+    color: $secondary;
+    background-color:$secondaryButton;
+    transition: 0.5s;
+    width: 200px;
+
+    &:hover{
+        transform: scale(0.97);
+    }
+}
+
+#answer_button{
+  background-color: $primary;
+  color: $secondaryButton;
+  border: 0;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: 600;
+  height: 50px;
+  width: 200px;
+  margin: 2px;
+
+  &:hover{
+      transform: scale(0.97);
+  }
+}
+
+#answer_button_incorrect{
+  background-color: $primary;
+  color: $secondaryButton;
+  border: 2px solid $primary;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: 600;
+  height: 50px;
+  width: 200px;
+  margin: 2px;
+
+  &:hover{
+      transform: scale(0.97);
+  }
+}
+
+#test-question{
+  margin-left: 25px;
+  margin-right: 25px;
+  text-align: center;
+  font-size: 4vh;
+  font-weight: 600;
+}
+
+.see-mistakes{
+  font-weight: 500 !important;
+  color: $primary !important; 
+}
+
+#next_incorrect_question_button{
+  margin-top: 50px;
+  border: 0;
+  border-width: 2px;
+  align-items: flex-end;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 1.4vh 3vh;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: $secondary;
+  background-color:$secondaryButton;
+  transition: 0.5s;
+
+  &:hover{
+      transform: scale(0.97);
+  }
+}

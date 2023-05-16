@@ -118,13 +118,13 @@ const IncorrectAnswersPage = () => {
         
     <Stack id="question-stack">
     <div className="container">
-        <ProgressBar now={currQues+1} label={currQues+1 + "/" + questionDetails.length} max={questionDetails.length}/>
+        <ProgressBar id="progress-bar" now={currQues+1} label={currQues+1 + "/" + questionDetails.length} max={questionDetails.length}/>
         {/* <ProgressBar now={currQues + 1} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/> */}
     </div>
     <div id="card-legend">
-      <Card id="card">
+      <Card id="question-card">
         <Card.Body>
-          <Card.Text id="card-text">
+          <Card.Text id="test-question">
           {questionDetails[currQues].question}
           </Card.Text>
         </Card.Body>
@@ -139,12 +139,17 @@ const IncorrectAnswersPage = () => {
                 {questionDetails[currQues] && questionDetails[currQues].options && (
                     questionDetails[currQues].options.map((option) => (
                     <Button
-                        id="answer_button"
-                        key={option._id}
-                        style={{
-                        backgroundColor: option.option === item.incorrectAnswers[currQues].userAnswer ? 'red' : 
-                                        option.option === item.incorrectAnswers[currQues].correctAnswer ? 'green' : ''
-                        }}
+                      id="answer_button_incorrect"
+                      key={option._id}
+                      style={{
+                      borderColor: 
+                        option.option === item.incorrectAnswers[currQues].userAnswer ? 'red' : 
+                        option.option === item.incorrectAnswers[currQues].correctAnswer ? 'green' : ''
+
+                      ,color: 
+                        option.option === item.incorrectAnswers[currQues].userAnswer ? 'red' : 
+                        option.option === item.incorrectAnswers[currQues].correctAnswer ? 'green' : ''
+                      }}
                     >
                         {option.option}
 

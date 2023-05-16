@@ -167,7 +167,7 @@ const TestQuestions2 = ({
   <Container>
     <Stack id="question-stack">
     <div className="container">
-        <ProgressBar now={currQues + 1} label={currQues+1 + "/" + questions.length} max={questions.length}/>
+        <ProgressBar id="progress-bar" now={currQues + 1} label={currQues+1 + "/" + questions.length} max={questions.length}/>
         {/* <ProgressBar now={currQues + 1} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/> */}
     </div>
 
@@ -175,7 +175,7 @@ const TestQuestions2 = ({
       
       <Card id="question-card">
         <Card.Body>
-          <Card.Text id="card-text">
+          <Card.Text id="test-question">
           {questions[currQues].question}
           </Card.Text>
         </Card.Body>
@@ -212,7 +212,6 @@ const TestQuestions2 = ({
                 variant="contained"
                 color="primary"
                 size="large"
-                style={{ width: 185 }}
                 onClick={handleNext}>
                 {currQues >= (questions.length - 1) ? (<span >Submit</span>) : (<span>Next Question</span>)}
               </Button>
