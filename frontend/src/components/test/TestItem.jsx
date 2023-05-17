@@ -87,7 +87,7 @@ function TestItem({test}) {
 
   const getCategoryNames = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/categories/${test._id}`, {
+      const response = await axios.get(`https://verbum-server-kd.onrender.com/api/categories/${test._id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
