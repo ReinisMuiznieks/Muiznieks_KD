@@ -1,0 +1,53 @@
+$primary: #ffffff;
+$secondary: #7678d2;
+$primaryButton: #95b8fe;
+$secondaryButton: #383946;
+$accent: #a580d5;
+
+#learn-page-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 580px;
+    height: 100px;
+    margin: auto;
+    padding: 80px;
+    border: 2px solid $secondary;
+    background-color: #7678d291;
+    border-radius: 20px;
+  }
+  
+  .learn-progress-bar-container {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .learn-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #learn-progress-text {
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 13px;
+    margin-bottom: -20px;
+  }
+  
+  #learn-progress-text-completed {
+    font-weight: 600;
+  }
+  
+  #user-name{
+    font-size: 40px;
+    font-weight: 600;
+    color: $secondaryButton;
+  }
+
+  #user-progress{
+    margin-top: -25px;
+    font-size: 20px;
+    font-weight: 700;
+    color: $secondaryButton;
+  }

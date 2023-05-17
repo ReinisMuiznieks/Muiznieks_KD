@@ -8,8 +8,9 @@ body{
     background-color: $secondary !important;
     background-image: url('../../images/fons.png');
     // background-size:cover;
-    background-repeat: no-repeat;
+    background-repeat:no-repeat;
     background-attachment: fixed;
+    background-size: 100%;
 }
 
 #legend{
