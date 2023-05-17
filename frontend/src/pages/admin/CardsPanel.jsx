@@ -11,7 +11,7 @@ function CardsPanel() {
       <Sidebar />
       <div style={{ paddingLeft: '10px', width: '100%' }}>
         <CardForm/>
-        <CardsTable/>
+        {/* <CardsTable/> */}
       </div>
     </div>
     </>

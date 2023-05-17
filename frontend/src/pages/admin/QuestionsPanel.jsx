@@ -11,7 +11,7 @@ function QuestionsPanel() {
       <Sidebar />
       <div style={{ paddingLeft: '10px', width: '100%' }}>
         <QuestionForm/>
-        <QuestionsTable/>
+        {/* <QuestionsTable/> */}
       </div>
     </div>
     </>

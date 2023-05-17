@@ -11,7 +11,7 @@ function TestPanel() {
       <Sidebar />
       <div style={{ paddingLeft: '10px', width: '100%' }}>
         <TestForm/>
-        <TestsTable/>
+        {/* <TestsTable/> */}
       </div>
     </div>
     </>

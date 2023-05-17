@@ -9,7 +9,7 @@ function UsersPanel() {
     <div style={{ display: 'flex' }}>
       <Sidebar />
       <div style={{ paddingLeft: '10px', width: '100%' }}>
-        <UsersTable/>
+        {/* <UsersTable/> */}
       </div>
     </div>
     </>
