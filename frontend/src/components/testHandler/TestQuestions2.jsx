@@ -77,12 +77,13 @@ const TestQuestions2 = ({
               ...prevAnswers,
               {
                 question: questions[currQues],
-                selectedAnswer: i,
+                selectedAnswer: options.find((option) => option.option === i)?.option,
               },
             ]);
           }
           setError(false);
         };
+        
         
       
     
