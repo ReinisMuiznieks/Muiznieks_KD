@@ -6,6 +6,10 @@ $accent: #a580d5;
 
 body{
     background-color: $secondary !important;
+    background-image: url('../../images/fons.png');
+    // background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #legend{
