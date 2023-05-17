@@ -11,7 +11,7 @@ function CategoriesPanel() {
       <Sidebar />
       <div style={{ paddingLeft: '10px', width: '100%' }}>
         <CategoryForm/>
-        {/* <CategoriesTable/> */}
+        <CategoriesTable/>
       </div>
     </div>
     </>
