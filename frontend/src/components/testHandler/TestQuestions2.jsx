@@ -72,17 +72,25 @@ const TestQuestions2 = ({
           setSelected(i);
           if (i === correct) {
             setScore(score + 1);
-          } else {
-            setIncorrectAnswers((prevAnswers) => [
-              ...prevAnswers,
-              {
-                question: questions[currQues],
-                selectedAnswer: options.find((option) => option.option === i)?.option,
-              },
-            ]);
           }
           setError(false);
+          if (questions[currQues] && questions[currQues].options) {
+            const selectedAnswer = questions[currQues].options.find((option) => option.option === i)?.option;
+            const correctAnswer = questions[currQues].options.find((option) => option.option === correct)?.option;
+            if (i !== correct) {
+              setIncorrectAnswers((prevAnswers) => [
+                ...prevAnswers,
+                {
+                  question: questions[currQues]._id,
+                  correctAnswer: correctAnswer,
+                  userAnswer: selectedAnswer,
+                },
+              ]);
+            }
+          }
         };
+        
+        
         
         
       
@@ -125,9 +133,9 @@ const TestQuestions2 = ({
 
       const submitTest = () => {
         const incorrectAnsweredQuestions = incorrectAnswers.map((answer) => ({
-          question: answer.question._id,
-          correctAnswer: answer.question.options.find((option) => option.isCorrect)?.option,
-          userAnswer: options.find((option) => option.option === answer.selectedAnswer)?.option,
+          question: answer.question,
+          correctAnswer: answer.correctAnswer,
+          userAnswer: answer.userAnswer,
         }));
       
         const testData = {
@@ -150,8 +158,8 @@ const TestQuestions2 = ({
           .catch((error) => {
             console.log(error);
           });
-
       };
+      
       
       
       

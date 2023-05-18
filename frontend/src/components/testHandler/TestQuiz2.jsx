@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TestQuestions2 from "./TestQuestions2";
 
-const Quiz = ({ questions, score, setScore, setQuestions, exam_id }) => {
+const Quiz = ({ questions, score, setScore, setQuestions, exam_id, questionCount, set }) => {
   const [options, setOptions] = useState();
   const [currQues, setCurrQues] = useState(0);
   const [correct, setCorrect] = useState();
@@ -35,6 +35,8 @@ const Quiz = ({ questions, score, setScore, setQuestions, exam_id }) => {
             <span>{/* Score : {score} */}</span>
           </div>
           <TestQuestions2
+            // questionCount={questionCount}
+            // setQuestioncount={setQuestionCount}
             currQues={currQues}
             setCurrQues={setCurrQues}
             questions={questions}
