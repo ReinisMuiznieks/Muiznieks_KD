@@ -69,6 +69,7 @@ function NavbarTop() {
             {user ? (
               <>
               <NavDropdown title={user.name} id="nav-dropdown" className="profile-dropdown">
+              <NavDropdown.Item href="/tests">Test History</NavDropdown.Item>
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>

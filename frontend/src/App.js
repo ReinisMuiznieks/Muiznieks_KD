@@ -28,7 +28,7 @@ import IncorrectAnswersPage from "./components/testHandler/IncorrectAnswers";
 import LearnController from "./components/learnHandler/LearnController";
 
 import TestingPage from "./pages/testingOnly/testingPage";
-import UserTests from "./pages/userTests/userTests";
+import UserTests from "./pages/userTests/UserTests";
 
 function App() {
 

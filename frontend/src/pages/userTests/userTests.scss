@@ -1,0 +1,19 @@
+$primary: #ffffff;
+$secondary: #7678d2;
+$primaryButton: #95b8fe;
+$secondaryButton: #383946;
+$accent: #a580d5;
+
+
+#stack-footer-left {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    left: 140px;
+    font-size: 14px;
+    color: $secondaryButton;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+  }

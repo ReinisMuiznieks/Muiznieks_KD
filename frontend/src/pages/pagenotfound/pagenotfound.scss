@@ -1,3 +1,9 @@
+$primary: #ffffff;
+$secondary: #7678d2;
+$primaryButton: #95b8fe;
+$secondaryButton: #383946;
+$accent: #a580d5;
+
 #notfound-stack{
     display: flex;
     justify-content: center;
@@ -11,7 +17,7 @@
 }
 
 #notfound-title{
-    color: #182c41;
+    color: $primaryButton;
     //font-size: 60px;
     font-size: 5vh;
     line-height: 1;
@@ -23,30 +29,16 @@
 #notfound-button{
     padding: 1vh 10vh;
     margin-top: 20px;
-    border-radius: 20px;
+    border-radius: 6px;
     font-size: 15px;
     font-weight: 700;
-    border: 2px solid #224274;
-    color:#152535;
-    background-color:#B1B2FF;
-    transition: 0.5s;
+    border: 0;
+    color:$secondary;
+    background-color:$secondaryButton;
+    transition: transform ease 0.2s, box-shadow ease 0.2s;
 
     &:hover{
-        border: 2px solid #224174ce;
-        color:#30567c;
-        background-color:#AAC4FF;
-        transform: scale(0.97);
-    }
-
-    &:focus{
-        border: 2px solid #224174ce;
-        color:#30567c;
-        background-color:#AAC4FF;
-    }
-
-    &:active{
-        border: 2px solid #224174ce;
-        color:#30567c;
-        background-color:#AAC4FF;
+        transform: translate(0, -3px);
+        box-shadow: 0 20px 80px -22px $primary;
     }
 }

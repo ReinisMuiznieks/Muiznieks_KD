@@ -48,7 +48,6 @@ function DisplayTests() {
         axios.get('https://verbum-server-kd.onrender.com/api/categories',  { headers: { 'Authorization': `Bearer ${user.token}` } })
         .then(response => {
             setCategories(response.data);
-            console.log(response.data);
         })
 
         return () => { // clears when component unmounts
@@ -109,6 +108,7 @@ return (
         </div>
         ) : (
         <>
+        
         </>
         )
     }

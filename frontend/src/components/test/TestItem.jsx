@@ -5,16 +5,10 @@ import { useDispatch } from 'react-redux'
 import { deleteCard } from '../../features/card/cardSlice'
 import React, { useEffect } from "react";
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
-import Form from 'react-bootstrap/Form';
-import { toast } from 'react-toastify'
-import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import diamond from '../../images/gem_purple.png'
@@ -33,7 +27,7 @@ function TestItem({test}) {
 
   useEffect(() => {
     getTestInfo();
-  getCategoryNames();
+    getCategoryNames();
   }, [])
 
   const getTestInfo = async () => {
@@ -52,7 +46,6 @@ function TestItem({test}) {
       for (let i = 0; i <= myData.length; i++) {
           if (myData[i] === test._id) {
               setisCompleted(true);
-              // setCompletedDate(myDataDate[i]);
 
               setCompletedDate(new Date(myDataDate[i]).toLocaleDateString(
                 'en-gb',
