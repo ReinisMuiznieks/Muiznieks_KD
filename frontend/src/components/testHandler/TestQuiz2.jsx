@@ -32,15 +32,12 @@ const Quiz = ({ questions, score, setScore, setQuestions, exam_id, questionCount
       {questions ? (
         <>
           <div className="quizInfo">
-            <span>{/* Score : {score} */}</span>
           </div>
           <TestQuestions2
-            // questionCount={questionCount}
-            // setQuestioncount={setQuestionCount}
             currQues={currQues}
             setCurrQues={setCurrQues}
             questions={questions}
-            options={options} // Pass the options prop
+            options={options}
             correct={correct}
             score={score}
             setScore={setScore}

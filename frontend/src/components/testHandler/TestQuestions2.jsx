@@ -106,29 +106,8 @@ const TestQuestions2 = ({
           }
         };
         
-
-      const getQuestions = async () => {
-        setIsLoading(true);
-        try {
-          const { data } = await axios.get(
-            `https://verbum-server-kd.onrender.com/api/questions?test=${id.id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${user.token}`,
-              },
-            }
-          );
-          setQuestions(data);
-          setQuestioncount(data.length);
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
       useEffect(() => {
-        getQuestions();
+        setQuestioncount(questions.length);
       }, [setQuestioncount])
 
       const submitTest = () => {
