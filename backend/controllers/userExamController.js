@@ -121,9 +121,20 @@ const addUserExam = asyncHandler(async (req, res) => {
           })
   })
   
+  const deleteAllUserExam = async (req, res) => {
+    try {
+      await UserExams.deleteMany();
+      res.json({ message: 'UserExam records deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to delete userexam records' });
+    }
+  };
+
   module.exports = router;
 
 module.exports = {
+    deleteAllUserExam,
     getExam,
     getUserExams,
     getUserExamByTestId,

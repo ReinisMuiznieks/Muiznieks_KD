@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { addUserExam, getExam, getUserExams, getUserExamByTestId, deleteUserExam, editUserExam, patchUserExam, getUserExamByUserId } = require('../controllers/userExamController')
+const { addUserExam, getExam, getUserExams, getUserExamByTestId, deleteUserExam, editUserExam, patchUserExam, getUserExamByUserId, deleteAllUserExam } = require('../controllers/userExamController')
 const { isAdmin, protect } = require('../middleware/authMiddleware')
 
 router.get('/', protect, getUserExams)
@@ -11,5 +11,6 @@ router.post('/', protect, addUserExam)
 router.put('/:id', protect,editUserExam)
 router.patch('/:id', protect, patchUserExam)
 router.delete('/:id', protect, isAdmin, deleteUserExam)
+router.delete('/', protect, isAdmin, deleteAllUserExam)
 
 module.exports = router;
