@@ -6,7 +6,7 @@ $accent: #a580d5;
 
 body{
     background-color: $secondary !important;
-    background-image: url('../../images/fons.png');
+    background-image: url('../../images/background_image.png');
     // background-size:cover;
     background-repeat:no-repeat;
     background-attachment: fixed;
@@ -16,7 +16,6 @@ body{
 #legend{
     padding-top: 150px;
 }
-
 
 #home-image{
     width: 100%;

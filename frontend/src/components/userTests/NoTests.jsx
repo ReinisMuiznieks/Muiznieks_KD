@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import image from '../../images/no_cards.svg'
 import Button from 'react-bootstrap/Button';
-import NavbarTop from "../navbar/Navbar";
 
 function NoTests() {
 

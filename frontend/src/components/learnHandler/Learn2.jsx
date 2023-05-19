@@ -18,9 +18,6 @@ const Learn2 = ({ cards, setCards, category_id, userLearnId, currCard, setCurrCa
     <div className="quiz">
       {cards ? (
         <>
-          <div className="quizInfo">
-            <span>{/* Score : {score} */}</span>
-          </div>
           <LearnCard
             currCard={currCard}
             setCurrCard={setCurrCard}

@@ -1,17 +1,10 @@
 import NavbarTop from "../../components/navbar/Navbar.jsx";
 import Footer from "../../components/footer/Footer.jsx";
-import DisplayTests from '../../components/test/DisplayTests';
 import Container from 'react-bootstrap/Container';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import Stack from 'react-bootstrap/Stack';
-import Card from 'react-bootstrap/Card';
-import diamond from '../../images/gem_purple.png'
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { Link } from "react-router-dom";
 import UserTestItem from "../../components/userTests/userTestItem.jsx";
 import NoTests from "../../components/userTests/NoTests.jsx";
 
