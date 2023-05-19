@@ -3,7 +3,6 @@ import './register.scss';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import NavbarTop from "../../components/navbar/Navbar.jsx";
-import Footer from "../../components/footer/Footer.jsx";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -151,7 +150,7 @@ return (
         </Row>
     </Container>
     
-    <Footer/></>
+    </>
 
 )
 }

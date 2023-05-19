@@ -1,6 +1,5 @@
 import './credits.scss'
 import NavbarTop from "../../components/navbar/Navbar.jsx";
-import Footer from "../../components/footer/Footer.jsx";
 import Container from 'react-bootstrap/esm/Container';
 import Stack from 'react-bootstrap/Stack';
 
@@ -20,8 +19,6 @@ const Credits = () => {
             <a href="https://www.flaticon.com/free-stickers/transportation" title="transportation stickers">Transportation stickers created by Stickers - Flaticon</a>
         </Stack>
     </Container>
-
-<Footer/>
 
 </>
     )

@@ -1,5 +1,4 @@
 import NavbarTop from "../../components/navbar/Navbar.jsx";
-import Footer from "../../components/footer/Footer.jsx";
 import DisplayCategories from "../../components/learn/DisplayLearnCategories";
 import './learn.scss';
 import Container from 'react-bootstrap/Container';
@@ -86,8 +85,6 @@ const Learn = () => {
 
         <DisplayCategories/>
     </Container>
-
-<Footer/>
 </>
     )
 }

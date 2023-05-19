@@ -1,6 +1,5 @@
 import React from "react";
 import NavbarTop from "../../components/navbar/Navbar.jsx";
-import Footer from "../../components/footer/Footer.jsx";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
@@ -19,8 +18,7 @@ const PageNotFound = () => {
             <Button variant="outline-secondary" id="notfound-button" href="/">Home</Button>
         </Stack>
     </Container>
-    
-<Footer />
+
 </>
         )
 }

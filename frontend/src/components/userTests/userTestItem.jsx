@@ -1,5 +1,4 @@
 import NavbarTop from "../navbar/Navbar.jsx";
-import Footer from "../footer/Footer.jsx";
 import DisplayTests from '../test/DisplayTests.jsx';
 import Container from 'react-bootstrap/Container';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -108,7 +107,6 @@ function UserTestItem({test}) {
           </Stack>
         </div>
       </Container>
-      <Footer/>
     </>
   );
 }

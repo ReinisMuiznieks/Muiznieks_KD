@@ -1,5 +1,4 @@
 import NavbarTop from "../../components/navbar/Navbar.jsx";
-import Footer from "../../components/footer/Footer.jsx";
 import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
@@ -42,8 +41,6 @@ const UserTests = () => {
         ) : (
         <NoTests/>
         )}
-      
-      <Footer/>
     </>
   );
 }

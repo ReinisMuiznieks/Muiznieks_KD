@@ -1,5 +1,4 @@
 import NavbarTop from "../../components/navbar/Navbar.jsx";
-import Footer from "../../components/footer/Footer.jsx";
 import DisplayTests from '../../components/test/DisplayTests';
 import React from "react";
 
@@ -8,7 +7,7 @@ const TestPage = () => {
 <>
 <NavbarTop />
         <DisplayTests/>
-<Footer/>
+
 
 </>
     )

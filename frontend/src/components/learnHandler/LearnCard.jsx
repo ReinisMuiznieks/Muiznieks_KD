@@ -3,7 +3,6 @@ import './learn.scss';
 import '../test/test.scss';
 import React, { useEffect, useState, useRef } from "react";
 import NavbarTop from "../navbar/Navbar.jsx";
-import Footer from "../footer/Footer.jsx";
 import axios from 'axios'
 import Spinner from "../spinner/Spinner";
 import Button from 'react-bootstrap/Button';
@@ -212,8 +211,7 @@ const LearnCard = ({
             ) : (<h3>No questions</h3>)}
           </>
         )}
-    
-        <Footer />
+
       </>
     );
     
