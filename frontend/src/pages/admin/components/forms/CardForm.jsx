@@ -54,7 +54,7 @@ function CardForm() {
         e.preventDefault()
     
         if (lv_word.trim().length !== 0 && eng_word.trim().length !== 0 && image) {
-          dispatch(createCard({ lv_word, eng_word, image: image.filesUploaded[0].url, audio: "test", category}))
+          dispatch(createCard({ lv_word, eng_word, image: image.filesUploaded[0].url,  audio: audio.filesUploaded[0].url, category}))
           setLvword('')
           setEngword('')
           setImage('')

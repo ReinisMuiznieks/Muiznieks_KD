@@ -4,6 +4,17 @@ $primaryButton: #95b8fe;
 $secondaryButton: #383946;
 $accent: #a580d5;
 
+#audio-player{
+    margin: auto;
+}
+
+#play-audio-icon{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    color: $secondaryButton;
+}
+
 .img-attrib {
     position: absolute;
     top: 0;

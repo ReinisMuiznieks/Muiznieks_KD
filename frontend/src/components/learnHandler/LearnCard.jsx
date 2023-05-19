@@ -1,7 +1,7 @@
 import '../card/card.scss';
 import './learn.scss';
 import '../test/test.scss';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import NavbarTop from "../navbar/Navbar.jsx";
 import Footer from "../footer/Footer.jsx";
 import axios from 'axios'
@@ -21,6 +21,7 @@ import icon from '../../images/question_mark.svg';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Image from 'react-bootstrap/Image';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 
 const Container = styled.div`
   width: 100%;
@@ -43,14 +44,15 @@ const LearnCard = ({
     const headers = { 'Authorization': `Bearer ${user.token}` };
     const [cardCount, setCardCount] = useState(0);
     const [showResults, setShowResults] = useState(false);
-    // const [currCard, setCurrCard] = useState(0);
+  const navigate = useNavigate()
+  const params = useParams();
+  const id = params;
 
-    // const [userTestId, setUserTestId] = useState('');
-
-        const navigate = useNavigate()
-      
-        const params = useParams();
-        const id = params;
+        const audioRef = useRef(null);
+        const handlePlay = () => {
+          audioRef.current.play();
+        };
+        
 
         const handleNext = async () => {
           console.log(userLearnId);
@@ -123,6 +125,7 @@ const LearnCard = ({
     if(isLoading) {
         return <Spinner/>
     }
+    
     return (
       <>
         <NavbarTop />
@@ -172,6 +175,12 @@ const LearnCard = ({
                         </Card.Text>
                       </Card.Body>
                       <Card.Img variant="top" id="card-image" src={cards[currCard].image} alt="card" />
+
+                        <div id="audio-player">
+                          <audio ref={audioRef} src={cards[currCard].audio} type="audio/mpeg" />
+                          <VolumeUpIcon id="play-audio-icon" onClick={handlePlay}/>
+                        </div>
+
                     </Card>
                   </div>
     

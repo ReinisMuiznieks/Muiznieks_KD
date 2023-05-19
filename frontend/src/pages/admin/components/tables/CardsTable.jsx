@@ -16,6 +16,8 @@ function CardsTable() {
   const [showModal, setShowModal] = useState(false);
   const [isPicker, setIsPicker] = useState(false);
   const [image, setImage] = useState("");
+  const [audio, setAudio] = useState("");
+  const [isAudioPicker, setIsAudioPicker] = useState(false);
 
   const columns = [
     { field: "_id", headerName: "ID", width: 250 },
@@ -83,6 +85,7 @@ useEffect(() => {
       setEditingItem(item);
       setSelectedCategory(item.category._id);
       setImage(item?.image || null);
+      setAudio(item?.audio || null);
       setShowModal(true);
     };
   
@@ -106,7 +109,7 @@ useEffect(() => {
     axios
       .put(
         `https://verbum-server-kd.onrender.com/api/cards/${editingItem._id}`,
-        { ...editingItem, category: selectedCategory, image: image},
+        { ...editingItem, category: selectedCategory, image: image, audio: audio},
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
@@ -215,6 +218,35 @@ useEffect(() => {
               </Button>  
 
               </div>
+
+
+
+              <div className="d-flex align-items-center">
+              {audio ? (
+              <>              
+              {/* <img
+                  src={audio && audio.filesUploaded[0].url}
+                  alt="audioUploaded"
+                  className="pb-3"
+                  id='card-image'
+                /> */}
+                <audio controls>
+                  <source src={audio} type="audio/mpeg"/>
+                  Your browser does not support the audio element.
+                </audio>
+                </>
+              ) : (
+                <Button
+                  onClick={() => (isAudioPicker ? setIsAudioPicker(false) : setIsAudioPicker(true))}
+                  type="button"
+                  variant="secondary"
+                >
+                  Choose Audio
+                </Button>  
+              )}
+
+              </div>
+
             </Form.Group>
           </Modal.Body>
 
@@ -237,6 +269,24 @@ useEffect(() => {
             pickerOptions={{
               maxFiles: 1,
               accept: ["image/*"],
+              errorsTimeout: 2000,
+              maxSize: 1 * 1000 * 1000,
+            }}
+          />
+          )}
+
+          {/* Filestack */}
+          {isAudioPicker && (
+          <PickerOverlay
+            apikey={process.env.REACT_APP_FILESTACK_API_KEY}
+            onSuccess={(res) => {
+              setAudio(res.filesUploaded[0].url);
+              setIsAudioPicker(false);
+            }}
+            onError={(res) => alert(res)}
+            pickerOptions={{
+              maxFiles: 1,
+              accept: ["audio/*"],
               errorsTimeout: 2000,
               maxSize: 1 * 1000 * 1000,
             }}
