@@ -2,11 +2,10 @@ import NavbarTop from "../../components/navbar/Navbar.jsx";
 import DisplayCategories from "../../components/learn/DisplayLearnCategories";
 import './learn.scss';
 import Container from 'react-bootstrap/Container';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import { useSelector } from 'react-redux';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { buildStyles } from 'react-circular-progressbar';
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 
 const Learn = () => {
@@ -16,7 +15,6 @@ const Learn = () => {
     const headers = { 'Authorization': `Bearer ${user.token}` };
 
     useEffect(() => {
-
         getCardCount();
         getUserProgressCount();
         }, [])

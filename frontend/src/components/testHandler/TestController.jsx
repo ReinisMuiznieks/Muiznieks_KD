@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Quiz from "./TestQuiz2";
+import Test from "./Test";
 import { useParams } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import NoQuestions from "../question/NoQuestions";
 import Spinner from "../spinner/Spinner";
 
-const QuizController = () => {
+const TestController = () => {
     const { user } = useSelector((state) => state.auth)
     const headers = { 'Authorization': `Bearer ${user.token}` };
     const [questions, setQuestions] = useState([]);
@@ -31,7 +31,7 @@ const QuizController = () => {
     return (
         <div>
         {questions.length > 0 ? (
-            <Quiz
+            <Test
             questions={questions}
             score={score}
             setScore={setScore}
@@ -43,4 +43,4 @@ const QuizController = () => {
     );
 }
 
-export default QuizController;
+export default TestController;

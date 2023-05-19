@@ -6,11 +6,11 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import '../card/card.scss'
+import '../../components/card/card.scss'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useSelector } from "react-redux";
-import NavbarTop from "../navbar/Navbar";
+import NavbarTop from "../../components/navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 
 const TestCompleted = () => {

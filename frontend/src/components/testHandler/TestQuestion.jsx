@@ -34,7 +34,7 @@ const Options = styled.div`
   margin: 10px;
 `
 
-const TestQuestions2 = ({
+const TestQuestion = ({
     currQues,
     setCurrQues,
     questions,
@@ -217,4 +217,4 @@ const TestQuestions2 = ({
 
 }
 
-export default TestQuestions2;
+export default TestQuestion;

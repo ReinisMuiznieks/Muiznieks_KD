@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import TestQuestions2 from "./TestQuestions2";
+import TestQuestion from "./TestQuestion";
 
-const Quiz = ({ questions, score, setScore, setQuestions, exam_id }) => {
+const Test = ({ questions, score, setScore, setQuestions, exam_id }) => {
   const [options, setOptions] = useState();
   const [currQues, setCurrQues] = useState(0);
   const [correct, setCorrect] = useState();
@@ -31,7 +31,7 @@ const Quiz = ({ questions, score, setScore, setQuestions, exam_id }) => {
         <>
           <div className="quizInfo">
           </div>
-          <TestQuestions2
+          <TestQuestion
             currQues={currQues}
             setCurrQues={setCurrQues}
             questions={questions}
@@ -49,4 +49,4 @@ const Quiz = ({ questions, score, setScore, setQuestions, exam_id }) => {
     </div>
   );
 };
-export default Quiz;
+export default Test;

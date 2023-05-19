@@ -1,6 +1,6 @@
-import '../test/test.scss';
-import '../learn/learnCategory.scss';
-import '../card/card.scss';
+import '../../components/test/test.scss';
+import '../../components/learn/learnCategory.scss';
+import '../../components/card/card.scss';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import NavbarTop from '../navbar/Navbar';
+import NavbarTop from '../../components/navbar/Navbar';
 import { useNavigate } from "react-router-dom";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
