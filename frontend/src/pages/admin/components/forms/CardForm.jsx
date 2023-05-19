@@ -17,7 +17,9 @@ import CategoryForm from './CategoryFormModal';
 
 function CardForm() {
     const [isPicker, setIsPicker] = useState(false);
+    const [isAudioPicker, setIsAudioPicker] = useState(false);
     const [image, setImage] = useState("");
+    const [audio, setAudio] = useState("");
     const [lv_word, setLvword] = useState("");
     const [eng_word, setEngword] = useState("");
     const [category, setCategory] = useState('');
@@ -52,7 +54,7 @@ function CardForm() {
         e.preventDefault()
     
         if (lv_word.trim().length !== 0 && eng_word.trim().length !== 0 && image) {
-          dispatch(createCard({ lv_word, eng_word, image: image.filesUploaded[0].url, category }))
+          dispatch(createCard({ lv_word, eng_word, image: image.filesUploaded[0].url, audio: "test", category}))
           setLvword('')
           setEngword('')
           setImage('')
@@ -71,6 +73,7 @@ function CardForm() {
       }
 
       const [isShown, setIsShown] = useState(false);
+    
 
       const handleClick = () => {
         setIsShown(current => !current);
@@ -136,6 +139,32 @@ function CardForm() {
           </Col>
 
           <Col>
+          {audio ? (
+            <>              
+            {/* <img
+                src={audio && audio.filesUploaded[0].url}
+                alt="audioUploaded"
+                className="pb-3"
+                id='card-image'
+              /> */}
+              <audio controls>
+                <source src={audio && audio.filesUploaded[0].url} type="audio/mpeg"/>
+                Your browser does not support the audio element.
+              </audio>
+              </>
+            ) : (
+              <Button
+                onClick={() => (isAudioPicker ? setIsAudioPicker(false) : setIsAudioPicker(true))}
+                type="button"
+                variant="secondary"
+              >
+                Choose Audio
+              </Button>  
+            )}
+
+          </Col>
+
+          <Col>
           
             <div className="input-group mb-3">
               <Form.Select onChange={(e)=>setCategory(e.target.value)} id="category" name="cars" className="form-control select select-initialized"  value={category}>
@@ -176,6 +205,24 @@ function CardForm() {
             pickerOptions={{
               maxFiles: 1,
               accept: ["image/*"],
+              errorsTimeout: 2000,
+              maxSize: 1 * 1000 * 1000,
+            }}
+          />
+          )}
+
+          {/* Filestack */}
+          {isAudioPicker && (
+          <PickerOverlay
+            apikey={process.env.REACT_APP_FILESTACK_API_KEY}
+            onSuccess={(res) => {
+              setAudio(res);
+              setIsAudioPicker(false);
+            }}
+            onError={(res) => alert(res)}
+            pickerOptions={{
+              maxFiles: 1,
+              accept: ["audio/*"],
               errorsTimeout: 2000,
               maxSize: 1 * 1000 * 1000,
             }}

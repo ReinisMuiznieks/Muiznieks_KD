@@ -68,6 +68,7 @@ function NavbarTop() {
           <Nav className="ms-auto">
             {user ? (
               <>
+              
               <NavDropdown title={user.name} id="nav-dropdown" className="profile-dropdown">
               <NavDropdown.Item href="/tests">Test History</NavDropdown.Item>
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>

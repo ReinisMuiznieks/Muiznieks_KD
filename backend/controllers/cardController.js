@@ -48,7 +48,7 @@ const getCardsbyCategory = asyncHandler(async (req, res) => {
 
 // Create card
 const addCard = asyncHandler(async(req,res) => {
-  const { lv_word, eng_word, description, image, category } = req.body
+  const { lv_word, eng_word, description, image, category, audio } = req.body
 
   
   const card = await Card.create({
@@ -56,7 +56,8 @@ const addCard = asyncHandler(async(req,res) => {
       eng_word,
       description,
       image,
-      category
+      category,
+      audio
   })
 
   if(card) {
@@ -66,6 +67,7 @@ const addCard = asyncHandler(async(req,res) => {
           eng_word: card.eng_word,
           description: card.description,
           image: card.image,
+          audio: card.audio,
           category: card.category
       })
   } else {

@@ -18,6 +18,10 @@ const cardSchema = mongoose.Schema({
         type: String,
         required: true,
       },
+      audio: {
+        type: String,
+        required: true,
+      },
       category: {
         type: ObjectId,
         ref: "Category",
