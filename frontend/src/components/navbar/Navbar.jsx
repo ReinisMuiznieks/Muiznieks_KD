@@ -65,6 +65,7 @@ function NavbarTop() {
             
           </Nav>
 
+
           <Nav className="ms-auto">
             {user ? (
               <>
@@ -82,6 +83,8 @@ function NavbarTop() {
           </Nav>
 
         </Navbar.Collapse>
+
+        
       </Container>
     </Navbar>
   );

@@ -5,6 +5,13 @@ $nav-link: #ffffff;
 $nav-link-hover:#383946;
 $button-hover: #a580d5;
 
+.dropdown-item{
+    &:active{
+        color: $nav-link-hover !important;
+        background-color: $nav-link !important;
+    }
+}
+
 .navbar {
     // background-color: $navbar;
     max-height: 100px;
