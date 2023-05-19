@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TestQuestions2 from "./TestQuestions2";
 
-const Quiz = ({ questions, score, setScore, setQuestions, exam_id, questionCount, set }) => {
+const Quiz = ({ questions, score, setScore, setQuestions, exam_id }) => {
   const [options, setOptions] = useState();
   const [currQues, setCurrQues] = useState(0);
   const [correct, setCorrect] = useState();
@@ -15,18 +15,16 @@ const Quiz = ({ questions, score, setScore, setQuestions, exam_id, questionCount
     var dataOptions;
 
     data = questions[currQues].options;
-    console.log(data);
     setOptions(data);
 
     for (let k = 0; k < data.length; k++) {
       dataOptions = data[k].isCorrect;
       if (dataOptions === true) {
         setCorrect(data[k].option);
-        console.log(data[k].option);
       }
     }
   };
-  console.log(exam_id);
+
   return (
     <div className="quiz">
       {questions ? (

@@ -4,7 +4,6 @@ import './admin.scss'
 
 function AdminPage() {
 
-
   return (
     <>
     <div style={{ display: 'flex' }} id='admin-legend'>

@@ -10,7 +10,6 @@ import { toast } from 'react-toastify'
 
 function CardsTable() {
   const { user } = useSelector((state) => state.auth);
-
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -18,6 +17,7 @@ function CardsTable() {
   const [image, setImage] = useState("");
   const [audio, setAudio] = useState("");
   const [isAudioPicker, setIsAudioPicker] = useState(false);
+  const headers = { 'Authorization': `Bearer ${user.token}` };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 250 },
@@ -55,9 +55,7 @@ function CardsTable() {
 
 useEffect(() => {
   axios
-    .get("https://verbum-server-kd.onrender.com/api/categories", {
-      headers: { Authorization: `Bearer ${user.token}` },
-    })
+    .get("https://verbum-server-kd.onrender.com/api/categories", {headers})
     .then((response) => {
       setCategories(response.data);
     })
@@ -70,9 +68,7 @@ useEffect(() => {
 
   useEffect(() => {
     axios
-      .get("https://verbum-server-kd.onrender.com/api/cards", {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .get("https://verbum-server-kd.onrender.com/api/cards", {headers})
       .then((response) => {
         setData(response.data);
       })
@@ -89,12 +85,9 @@ useEffect(() => {
       setShowModal(true);
     };
   
-
   const handleDelete = (item) => {
     axios
-      .delete(`https://verbum-server-kd.onrender.com/api/cards/${item._id}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .delete(`https://verbum-server-kd.onrender.com/api/cards/${item._id}`, {headers})
       .then((response) => {
         setData(data.filter((i) => i._id !== item._id));
       })
@@ -110,9 +103,7 @@ useEffect(() => {
       .put(
         `https://verbum-server-kd.onrender.com/api/cards/${editingItem._id}`,
         { ...editingItem, category: selectedCategory, image: image, audio: audio},
-        {
-          headers: { Authorization: `Bearer ${user.token}` },
-        }
+        {headers}
       )
       .then((response) => {
         setData(
@@ -133,7 +124,6 @@ useEffect(() => {
       }
   };
   
-
   const handleCancel = () => {
     setEditingItem({});
     setShowModal(false);
@@ -209,42 +199,36 @@ useEffect(() => {
                   </div>
                 )}
 
-              <Button
-                onClick={() => (isPicker ? setIsPicker(false) : setIsPicker(true))}
-                type="button"
-                variant="secondary"
-              >
-                Choose Image
-              </Button>  
-
-              </div>
-
-
-
-              <div className="d-flex align-items-center">
-              {audio ? (
-              <>              
-              {/* <img
-                  src={audio && audio.filesUploaded[0].url}
-                  alt="audioUploaded"
-                  className="pb-3"
-                  id='card-image'
-                /> */}
-                <audio controls>
-                  <source src={audio} type="audio/mpeg"/>
-                  Your browser does not support the audio element.
-                </audio>
-                </>
-              ) : (
                 <Button
-                  onClick={() => (isAudioPicker ? setIsAudioPicker(false) : setIsAudioPicker(true))}
+                  onClick={() => (isPicker ? setIsPicker(false) : setIsPicker(true))}
                   type="button"
                   variant="secondary"
                 >
-                  Choose Audio
+                  Choose Image
                 </Button>  
-              )}
+              </div>
 
+              <div className="d-flex align-items-center">
+                {audio ? (
+                <>              
+                  <audio controls>
+                    <source src={audio} type="audio/mpeg"/>
+                    Your browser does not support the audio element.
+                  </audio>
+                </>
+                ) : (
+                  <div className="mr-3" style={{ width: 100, height: 100 }}>
+                  No audio selected
+                  </div>
+                )}
+
+                  <Button
+                    onClick={() => (isAudioPicker ? setIsAudioPicker(false) : setIsAudioPicker(true))}
+                    type="button"
+                    variant="secondary"
+                  >
+                    Choose Audio
+                  </Button>  
               </div>
 
             </Form.Group>
@@ -258,6 +242,8 @@ useEffect(() => {
               Save
             </Button>
           </Modal.Footer>
+
+          {/* Filestack Image */}
           {isPicker && (
           <PickerOverlay
             apikey={process.env.REACT_APP_FILESTACK_API_KEY}
@@ -275,7 +261,7 @@ useEffect(() => {
           />
           )}
 
-          {/* Filestack */}
+          {/* Filestack Audio */}
           {isAudioPicker && (
           <PickerOverlay
             apikey={process.env.REACT_APP_FILESTACK_API_KEY}
@@ -296,8 +282,6 @@ useEffect(() => {
       </Modal>
     </div>
     </Container>
-
-    
   );
 }
 

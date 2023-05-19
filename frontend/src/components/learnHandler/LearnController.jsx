@@ -12,7 +12,6 @@ const LearnController = () => {
     const [cards, setCards] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [userLearnId, setUserLearnId] = useState();
-
     const params = useParams();
     const id = params;
     const [currCard, setCurrCard] = useState(0);
@@ -31,7 +30,6 @@ const LearnController = () => {
         const { data } = await axios.get(`https://verbum-server-kd.onrender.com/api/cards?category=${id.id}`, { headers });
         setCards(data);
         setIsLoading(false);
-        // checkUserLearn();
     }
 
     const checkUserLearn = async () => {
@@ -55,29 +53,20 @@ const LearnController = () => {
     }
 
     const createUserLearn = async () => {
-        const dummyData = {
+        const initialData = {
             user: user._id,
             category: id.id,
             progress: 0,
             completed: false,
         };
-        const response = await axios.post("https://verbum-server-kd.onrender.com/api/userlearn/", dummyData, { headers });
+        const response = await axios.post("https://verbum-server-kd.onrender.com/api/userlearn/", initialData, { headers });
         console.log(response.status);
         console.log(response.data);
         setUserLearnId(response.data._id);
     }
 
-    // useEffect(() => {
-    //     if (!isLoading) {
-    //         securityData();
-    //     }
-    // }, [isLoading]);
-
     if (isLoading) {
-        return (
-            <>
-                <Spinner/>
-            </>)
+        return (<Spinner/>)
     }
 
     return (

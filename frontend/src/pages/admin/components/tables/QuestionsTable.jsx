@@ -8,10 +8,10 @@ import {Container} from 'react-bootstrap';
 
 function QuestionsTable() {
   const { user } = useSelector((state) => state.auth);
-
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const headers = { 'Authorization': `Bearer ${user.token}` };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 250 },
@@ -65,9 +65,7 @@ function QuestionsTable() {
 
   useEffect(() => {
     axios
-      .get("https://verbum-server-kd.onrender.com/api/questions", {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .get("https://verbum-server-kd.onrender.com/api/questions", {headers})
       .then((response) => {
         setData(response.data);
       })
@@ -85,9 +83,7 @@ function QuestionsTable() {
 
   const handleDelete = (item) => {
     axios
-      .delete(`https://verbum-server-kd.onrender.com/api/questions/${item._id}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .delete(`https://verbum-server-kd.onrender.com/api/questions/${item._id}`, {headers})
       .then((response) => {
         setData(data.filter((i) => i._id !== item._id));
       })
@@ -96,29 +92,26 @@ function QuestionsTable() {
       });
   };
 
-const handleSave = (event) => {
-  event.preventDefault();
-  const updatedItem = { ...editingItem };
-  axios
-    .put(`https://verbum-server-kd.onrender.com/api/questions/${editingItem._id}`, updatedItem, {
-      headers: { Authorization: `Bearer ${user.token}` },
-    })
-    .then((response) => {
-      setData(
-        data.map((item) =>
-          item._id === editingItem._id ? updatedItem : item  
-        )
-      );
-      console.log(updatedItem);
-      console.log(data);
-      setEditingItem({});
-      setShowModal(false);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
-
+  const handleSave = (event) => {
+    event.preventDefault();
+    const updatedItem = { ...editingItem };
+    axios
+      .put(`https://verbum-server-kd.onrender.com/api/questions/${editingItem._id}`, updatedItem, {headers})
+      .then((response) => {
+        setData(
+          data.map((item) =>
+            item._id === editingItem._id ? updatedItem : item  
+          )
+        );
+        console.log(updatedItem);
+        console.log(data);
+        setEditingItem({});
+        setShowModal(false);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const handleCancel = () => {
     setEditingItem({});
@@ -129,10 +122,6 @@ const handleSave = (event) => {
     newOptions[index] = { ...newOptions[index], option: value };
     setEditingItem((prev) => ({ ...prev, options: newOptions }));
   };
-  
-  
-  
-
   
   return (
     <Container className='pt-5'>
@@ -148,46 +137,46 @@ const handleSave = (event) => {
         disableRowSelectionOnClick
         style={{backgroundColor: "white"}}
       />
-<Modal show={showModal} onHide={handleCancel}>
-  <Modal.Header closeButton>
-    <Modal.Title>Edit Item</Modal.Title>
-  </Modal.Header>
-  <Form onSubmit={handleSave}>
-    <Modal.Body>
-      <Form.Group controlId="formItemName">
-        <Form.Label>Question:</Form.Label>
-        <Form.Control
-          type="text"
-          value={editingItem?.question || ''}
-          onChange={(event) =>
-            setEditingItem({ ...editingItem, question: event.target.value })
-          }
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Options:</Form.Label>
-        {editingItem?.options?.map((option, index) => (
-          <Form.Control
-            key={option._id}
-            type="text"
-            value={option.option}
-            onChange={(event) => handleOptionChange(index, event.target.value)}
-            className={option.isCorrect ? 'font-weight-bold' : ''}
-          />
-        ))}
-      </Form.Group>
-    </Modal.Body>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={handleCancel}>
-        Cancel
-      </Button>
-      <Button variant="primary" type="submit">
-        Save
-      </Button>
-    </Modal.Footer>
-  </Form>
-</Modal>
 
+      <Modal show={showModal} onHide={handleCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Item</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={handleSave}>
+          <Modal.Body>
+            <Form.Group controlId="formItemName">
+              <Form.Label>Question:</Form.Label>
+              <Form.Control
+                type="text"
+                value={editingItem?.question || ''}
+                onChange={(event) =>
+                  setEditingItem({ ...editingItem, question: event.target.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Options:</Form.Label>
+              {editingItem?.options?.map((option, index) => (
+                <Form.Control
+                  key={option._id}
+                  type="text"
+                  value={option.option}
+                  onChange={(event) => handleOptionChange(index, event.target.value)}
+                  className={option.isCorrect ? 'font-weight-bold' : ''}
+                />
+              ))}
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit">
+              Save
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
     </div>
     </Container>
   );

@@ -88,112 +88,93 @@ function CardForm() {
         <Container className='card-legend pt-5'>
         <Form onSubmit={onSubmit}>
           <Row>
-          <Col>
-            <Form.Group className="mb-3">
-              <Form.Label>LV</Form.Label>
-              <Form.Control 
-              type='text'
-              name='lv_word'
-              required
-              onChange={(e) => setLvword(e.target.value)}
-              placeholder="LV"
-              />
-            </Form.Group>
-          </Col>
-
-          <Col>
-            <Form.Group className='pb-4'>
-              <Form.Label>ENG</Form.Label>
-              <Form.Control 
-              type='text'
-              name='eng_word'
-              required
-              onChange={(e) => setEngword(e.target.value)}
-              placeholder="LV"
-              />
-            </Form.Group>
-          </Col>
+            <Col>
+              <Form.Group className="mb-3">
+                <Form.Label>LV</Form.Label>
+                <Form.Control 
+                type='text'
+                name='lv_word'
+                required
+                onChange={(e) => setLvword(e.target.value)}
+                placeholder="LV"
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className='pb-4'>
+                <Form.Label>ENG</Form.Label>
+                <Form.Control 
+                type='text'
+                name='eng_word'
+                required
+                onChange={(e) => setEngword(e.target.value)}
+                placeholder="LV"
+                />
+              </Form.Group>
+            </Col>
           </Row>
-
           <Row>
-          <Col>
-
-          {image ? (
-              <img
-                src={image && image.filesUploaded[0].url}
-                alt="imageUploded"
-                className="pb-3"
-                // name='image'
-                id='card-image'
-              />
-            ) : (
-              <Button
-                onClick={() => (isPicker ? setIsPicker(false) : setIsPicker(true))}
-                type="button"
-                variant="secondary"
-              >
-                Choose Image
-              </Button>  
-            )}
-
-          </Col>
-
-          <Col>
-          {audio ? (
-            <>              
-            {/* <img
-                src={audio && audio.filesUploaded[0].url}
-                alt="audioUploaded"
-                className="pb-3"
-                id='card-image'
-              /> */}
-              <audio controls>
-                <source src={audio && audio.filesUploaded[0].url} type="audio/mpeg"/>
-                Your browser does not support the audio element.
-              </audio>
+            <Col>
+            {image ? (
+                <img
+                  src={image && image.filesUploaded[0].url}
+                  alt="imageUploded"
+                  className="pb-3"
+                  // name='image'
+                  id='card-image'
+                />
+              ) : (
+                <Button
+                  onClick={() => (isPicker ? setIsPicker(false) : setIsPicker(true))}
+                  type="button"
+                  variant="secondary"
+                >
+                  Choose Image
+                </Button>  
+              )}
+            </Col>
+            <Col>
+            {audio ? (
+              <>              
+                <audio controls>
+                  <source src={audio && audio.filesUploaded[0].url} type="audio/mpeg"/>
+                  Your browser does not support the audio element.
+                </audio>
               </>
-            ) : (
-              <Button
-                onClick={() => (isAudioPicker ? setIsAudioPicker(false) : setIsAudioPicker(true))}
-                type="button"
-                variant="secondary"
-              >
-                Choose Audio
-              </Button>  
-            )}
-
-          </Col>
-
-          <Col>
-          
-            <div className="input-group mb-3">
-              <Form.Select onChange={(e)=>setCategory(e.target.value)} id="category" name="cars" className="form-control select select-initialized"  value={category}>
-                <option >Choose Category</option>
-                {
-                    categories && categories.map(category =>(
-                        <option key={category._id}  value={category._id} category={category} >{category.name}</option>
-                    ))
-                    
-                }
-              </Form.Select>
-              <Button className="btn btn-secondary" type="button" onClick={handleClick} id="button-addon2">Add category</Button>
-                    {isShown && (
-
-                        <CategoryForm/>
-
-                    )}
-            </div>
-          </Col>
-
+              ) : (
+                <Button
+                  onClick={() => (isAudioPicker ? setIsAudioPicker(false) : setIsAudioPicker(true))}
+                  type="button"
+                  variant="secondary"
+                >
+                  Choose Audio
+                </Button>  
+              )}
+            </Col>
+            <Col>
+              <div className="input-group mb-3">
+                <Form.Select onChange={(e)=>setCategory(e.target.value)} id="category" name="cars" className="form-control select select-initialized"  value={category}>
+                  <option >Choose Category</option>
+                  {
+                  categories && categories.map(category =>(
+                      <option key={category._id}  value={category._id} category={category} >{category.name}</option>
+                  ))    
+                  }
+                </Form.Select>
+                <Button className="btn btn-secondary" type="button" onClick={handleClick} id="button-addon2">Add category</Button>
+                {isShown && (
+                    <CategoryForm/>
+                )}
+              </div>
+            </Col>
           </Row>
-
           <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
                 <Button variant="success" type="submit">Submit</Button>
                 <div className="vr" />
                 <Button variant="danger" onClick={onReset}>Reset</Button>
           </Stack>
 
-          {/* Filestack */}
+          {/* Filestack Image*/}
           {isPicker && (
           <PickerOverlay
             apikey={process.env.REACT_APP_FILESTACK_API_KEY}
@@ -211,7 +192,7 @@ function CardForm() {
           />
           )}
 
-          {/* Filestack */}
+          {/* Filestack Audio*/}
           {isAudioPicker && (
           <PickerOverlay
             apikey={process.env.REACT_APP_FILESTACK_API_KEY}
@@ -228,7 +209,6 @@ function CardForm() {
             }}
           />
           )}
-
       </Form>
       </Container>
       </>

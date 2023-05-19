@@ -10,16 +10,15 @@ function NoQuestions() {
     return (
 <>
 <NavbarTop/>
-  <div id="learn-legend">
-    <Container>
-        <Stack id="notfound-stack">
-            <img src={image} alt="404" id="notfound-image"></img>
-            <h3 id="notfound-title" className="text-center">No questions!</h3>
-            <Button variant="outline-secondary" id="notfound-button" href="/test">Back</Button>
-        </Stack>
-    </Container>
-</div>
-
+    <div id="learn-legend">
+        <Container>
+            <Stack id="notfound-stack">
+                <img src={image} alt="404" id="notfound-image"></img>
+                <h3 id="notfound-title" className="text-center">No questions!</h3>
+                <Button variant="outline-secondary" id="notfound-button" href="/test">Back</Button>
+            </Stack>
+        </Container>
+    </div>
 </>
     )
 }

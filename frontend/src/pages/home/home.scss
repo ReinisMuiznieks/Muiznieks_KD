@@ -7,7 +7,6 @@ $accent: #a580d5;
 body{
     background-color: $secondary !important;
     background-image: url('../../images/background_image.png');
-    // background-size:cover;
     background-repeat:no-repeat;
     background-attachment: fixed;
     background-size: 100%;
@@ -62,7 +61,6 @@ body{
         box-shadow: 0 20px 80px -22px $primary;
     }
 }
-
 
 #kateg{
     text-align: left;

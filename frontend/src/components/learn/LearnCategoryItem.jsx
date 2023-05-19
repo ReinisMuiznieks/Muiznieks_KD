@@ -1,5 +1,4 @@
-// import './learnCategory.scss';
-import './learnCategoryUpdated.scss';
+import './learnCategory.scss';
 import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
@@ -18,6 +17,7 @@ function LearnCategoryItem({ category }) {
   const [progress, setProgress] = useState(0);
   const [cardCount, setCardCount] = useState(0);
   const [cardImage, setCardImage] = useState('');
+  const headers = { 'Authorization': `Bearer ${user.token}` };
 
   useEffect(() => {
     getUserProgress();
@@ -26,12 +26,7 @@ function LearnCategoryItem({ category }) {
   const getUserProgress = async () => {
     try {
       const { data } = await axios.get(
-        `https://verbum-server-kd.onrender.com/api/userlearn/user/${user._id}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
-          }
-        }
+        `https://verbum-server-kd.onrender.com/api/userlearn/user/${user._id}`,{headers}
       );
 
       const myData = await Promise.all(data.map((d) => d.category));
@@ -45,12 +40,7 @@ function LearnCategoryItem({ category }) {
       }
 
       const response = await axios.get(
-        `https://verbum-server-kd.onrender.com/api/cards/?category=${category._id}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
-          }
-        }
+        `https://verbum-server-kd.onrender.com/api/cards/?category=${category._id}`,{headers}
       );
       setCardCount(response.data.length);
 

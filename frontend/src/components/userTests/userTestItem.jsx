@@ -1,7 +1,4 @@
-import NavbarTop from "../navbar/Navbar.jsx";
-import DisplayTests from '../test/DisplayTests.jsx';
 import Container from 'react-bootstrap/Container';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -18,6 +15,7 @@ function UserTestItem({test}) {
   const [categoryNames, setCategoryNames] = useState([]);
   const [testName, setTestName] = useState("");
   const [completedDate, setCompletedDate] = useState(" ");
+  const headers = { 'Authorization': `Bearer ${user.token}` };
 
   useEffect(() => {
     getCategoryNames();
@@ -27,11 +25,7 @@ function UserTestItem({test}) {
 
   const getCategoryNames = async () => {
     try {
-      const response = await axios.get(`https://verbum-server-kd.onrender.com/api/categories/${test.test}`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
+      const response = await axios.get(`https://verbum-server-kd.onrender.com/api/categories/${test.test}`, {headers});
       const categories = response.data.map((category) => category.name);
       setCategoryNames(categories);
     } catch (error) {
@@ -52,11 +46,7 @@ function UserTestItem({test}) {
 
   const getTestName = async () => {
     try {
-      const response = await axios.get(`https://verbum-server-kd.onrender.com/api/tests/${test.test}`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
+      const response = await axios.get(`https://verbum-server-kd.onrender.com/api/tests/${test.test}`, {headers});
       setTestName(response.data[0].testname);
       console.log(response.data)
     } catch (error) {
@@ -98,9 +88,6 @@ function UserTestItem({test}) {
                   <Card.Body id="stack-footer-left">
                   Completed on {completedDate}
                   </Card.Body>
-
-                  
-
                 </div>
               </div>
             </Link>

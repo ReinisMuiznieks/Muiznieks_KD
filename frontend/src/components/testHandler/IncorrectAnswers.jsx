@@ -10,31 +10,13 @@ import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import styled from "styled-components"
 import NavbarTop from '../navbar/Navbar';
 import { useNavigate } from "react-router-dom";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const Options = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1;
-  align-items: center;
-  justify-content: space-around;
-  margin: 10px;
-`
-
-
 const IncorrectAnswersPage = () => {
   const { user } = useSelector((state) => state.auth);
+  const headers = { 'Authorization': `Bearer ${user.token}` };
   const params = useParams();
   const id = params;
   const [data, setData] = useState([]);
@@ -48,15 +30,11 @@ const IncorrectAnswersPage = () => {
 
   const fetchIncorrectAnswers = async () => {
     try {
-      const response = await axios.get(`https://verbum-server-kd.onrender.com/api/usertests/${id.id}`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
+      const response = await axios.get(`https://verbum-server-kd.onrender.com/api/usertests/${id.id}`, {headers});
 
       setData(response.data);
-      console.log(response.data[0].incorrectAnswers);
       const incorrectAnswers = response.data[0].incorrectAnswers;
+
       if (incorrectAnswers) {
         const questionIds = incorrectAnswers.map((answer) => answer.question);
         const questionDetails = await fetchQuestionDetails(questionIds);
@@ -66,12 +44,11 @@ const IncorrectAnswersPage = () => {
       console.log(error);
     }
   };
+
   const fetchQuestionDetails = async (questionIds) => {
     try {
       const response = await axios.get(`https://verbum-server-kd.onrender.com/api/questions`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        },
+        headers,
         params: {
           ids: questionIds
         }
@@ -88,9 +65,6 @@ const IncorrectAnswersPage = () => {
 
   const handleNext = () => {
     if (currQues >= questionDetails.length-1) {
-      // submitTest();
-    //   setCurrQues(currQues + 1);
-      console.log("done");
       navigate(`/result/${id.id}`);
     } else {
       setCurrQues(currQues + 1);
@@ -108,90 +82,87 @@ const IncorrectAnswersPage = () => {
   const item = data[0];
 
   return (
-    <>
-    <NavbarTop/>
-    <Container>
-      {data.length > 0 ? (
-        <>       
-        {questionDetails.length > 0 && ( 
-        <Container>
-        
-    <Stack id="question-stack">
-    <div className="container">
-        <ProgressBar id="progress-bar" now={currQues+1} label={currQues+1 + "/" + questionDetails.length} max={questionDetails.length}/>
-        {/* <ProgressBar now={currQues + 1} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/> */}
-    </div>
-    <div id="card-legend">
-      <Card id="question-card">
-        <Card.Body>
-          <Card.Text id="test-question">
-          {questionDetails[currQues].question}
-          </Card.Text>
-        </Card.Body>
-          <Card.Img variant="top" id="card-image" src={questionDetails[currQues].card} alt="card"/>
-      </Card>
-      </div>
-
-      <Container id="answer_container">
-                <Row>
-                <Col>
-                <Options>
-                {questionDetails[currQues] && questionDetails[currQues].options && (
-                    questionDetails[currQues].options.map((option) => (
-                    <Button
-                      id="answer_button_incorrect"
-                      key={option._id}
-                      style={{
-                      borderColor: 
+        <>
+        <NavbarTop/>
+        <div className='container-div'>
+          {data.length > 0 ? (
+              <>       
+              {questionDetails.length > 0 && ( 
+          <div className='container-div'>
+            <Stack id="question-stack">
+              <div className="container-div">
+                <ProgressBar id="progress-bar" now={currQues+1} label={currQues+1 + "/" + questionDetails.length} max={questionDetails.length}/>
+              </div>
+              <div id="card-legend">
+                <Card id="question-card">
+                  <Card.Body>
+                    <Card.Text id="test-question">
+                    {questionDetails[currQues].question}
+                    </Card.Text>
+                  </Card.Body>
+                    <Card.Img variant="top" id="card-image" src={questionDetails[currQues].card} alt="card"/>
+                </Card>
+              </div>
+                <div className='container-div' id="answer_container">
+                  <Row>
+                    <Col>
+                      <div className='options-div'>
+                      {questionDetails[currQues] && questionDetails[currQues].options && (
+                      questionDetails[currQues].options.map((option) => (
+                        <Button
+                        id="answer_button_incorrect"
+                        key={option._id}
+                        style={{
+                        borderColor: 
                         option.option === item.incorrectAnswers[currQues].userAnswer ? 'red' : 
                         option.option === item.incorrectAnswers[currQues].correctAnswer ? 'green' : ''
 
-                      ,color: 
+                        ,color: 
                         option.option === item.incorrectAnswers[currQues].userAnswer ? 'red' : 
                         option.option === item.incorrectAnswers[currQues].correctAnswer ? 'green' : ''
-                      }}
-                    >
+                        }}
+                        >
                         {option.option}
-
-                    </Button>
-                    ))
-                )}
-                </Options>
-                </Col>
-                </Row>
-                <Row>
-                <Col>
-                    <Button
-                        id="next_incorrect_question_button"
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        style={{ width: 185 }}
-                        onClick={handlePrevious}>
-                        {currQues < (data.length) ? (<span >Back</span>) : (<span>Previous</span>)}
-                    </Button>
-
-
-                    <Button
-                        id="next_incorrect_question_button"
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        style={{ width: 185 }}
-                        onClick={handleNext}>
-                        {currQues >= (questionDetails.length-1) ? (<span >Done</span>) : (<span>Next Question</span>)}
-                    </Button>
-                </Col>
-                </Row>
-            </Container>
+                        </Button>
+                      ))
+                      )}
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Button
+                      id="next_incorrect_question_button"
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      style={{ width: 185 }}
+                      onClick={handlePrevious}>
+                      {currQues < (data.length) ? (<span >Back</span>) : (<span>Previous</span>)}
+                      </Button>
+                      
+                      <Button
+                      id="next_incorrect_question_button"
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      style={{ width: 185 }}
+                      onClick={handleNext}>
+                      {currQues >= (questionDetails.length-1) ? (<span >Done</span>) : (<span>Next Question</span>)}
+                      </Button>
+                    </Col>
+                  </Row>
+                </div>
             </Stack>
-            
-        </Container>
-        )}
+          </div>
+          )}
+          </>
+          ): (
+          <>
+          </>
+          )}
+        </div>
         </>
-    ): (<h3>No questions</h3>)}
-    </Container>
-    </>
   );
 };
 

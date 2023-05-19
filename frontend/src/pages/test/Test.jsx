@@ -5,10 +5,8 @@ import React from "react";
 const TestPage = () => {
     return (
 <>
-<NavbarTop />
-        <DisplayTests/>
-
-
+    <NavbarTop />
+    <DisplayTests/>
 </>
     )
 }

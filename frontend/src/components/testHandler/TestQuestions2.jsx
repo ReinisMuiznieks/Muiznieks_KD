@@ -210,7 +210,7 @@ const TestQuestions2 = ({
     </Stack>
   </Container>
 
-  ) : (<h3>No questions</h3>)}
+  ) : (<></>)}
 
 </>
     )

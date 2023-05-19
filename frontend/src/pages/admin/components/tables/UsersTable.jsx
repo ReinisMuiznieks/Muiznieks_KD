@@ -8,7 +8,7 @@ import {Container} from 'react-bootstrap';
 
 function UsersTable() {
   const { user } = useSelector((state) => state.auth);
-
+  const headers = { 'Authorization': `Bearer ${user.token}` };
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -47,9 +47,7 @@ function UsersTable() {
 
   useEffect(() => {
     axios
-      .get("https://verbum-server-kd.onrender.com/api/users", {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .get("https://verbum-server-kd.onrender.com/api/users", {headers})
       .then((response) => {
         setData(response.data);
       })
@@ -65,9 +63,7 @@ function UsersTable() {
 
   const handleDelete = (item) => {
     axios
-      .delete(`https://verbum-server-kd.onrender.com/api/users/${item._id}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .delete(`https://verbum-server-kd.onrender.com/api/users/${item._id}`, {headers})
       .then((response) => {
         setData(data.filter((i) => i._id !== item._id));
       })
@@ -79,9 +75,7 @@ function UsersTable() {
   const handleSave = (event) => {
     event.preventDefault();
     axios
-      .put(`https://verbum-server-kd.onrender.com/api/users/${editingItem._id}`, editingItem, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .put(`https://verbum-server-kd.onrender.com/api/users/${editingItem._id}`, editingItem, {headers})
       .then((response) => {
         setData(
           data.map((item) =>
@@ -115,33 +109,33 @@ function UsersTable() {
         disableRowSelectionOnClick
         style={{backgroundColor: "white"}}
       />
-      <Modal show={showModal} onHide={handleCancel}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Item</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSave}>
-          <Modal.Body>
-            <Form.Group controlId="formItemName">
-              <Form.Label>Name:</Form.Label>
-              <Form.Control
-                type="text"
-                value={editingItem?.role || ''}
-                onChange={(event) =>
-                  setEditingItem({ ...editingItem, role: event.target.value })
-                }
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleCancel}>
-              Cancel
-            </Button>
-            <Button variant="primary" type="submit">
-              Save
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
+        <Modal show={showModal} onHide={handleCancel}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Item</Modal.Title>
+          </Modal.Header>
+          <Form onSubmit={handleSave}>
+            <Modal.Body>
+              <Form.Group controlId="formItemName">
+                <Form.Label>Name:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={editingItem?.role || ''}
+                  onChange={(event) =>
+                    setEditingItem({ ...editingItem, role: event.target.value })
+                  }
+                />
+              </Form.Group>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCancel}>
+                Cancel
+              </Button>
+              <Button variant="primary" type="submit">
+                Save
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal>
     </div>
     </Container>
   );

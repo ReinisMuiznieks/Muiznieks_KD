@@ -10,7 +10,7 @@ import image from '../../images/404.svg'
 const PageNotFound = () => {
     return (
 <>
-<NavbarTop />
+    <NavbarTop />
     <Container>
         <Stack id="notfound-stack">
             <img src={image} alt="404" id="notfound-image"></img>
@@ -18,7 +18,6 @@ const PageNotFound = () => {
             <Button variant="outline-secondary" id="notfound-button" href="/">Home</Button>
         </Stack>
     </Container>
-
 </>
         )
 }

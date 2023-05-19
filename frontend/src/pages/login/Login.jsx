@@ -90,7 +90,7 @@ function Login() {
                     id='email'
                     name='email'
                     value={email}
-                    placeholder='Enter email' /* Ievadiet e-pastu */
+                    placeholder='Enter email'
                     onChange={onChange}
                 />
                 </div>
@@ -105,7 +105,7 @@ function Login() {
                     id='password'
                     name='password'
                     value={password}
-                    placeholder='Enter password' /* Ievadiet paroli */
+                    placeholder='Enter password'
                     onChange={onChange}
                 />
                 </div>

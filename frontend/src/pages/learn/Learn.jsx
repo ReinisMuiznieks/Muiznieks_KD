@@ -13,6 +13,7 @@ const Learn = () => {
     const { user } = useSelector((state) => state.auth)
     const [userProgress, setUserProgress] = useState(0);
     const [totalCards, setTotalCards] = useState(0);
+    const headers = { 'Authorization': `Bearer ${user.token}` };
 
     useEffect(() => {
 
@@ -22,11 +23,7 @@ const Learn = () => {
       
         const getCardCount = async () => {
       
-            axios.get('https://verbum-server-kd.onrender.com/api/cards',{
-                headers: {
-                  'Authorization': `Bearer ${user.token}`
-                }
-              })
+            axios.get('https://verbum-server-kd.onrender.com/api/cards',{headers})
             .then(response => {
               const cards = response.data;
               setTotalCards(cards.length);
@@ -37,11 +34,7 @@ const Learn = () => {
         }
 
         const getUserProgressCount = async () => {       
-            axios.get('https://verbum-server-kd.onrender.com/api/userlearn/all',{
-                headers: {
-                  'Authorization': `Bearer ${user.token}`
-                }
-              })
+            axios.get('https://verbum-server-kd.onrender.com/api/userlearn/all',{headers})
               .then(response => {
                 const userLearnData = response.data;
                 const filteredData = userLearnData.filter(item => item.user === user._id);
@@ -81,7 +74,6 @@ const Learn = () => {
                 </CircularProgressbarWithChildren>
             </div>
         </div>
-
 
         <DisplayCategories/>
     </Container>

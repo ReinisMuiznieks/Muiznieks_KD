@@ -8,10 +8,10 @@ import {Container} from 'react-bootstrap';
 
 function CategoriesTable() {
   const { user } = useSelector((state) => state.auth);
-
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const headers = { 'Authorization': `Bearer ${user.token}` };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 250 },
@@ -39,9 +39,7 @@ function CategoriesTable() {
 
   useEffect(() => {
     axios
-      .get("https://verbum-server-kd.onrender.com/api/categories", {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .get("https://verbum-server-kd.onrender.com/api/categories", {headers})
       .then((response) => {
         setData(response.data);
       })
@@ -57,9 +55,7 @@ function CategoriesTable() {
 
   const handleDelete = (item) => {
     axios
-      .delete(`https://verbum-server-kd.onrender.com/api/categories/${item._id}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .delete(`https://verbum-server-kd.onrender.com/api/categories/${item._id}`, {headers})
       .then((response) => {
         setData(data.filter((i) => i._id !== item._id));
       })
@@ -71,9 +67,7 @@ function CategoriesTable() {
   const handleSave = (event) => {
     event.preventDefault();
     axios
-      .put(`https://verbum-server-kd.onrender.com/api/categories/${editingItem._id}`, editingItem, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      })
+      .put(`https://verbum-server-kd.onrender.com/api/categories/${editingItem._id}`, editingItem, {headers})
       .then((response) => {
         setData(
           data.map((item) =>

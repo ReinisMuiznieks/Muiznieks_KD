@@ -9,7 +9,6 @@ import {Container} from 'react-bootstrap';
 
 function CategoryForm() {
     const [name, setName] = useState('')
-  
     const dispatch = useDispatch()
   
     const onSubmit = (e) => {

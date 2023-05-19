@@ -8,12 +8,9 @@ import Modal from 'react-bootstrap/Modal';
 
 function CategoryForm() {
   const [show, setShow] = useState(true);
-
   const handleClose = () => setShow(false);
-
-    const [name, setName] = useState('')
-  
-    const dispatch = useDispatch()
+  const [name, setName] = useState('')
+  const dispatch = useDispatch()
   
     const onSubmit = (e) => {
       e.preventDefault()

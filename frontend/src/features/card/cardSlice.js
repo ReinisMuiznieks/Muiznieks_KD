@@ -10,7 +10,6 @@ const initialState = {
 }
 
 // Create new card
-
 export const createCard = createAsyncThunk('/cards/create', async (cardData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -43,7 +42,6 @@ export const getCards = createAsyncThunk('cards/getAll', async (_, thunkAPI) => 
 })
 
 // Delete card
-
 export const deleteCard = createAsyncThunk('/cards/delete', async (id, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token

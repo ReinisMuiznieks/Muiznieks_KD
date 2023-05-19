@@ -80,7 +80,7 @@ return (
                 <Form id="register-form" onSubmit={onSubmit}>
                     <h3 id="form-title" className="text-center">Register</h3> {/* Reģistrācija */}
                     <div className="text-center">Already have an account?{" "} {/* Esiet jau reģistrēti? */}
-                        <a className="link-primary" id="login-href" href="/log-in">Login</a> {/* */}
+                        <a className="link-primary" id="login-href" href="/log-in">Login</a>
                     </div>
     
                     <Form.Group className="mb-3 pt-3">
@@ -142,9 +142,7 @@ return (
                     />
                     </div>
                     </Form.Group>
-    
                     <Button variant="primary" type="submit" id="submit-form">Register</Button> {/* Reģistrēties */} 
-    
                   </Form>
             </Col>
         </Row>

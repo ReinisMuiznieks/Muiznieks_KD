@@ -14,10 +14,9 @@ import axios from 'axios'
 import {getTests} from '../../../../features/test/testSlice'
 import { getCards } from '../../../../features/card/cardSlice'
 import { v4 as uuidv4 } from 'uuid';
-import '../../../../components/question/question.scss'
+import '../../admin.scss'
 
 function QuestionForm() {
-
   const [correctOption, setCorrectOption] = useState();
   const { user } = useSelector((state) => state.auth)
   const [questionTitle, setQuestionTitle] = useState("");
@@ -25,11 +24,11 @@ function QuestionForm() {
   const navigate = useNavigate()
   const [test, setTest] = useState("");
   const { tests, isLoading, isError, message } = useSelector((state) => state.tests);
-
   const [card, setCard] = useState("");
   const { cards } = useSelector((state) => state.cards);
   const [dumy, setDumy] = useState(0);
   const [inputFields, setInputFields] = useState([{ id: uuidv4(), option: '' }]);
+  const headers = { 'Authorization': `Bearer ${user.token}` };
 
     const handleAddFields = () => {
         setInputFields([...inputFields, { id: uuidv4(), option: '' }])
@@ -92,7 +91,7 @@ const handleChangeInput = async (id, event) => {
         };
         console.log(questionData)
         axios.post("https://verbum-server-kd.onrender.com/api/questions", questionData,
-          { headers: { 'Authorization': `Bearer ${user.token}` } },).then((response) => {
+          { headers },).then((response) => {
             console.log(response.status);
             const data = response.data._id;
             handleOptions({ data, inputOption });
@@ -130,7 +129,7 @@ const handleChangeInput = async (id, event) => {
                 }
             }
             console.log(option);
-            axios.put("https://verbum-server-kd.onrender.com/api/questions/" + data, option ,{headers: {'Authorization': `Bearer ${user.token}`}},).then((response) => {
+            axios.put("https://verbum-server-kd.onrender.com/api/questions/" + data, option ,{headers},).then((response) => {
                 console.log(response.status);
                 console.log(response);
             });
@@ -165,23 +164,19 @@ const handleChangeInput = async (id, event) => {
               />
             </Form.Group>
 
-          
             <div className="input-group mb-3">
               <Form.Select onChange={(e)=>setTest(e.target.value)} id="test" name="cars" className="form-control select select-initialized"  value={test}>
                 <option >Choose Test</option>
                 {
                     tests && tests.map(test =>(
                         <option key={test._id}  value={test._id} test={test} >{test.testname}</option>
-                    ))
-                    
+                    ))   
                 }
               </Form.Select>
               <Button className="btn btn-secondary" type="button" onClick={handleClick} id="button-addon2">Add Test</Button>
                     {isShown && (
-
                        <>
                        </>
-
                     )}
             </div>
 
@@ -189,64 +184,48 @@ const handleChangeInput = async (id, event) => {
               <Form.Select onChange={(e)=>setCard(e.target.value)} id="card" name="cars" className="form-control select select-initialized"  value={card.image}>
                 <option >Choose Card</option>
                 {
-                    cards && cards.map(card =>(
-                        <option key={card._id}  value={card.image} card={card.image} >{card.lv_word}</option>
-                    ))
-                    
+                  cards && cards.map(card =>(
+                      <option key={card._id}  value={card.image} card={card.image} >{card.lv_word}</option>
+                  ))  
                 }
               </Form.Select>
               <Button className="btn btn-secondary" type="button" onClick={handleClick} id="button-addon2">Add Test</Button>
                     {isShown && (
-
                        <>
                        </>
-
                     )}
             </div>
-          </Col>
-
-          
-
+          </Col>    
           </Row>
-          
-
       </Form>
       </Container>
-      
-      <Container className='card-legend pt-5'>
-            <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
-                <Button variant="success" type="submit" onClick={addQuestion}>Submit</Button>
-                <div className="vr" />
-                <Button variant="danger" onClick={onReset}>Reset</Button>
-            </Stack>
-      </Container>
-
+        <Container className='card-legend pt-5'>
+              <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
+                  <Button variant="success" type="submit" onClick={addQuestion}>Submit</Button>
+                  <div className="vr" />
+                  <Button variant="danger" onClick={onReset}>Reset</Button>
+              </Stack>
+        </Container>
 <Container>
-
-<div>
-  <Form.Group>
-      {inputFields.map(inputField => (
-      <div key={inputField.id} className="input-group mb-3" style={{ width: "650px" }} >
-          <Form.Control
-              name="option"
-              label="option"
-              // variant="filled"
-              value={inputField.option}
-              onChange={event => handleChangeInput(inputField.id, event)}
-              // style={{ maxWidth: "650px", maxHeight: "50px", width: "650px" }}
-          />
-          <Button variant="danger" type="button" id="option-button" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove</Button>
-          <Button variant="success" type="button" id="option-button" disabled={inputFields.length > 3} onClick={handleAddFields}>Add</Button>
-          <input type="radio" name='control' id="option-correct" value={inputField.option} onClick={(e) => setCorrectOption(e.target.value)} />
-      </div> 
-  ))}
-    </Form.Group>
-</div>
+  <div>
+    <Form.Group>
+        {inputFields.map(inputField => (
+        <div key={inputField.id} className="input-group mb-3" style={{ width: "650px" }} >
+            <Form.Control
+                name="option"
+                label="option"
+                value={inputField.option}
+                onChange={event => handleChangeInput(inputField.id, event)}
+            />
+            <Button variant="danger" type="button" id="option-button" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove</Button>
+            <Button variant="success" type="button" id="option-button" disabled={inputFields.length > 3} onClick={handleAddFields}>Add</Button>
+            <input type="radio" name='control' id="option-correct" value={inputField.option} onClick={(e) => setCorrectOption(e.target.value)} />
+        </div> 
+    ))}
+      </Form.Group>
+  </div>
 </Container>
   </>
-
-      
-      
       );
   }
   

@@ -6,13 +6,12 @@ import { useSelector } from "react-redux";
 import NoQuestions from "../question/NoQuestions";
 import Spinner from "../spinner/Spinner";
 
-const QuizController = (CUId) => {
+const QuizController = () => {
     const { user } = useSelector((state) => state.auth)
     const headers = { 'Authorization': `Bearer ${user.token}` };
     const [questions, setQuestions] = useState([]);
     const [score, setScore] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
-
     const params = useParams();
     const id = params;
 
@@ -27,10 +26,7 @@ const QuizController = (CUId) => {
     }
 
     if (isLoading) {
-        return (
-            <>
-                <Spinner/>
-            </>)
+        return (<Spinner/>)
     }
     return (
         <div>

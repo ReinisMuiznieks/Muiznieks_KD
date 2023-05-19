@@ -10,7 +10,6 @@ const initialState = {
 }
 
 // Create new category
-
 export const createCategory = createAsyncThunk('/categories/create', async (categoryData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -28,7 +27,6 @@ export const createCategory = createAsyncThunk('/categories/create', async (cate
 
 
 // Update category
-
 export const updateCategory = createAsyncThunk('/categories/update', async (updatedCategoryData,id, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -45,7 +43,6 @@ export const updateCategory = createAsyncThunk('/categories/update', async (upda
 })
 
 // Get user category
-
 export const getCategories = createAsyncThunk('categories/getAll', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -62,7 +59,6 @@ export const getCategories = createAsyncThunk('categories/getAll', async (_, thu
 })
 
 // Delete category
-
 export const deleteCategory = createAsyncThunk('/categories/delete', async (id, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token

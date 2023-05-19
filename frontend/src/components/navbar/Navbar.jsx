@@ -4,7 +4,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import './navbar.scss'
-
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../../features/auth/authSlice'
@@ -42,34 +41,28 @@ function NavbarTop() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/" id="nav-link">Home</Nav.Link> {/* Sākums */}
+            <Nav.Link href="/" id="nav-link">Home</Nav.Link>
             {user ? (
               <>
-              <Nav.Link href="/learn" id="nav-link">Learn</Nav.Link> {/* Mācies */}
+              <Nav.Link href="/learn" id="nav-link">Learn</Nav.Link>
               <Nav.Link href="/test" id="nav-link">Test</Nav.Link>
               </>
             ) : (
               <>
               </>   
             )}
-
             {isAdmin ? (
               <>
-              {/* <Nav.Link href="/admin" id="nav-link">Dashboard</Nav.Link> */}
               <Nav.Link href="/admin" id="nav-link">Admin</Nav.Link>
               </>
             ) : (
               <>
               </>   
-            )}
-            
+            )}         
           </Nav>
-
-
           <Nav className="ms-auto">
             {user ? (
               <>
-              
               <NavDropdown title={user.name} id="nav-dropdown" className="profile-dropdown">
               <NavDropdown.Item href="/tests">Test History</NavDropdown.Item>
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
@@ -81,10 +74,7 @@ function NavbarTop() {
               <><Button variant="outline-secondary" id="nav-btn" href="/sign-up">Register</Button><Button variant="outline-secondary" id="nav-btn" href="/log-in">Login</Button></>   
             )}
           </Nav>
-
-        </Navbar.Collapse>
-
-        
+        </Navbar.Collapse> 
       </Container>
     </Navbar>
   );

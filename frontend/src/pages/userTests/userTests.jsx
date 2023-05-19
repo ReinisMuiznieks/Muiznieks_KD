@@ -10,6 +10,7 @@ import NoTests from "../../components/userTests/NoTests.jsx";
 const UserTests = () => {
   const { user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
+  const headers = { 'Authorization': `Bearer ${user.token}` };
 
   useEffect(() => {
     fetchUserTests();
@@ -17,11 +18,7 @@ const UserTests = () => {
 
   const fetchUserTests = async () => {
     try {
-        const { data } = await axios.get(`https://verbum-server-kd.onrender.com/api/usertests/user/${user._id}`, {
-          headers: {
-              'Authorization': `Bearer ${user.token}`
-          },
-        },);
+        const { data } = await axios.get(`https://verbum-server-kd.onrender.com/api/usertests/user/${user._id}`, {headers});
       console.log(data);
       setData(data);
     } catch (error) {
@@ -32,14 +29,14 @@ const UserTests = () => {
   return (
     <>
       <NavbarTop />
-      {data.length > 0 ? (
-        <Container>
-      {data.map((test) => (
-          <UserTestItem key={test._id} test={test} />
-        ))}
-        </Container>
+        {data.length > 0 ? (
+          <Container>
+          {data.map((test) => (
+            <UserTestItem key={test._id} test={test} />
+          ))}
+          </Container>
         ) : (
-        <NoTests/>
+          <NoTests/>
         )}
     </>
   );

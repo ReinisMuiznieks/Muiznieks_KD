@@ -7,18 +7,17 @@ import Button from 'react-bootstrap/Button';
 function NoTests() {
 
     return (
-<>
-  <div id="learn-legend">
-    <Container>
-        <Stack id="notfound-stack">
-            <img src={image} alt="404" id="notfound-image"></img>
-            <h3 id="notfound-title" className="text-center">No completed tests found!</h3>
-            <Button variant="outline-secondary" id="notfound-button" href="/">Home</Button>
-        </Stack>
-    </Container>
-</div>
-
-</>
+        <>
+        <div id="learn-legend">
+            <Container>
+                <Stack id="notfound-stack">
+                    <img src={image} alt="404" id="notfound-image"></img>
+                    <h3 id="notfound-title" className="text-center">No completed tests found!</h3>
+                    <Button variant="outline-secondary" id="notfound-button" href="/">Home</Button>
+                </Stack>
+            </Container>
+        </div>
+        </>
     )
 }
 

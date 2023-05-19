@@ -7,22 +7,18 @@ import Form from 'react-bootstrap/Form';
 import "./test.scss"
 import TestItem from "./TestItem";
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 
 function DisplayTests() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.auth)
     const { tests, isLoading, isError, message } = useSelector((state) => state.tests)
-    const params = useParams();
-    const id = params;
     const [search, setSearch] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [categories, setCategories] = useState([]);
-    
     const [showAllCategories, setShowAllCategories] = useState(false);
-
     const visibleCategories = showAllCategories ? categories : categories.slice(0, 3);
+    const headers = { 'Authorization': `Bearer ${user.token}` };
   
     const toggleShowAllCategories = () => {
       setShowAllCategories(!showAllCategories);
@@ -32,8 +28,7 @@ function DisplayTests() {
         setSelectedCategory(event);
         setSearch('');
     };
-
-    
+  
     useEffect(() => {
         if(isError) {
             console.log(message)
@@ -45,7 +40,7 @@ function DisplayTests() {
 
         dispatch(getTests())
         
-        axios.get('https://verbum-server-kd.onrender.com/api/categories',  { headers: { 'Authorization': `Bearer ${user.token}` } })
+        axios.get('https://verbum-server-kd.onrender.com/api/categories', { headers })
         .then(response => {
             setCategories(response.data);
         })

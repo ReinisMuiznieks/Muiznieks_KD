@@ -17,7 +17,6 @@ import Credits from "./pages/credits/Credits";
 import TestPage from "./pages/test/Test";
 import QuizController from "./components/testHandler/TestQuizController2";
 import TestCompleted from "./components/test/TestCompleted";
-
 import UsersPanel from "./pages/admin/UsersPanel";
 import TestPanel from "./pages/admin/TestsPanel";
 import QuestionsPanel from "./pages/admin/QuestionsPanel";
@@ -34,30 +33,30 @@ function App() {
         <>
         <BrowserRouter>
             <Routes>
+                {/* Visitor access */}
                 <Route path="/" element={<Home/>}/>
                 <Route path="/log-in" element={<Login/>}/>
                 <Route path="/sign-up" element={<Register/>}/>
                 <Route path="/*" element={<PageNotFound/>}/> 
+                <Route path="/credits" element={<Credits/>}/>
+
+                {/* User access */}
                 <Route path="/learn" element={<Learn/>}/>
                 <Route path="/test" element={<TestPage/>}/>
-                <Route path="/learn/test" element={<Learn/>}/>
-                <Route path="/credits" element={<Credits/>}/>
                 <Route path="/test/:id" element={<QuizController/>} />
                 <Route path="/result/:id" element={<TestCompleted/>} />
+                <Route path="/profile" element={<ProfilePage/>}/>
+                <Route path="/incorrect/:id" element={<IncorrectAnswersPage/>}/>
+                <Route path="/learn/:id" element={<LearnController/>}/>
+                <Route path="/tests" element={<UserTests/>}/>
 
+                {/* Admin access */}
                 <Route path="/admin" element={<AdminPage/>}/>
                 <Route path="/admin/tests" element={<TestPanel/>}/>
                 <Route path="/admin/users" element={<UsersPanel/>}/>
                 <Route path="/admin/questions" element={<QuestionsPanel/>}/>
                 <Route path="/admin/cards" element={<CardsPanel/>}/>
                 <Route path="/admin/categories" element={<CategoriesPanel/>}/>
-
-                <Route path="/profile" element={<ProfilePage/>}/>
-                <Route path="/incorrect/:id" element={<IncorrectAnswersPage/>}/>
-
-                <Route path="/learn/:id" element={<LearnController/>}/>
-
-                <Route path="/tests" element={<UserTests/>}/>
             </Routes>
         </BrowserRouter>
         <ToastContainer />

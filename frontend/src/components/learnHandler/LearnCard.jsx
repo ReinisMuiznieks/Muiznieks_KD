@@ -34,7 +34,6 @@ const LearnCard = ({
     currCard,
     setCurrCard,
     cards,
-    category_id,
     setCards,
     userLearnId,
   }) => {
@@ -42,85 +41,77 @@ const LearnCard = ({
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useSelector((state) => state.auth)
     const headers = { 'Authorization': `Bearer ${user.token}` };
-    const [cardCount, setCardCount] = useState(0);
     const [showResults, setShowResults] = useState(false);
-  const navigate = useNavigate()
-  const params = useParams();
-  const id = params;
+    const navigate = useNavigate()
+    const params = useParams();
+    const id = params;
+    const audioRef = useRef(null);
 
-        const audioRef = useRef(null);
-        const handlePlay = () => {
-          audioRef.current.play();
-        };
+    const handlePlay = () => {
+      audioRef.current.play();
+    };
         
-
-        const handleNext = async () => {
-          console.log(userLearnId);
-            if (currCard >= cards.length - 1) {             
-              submitLearn();
-              setShowResults(true);
-            } else {
-              try {
-                const updatedProgress = currCard+1;
-                await axios.patch(
-                  `https://verbum-server-kd.onrender.com/api/userlearn/${userLearnId}`,
-                  { progress: updatedProgress },
-                  { headers }
-                );
-                setCurrCard(currCard + 1);
-              } catch (error) {
-                console.log(error);
-                setError(true);
-              }
-            }
-          };
-          
-          const submitLearn = async () => {
-            try {
-                const updatedProgress = currCard+1;
-                await axios.patch(
-                  `https://verbum-server-kd.onrender.com/api/userlearn/${userLearnId}`,
-                  { progress: updatedProgress, completed: true },
-                  { headers }
-                );
-              } catch (error) {
-                console.log(error);
-                setError(true);
-              }
-          };
-
-        const handlePrevious = () => {
-            if (currCard == 0) {
-              navigate(`/learn/`);
-            } else {
-              setCurrCard(currCard - 1);
-            }
-          };
-
-      const getCards = async () => {
-        setIsLoading(true);
-        try {
-          const { data } = await axios.get(
-            `https://verbum-server-kd.onrender.com/api/cards?category=${id.id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${user.token}`,
-              },
-            }
-          );
-          setCards(data);
-          setCardCount(data.length);
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setIsLoading(false);
+    const handleNext = async () => {
+      console.log(userLearnId);
+        if (currCard >= cards.length - 1) {             
+          submitLearn();
+          setShowResults(true);
+        } else {
+          try {
+            const updatedProgress = currCard+1;
+            await axios.patch(
+              `https://verbum-server-kd.onrender.com/api/userlearn/${userLearnId}`,
+              { progress: updatedProgress },
+              { headers }
+            );
+            setCurrCard(currCard + 1);
+          } catch (error) {
+            console.log(error);
+            setError(true);
+          }
         }
       };
+          
+      const submitLearn = async () => {
+        try {
+            const updatedProgress = currCard+1;
+            await axios.patch(
+              `https://verbum-server-kd.onrender.com/api/userlearn/${userLearnId}`,
+              { progress: updatedProgress, completed: true },
+              { headers }
+            );
+          } catch (error) {
+            console.log(error);
+            setError(true);
+          }
+      };
 
-      useEffect(() => {
-        getCards();
-      }, [setCardCount])
-       
+      const handlePrevious = () => {
+          if (currCard == 0) {
+            navigate(`/learn/`);
+          } else {
+            setCurrCard(currCard - 1);
+          }
+        };
+
+    const getCards = async () => {
+      setIsLoading(true);
+      try {
+        const { data } = await axios.get(
+          `https://verbum-server-kd.onrender.com/api/cards?category=${id.id}`,{headers}
+        );
+        setCards(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    useEffect(() => {
+      getCards();
+    }, [])
+      
 
     if(isLoading) {
         return <Spinner/>
@@ -139,7 +130,6 @@ const LearnCard = ({
                 <Stack id="question-stack">
                   <div className="container">
                     <ProgressBar id="progress-bar" now={currCard + 1} label={currCard + 1 + "/" + cards.length} max={cards.length} />
-                    {/* <ProgressBar now={currQues + 1} label={Math.round((100 / questions.length) * [currQues+1])+ "%"} max={questions.length}/> */}
                   </div>
     
                   <div id="card-legend">

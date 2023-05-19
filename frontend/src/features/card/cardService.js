@@ -41,8 +41,6 @@ const createCard = async (cardData, token) => {
     return response.data
   }
 
-
-
 const cardService = {
     createCard,
     getCards,

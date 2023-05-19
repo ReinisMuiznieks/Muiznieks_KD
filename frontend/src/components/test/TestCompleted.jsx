@@ -43,35 +43,33 @@ const TestCompleted = () => {
 
     return (
         <>
-            <NavbarTop />
-
-            <div id="learn-legend">
-                <Container>
-                    <Stack id="notfound-stack">
-
-                        <img src={image} alt="404" id="notfound-image"></img>
-                        <h3 id="complete-title" className="text-center">Test completed!</h3>
-                        <Card id="complete-card">
-                            <Container>
-                                <Row id="card-items">
-                                    <Col>Score</Col>
-                                    <Col id="item">{data.length > 0 ? `${data[0].score}%` : ''}</Col>
-                                </Row>
-                            </Container>
-                        </Card>
-                        {data.length > 0 && data[0].score == 100 ? (
-                        <>
+        <NavbarTop />
+        <div id="learn-legend">
+            <Container>
+                <Stack id="notfound-stack">
+                    <img src={image} alt="404" id="notfound-image"></img>
+                    <h3 id="complete-title" className="text-center">Test completed!</h3>
+                    <Card id="complete-card">
+                        <Container>
+                            <Row id="card-items">
+                                <Col>Score</Col>
+                                <Col id="item">{data.length > 0 ? `${data[0].score}%` : ''}</Col>
+                            </Row>
+                        </Container>
+                    </Card>
+                    {data.length > 0 && data[0].score == 100 ? (
+                    <>
                         <Button variant="outline-secondary" id="complete-button" href="/test">Home</Button>
-                        </>
-                        ) : (
-                        <>
+                    </>
+                    ) : (
+                    <>
                         <Button variant="outline-secondary" id="complete-button"  className="see-mistakes" onClick={seeMistakes}>See mistakes</Button>
                         <Button variant="outline-secondary" id="complete-button" href="/test">Home</Button>
-                        </>
-                        )}
-                    </Stack>
-                </Container>
-            </div>
+                    </>
+                    )}
+                </Stack>
+            </Container>
+        </div>
 
         </>
     )
