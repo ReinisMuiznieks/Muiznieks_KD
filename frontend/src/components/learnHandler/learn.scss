@@ -15,6 +15,17 @@ $accent: #a580d5;
     color: $secondaryButton;
 }
 
+#attribution-icon{
+    cursor: pointer;
+    opacity: 0.5;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 25px;
+    height: 25px;
+    
+}
+
 .img-attrib {
     position: absolute;
     top: 0;

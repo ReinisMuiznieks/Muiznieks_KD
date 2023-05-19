@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import AttributionIcon from '@mui/icons-material/Attribution';
 
 const Container = styled.div`
   width: 100%;
@@ -162,6 +163,7 @@ const TestQuestions2 = ({
     <div id="card-legend">
       
       <Card id="question-card">
+      <AttributionIcon id="attribution-icon" alt="credits" onClick={() => navigate("/credits")} />
         <Card.Body>
           <Card.Text id="test-question">
           {questions[currQues].question}

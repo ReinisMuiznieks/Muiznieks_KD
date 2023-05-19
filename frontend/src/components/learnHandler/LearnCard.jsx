@@ -22,6 +22,7 @@ import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Image from 'react-bootstrap/Image';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import AttributionIcon from '@mui/icons-material/Attribution';
 
 const Container = styled.div`
   width: 100%;
@@ -144,6 +145,7 @@ const LearnCard = ({
     
                   <div id="card-legend">
                     <Card id="question-card">
+                      <AttributionIcon id="attribution-icon" alt="credits" onClick={() => navigate("/credits")} />
                       <Card.Body>
                         <Card.Text id="card-text">
                           {cards[currCard].lv_word}

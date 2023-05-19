@@ -1,3 +1,9 @@
+$primary: #ffffff;
+$secondary: #7678d2;
+$primaryButton: #95b8fe;
+$secondaryButton: #383946;
+$accent: #a580d5;
+
 #title{
     margin-top: 40px;
     text-align: left;
@@ -5,4 +11,13 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 660;
     margin-bottom: 30px;
+}
+
+.credits-stack a{
+    color: $primaryButton;
+}
+
+.credits-stack a:hover{
+    color: $primaryButton;
+    opacity: 0.7;
 }

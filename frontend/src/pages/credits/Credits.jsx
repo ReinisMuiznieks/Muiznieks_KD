@@ -10,9 +10,9 @@ const Credits = () => {
 <>
 <NavbarTop />
     <Container>
-        <h1 id='title'>Credits</h1>
+        <h1 id='title'>Card Image Attributions</h1>
 
-        <Stack id="credits-stack">
+        <Stack className="credits-stack">
             <a href="https://www.flaticon.com/free-stickers/fruit">Fruits and Vegetables stickers pack by Stickers - Flaticon</a>
             <a href="https://www.flaticon.com/stickers-pack/days-of-the-week-months-and-seasons">Days of the week months and seasons stickers pack by Stickers - Flaticon</a>
             <a href="https://www.flaticon.com/free-stickers/number" title="number stickers">Number stickers created by Stickers - Flaticon</a>
