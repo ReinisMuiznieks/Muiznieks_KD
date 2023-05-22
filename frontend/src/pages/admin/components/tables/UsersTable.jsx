@@ -13,6 +13,7 @@ function UsersTable() {
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("");
 
   const columns = [
     { field: "_id", headerName: "ID", width: 250 },
@@ -78,7 +79,9 @@ function UsersTable() {
   const handleSave = (event) => {
     event.preventDefault();
     axios
-      .put(`https://verbum-server-kd.onrender.com/api/users/${editingItem._id}`, editingItem, {headers})
+      .put(`https://verbum-server-kd.onrender.com/api/users/${editingItem._id}`, 
+      { ...editingItem, role: selectedRole}, 
+      {headers})
       .then((response) => {
         setData(
           data.map((item) =>
@@ -128,6 +131,18 @@ function UsersTable() {
                   }
                 />
               </Form.Group>
+
+              <Form.Group controlId="formItemCategory">
+              <Form.Label>Category:</Form.Label>
+              <Form.Select
+                value={selectedRole}
+                onChange={(event) => setSelectedRole(event.target.value)}
+              >
+                  <option value={"user"}>User</option>
+                  <option value={"admin"}>Admin</option>
+              </Form.Select>
+            </Form.Group>
+
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCancel}>
