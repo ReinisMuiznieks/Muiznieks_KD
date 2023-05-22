@@ -51,8 +51,18 @@ function Register() {
 
   const onSubmit = (e) => {
     e.preventDefault()
+    const uppercaseRegex = /[A-Z]/;
 
-    if (password !== password2) {
+    if(!name || name.length <3 || name.length >12){
+      toast.error('Name must be between 3-12 characters.')
+    }
+    else if(!password || password.length <6){
+      toast.error('Password must be at least 6 symbols long.')
+    }
+    else if (!uppercaseRegex.test(password)) {
+      toast.error("Password must contain at least one capital letter.");
+    }
+    else if (password !== password2) {
       toast.error('Password do not match!')
     } else {
       const userData = {
@@ -60,7 +70,6 @@ function Register() {
         email,
         password,
       }
-
       dispatch(register(userData))
     }
   }
