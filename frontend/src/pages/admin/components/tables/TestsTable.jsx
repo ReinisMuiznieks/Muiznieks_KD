@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Button, Modal, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import {Container} from 'react-bootstrap';
+import { toast } from 'react-toastify'
 
 function TestsTable() {
   const { user } = useSelector((state) => state.auth);
@@ -62,6 +63,8 @@ function TestsTable() {
       .catch((error) => {
         console.error(error);
       });
+
+      toast.success(`Test has been deleted!`)
   };
 
   const handleSave = (event) => {

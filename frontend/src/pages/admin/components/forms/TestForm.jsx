@@ -14,7 +14,6 @@ import axios from 'axios'
 import Select from 'react-select';
 
 function TestForm() {
-    const [category, setCategory] = useState([]);
     const { user } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -41,7 +40,7 @@ function TestForm() {
       const onSubmit = (e) => {
         e.preventDefault()
     
-        if (testName.trim().length !== 0 && category) {
+        if (testName.trim().length !== 0 && selectedCategories.length>0) {
           // axios post create new test
           const testData = {
             testname: testName,
@@ -52,8 +51,8 @@ function TestForm() {
 
           axios.post("http://localhost:5000/api/tests",testData,{headers})
 
-          setCategory('')
           setTestName('')
+          setCategories([])
           toast.success(`Test ${testName} has been created!`)
         } else {
           toast.error('Please fill out all of the fields!')
@@ -61,8 +60,8 @@ function TestForm() {
       }
 
       const onReset = () => {
-        setCategory('')
         setTestName('')
+        setCategories([])
       }
   
     const fetchCategories = async () => {

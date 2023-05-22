@@ -94,6 +94,8 @@ useEffect(() => {
       .catch((error) => {
         console.error(error);
       });
+
+      toast.success("Card has been deleted!")
   };
 
   const handleSave = (event) => {

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Button, Modal, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import {Container} from 'react-bootstrap';
+import { toast } from 'react-toastify'
 
 function QuestionsTable() {
   const { user } = useSelector((state) => state.auth);
@@ -90,6 +91,7 @@ function QuestionsTable() {
       .catch((error) => {
         console.error(error);
       });
+      toast.success("Question has been deleted!")
   };
 
   const handleSave = (event) => {
