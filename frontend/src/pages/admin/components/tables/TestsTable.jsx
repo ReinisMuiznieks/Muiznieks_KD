@@ -70,7 +70,7 @@ function TestsTable() {
   const handleSave = (event) => {
     event.preventDefault();
     axios
-      .put(`http://localhost:5000/api/tests/${editingItem._id}`, editingItem, {headers})
+      .put(`https://verbum-server-kd.onrender.com/api/tests/${editingItem._id}`, editingItem, {headers})
       .then((response) => {
         setData(
           data.map((item) =>
