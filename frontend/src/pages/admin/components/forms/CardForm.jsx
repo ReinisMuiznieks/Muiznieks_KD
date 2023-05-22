@@ -53,7 +53,7 @@ function CardForm() {
       const onSubmit = (e) => {
         e.preventDefault()
     
-        if (lv_word.trim().length !== 0 && eng_word.trim().length !== 0 && image) {
+        if (lv_word.trim().length !== 0 && eng_word.trim().length !== 0 && image && audio) {
           dispatch(createCard({ lv_word, eng_word, image: image.filesUploaded[0].url,  audio: audio.filesUploaded[0].url, category}))
           setLvword('')
           setEngword('')
@@ -108,7 +108,7 @@ function CardForm() {
                 name='eng_word'
                 required
                 onChange={(e) => setEngword(e.target.value)}
-                placeholder="LV"
+                placeholder="ENG"
                 />
               </Form.Group>
             </Col>
