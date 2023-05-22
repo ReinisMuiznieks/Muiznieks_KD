@@ -5,10 +5,21 @@ const resultSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  username : { type : String },
-  result : { type : Array, default : []},
-  attempts : { type : Number, default : 0},
-  points : { type : Number, default : 0},
+  username : { 
+    type: String 
+  },
+  result: { 
+    type: Array, 
+    default : []
+  },
+  attempts: { 
+    type: Number, 
+    default: 0
+  },
+  points: { 
+    type: Number, 
+    default: 0
+  },
 },
   {
     timestamps: true,

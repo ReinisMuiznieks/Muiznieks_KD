@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import {reset} from '../../../../features/category/categorySlice'
-import Spinner from '../../../../components/spinner/Spinner';
 import '../../../../components/card/card.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -12,7 +11,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import axios from 'axios'
-import {getTypes} from '../../../../features/type/typeSlice'
 import Select from 'react-select';
 
 function TestForm() {
@@ -21,8 +19,6 @@ function TestForm() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [testName, setTestName] = useState("");
-    const [type, setType] = useState('');
-    const { types } = useSelector((state) => state.type)
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [categories, setCategories] = useState([]);
     const headers = { 'Authorization': `Bearer ${user.token}` };
@@ -37,8 +33,6 @@ function TestForm() {
             navigate('/')
         }
 
-        dispatch(getTypes())
-
         return () => { // clears when component unmounts
             dispatch(reset())
         }
@@ -47,12 +41,11 @@ function TestForm() {
       const onSubmit = (e) => {
         e.preventDefault()
     
-        if (testName.trim().length !== 0 && category && type) {
+        if (testName.trim().length !== 0 && category) {
           // axios post create new test
           const testData = {
             testname: testName,
-            categories: selectedCategories.map((categoryId) => ({ category: categoryId })),
-            type: type
+            categories: selectedCategories.map((categoryId) => ({ category: categoryId }))
           };
           
           console.log(testData);
@@ -60,7 +53,6 @@ function TestForm() {
           axios.post("http://localhost:5000/api/tests",testData,{headers})
 
           setCategory('')
-          setType('')
           setTestName('')
           toast.success(`Test ${testName} has been created!`)
         } else {
@@ -70,13 +62,8 @@ function TestForm() {
 
       const onReset = () => {
         setCategory('')
-        setType('')
         setTestName('')
       }
-
-    useEffect(() => {
-      fetchCategories();
-    }, []);
   
     const fetchCategories = async () => {
       try {
@@ -89,6 +76,11 @@ function TestForm() {
         }
     }; 
 
+    
+    useEffect(() => {
+      fetchCategories();
+    }, []);
+    
     const handleCategoryChange = (selectedOptions) => {
       setSelectedCategories(selectedOptions.map((option) => option.value));
       console.log(selectedCategories)
@@ -125,16 +117,6 @@ function TestForm() {
                 classNamePrefix="select"
                 onChange={handleCategoryChange}
               />
-              <div className="input-group mb-3">
-                <Form.Select onChange={(e)=>setType(e.target.value)} id="type" name="cars" className="form-control select select-initialized"  value={type}>
-                  <option >Choose Type</option>
-                  {
-                      types && types.map(type =>(
-                          <option key={type._id}  value={type._id} type={type} >{type.name}</option>
-                      ))        
-                  }
-                </Form.Select>
-              </div>
             </Col>  
           </Row>
             <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">

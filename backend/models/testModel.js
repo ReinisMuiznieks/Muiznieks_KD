@@ -12,12 +12,7 @@ const testSchema = new mongoose.Schema({
       ref: "Category",
       required : [true, 'Must belong to a category'],
     }
-  }],
-  type: {
-    type: ObjectId,
-    ref: "Type",
-    required : [true, 'Must belong to a type'],
-  },
+  }]
 },
   {
     timestamps: true,
