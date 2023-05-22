@@ -125,17 +125,17 @@ function UsersTable() {
                 <Form.Label>Name:</Form.Label>
                 <Form.Control
                   type="text"
-                  value={editingItem?.role || ''}
+                  value={editingItem?.name || ''}
                   onChange={(event) =>
-                    setEditingItem({ ...editingItem, role: event.target.value })
+                    setEditingItem({ ...editingItem, name: event.target.value })
                   }
                 />
               </Form.Group>
 
               <Form.Group controlId="formItemCategory">
-              <Form.Label>Category:</Form.Label>
+              <Form.Label>Role:</Form.Label>
               <Form.Select
-                value={selectedRole}
+                value={editingItem?.role}
                 onChange={(event) => setSelectedRole(event.target.value)}
               >
                   <option value={"user"}>User</option>
