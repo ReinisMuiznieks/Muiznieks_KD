@@ -114,12 +114,16 @@ const IncorrectAnswersPage = () => {
                         key={option._id}
                         style={{
                         borderColor: 
-                        option.option === item.incorrectAnswers[currQues].userAnswer ? 'red' : 
-                        option.option === item.incorrectAnswers[currQues].correctAnswer ? 'green' : ''
+                        option.option === item.incorrectAnswers[currQues].userAnswer ? 'rgba(255, 0, 0, 1)' : 
+                        option.option === item.incorrectAnswers[currQues].correctAnswer ? 'rgba(0, 180, 0, 1)' : ''
 
                         ,color: 
-                        option.option === item.incorrectAnswers[currQues].userAnswer ? 'red' : 
-                        option.option === item.incorrectAnswers[currQues].correctAnswer ? 'green' : ''
+                        option.option === item.incorrectAnswers[currQues].userAnswer ? 'black' : 
+                        option.option === item.incorrectAnswers[currQues].correctAnswer ? 'black' : ''
+
+                        ,backgroundColor:
+                        option.option === item.incorrectAnswers[currQues].userAnswer ? 'rgba(255, 0, 0, 0.57)' : 
+                        option.option === item.incorrectAnswers[currQues].correctAnswer ? 'rgba(0, 180, 0, 0.55)' : ''
                         }}
                         >
                         {option.option}
