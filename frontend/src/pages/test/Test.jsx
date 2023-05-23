@@ -6,7 +6,9 @@ const TestPage = () => {
     return (
 <>
     <NavbarTop />
-    <DisplayTests/>
+    <div className="item-container">
+       <DisplayTests/>  
+    </div>
 </>
     )
 }

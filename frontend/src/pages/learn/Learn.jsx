@@ -73,7 +73,10 @@ const Learn = () => {
             </div>
         </div>
 
-        <DisplayCategories/>
+        <div className="item-container">
+            <DisplayCategories/>
+        </div>
+        
     </Container>
 </>
     )
