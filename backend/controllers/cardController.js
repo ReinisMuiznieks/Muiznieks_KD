@@ -54,7 +54,6 @@ const addCard = asyncHandler(async(req,res) => {
   const card = await Card.create({
       lv_word,
       eng_word,
-      description,
       image,
       category,
       audio
@@ -65,7 +64,6 @@ const addCard = asyncHandler(async(req,res) => {
           _id: card.id,
           lv_word: card.lv_word,
           eng_word: card.eng_word,
-          description: card.description,
           image: card.image,
           audio: card.audio,
           category: card.category
