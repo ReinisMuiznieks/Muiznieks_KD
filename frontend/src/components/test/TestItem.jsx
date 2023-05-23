@@ -32,11 +32,13 @@ function TestItem({test}) {
             'Authorization': `Bearer ${user.token}`
         },
       },);
-
+      
+      const myDataScore = await Promise.all(data.map((d) => d.score))
       const myData = await Promise.all(data.map((d) => d.test))
       for (let i = 0; i <= myData.length; i++) {
           if (myData[i] === test._id) {
               setisCompleted(true);
+              setScore(myDataScore[i]);
           }
       }
 
@@ -54,7 +56,6 @@ function TestItem({test}) {
       });
       const categories = response.data.map((category) => category.name);
       setCategoryNames(categories);
-      console.log(categoryNames);
     } catch (error) {
       console.log(error);
     }
