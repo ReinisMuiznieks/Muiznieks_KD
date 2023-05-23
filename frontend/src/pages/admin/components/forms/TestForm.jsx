@@ -49,7 +49,7 @@ function TestForm() {
           
           console.log(testData);
 
-          axios.post("http://localhost:5000/api/tests",testData,{headers})
+          axios.post("https://verbum-server-kd.onrender.com/api/tests",testData,{headers})
 
           setTestName('')
           setCategories([])
