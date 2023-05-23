@@ -5,8 +5,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import './home.scss'
-import image from '../../images/home_image.svg'
+import homeImage from '../../images/home_image.svg'
 import { useSelector } from 'react-redux'
+import audioImage from '../../images/listen-item-image.svg'
+import vocabularyImage from '../../images/vocabulary-item-image.svg'
+import trackImage from '../../images/track-item-image.svg'
 
 function Home() {
   const { user } = useSelector((state) => state.auth)
@@ -32,10 +35,50 @@ function Home() {
                 
             </Col>
             <Col id="test">
-                <img src={image} alt="learning" id="home-image"></img>
+                <img src={homeImage} alt="learning" id="home-image"></img>
 
             </Col>
           </Row>
+
+          <div className="part-container">
+            <Row>
+              <Col>
+                  <div className="part-item">
+                    <img id="item-image" src={vocabularyImage}></img>
+                    <div className="part-title">
+                      Expands vocabulary
+                    </div>
+                    <div className="part-text">
+                        Expand your word knowledge across various categories that we provide.
+                    </div>
+                  </div>
+              </Col>
+
+              <Col>
+                  <div className="part-item">
+                    <img id="item-image" src={audioImage}></img>
+                    <div className="part-title">
+                      Offers audio
+                    </div>
+                    <div className="part-text">
+                      Listen to the each word, learn the pronounciation and try for yourself!
+                    </div>
+                  </div>
+              </Col>
+
+              <Col>
+                  <div className="part-item">
+                    <img id="item-image" src={trackImage}></img>
+                    <div className="part-title">
+                      Tracks progress
+                    </div>
+                    <div className="part-text">
+                        Keep track of your learning progress, view your previously completed tests and see the incorrect answers!
+                    </div>
+                  </div>
+              </Col>
+            </Row>
+          </div>
     </Container>
 </div>
 

@@ -66,3 +66,40 @@ body{
     text-align: left;
     margin-bottom: 100px;
 }
+
+.part-container{
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.part-item{
+    border-radius: 10px;
+    margin: 30px;
+    background-color: #7678d286;
+    padding: 30px 20px 60px 20px;
+    align-items: center;
+    display: block;
+    text-align: center;
+    height: 470px;
+}
+
+#item-image{
+    width: 150px;
+    height: 150px;
+}
+
+.part-text{
+    color: $primary;
+    font-size: 20px;
+    text-align: left;
+    margin-left: 20px;
+    font-weight: 300;
+}
+
+.part-title{
+    font-weight: 500;
+    color: $primary;
+    font-size: 26px;
+    margin-top: 20px;
+    margin-bottom: 55px;
+}
