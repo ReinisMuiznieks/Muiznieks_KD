@@ -13,6 +13,7 @@ function TestsTable() {
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const columns = [
     { field: "_id", headerName: "ID", width: 250 },
@@ -55,17 +56,22 @@ function TestsTable() {
   };
 
   const handleDelete = (item) => {
+    setEditingItem(item);
+    setShowDeleteModal(true);
+  };
+
+const handleConfirmDelete = () => {
+    setShowDeleteModal(false);
     axios
-      .delete(`https://verbum-server-kd.onrender.com/api/tests/${item._id}`, {headers})
+      .delete(`https://verbum-server-kd.onrender.com/api/tests/${editingItem._id}`, { headers })
       .then((response) => {
-        setData(data.filter((i) => i._id !== item._id));
+        setData(data.filter((i) => i._id !== editingItem._id));
+        toast.success("Test has been deleted!");
       })
       .catch((error) => {
         console.error(error);
       });
-
-      toast.success(`Test has been deleted!`)
-  };
+};
 
   const handleSave = (event) => {
     event.preventDefault();
@@ -88,6 +94,7 @@ function TestsTable() {
   const handleCancel = () => {
     setEditingItem({});
     setShowModal(false);
+    setShowDeleteModal(false);
   };
 
   return (
@@ -131,6 +138,24 @@ function TestsTable() {
             </Modal.Footer>
           </Form>
         </Modal>
+        <Modal show={showDeleteModal} onHide={handleCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Item</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={handleSave}>
+          <Modal.Body>
+            <Form.Label>Are you sure you want to delete {editingItem?.testname} test?</Form.Label>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button variant="danger" type="submit" onClick={handleConfirmDelete}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
     </div>
     </Container>
   );

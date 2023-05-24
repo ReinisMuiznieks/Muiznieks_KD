@@ -53,14 +53,18 @@ function CardForm() {
       const onSubmit = (e) => {
         e.preventDefault()
     
-        if (lv_word.trim().length !== 0 && eng_word.trim().length !== 0 && image && audio) {
+        if(lv_word.length > 20 || eng_word.length > 20) {
+          toast.error('Words must be below 20 symbols!')
+        }
+        else if (lv_word.trim().length !== 0 && eng_word.trim().length !== 0 && image && audio) {
           dispatch(createCard({ lv_word, eng_word, image: image.filesUploaded[0].url,  audio: audio.filesUploaded[0].url, category}))
           setLvword('')
           setEngword('')
           setImage('')
           setCategory('')
           toast.success(`Card ${lv_word} has been created!`)
-        } else {
+        }
+        else {
           toast.error('Please fill out all of the fields!')
         }
       }

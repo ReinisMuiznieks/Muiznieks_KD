@@ -14,6 +14,7 @@ function UsersTable() {
   const [editingItem, setEditingItem] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [selectedRole, setSelectedRole] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const columns = [
     { field: "_id", headerName: "ID", width: 250 },
@@ -64,17 +65,23 @@ function UsersTable() {
   };
 
   const handleDelete = (item) => {
+    setEditingItem(item);
+    setShowDeleteModal(true);
+  };
+
+const handleConfirmDelete = () => {
+    setShowDeleteModal(false);
     axios
-      .delete(`https://verbum-server-kd.onrender.com/api/users/${item._id}`, {headers})
+      .delete(`https://verbum-server-kd.onrender.com/api/users/${editingItem._id}`, { headers })
       .then((response) => {
-        setData(data.filter((i) => i._id !== item._id));
+        setData(data.filter((i) => i._id !== editingItem._id));
+        toast.success("User has been deleted!");
       })
       .catch((error) => {
         console.error(error);
       });
+};
 
-      toast.success("User has been deleted!")
-  };
 
   const handleSave = (event) => {
     event.preventDefault();
@@ -99,6 +106,7 @@ function UsersTable() {
   const handleCancel = () => {
     setEditingItem({});
     setShowModal(false);
+    setShowDeleteModal(false);
   };
 
   return (
@@ -154,6 +162,24 @@ function UsersTable() {
             </Modal.Footer>
           </Form>
         </Modal>
+        <Modal show={showDeleteModal} onHide={handleCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Item</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={handleSave}>
+          <Modal.Body>
+            <Form.Label>Are you sure you want to delete {editingItem?.name} user?</Form.Label>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button variant="danger" type="submit" onClick={handleConfirmDelete}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
     </div>
     </Container>
   );

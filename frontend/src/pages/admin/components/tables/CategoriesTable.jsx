@@ -12,6 +12,7 @@ function CategoriesTable() {
   const [data, setData] = useState([]);
   const [editingItem, setEditingItem] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const headers = { 'Authorization': `Bearer ${user.token}` };
 
   const columns = [
@@ -55,17 +56,23 @@ function CategoriesTable() {
   };
 
   const handleDelete = (item) => {
+    setEditingItem(item);
+    setShowDeleteModal(true);
+  };
+  
+  const handleConfirmDelete = () => {
+    setShowDeleteModal(false);
     axios
-      .delete(`https://verbum-server-kd.onrender.com/api/categories/${item._id}`, {headers})
+      .delete(`https://verbum-server-kd.onrender.com/api/categories/${editingItem._id}`, { headers })
       .then((response) => {
-        setData(data.filter((i) => i._id !== item._id));
+        setData(data.filter((i) => i._id !== editingItem._id));
+        toast.success("Category has been deleted!");
       })
       .catch((error) => {
         console.error(error);
       });
-
-      toast.success("Card has been deleted!")
   };
+  
 
   const handleSave = (event) => {
     event.preventDefault();
@@ -88,6 +95,7 @@ function CategoriesTable() {
   const handleCancel = () => {
     setEditingItem({});
     setShowModal(false);
+    setShowDeleteModal(false);
   };
 
   return (
@@ -127,6 +135,25 @@ function CategoriesTable() {
             </Button>
             <Button variant="primary" type="submit">
               Save
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
+
+      <Modal show={showDeleteModal} onHide={handleCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Item</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={handleSave}>
+          <Modal.Body>
+            <Form.Label>Are you sure you want to delete {editingItem?.name} category?</Form.Label>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button variant="danger" type="submit" onClick={handleConfirmDelete}>
+              Delete
             </Button>
           </Modal.Footer>
         </Form>
