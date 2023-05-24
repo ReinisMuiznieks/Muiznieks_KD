@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const router = require('express')
-const UserExams = require('../models/userExamModel')
+const UserExams = require('../models/userTestModel')
 
 const getUserExams = asyncHandler(async (req, res) => {
       UserExams.find().then(data => {

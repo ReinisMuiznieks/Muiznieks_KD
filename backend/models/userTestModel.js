@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
-const UserExamSchema = new mongoose.Schema(
+const UserTestSchema = new mongoose.Schema(
   {
     test: {
       type: ObjectId,
@@ -44,4 +44,4 @@ const UserExamSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("UserExam", UserExamSchema);
+module.exports = mongoose.model("UserTest", UserTestSchema);
