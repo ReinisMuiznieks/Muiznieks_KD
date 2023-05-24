@@ -40,7 +40,10 @@ function TestForm() {
       const onSubmit = (e) => {
         e.preventDefault()
     
-        if (testName.trim().length !== 0 && selectedCategories.length>0) {
+        if(testName.trim().length > 30) {
+          toast.error('Test name must be below 20 symbols!')
+        }
+        else if (testName.trim().length !== 0 && selectedCategories.length>0) {
           // axios post create new test
           const testData = {
             testname: testName,
