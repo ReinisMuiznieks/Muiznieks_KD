@@ -173,11 +173,6 @@ const handleChangeInput = async (id, event) => {
                     ))   
                 }
               </Form.Select>
-              <Button className="btn btn-secondary" type="button" onClick={handleClick} id="button-addon2">Add Test</Button>
-                    {isShown && (
-                       <>
-                       </>
-                    )}
             </div>
 
             <div className="input-group mb-3">
@@ -189,11 +184,6 @@ const handleChangeInput = async (id, event) => {
                   ))  
                 }
               </Form.Select>
-              <Button className="btn btn-secondary" type="button" onClick={handleClick} id="button-addon2">Add Test</Button>
-                    {isShown && (
-                       <>
-                       </>
-                    )}
             </div>
           </Col>    
           </Row>

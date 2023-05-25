@@ -292,7 +292,7 @@ useEffect(() => {
 
       <Modal show={showDeleteModal} onHide={handleCancel}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Item</Modal.Title>
+          <Modal.Title>Delete Item</Modal.Title>
         </Modal.Header>
         <Form onSubmit={handleSave}>
           <Modal.Body>
