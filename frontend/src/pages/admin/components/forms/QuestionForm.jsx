@@ -189,13 +189,6 @@ const handleChangeInput = async (id, event) => {
           </Row>
       </Form>
       </Container>
-        <Container className='card-legend pt-5'>
-              <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
-                  <Button variant="success" type="submit" onClick={addQuestion}>Submit</Button>
-                  <div className="vr" />
-                  <Button variant="danger" onClick={onReset}>Reset</Button>
-              </Stack>
-        </Container>
 <Container>
   <div>
     <Form.Group>
@@ -214,6 +207,14 @@ const handleChangeInput = async (id, event) => {
     ))}
       </Form.Group>
   </div>
+</Container>
+
+<Container className='card-legend pt-5'>
+      <Stack direction="horizontal" gap={3} className="pt-5 d-flex justify-content-end">
+          <Button variant="success" type="submit" onClick={addQuestion}>Submit</Button>
+          <div className="vr" />
+          <Button variant="danger" onClick={onReset}>Reset</Button>
+      </Stack>
 </Container>
   </>
       );
