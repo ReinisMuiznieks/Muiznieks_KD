@@ -36,7 +36,7 @@ const LearnCard = ({
     cards,
     setCards,
     userLearnId,
-  }) => {
+  }) => { // saņem mainīgos no Learn komponenta
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useSelector((state) => state.auth)
@@ -47,16 +47,19 @@ const LearnCard = ({
     const id = params;
     const audioRef = useRef(null);
 
+    // funkcija kas atskaņo audio
     const handlePlay = () => {
       audioRef.current.play();
     };
         
+    // funkcija kas notiek kad lietotājs izvēlas nevigēt uz nākamo vārda kartiņu
     const handleNext = async () => {
-      console.log(userLearnId);
+      // ja pēdējā kartiņa
         if (currCard >= cards.length - 1) {             
           submitLearn();
           setShowResults(true);
         } else {
+          // citādi atjaunināt lietotāja progresu
           try {
             const updatedProgress = currCard+1;
             await axios.patch(
@@ -64,6 +67,7 @@ const LearnCard = ({
               { progress: updatedProgress },
               { headers }
             );
+            // piešķirt currCard mainīgajam vērtību kā nākamo kartiņu
             setCurrCard(currCard + 1);
           } catch (error) {
             console.log(error);
@@ -72,6 +76,7 @@ const LearnCard = ({
         }
       };
           
+      // funckija kas notiek kad lietotājs ir apguvis visas mācību kartiņas
       const submitLearn = async () => {
         try {
             const updatedProgress = currCard+1;
@@ -86,6 +91,7 @@ const LearnCard = ({
           }
       };
 
+      // funkcija kas notiek kad lietotājs izvēlas nevigēt uz iepriekšējo vārda kartiņu
       const handlePrevious = () => {
           if (currCard == 0) {
             navigate(`/learn/`);
@@ -112,7 +118,6 @@ const LearnCard = ({
       getCards();
     }, [])
       
-
     if(isLoading) {
         return <Spinner/>
     }

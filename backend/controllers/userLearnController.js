@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const router = require('express')
 const UserLearn = require('../models/userLearnModel')
 
+// get UserLearn
 const getUserLearn = asyncHandler(async (req, res) => {
     UserLearn.find().then(data => {
         res.json(data)
@@ -10,7 +11,7 @@ const getUserLearn = asyncHandler(async (req, res) => {
       })
   })
   
-  //spesific exam
+//specific exam
   const getLearn = asyncHandler(async (req, res) => {
       try {
         UserLearn.find({ _id: req.params.id }).then(data => {
@@ -21,6 +22,7 @@ const getUserLearn = asyncHandler(async (req, res) => {
       }
   });
   
+// get User Learn by Category id
   const getUserLearnByCategoryId = asyncHandler(async (req, res) => {
       try {
             UserLearn.find({ category: req.params.id }).then(data => {
@@ -30,7 +32,7 @@ const getUserLearn = asyncHandler(async (req, res) => {
         res.json({ message: err });
       }
   });
-
+// get User Learn by User id
   const getUserLearnByUserId = asyncHandler(async (req, res) => {
     try {
         UserLearn.find({ user: req.params.id }).then(data => {
@@ -40,7 +42,8 @@ const getUserLearn = asyncHandler(async (req, res) => {
       res.json({ message: err });
     }
 });
-  
+
+// add User Learn
 const addUserLearn = asyncHandler(async (req, res) => {
   const newUserLearn = new UserLearn({
     category: req.body.category,
@@ -66,7 +69,7 @@ const addUserLearn = asyncHandler(async (req, res) => {
 });
 
   
-  
+// update User Learn
   const editUserLearn = asyncHandler(async (req, res) => {
         UserLearn.updateOne({ _id: req.params.id }, {
           $push: {
@@ -79,7 +82,9 @@ const addUserLearn = asyncHandler(async (req, res) => {
           res.json({ message: e })
       })
   })
-  
+
+
+// patch User Learn
   const patchUserLearn = asyncHandler(async (req, res) => {
     UserLearn.updateOne({ _id: req.params.id }, {
           $set: {
@@ -95,6 +100,7 @@ const addUserLearn = asyncHandler(async (req, res) => {
       })
   })
   
+// delete User Learn
   const deleteUserLearn = asyncHandler(async (req, res) => {
       UserLearn.deleteOne({ _id: req.params.id })
           .then(data => {
@@ -104,6 +110,7 @@ const addUserLearn = asyncHandler(async (req, res) => {
           })
   })
   
+// get User Learn by User and Category Id
   const getUserLearnByUserAndCategoryId = async (req, res) => {
     const { user, category } = req.query;
     try {
@@ -111,17 +118,18 @@ const addUserLearn = asyncHandler(async (req, res) => {
       res.json(userLearn);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Failed to retrieve user learn records' });
+      res.status(500).json;
     }
   };
 
+  // delete all records of User learn
   const deleteAllUserLearn = async (req, res) => {
     try {
       await UserLearn.deleteMany();
-      res.json({ message: 'Userlearn records deleted successfully' });
+      res.json({ message: 'Deleted all of User Learn records' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Failed to delete userlearn records' });
+      res.status(500);
     }
   };
 

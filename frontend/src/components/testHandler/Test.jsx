@@ -17,6 +17,7 @@ const Test = ({ questions, score, setScore, setQuestions, exam_id }) => {
     data = questions[currQues].options;
     setOptions(data);
 
+    // iet cauri katrai opcijai un ja tā ir isCorrect == true, tad to piešķir kā pareizo atbildi
     for (let k = 0; k < data.length; k++) {
       dataOptions = data[k].isCorrect;
       if (dataOptions === true) {
@@ -29,6 +30,7 @@ const Test = ({ questions, score, setScore, setQuestions, exam_id }) => {
     <div className="quiz">
       {questions ? (
         <>
+        {/* ja ir vārdu jautājumi tad padod mainīgos uz TestQuestion komponentu */}
           <div className="quizInfo">
           </div>
           <TestQuestion
@@ -43,6 +45,7 @@ const Test = ({ questions, score, setScore, setQuestions, exam_id }) => {
             exam_id={exam_id}
           />
         </>
+        // citādi atgriež tekstu
       ) : (
         <div>Sorry we couldn't find any question</div>
       )}

@@ -3,27 +3,28 @@ const Category = require('../models/categoryModel')
 const e = require('express')
 const Test = require('../models/testModel');
 
-// Get category
-const getCategories = asyncHandler(async (req, res) => {
-    const categories = await Category.find()
-  
-    res.status(200).json(categories)
+// Get categories
+const getCategories = asyncHandler(async (req,res) =>{
+  Category.find().then(data => {
+      res.json(data)
+  }).catch(e => {
+      res.json({ message: e })
   })
+})
 
-  const getCategory = asyncHandler(async (req, res) => {
-    try {
-      const test = await Test.findById(req.params.id).populate('categories.category');
-      if (!test) {
-        return res.status(404).json({ message: 'Test not found' });
-      }
-      const categories = test.categories.map((category) => category.category);
-      res.json(categories);
-    } catch (err) {
-      res.status(500).json({ message: 'Internal server error' });
+const getCategory = asyncHandler(async (req, res) => {
+  try {
+    const test = await Test.findById(req.params.id).populate('categories.category');
+    if (!test) {
+      return res.status(404);
     }
-  });
-  
-  
+    const categories = test.categories.map((category) => category.category);
+    res.json(categories);
+  } catch (err) {
+    res.status(500);
+  }
+});
+   
 
 const addCategory = asyncHandler(async(req,res) => {
     const { name } = req.body
@@ -44,7 +45,6 @@ const addCategory = asyncHandler(async(req,res) => {
     }
 })
 
-
 // Update category
 const updateCategory = asyncHandler(async (req, res) => {
     const category = await Category.findById(req.params.id)
@@ -63,7 +63,6 @@ const updateCategory = asyncHandler(async (req, res) => {
     const updateCategory = await Category.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     })
-  
     res.status(200).json(updateCategory)
   })
   
@@ -86,7 +85,6 @@ const updateCategory = asyncHandler(async (req, res) => {
   
     res.status(200).json({ id: req.params.id })
   })
-
 
 module.exports ={
     addCategory,

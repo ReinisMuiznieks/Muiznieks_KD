@@ -24,8 +24,8 @@ function TestItem({test}) {
     getCategoryNames();
   }, [])
 
+  // atgriež visus lietotāja testus no datu bāzes
   const getTestInfo = async () => {
-
     try {
       const { data } = await axios.get(`https://verbum-server-kd.onrender.com/api/usertests/user/${user._id}`, {
         headers: {
@@ -33,6 +33,7 @@ function TestItem({test}) {
         },
       },);
       
+      // ideja tāda pati kā LearnCard komponentā
       const myDataScore = await Promise.all(data.map((d) => d.score))
       const myData = await Promise.all(data.map((d) => d.test))
       for (let i = 0; i <= myData.length; i++) {
@@ -47,6 +48,7 @@ function TestItem({test}) {
     }
   }
 
+  // atgriež attiecīgā testa kategorijas no datu bāzes 
   const getCategoryNames = async () => {
     try {
       const response = await axios.get(`https://verbum-server-kd.onrender.com/api/categories/${test._id}`, {

@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler')
 const Test = require('../models/testModel')
 const router = require('express')
 
-//Get Test(s)
+// get Test
 const getTests = asyncHandler(async (req,res) =>{
     Test.find().then(data => {
         res.json(data)
@@ -11,7 +11,7 @@ const getTests = asyncHandler(async (req,res) =>{
     })
 })
 
-//GET Test by testId
+// gET Test by testId
 const getTest = asyncHandler(async (req,res) =>{
     try {
         Test.find({ _id: req.params.id }).then(data => {
@@ -22,6 +22,7 @@ const getTest = asyncHandler(async (req,res) =>{
     }
 });
 
+// add Test
 const addTest = asyncHandler(async (req,res) =>{
     const test = new Test({
         userId: req.body.userId,
@@ -35,6 +36,7 @@ const addTest = asyncHandler(async (req,res) =>{
     })
 })
 
+// delete Test
 const deleteTest = asyncHandler(async (req,res) =>{
     Test.deleteOne({ _id: req.params.id })
         .then(data => {
@@ -44,7 +46,8 @@ const deleteTest = asyncHandler(async (req,res) =>{
         })
 })
 
-  const updateTest = asyncHandler(async (req, res) => {
+// update Test
+const updateTest = asyncHandler(async (req, res) => {
     Test.updateOne({ _id: req.params.id }, {
         $push: {
             categories: req.body.categories,
@@ -54,7 +57,7 @@ const deleteTest = asyncHandler(async (req,res) =>{
     }).catch(e => {
         res.json({ message: e })
     })
-  })
+})
   
 module.exports = {
     getTests,

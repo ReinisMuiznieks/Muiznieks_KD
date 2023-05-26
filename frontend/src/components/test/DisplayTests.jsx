@@ -38,8 +38,10 @@ function DisplayTests() {
             navigate('/sign-up')
         }
 
+        // atgriež visus testus no datu bāzes
         dispatch(getTests())
         
+        // atgriež visas kategorijas no datu bāzes
         axios.get('https://verbum-server-kd.onrender.com/api/categories', { headers })
         .then(response => {
             setCategories(response.data);
@@ -69,7 +71,9 @@ return (
     </div>
     <div id="category-legend">
         <div id="category-select">
+            {/* izveido pogas kura katra attiecas uz kategoriju */}
             <button
+            // ja izvēlētā poga ir All Categories tad izvada visas kategorijas
             className={`category-button ${selectedCategory === "" ? "active" : ""}`}
             onClick={() => handleCategoryChange("")}>All Categories</button>
             {visibleCategories.map((category) => (
@@ -80,6 +84,7 @@ return (
             {category.name}
             </button>
             ))}
+            {/* ja kategorijas ir vairāk par 3 uzspiežot uz pogas ... parādas visas. Ja ir visas tad uzspiežot uz pogas Less, atkal rādas tikai 4. */}
             {categories.length > 3 && (
             <button className="more-button" onClick={toggleShowAllCategories}>
                 {showAllCategories ? "Less" : "..."}
@@ -90,6 +95,7 @@ return (
     
       {tests.length > 0 ? (
         <div className="categories">
+            {/* Meklēšanas joslas attēlošana */}
         {tests.filter((item) => {
         if (selectedCategory) {
             return item.categories.some((category) => category.category === selectedCategory) &&

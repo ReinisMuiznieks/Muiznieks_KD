@@ -2,22 +2,16 @@ const asyncHandler = require('express-async-handler')
 const Question = require('../models/questionModel')
 const router = require('express')
 
-//Get Question(s)
-// const getQuestions = asyncHandler(async (req,res) =>{
-//     Question.find().then(data => {
-//         res.json(data)
-//     }).catch(e => {
-//         res.json({ message: e })
-//     })
-// })
+// get Questions
+const getQuestions = asyncHandler(async (req,res) =>{
+    Question.find().then(data => {
+        res.json(data)
+    }).catch(e => {
+        res.json({ message: e })
+    })
+})
 
-const getQuestions = asyncHandler(async (req, res) => {
-    const questions = await Question.find()
-  
-    res.status(200).json(questions)
-  })
-
-//GET Test by testId
+// get Question 
 const getQuestion = asyncHandler(async (req,res) =>{
     try {
         Question.find({ _id: req.params.id }).then(data => {
@@ -28,20 +22,7 @@ const getQuestion = asyncHandler(async (req,res) =>{
     }
 });
 
-
-// const addQuestion = asyncHandler(async (req,res) =>{
-//     const question = new Question({
-//         testname: req.body.testname,
-//         question: req.body.question
-//     })
-//     question.save().then(data => {
-//         res.json(data)
-//     }).catch(e => {
-//         res.json({ message: e })
-//     })
-// })
-
-// Create question
+// add question
 const addQuestion = asyncHandler(async(req,res) => {
   const { test, question, card, options, correctOption } = req.body
 
@@ -69,6 +50,7 @@ const addQuestion = asyncHandler(async(req,res) => {
   }
 })
 
+// delete Question
 const deleteQuestion = asyncHandler(async (req,res) =>{
     Question.deleteOne({ _id: req.params.id })
         .then(data => {
@@ -78,7 +60,7 @@ const deleteQuestion = asyncHandler(async (req,res) =>{
         })
 })
 
-// Gets questions by test id
+// get questions by test id
 const getQuestionsByTest = asyncHandler(async (req, res) => {
     const qNew = req.query.new;
     const qTest = req.query.test;
@@ -106,7 +88,7 @@ const getQuestionsByTest = asyncHandler(async (req, res) => {
     }
   });
 
-  // Gets questions by card id
+  // gets questions by card id
 const getQuestionsByCard = asyncHandler(async (req, res) => {
   const qNew = req.query.new;
   const qCard = req.query.card;

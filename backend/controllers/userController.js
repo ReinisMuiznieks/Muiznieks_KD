@@ -47,8 +47,7 @@ const registerUser = asyncHandler(async(req,res) => {
 
 })
 
-// Authenticate user
-// POST /api/users/login
+// authorize user
 const loginUser = asyncHandler(async(req,res) => {
     const {email, password} = req.body
 
@@ -70,9 +69,7 @@ const loginUser = asyncHandler(async(req,res) => {
 
 })
 
-// Get user data
-// POST /api/users/me
-// Private route
+// Get users
 const getMe = asyncHandler(async(req,res) => {
     const {_id, name, email} = await User.findById(req.user.id)
 
@@ -84,7 +81,7 @@ const getMe = asyncHandler(async(req,res) => {
     })
 })
 
-// Generate JWT
+// Generate JWT that lasts 30 days
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d'
@@ -99,7 +96,7 @@ const getUsers = asyncHandler(async(req,res) => {
     })
 })
 
-//spesific user
+// get user
 const getUser = asyncHandler(async(req,res) => {
     try {
         User.find({ _id: req.params.id }).then(data => {

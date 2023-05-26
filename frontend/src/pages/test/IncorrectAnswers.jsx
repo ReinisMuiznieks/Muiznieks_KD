@@ -53,7 +53,7 @@ const IncorrectAnswersPage = () => {
           ids: questionIds
         }
       });
-      // Filter the response data to only include questions with matching IDs
+      // filtrē atbilžu datus, lai iekļautu tikai jautājumus ar atbilstošiem ID
       const filteredQuestions = response.data.filter((question) => questionIds.includes(question._id));
       return filteredQuestions;
     } catch (error) {

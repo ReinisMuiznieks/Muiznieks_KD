@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API_URL = '/api/users/'
 
-// Register user
+// Reģistrē lietotāju
 const register = async (userData) => {
   const response = await axios.post(API_URL, userData)
 
@@ -13,7 +13,7 @@ const register = async (userData) => {
   return response.data
 }
 
-// Login user
+// Autorizē lietotāju
 const login = async (userData) => {
   const response = await axios.post(API_URL + 'login', userData)
 
@@ -24,7 +24,7 @@ const login = async (userData) => {
   return response.data
 }
 
-// Logout user
+// Logout lietotāju
 const logout = () => {
   localStorage.removeItem('user')
 }

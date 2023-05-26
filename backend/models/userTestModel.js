@@ -25,16 +25,12 @@ const UserTestSchema = new mongoose.Schema(
       {
         question: {
           type: ObjectId,
-        //   required: true,
-        //   ref: "Question",
         },
         correctAnswer: {
           type: String,
-        //   required: true,
         },
         userAnswer: {
           type: String,
-        //   required: true,
         },
       },
     ],

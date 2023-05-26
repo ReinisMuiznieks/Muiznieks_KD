@@ -3,10 +3,12 @@ const Card = require('../models/cardModel')
 const e = require('express')
 
 // Get cards
-const getCard = asyncHandler(async (req, res) => {
-  const cards = await Card.find()
-
-  res.status(200).json(cards)
+const getCard = asyncHandler(async (req,res) =>{
+  Card.find().then(data => {
+      res.json(data)
+  }).catch(e => {
+      res.json({ message: e })
+  })
 })
 
 // Get card by id
@@ -48,9 +50,8 @@ const getCardsbyCategory = asyncHandler(async (req, res) => {
 
 // Create card
 const addCard = asyncHandler(async(req,res) => {
-  const { lv_word, eng_word, description, image, category, audio } = req.body
+  const { lv_word, eng_word, image, category, audio } = req.body
 
-  
   const card = await Card.create({
       lv_word,
       eng_word,

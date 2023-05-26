@@ -30,7 +30,7 @@ const protect = asyncHandler(async (req, res, next) => {
 })
 
 
-
+// checks if the current user is admin
 const isAdmin = asyncHandler(async (req, res, next) => {
     if (req.user.role === 'user'){
         throw new Error('Not authrozied, must be an admin!')

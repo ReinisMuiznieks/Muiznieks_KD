@@ -23,16 +23,19 @@ function UserTestItem({test}) {
     getCompletedDate();
   }, [])
 
+  // atgriež kategorijas attiecīgajā testā no datu bāzes
   const getCategoryNames = async () => {
     try {
       const response = await axios.get(`https://verbum-server-kd.onrender.com/api/categories/${test.test}`, {headers});
       const categories = response.data.map((category) => category.name);
+      // iegūst kategorijas attiecīgajam testam
       setCategoryNames(categories);
     } catch (error) {
       console.log(error);
     }
   }
 
+  // piešķir testa pabeigšanas datumu
   const getCompletedDate = async () => {
     setCompletedDate(new Date(test.createdAt).toLocaleDateString(
         'en-gb',
@@ -44,9 +47,11 @@ function UserTestItem({test}) {
       ));
   }
 
+  // atgriež testus attiecīgajā kategorijā
   const getTestName = async () => {
     try {
       const response = await axios.get(`https://verbum-server-kd.onrender.com/api/tests/${test.test}`, {headers});
+      // iegūst testa nosaukumu
       setTestName(response.data[0].testname);
       console.log(response.data)
     } catch (error) {

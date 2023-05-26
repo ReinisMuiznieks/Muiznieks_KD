@@ -38,14 +38,10 @@ const TestQuestion = ({
     currQues,
     setCurrQues,
     questions,
-    options,
     correct,
     setScore,
     score,
-    setQuestions,
-    userId,
-    exam_id
-  }) => {
+  }) => { //  saņem mainīgos no Test komponenta
     const [selected, setSelected] = useState();
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -60,24 +56,30 @@ const TestQuestion = ({
         const params = useParams();
         const id = params;
 
+      // pārbauda vai atbilde ir pareiza vai nē un attiecīgi atgriež tekstu priekš className
         const handleSelect = (i) => {
           if (selected === i && selected === correct) return "select";
           else if (selected === i && selected !== correct) return "wrong";
-          else if (correct && i === correct) return "select"; // Add a check for 'correct' property
+          else if (correct && i === correct) return "select";
         };
         
       
-    
+      // pārbauda kādu atbildi lietotājs izvēlējās
         const handleCheck = (i) => {
           setSelected(i);
+          // ja lietotājs izvēlējās pareizo atbildi, tad lietotāja rezultātu inkrementē par 1
           if (i === correct) {
             setScore(score + 1);
           }
           setError(false);
+          // pārbauda vai lietotājs izvēlējās nepareizo atbildi
           if (questions[currQues] && questions[currQues].options) {
+            // lietotāja atlasīto atbildi saglabā
             const selectedAnswer = questions[currQues].options.find((option) => option.option === i)?.option;
+            // jautājuma pareizo atbildi saglabā
             const correctAnswer = questions[currQues].options.find((option) => option.option === correct)?.option;
             if (i !== correct) {
+              // ja lietotājs atbildēja nepareizi uz jautājumu tad saglabā esošos datus
               setIncorrectAnswers((prevAnswers) => [
                 ...prevAnswers,
                 {
@@ -90,17 +92,15 @@ const TestQuestion = ({
           }
         };
         
-        
-        
-        
-      
-    
+        // funkcija kas notiek kad lietotājs vēlas doties uz nākamo jautājumu
         const handleNext = () => {
+          // pārbauda vai tas ir pēdējais jautājums
           if (currQues >= questions.length - 1) {
             submitTest();
           } else if (selected !== undefined) {
             setCurrQues(currQues + 1);
             setSelected(undefined);
+            // pārbauda vai lietotājs ir izvēlējies atbildi
           } else {
             toast.error("Please select an option");
           }
@@ -110,6 +110,7 @@ const TestQuestion = ({
         setQuestioncount(questions.length);
       }, [setQuestioncount])
 
+      // funkcija kas notiek kad lietotājs ir iesniedzis pēdējo atbildi
       const submitTest = () => {
         const incorrectAnsweredQuestions = incorrectAnswers.map((answer) => ({
           question: answer.question,
@@ -120,7 +121,7 @@ const TestQuestion = ({
         const testData = {
           user: user._id,
           test: id.id,
-          score: Math.round((score / questioncount) * 100),
+          score: Math.round((score / questioncount) * 100), // rezultātu izrēķina procentos
           completed: true,
           incorrectAnswers: incorrectAnsweredQuestions,
         };
@@ -132,6 +133,7 @@ const TestQuestion = ({
             console.log(response.status);
             console.log(response.data);
             setUserTestId(response.data._id);
+            // navigē lietotāju uz rezultātu lapu
             navigate(`/result/${response.data._id}`);
           })
           .catch((error) => {
@@ -139,12 +141,6 @@ const TestQuestion = ({
           });
       };
       
-      
-      
-      
-
-      
-
     if(isLoading) {
         return <Spinner/>
     }
@@ -180,7 +176,7 @@ const TestQuestion = ({
             questions[currQues].options.map((option) => (
               <Button
                 id="answer_button"
-                className={`singleOption  ${selected && handleSelect(option.option)}`}
+                className={`singleOption  ${selected && handleSelect(option.option)}`} // className piešķir attiecīgi vai lietotājs ir izvēlējies atbildi vai nav
                 key={option._id}
                 onClick={() => {
                   handleCheck(option.option);
@@ -202,6 +198,7 @@ const TestQuestion = ({
                 color="primary"
                 size="large"
                 onClick={handleNext}>
+                {/* ja jautājums nav pēdējais tad poga ir Next Question ja pēdējais tad Submit */}
                 {currQues >= (questions.length - 1) ? (<span >Submit</span>) : (<span>Next Question</span>)}
               </Button>
           </Col>

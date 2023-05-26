@@ -51,14 +51,18 @@ return (
     </div>
 
     <section className="content">
+        {/* parbaudīt vai ir kada kategorija */}
         {categories.length > 0 ? (
             <div className="categories">
+                {/* filtrēt kategorijas ar tekstu no meklēšanas joslas */}
                 {categories.filter((item) => {
                     return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search)
                 }).map((category) => (
+                    // iziet cauri katrai kategorijai un izvadīt Learn category item komponentu
                     <LearnCategoryItem key={category._id} category={category}/>
                 ))}
             </div>
+            // Ja nav neviena kategorija izvadit ziņu
         ) : (<h1>No categories</h1>)}
     </section>
     </div>

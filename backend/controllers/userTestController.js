@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const router = require('express')
 const UserExams = require('../models/userTestModel')
 
+// get User Exams
 const getUserExams = asyncHandler(async (req, res) => {
       UserExams.find().then(data => {
         res.json(data)
@@ -10,7 +11,7 @@ const getUserExams = asyncHandler(async (req, res) => {
       })
   })
   
-  //spesific exam
+  //specific exam
   const getExam = asyncHandler(async (req, res) => {
       try {
           UserExams.find({ _id: req.params.id }).then(data => {
@@ -21,6 +22,7 @@ const getUserExams = asyncHandler(async (req, res) => {
       }
   });
   
+ // get User Exam by Test id
   const getUserExamByTestId = asyncHandler(async (req, res) => {
       try {
           UserExams.find({ test: req.params.id }).then(data => {
@@ -31,6 +33,7 @@ const getUserExams = asyncHandler(async (req, res) => {
       }
   });
 
+ // get User Exam by User id
   const getUserExamByUserId = asyncHandler(async (req, res) => {
     try {
         UserExams.find({ user: req.params.id }).then(data => {
@@ -41,6 +44,7 @@ const getUserExams = asyncHandler(async (req, res) => {
     }
 });
   
+// add User Exam
 const addUserExam = asyncHandler(async (req, res) => {
     const userExams = new UserExams({
       test: req.body.test,
@@ -68,23 +72,7 @@ const addUserExam = asyncHandler(async (req, res) => {
       });
   });
   
-//   const addUserExams= asyncHandler(async (req, res) => {
-//     try {
-//       const { test, user, score, completed, incorrectAnswers } = req.body;
-//       const userExam = new UserExam({
-//         test,
-//         user,
-//         score,
-//         completed,
-//         incorrectAnswers,
-//       });
-//       const savedUserExam = await userExam.save();
-//       res.json(savedUserExam);
-//     } catch (error) {
-//       res.status(500).json({ message: 'Failed to add user exam.' });
-//     }
-//   });
-  
+  // update User Exam
   const editUserExam = asyncHandler(async (req, res) => {
       UserExams.updateOne({ _id: req.params.id }, {
           $push: {
@@ -97,7 +85,8 @@ const addUserExam = asyncHandler(async (req, res) => {
           res.json({ message: e })
       })
   })
-  
+
+   // patch User Exam
   const patchUserExam = asyncHandler(async (req, res) => {
       UserExams.updateOne({ _id: req.params.id }, {
           $set: {
@@ -112,6 +101,7 @@ const addUserExam = asyncHandler(async (req, res) => {
       })
   })
   
+  // delete User Exam
   const deleteUserExam = asyncHandler(async (req, res) => {
       UserExams.deleteOne({ _id: req.params.id })
           .then(data => {
@@ -121,13 +111,14 @@ const addUserExam = asyncHandler(async (req, res) => {
           })
   })
   
+  // delete all records of User Exams
   const deleteAllUserExam = async (req, res) => {
     try {
       await UserExams.deleteMany();
-      res.json({ message: 'UserExam records deleted successfully' });
+      res.json({ message: 'Deleted all records of User Exams' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Failed to delete userexam records' });
+      res.status(500);
     }
   };
 

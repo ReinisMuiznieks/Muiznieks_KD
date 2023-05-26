@@ -25,6 +25,7 @@ function NavbarTop() {
     checkRole();
   })
 
+  // pārbaudīt vai lietotājs ir administrators
   const checkRole = () => {
       if(user && user.role === 'admin'){
       setIsAdmin(true)

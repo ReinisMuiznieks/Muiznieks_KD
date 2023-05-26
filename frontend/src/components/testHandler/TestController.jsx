@@ -19,6 +19,7 @@ const TestController = () => {
         getQuestions();
     }, [])
 
+    // atgriež jautājumus attiecīgajam testam no datu bāzes
     const getQuestions = async () => {
         const { data } = await axios.get(`https://verbum-server-kd.onrender.com/api/questions?test=${id.id}`, { headers });
         setQuestions(data);
@@ -30,6 +31,7 @@ const TestController = () => {
     }
     return (
         <div>
+        {/* ja ir vārdu jautājumi tad padod mainīgos uz Test komponentu */}
         {questions.length > 0 ? (
             <Test
             questions={questions}
@@ -38,6 +40,7 @@ const TestController = () => {
             setQuestions={setQuestions}
             exam_id={id}
             />
+        // citādi atgriež NoQuestions komponentu
         ) : (<NoQuestions/>)}
         </div>
     );

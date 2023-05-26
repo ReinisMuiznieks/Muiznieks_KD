@@ -39,7 +39,7 @@ function App() {
       };
 
     const RequireAdmin = ({ children }) => {
-    // Check if the user is authenticated and has the admin role
+    // pārbauda vai lietotājs ir autorizēts un vai viņam ir administratora loma
     const isAdmin = user && user.role === 'admin';
     return isAdmin ? children : <Navigate to="/" />;
     };
