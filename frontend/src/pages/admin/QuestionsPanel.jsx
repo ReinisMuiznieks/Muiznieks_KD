@@ -9,7 +9,7 @@ function QuestionsPanel() {
     <>
     <div style={{ display: 'flex' }}>
       <Sidebar />
-      <div style={{ paddingLeft: '10px', width: '100%' }}>
+      <div style={{ paddingLeft: '200px', width: '100%' }}>
         <QuestionForm/>
         <QuestionsTable/>
       </div>
