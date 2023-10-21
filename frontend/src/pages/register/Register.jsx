@@ -82,7 +82,7 @@ return (
     
     <Container id="register-container">
         <Row className="full-form">
-            <Col>
+            <Col lg={6} md={12} className="d-none d-md-block d-md-none d-lg-block">
             <img src={image} alt="sign-up" id="register-image"></img>
             
             </Col> 
