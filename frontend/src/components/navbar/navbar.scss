@@ -13,7 +13,6 @@ $button-hover: #a580d5;
 }
 
 .navbar {
-    max-height: 100px;
     padding-top: 20px !important;
   }
 
@@ -60,4 +59,17 @@ $button-hover: #a580d5;
 .profile-dropdown{
     font-size: 18px;
     font-weight: 500;
+    margin: 16px 1px 10px 10px;
+    padding-left: 20px;
+
+    @media (max-width: 768px) {
+        padding-left: 0px;
+        padding-top: 20px;
+    }
+}
+
+.side-nav{
+    @media (max-width: 768px) {
+        background-color: $navbar;
+    }
 }

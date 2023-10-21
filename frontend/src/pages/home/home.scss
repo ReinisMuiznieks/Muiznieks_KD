@@ -15,19 +15,40 @@ body{
     padding-top: 80px;
 }
 
-#home-image{
-    width: 100%;
-    height: 90%;
-    display: inline-block;
-}
-
-#home-slogan{
-    color: white;
+.title{
     font-size: 48px;
+    color: white;
     line-height: 1;
     font-weight: 700;
     letter-spacing: -1px;
+    
+        // (md)
+        @media (max-width: 768px) {
+            font-size: 48px;
+        }
+    
+        // (xs)
+        @media (max-width: 576px) {
+            font-size: 34px;
+        }
 }
+
+.subtitle{
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 30px;
+    color: rgb(255, 255, 255);
+    
+    // (md)
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  
+    // (xs)
+    @media (max-width: 576px) {
+      font-size: 16px;
+    }
+}  
 
 .gradient-accent{
     background: linear-gradient(120deg, $primaryButton, $accent);
@@ -36,16 +57,9 @@ body{
     -webkit-text-fill-color: transparent;
 }
 
-#home-text{
-    color: rgb(255, 255, 255);
-    font-size: 28px;
-    font-weight: 500;
-    margin-top: 30px;
-}
-
 #get-started-home{
     display: inline-block;
-    margin-top: 50px;
+    margin-top: 10px;
     border-radius: 6px;
     font-weight: 500;
     color: $primary;
@@ -59,11 +73,16 @@ body{
         transform: translate(0, -3px);
         box-shadow: 0 20px 80px -22px $primary;
     }
-}
 
-#kateg{
-    text-align: left;
-    margin-bottom: 100px;
+    // (md)
+    @media (max-width: 768px) {
+    font-size: 16px;
+    }
+
+    // (xs)
+    @media (max-width: 576px) {
+    font-size: 14px;
+    }
 }
 
 .part-container{
@@ -79,7 +98,7 @@ body{
     align-items: center;
     display: block;
     text-align: center;
-    height: 470px;
+    height: auto;
 }
 
 #item-image{

@@ -19,26 +19,27 @@ function Home() {
 <NavbarTop />
   <div id="legend">
     <Container>
+      <Container>
           <Row>
-            <Col>
-                <h1 id="home-slogan">Learn <span className="gradient-accent">Latvian</span><br></br> Language Online</h1> {/* Latviešu valodas apguve internēta */}
-                <p id="home-text">Learn Latvian at the best time for you from anywhere. Expand your vocabulary <br></br>and measure your knowledge by doing tests <br></br>& keep track of your progress.</p> {/* Apgūsti latviešu valodu sev vispiemērotākajā laikā no jebkuras vietas. Paplašiniet savu vārdu krājumu un novērtējiet savas zināšanas testu veidā un sekojoiet līdzi savam progresam. */}
-                {user ? (
-                  <>
-                  <Button variant="outline-secondary" id="get-started-home" href="/learn">Get started</Button>
-                  </>
-                ) : (
-                  <>
-                  <Button variant="outline-secondary" id="get-started-home"  className="login-button"href="/sign-up">Get started</Button>
-                  </>
-                )}
-                
+            <Col lg={6} md={12}>
+              <h1 className="title">Learn <span className="gradient-accent">Latvian</span><br></br> Language Online</h1>
+              <p className="subtitle">Learn Latvian at the best time for you from anywhere. Expand your vocabulary and measure your knowledge by doing tests & keep track of your progress.</p>
+              {user ? (
+                        <>
+                        <Button variant="outline-secondary" id="get-started-home" href="/learn">Get started</Button>
+                        </>
+                      ) : (
+                        <>
+                        <Button variant="outline-secondary" id="get-started-home"  className="login-button"href="/sign-up">Get started</Button>
+                        </>
+                      )} 
             </Col>
-            <Col id="test">
-                <img src={homeImage} alt="learning" id="home-image"></img>
-
+            <Col lg={6} md={12} className="d-none d-md-block d-md-none d-lg-block">
+              <img src={homeImage} alt="learning" className="img-fluid"></img>
             </Col>
           </Row>
+        </Container>   
+
 
           <div className="part-container">
             <Row>
@@ -73,7 +74,7 @@ function Home() {
                       Tracks progress
                     </div>
                     <div className="part-text">
-                        Keep track of your learning progress, view your previously completed tests and see the incorrect answers!
+                        Keep track of your learning progress, review your previously completed tests!
                     </div>
                   </div>
               </Col>
