@@ -75,7 +75,7 @@ function Login() {
 
 <Container id="login-container">
     <Row className="full-form">
-        <Col>
+        <Col lg={6} md={12} className="d-none d-md-block d-md-none d-lg-block">
         <img src={image} alt="log-in" id="login-image"></img>
         
         </Col>
@@ -87,7 +87,7 @@ function Login() {
                     <a className="link-primary" id="login-href" href="/sign-up">Register</a> {/* Reģistrēties */}
                 </div>
 
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3 pt-3">
                 <Form.Label>Email</Form.Label> {/* E-pasts */}
                 <div className='form-group'>
                 <input
